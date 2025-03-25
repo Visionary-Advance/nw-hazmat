@@ -1,101 +1,166 @@
+import Button from "@/Components/Button";
 import Image from "next/image";
+import Link from "next/link";
+import { FaPhone } from "react-icons/fa6";
+import ServiceList from "@/Components/ServiceList";
+import { IoLocationSharp } from "react-icons/io5";
+import StatsCard from "@/Components/CountUp";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <>
+      <section className="grid grid-cols-1 pb-10 relative 2xl:grid-cols-[2fr_3fr] gap-x-4 lg:w-full overflow-x-hidden overflow-hidden ">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+          className="absolute bottom-[-130px] right-[-110px] -z-20"
+          src="/Img/Hazmat_Symbol.png"
+          width={500}
+          height={500}
+          alt="Hazmat Symbol"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className="relative w-11/12 lg:w-full  max-w-[800px] col-span-1 aspect-[8/7]">
+          <Image
+            src="/Img/Confined_Space.jpg"
+            alt="Confined Space Worksite"
+            fill
+            className="object-cover rounded-br-[80px]"
+            priority
+          />
+          <div className="bg-red-600  w-[102%] h-[102%] absolute inset-0 rounded-br-[90px] -z-10"></div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="col-span-1 pt-4 ps-2 relative lg:pt-12 flex flex-col">
+          <h1 className="fjalla-one leading-tight text-4xl lg:text-5xl">
+            Lane County's Longest Active <br className="lg:block hidden" />{" "}
+            Hazmat Service
+          </h1>
+          <p className="w-11/12 lg:w-6/12 text-lg lg:text-xl pt-5 poppins">
+            Founded in 2000, NorthWest HazMat, Inc. is a female owned and
+            operated environmental company. We began as a spill response company
+            based in the Eugene-Springfield, Oregon area. Since then we have
+            grown into a full service environmental response and management
+            company.
+          </p>
+
+          <div className="flex justify-center lg:justify-normal space-x-2 mt-auto pt-6">
+            <Button
+              text={"Shop Now"}
+              color={
+                "bg-red-600 hover:bg-white hover:text-red-600 text-white border border-red-600 arial-bold duration-200 "
+              }
+            />
+            <Button
+              text={
+                <span className="flex items-center gap-2 arial-bold">
+                  <FaPhone /> Call Us
+                </span>
+              }
+              color={
+                "bg-white hover:bg-red-600 hover:text-white text-red-600 border border-red-600 duration-200 "
+              }
+            />
+          </div>
+        </div>
+      </section>
+      <section className="relative">
+        <div className="bg-red-600 h-full w-full absolute top-0 left-0 -z-10 opacity-65"></div>
+        <Image
+          src="/Img/Trucks.jpg"
+          alt="Truck Background"
+          width={1000}
+          height={250}
+          className="absolute top-0 left-0 w-full h-full -z-20 object-cover"
+        />
+        <div className="text-center text-white fjalla-one pt-5 pb-5 text-3xl">
+          <h3 className="pb-8">For an Immediate Emergency</h3>
+          <Link href={"tel:555-555-5555"}>
+            <Button
+              text={
+                <span className="flex items-center gap-2 arial-bold">
+                  <FaPhone /> Call Us
+                </span>
+              }
+              color={
+                "bg-white hover:bg-black hover:text-white text-black border border-white px-10  duration-200 "
+              }
+            />
+          </Link>
+        </div>
+      </section>
+
+      {/* SERVICES LIST */}
+      <section className="bg-black pb-10">
+        <div className="text-white w-10/12 mx-auto  py-14 text-5xl fjalla-one">
+          <h2 className=""> Our Services </h2>
+        </div>
+        <ServiceList />
+      </section>
+
+      <section className="relative">
+        <div className="bg-red-600 h-full w-full absolute top-0 left-0 -z-10 opacity-65"></div>
+        <Image
+          src="/Img/Areas_bg.png"
+          alt="Truck Background"
+          width={1000}
+          height={250}
+          className="absolute top-0 left-0 w-full h-full -z-20 object-cover"
+        />
+        <div className="text-center text-white fjalla-one pt-5 pb-5 text-3xl">
+          <h3 className="pb-3">Areas We Serve</h3>
+          <div className="border-white -mt-3 border w-[60px] mx-auto"></div>
+        </div>
+        <div className="grid place-items-center text-white lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-3">
+          {["Eugene", "Salem", "Rainier"].map((item, index) => (
+            <div
+              className="text-center text-3xl place-items-center"
+              key={index}
+            >
+              <IoLocationSharp />
+              <span className="font-bold">{item}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="">
+        <div className="text-black w-10/12 mx-auto pt-5 pb-14 text-5xl fjalla-one">
+          <h2 className=""> About Us </h2>
+        </div>
+        <div className="grid lg:grid-cols-2 grid-cols-1 lg:w-8/12 w-11/12 mx-auto">
+        <div className="col-span-1 relative mx-auto w-fit">
+      {/* Background Shadow */}
+      <div className="bg-red-600 h-full w-full rounded-[20px] absolute -z-10 -translate-y-4 -translate-x-4"></div>
+
+      {/* Main Image */}
+      <Image
+        className="rounded-[20px]"
+        src="/Img/Reading_Gauge.jpg"
+        alt="Reading Gauge Image"
+        width={400}
+        height={600}
+      />
+
+      {/* Stats Overlay */}
+      <StatsCard />
     </div>
+          <div className="col-span-1 flex flex-col gap-5 pt-5 mx-auto lg:items-start items-center">
+      <h3 className="fjalla-one text-4xl lg:w-7/12 text-center lg:text-left">
+        <span className="text-red-600">Who We Are:</span> Your Trusted Partner in Hazmat Services
+      </h3>
+      <div className="border-black border w-[60px] lg:me-auto"></div>
+      <p className="lg:w-9/12 w-11/12 text-2xl lg:text-xl">
+        Founded in 2000, NorthWest HazMat, Inc. is a female-owned and operated environmental company. 
+        We began as a spill response company based in the Eugene-Springfield, Oregon area. 
+        Since then, we have grown into a full-service environmental response and management company.
+      </p>
+
+      {/* Button pushed to the bottom */}
+      <div className=" my-auto flex">
+        <Button 
+          text={"View More"} 
+          color={"arial font-semibold text-white bg-red-600 hover:bg-white border border-red-600 hover:text-red-600"} 
+        />
+      </div>
+    </div>
+  </div>
+      </section>
+    </>
   );
 }

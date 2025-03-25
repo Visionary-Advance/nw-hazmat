@@ -2,20 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: 'FjallaOne';
+  src: url('/Fonts/FjallaOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'PoppinsMedium';
+  src: url('/Fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('/Fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Arial';
+  src: url('/Fonts/ARIAL.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ArialBD';
+  src: url('/Fonts/ARIALBD.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.fjalla-one{
+  font-family: "FjallaOne" , sans-serif;
+}
+.poppins-medium{
+  font-family: "PoppinsMedium" , sans-serif;
+}
+.poppins{
+  font-family: "Poppins" , sans-serif;
+}
+.arial{
+  font-family: "ARIAL" , sans-serif;
+}
+.arial-bold{
+  font-family: "ARIALBD" , sans-serif;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
