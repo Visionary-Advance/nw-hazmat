@@ -85,7 +85,7 @@ export default function ServiceList() {
 
             {/* Title */}
             <div className="ps-5">
-              <h2 className="text-3xl hover:text-red-600 lg:text-left text-center lg:text-5xl fjalla-one">
+              <h2 className="text-3xl  group-hover:text-red-600 lg:text-left text-center lg:text-5xl fjalla-one">
                 {item.title}
               </h2>
             </div>
