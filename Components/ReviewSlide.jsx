@@ -40,7 +40,7 @@ export default function TestimonialSlider() {
       </div>
 
       {/* Sliding Review */}
-      <div className="relative overflow-hidden min-h-[200px]">
+      <div className="relative overflow-hidden min-h-[200px] lg:min-h-[125px]">
         <div
           className="transition duration-500 ease-in-out"
           style={{ transform: `translateX(-${index * 100}%)`, display: 'flex' }}
