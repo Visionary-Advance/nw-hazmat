@@ -1,30 +1,26 @@
-# Base image
-FROM node:18
+# Stage 1: Build static site with Node
+FROM node:18 as builder
 
-# Set working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy config and package files first (takes advantage of Docker caching)
-COPY package.json package-lock.json ./
+COPY package*.json ./
 COPY tailwind.config.mjs postcss.config.mjs next.config.mjs jsconfig.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of your app (pages, components, public, styles, etc.)
 COPY public/ public/
 COPY app/ app/
 COPY Components/ Components/
 
-# Optional: if you have global styles in a styles folder
-# COPY styles/ styles/
-
-# Build the app (Tailwind will get processed here)
+RUN npm install
 RUN npm run build
 
-# Expose the port
-EXPOSE 3000
+# Stage 2: Serve with NGINX
+FROM nginx:alpine
 
-# Start the app
-CMD ["npm", "start"]
+RUN rm -rf /usr/share/nginx/html/*
 
+COPY --from=builder /app/out /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

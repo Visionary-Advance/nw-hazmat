@@ -1,5 +1,4 @@
 import Button from "@/Components/Button";
-import Image from "next/image";
 import Link from "next/link";
 import { FaPhone } from "react-icons/fa6";
 import ServiceList from "@/Components/ServiceList";
@@ -11,16 +10,16 @@ export default function Home() {
   return (
     <>
       <section className="grid grid-cols-1 pb-10 relative 2xl:grid-cols-[2fr_3fr] gap-x-4 lg:w-full overflow-x-hidden overflow-hidden ">
-        <Image
+        <img
           className="absolute bottom-[-130px] right-[-110px] -z-20"
-          src="/Img/Hazmat_Symbol.png"
+          src="/img/Hazmat_Symbol.png"
           width={500}
           height={500}
           alt="Hazmat Symbol"
         />
         <div className="relative w-11/12 lg:w-full  max-w-[800px] col-span-1 aspect-[8/7]">
-          <Image
-            src="/Img/Confined_Space.jpg"
+          <img
+            src="/img/Confined_Space.jpg"
             alt="Confined Space Worksite"
             fill
             className="object-cover rounded-br-[80px]"
@@ -63,8 +62,8 @@ export default function Home() {
       </section>
       <section className="relative">
         <div className="bg-red-600 h-full w-full absolute top-0 left-0 -z-10 opacity-65"></div>
-        <Image
-          src="/Img/Trucks.jpg"
+        <img
+          src="/img/Trucks.jpg"
           alt="Truck Background"
           width={1000}
           height={250}
@@ -97,8 +96,8 @@ export default function Home() {
 
       <section className="relative">
         <div className="bg-red-600 h-full w-full absolute top-0 left-0 -z-10 opacity-65"></div>
-        <Image
-          src="/Img/Areas_bg.png"
+        <img
+          src="/img/Areas_bg.png"
           alt="Truck Background"
           width={1000}
           height={250}
@@ -130,9 +129,9 @@ export default function Home() {
             <div className="bg-red-600 h-full w-full rounded-[25px] absolute -z-10 -translate-y-4 -translate-x-4"></div>
 
             {/* Main Image */}
-            <Image
+            <img
               className="rounded-[20px]"
-              src="/Img/Reading_Gauge.jpg"
+              src="/img/Reading_Gauge.jpg"
               alt="Reading Gauge Image"
               width={400}
               height={900}
@@ -188,8 +187,8 @@ export default function Home() {
       <div className="absolute bottom-4 left-4 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
 
       {/* Image */}
-      <Image
-        src="/Img/Homeless.jpg"
+      <img
+        src="/img/Homeless.jpg"
         alt="Training Image"
         width={500}
         height={450}

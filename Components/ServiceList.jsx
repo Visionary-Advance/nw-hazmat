@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import GoButton from './Go-Button';
 
 export default function ServiceList() {
@@ -12,50 +11,50 @@ export default function ServiceList() {
     {
       id: "hazmat-services",
       title: "Hazmat Services",
-      img: "/Img/Hazmat-Services.jpg",
-      icon: "/Img/Hazmat.png",
+      img: "/img/Hazmat-Services.jpg",
+      icon: "/img/Hazmat.png",
       description: "Expert hazmat handling, containment, and disposal to protect your environment and ensure safety.",
     },
     {
       id: "lab-services",
       title: "Lab Services",
-      img: "/Img/Lab-Testing.jpg",
-      icon: "/Img/Lab.png",
+      img: "/img/Lab-Testing.jpg",
+      icon: "/img/Lab.png",
       description: "Accurate asbestos testing and lab analysis to identify hazards and ensure safe removal.",
     },
     {
       id: "mold-remediation",
       title: "Mold Remediation",
-      img: "/Img/Mold-Remi.jpg",
-      icon: "/Img/Mold.png",
+      img: "/img/Mold-Remi.jpg",
+      icon: "/img/Mold.png",
       description: "Professional mold removal to prevent health risks, improve air quality, and protect property.",
     },
     {
       id: "soil-remidiation",
       title: "Soil Remediation",
-      img: "/Img/Soil-Remidiation.jpg",
-      icon: "/Img/Soil.png",
+      img: "/img/Soil-Remidiation.jpg",
+      icon: "/img/Soil.png",
       description: "Effective soil remediation services to restore contaminated ground for safe use.",
     },
     {
       id: "bio-hazard-cleanup",
       title: "Bio Hazard Cleanup",
-      img: "/Img/Cleanup.jpg",
-      icon: "/Img/Bio.png",
+      img: "/img/Cleanup.jpg",
+      icon: "/img/Bio.png",
       description: "Safe and thorough biohazard cleanup to remove health risks and contamination.",
     },
     {
       id: "management-and-consulting",
       title: "Management & Consulting",
-      img: "/Img/Managment-Services.jpg",
-      icon: "/Img/Management.png",
+      img: "/img/Managment-Services.jpg",
+      icon: "/img/Management.png",
       description: "Expert consulting and project management for safety and environmental solutions.",
     },
     {
       id: "dedication-services",
       title: "Dedication Services",
-      img: "/Img/Dedication-Services.jpg",
-      icon: "/Img/Dedicated.png",
+      img: "/img/Dedication-Services.jpg",
+      icon: "/img/Dedicated.png",
       description: "Committed to delivering safe, high-quality solutions for every project.",
     },
   ];
@@ -80,7 +79,7 @@ export default function ServiceList() {
           >
             {/* ICON */}
             <div className="col-span-1 mx-auto w-auto pb-2 lg:pb-0">
-              <Image src={item.icon} alt={item.icon + " Icon"} width={70} height={70} />
+              <img src={item.icon} alt={item.icon + " Icon"} width={70} height={70} />
             </div>
 
             {/* Title */}
@@ -102,7 +101,7 @@ export default function ServiceList() {
 
             {/* Hover Image - Inside Each Link */}
             {hoveredId === item.id && (
-              <Image
+              <img
                 src={item.img}
                 alt={item.title + " Image"}
                 width={200}
