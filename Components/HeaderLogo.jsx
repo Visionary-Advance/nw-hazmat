@@ -9,7 +9,7 @@ export default function HeaderLogo() {
         alt="NorthWest Hazmat Logo" 
         width={250} 
         height={70} 
-        priority
+       
       />
     </Link>
   );

@@ -21,9 +21,9 @@ export default function Home() {
           <img
             src="/img/Confined_Space.jpg"
             alt="Confined Space Worksite"
-            fill
+            fill = "true"
             className="object-cover rounded-br-[80px]"
-            priority
+            // priority
           />
           <div className="bg-red-600 w-[102%] h-[102%] absolute inset-0 rounded-br-[90px] -z-10"></div>
         </div>

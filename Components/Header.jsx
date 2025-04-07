@@ -28,10 +28,10 @@ export default function Header() {
       <HeaderLogo />
         {/* Desktop Navigation */}
         <nav className="text-black hidden ms-auto lg:flex fjalla-one text-xl space-x-6">
-          <Link href="#">Services</Link>
+          <Link href="/services/hazmat-services">Services</Link>
           <Link href="#">About</Link>
           <Link href="#">Training</Link>
-          <Link href="#">Shop</Link>
+          <Link href="/shop">Shop</Link>
           <Link href="#">Contact</Link>
         </nav>
 
