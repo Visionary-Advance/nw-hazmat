@@ -78,9 +78,9 @@ export default function ServiceList() {
             //   setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
             // }}
           >
-            {/* ICON */}
-            <div className="col-span-1 mx-auto w-auto pb-2 lg:pb-0">
-              <img src={item.img} alt={item.icon + " Icon"} width={150} height={70} />
+            {/* IMAGE */}
+            <div className="col-span-1 rounded-xl mx-auto w-auto pb-2 lg:pb-0">
+              <img className='rounded-xl' src={item.img} alt={item.icon + " Icon"} width={150} height={70} />
             </div>
 
             {/* Title */}
