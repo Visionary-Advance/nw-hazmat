@@ -10,7 +10,7 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function ServicePage({ params }) {
+export default async function TrainingPage({ params }) {
 
   
   const slug =  params.slug;

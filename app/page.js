@@ -22,7 +22,7 @@ export default function Home() {
             src="/img/Confined_Space.jpg"
             alt="Confined Space Worksite"
             fill = "true"
-            className="object-cover rounded-br-[80px]"
+            className="object-cover h-full rounded-br-[80px]"
             // priority
           />
           <div className="bg-red-600 w-[102%] h-[102%] absolute inset-0 rounded-br-[90px] -z-10"></div>
@@ -138,7 +138,7 @@ export default function Home() {
             />
 
             {/* Stats Overlay */}
-            <StatsCard />
+            <StatsCard widths={"w-[107%] md:w-[125%]"} textSize={"md:text-4xl"} bottom={"bottom-20"} textSizep={"text-lg"} />
           </div>
           <div className="col-span-1 flex flex-col gap-5 ps-10 pt-5 mx-auto lg:items-start items-center">
             <h3 className="fjalla-one text-4xl lg:w-7/12 text-center lg:text-left">

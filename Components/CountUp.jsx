@@ -1,38 +1,67 @@
 'use client';
+import { motion, useAnimation } from 'framer-motion';
 import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
+import { useEffect, useRef } from 'react';
+import { useInView } from 'framer-motion';
 
-const StatsCard = () => {
-  const { ref, inView } = useInView({ triggerOnce: true });
+const StatsCard = ({widths, bottom, textSize, textSizep}) => {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    once: true,
+    amount: 0.2 
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start('visible');
+    }
+  }, [controls, isInView]);
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut",
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  
 
   return (
-    <div
-      ref={ref}
-      className="bg-[#1e1e1e] fjalla-one rounded-xl absolute bottom-20 left-1/2 -translate-x-1/2 translate-y-1/2 
-                 flex flex-wrap md:flex-nowrap justify-around items-center text-white p-5 gap-5 w-[107%]
-                 md:w-[125%] "
-    >
-      <div className="text-center flex-1 min-w-[90px]">
-        <p className="text-3xl md:text-4xl font-bold">
-          {inView && <CountUp end={25} duration={2} />}+
+    <motion.div
+    ref={ref}
+    initial="hidden"
+    animate={controls}
+    variants={containerVariants}
+    className={`bg-[#1e1e1e] ${widths} fjalla-one rounded-xl absolute ${bottom}  -translate-x-1/2 -translate-y-1/2 flex flex-wrap  justify-around items-center text-white p-5 gap-5`}
+  >
+      <motion.div className="text-center flex-1 min-w-[90px]" >
+        <p className={`${textSize} font-bold`}>
+          {isInView && <CountUp end={25} duration={2} />}+
         </p>
-        <p className="text-lg lg:text-2xl">Years in Business</p>
-      </div>
+        <p className={`${textSizep}`}>Years in <br/> Business</p>
+      </motion.div>
 
-      <div className="text-center flex-1 min-w-[90px]">
-        <p className="text-3xl md:text-4xl font-bold">
-          {inView && <CountUp end={500} duration={2} />}+
+      <motion.div className="text-center flex-1 min-w-[90px]" >
+        <p className={`${textSize} font-bold`}>
+          {isInView && <CountUp end={500} duration={2} />}+
         </p>
-        <p className="text-lg lg:text-2xl">Tons of Waste Handled</p>
-      </div>
+        <p className={`${textSizep}`}>Tons of Waste Handled</p>
+      </motion.div>
 
-      <div className="text-center flex-1 min-w-[90px] ">
-        <p className="text-3xl md:text-4xl font-bold ">
-          {inView && <CountUp end={51} duration={3} separator="," />}k
+      <motion.div className="text-center flex-1 min-w-[90px]" >
+        <p className={`${textSize} font-bold`}>
+          {isInView && <CountUp end={51} duration={3} separator="," />}k
         </p>
-        <p className="text-lg lg:text-2xl">Clients <br/> Served</p>
-      </div>
-    </div>
+        <p className={`${textSizep}`}>Clients <br/> Served</p>
+      </motion.div>
+    </motion.div>
   );
 };
 
