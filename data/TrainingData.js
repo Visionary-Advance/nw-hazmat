@@ -1,4 +1,4 @@
-export const services = [
+export const training = [
   {
     title: "HAZWOPER 40-Hour Certification",
     slug: "hazwoper-40-hour",

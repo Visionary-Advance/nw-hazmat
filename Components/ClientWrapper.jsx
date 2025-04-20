@@ -19,7 +19,7 @@ export default function ClientWrapper({ children }) {
       {loading && (
         <HazmatLoader className={`${fadeOut ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000 ease-in`} />
       )}
-      {!loading && children}
+      {loading && children}
     </>
   );
 }

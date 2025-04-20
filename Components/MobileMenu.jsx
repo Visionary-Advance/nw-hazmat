@@ -85,7 +85,7 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
                     {equipment.map((item) => (
                       <li key={item.id}>
                         <Link
-                          href={`/equipment/${item.id}`}
+                          href={`/services/${item.id}`}
                           onClick={() => setMenuOpen(false)}
                           className="text-white text-xl"
                         >
@@ -100,12 +100,12 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
 
             {/* Other Mobile Menu Items */}
             <motion.li variants={itemVariants} className="text-white text-3xl">
-              <Link href="/history" onClick={() => setMenuOpen(false)}>
+              <Link href="/about" onClick={() => setMenuOpen(false)}>
                 About
               </Link>
             </motion.li>
             <motion.li variants={itemVariants} className="text-white text-3xl">
-              <Link href="/gallery" onClick={() => setMenuOpen(false)}>
+              <Link href="/training/hazwoper-40-hour" onClick={() => setMenuOpen(false)}>
                 Training
               </Link>
             </motion.li>

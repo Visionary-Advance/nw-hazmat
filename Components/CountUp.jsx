@@ -39,8 +39,9 @@ const StatsCard = ({widths, bottom, textSize, textSizep}) => {
     initial="hidden"
     animate={controls}
     variants={containerVariants}
-    className={`bg-[#1e1e1e] ${widths} fjalla-one rounded-xl absolute ${bottom}  -translate-x-1/2 -translate-y-1/2 flex flex-wrap  justify-around items-center text-white p-5 gap-5`}
+    className={`bg-[#1e1e1e] ${widths} fjalla-one rounded-xl absolute left-1/2 ${bottom} -translate-x-1/2 flex flex-wrap justify-around items-center text-white p-5 gap-5`}
   >
+  
       <motion.div className="text-center flex-1 min-w-[90px]" >
         <p className={`${textSize} font-bold`}>
           {isInView && <CountUp end={25} duration={2} />}+

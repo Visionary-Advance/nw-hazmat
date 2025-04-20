@@ -30,7 +30,7 @@ export default function Header() {
         <nav className="text-black hidden ms-auto lg:flex fjalla-one text-xl space-x-6">
           <Link href="/services/hazmat-services">Services</Link>
           <Link href="/about">About</Link>
-          <Link href="training/roll-over">Training</Link>
+          <Link href="/training/hazwoper-40-hour">Training</Link>
           <Link href="/shop">Shop</Link>
           <Link href="/contact">Contact</Link>
         </nav>

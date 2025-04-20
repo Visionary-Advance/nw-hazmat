@@ -129,16 +129,26 @@ export default function Home() {
             <div className="bg-red-600 h-full w-full rounded-[25px] absolute -z-10 -translate-y-4 -translate-x-4"></div>
 
             {/* Main Image */}
-            <img
-              className="rounded-[20px]"
-              src="/img/Reading_Gauge.jpg"
-              alt="Reading Gauge Image"
-              width={400}
-              height={900}
-            />
+  {/* Main Image */}
+  <img
+    className="rounded-[20px]"
+    src="/img/Reading_Gauge.jpg"
+    alt="Reading Gauge Image"
+    width={400}
+    height={900}
+  />
+            <div className="relative">
 
-            {/* Stats Overlay */}
-            <StatsCard widths={"w-[107%] md:w-[125%]"} textSize={"md:text-4xl"} bottom={"bottom-20"} textSizep={"text-lg"} />
+  {/* Stats Overlay — now inside the same relative parent */}
+  <StatsCard
+    widths="w-[120%] max-w-[500px]"
+    textSize="md:text-4xl text-3xl"
+    textSizep="text-lg"
+    bottom="bottom-[-30px]"
+  />
+</div>
+
+
           </div>
           <div className="col-span-1 flex flex-col gap-5 ps-10 pt-5 mx-auto lg:items-start items-center">
             <h3 className="fjalla-one text-4xl lg:w-7/12 text-center lg:text-left">
@@ -156,19 +166,22 @@ export default function Home() {
 
             {/* Button pushed to the bottom */}
             <div className=" my-auto flex">
+              <Link href={"/about"}>
               <Button
                 text={"View More"}
                 color={
                   "arial font-semibold text-white bg-red-600 hover:bg-white border border-red-600 hover:text-red-600"
                 }
               />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="my-20 bg-black">
-  <div className="w-11/12 lg:w-10/12 grid grid-cols-1 lg:grid-cols-2 mx-auto items-center relative">
+      <section className="my-20 py-10 bg-black relative overflow-visible">
+  <div className="w-11/12 lg:w-10/12 grid grid-cols-1 lg:grid-cols-2 mx-auto items-center relative z-10">
+    
     {/* Text Column */}
     <div className="text-white py-5">
       <h3 className="text-4xl fjalla-one">Need Training?</h3>
@@ -181,22 +194,60 @@ export default function Home() {
       />
     </div>
 
-    {/* Image Column */}
-    <div className="relative w-full mt-10 lg:mt-0">
-      {/* Red Border Behind */}
-      <div className="absolute bottom-4 left-4 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
-
-      {/* Image */}
+    {/* Image Column for mobile (relative position) */}
+    <div className="block lg:hidden mt-10 relative z-0 w-full">
+      <div className="absolute top-2 left-2 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
       <img
         src="/img/Homeless.jpg"
         alt="Training Image"
-        width={500}
-        height={450}
-        className="rounded-[25px] w-[115%] h-auto relative z-10 object-cover shadow-lg"
+        className="rounded-[25px] w-full relative z-10 shadow-lg object-cover"
       />
     </div>
   </div>
+
+  {/* Image Column for desktop (absolute) */}
+  <div className="hidden lg:block absolute top-[-40px] right-[5%] w-[105%] max-w-2xl z-0">
+    <div className="absolute top-4 left-4 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
+    <img
+      src="/img/Homeless.jpg"
+      alt="Training Image"
+      className="rounded-[25px] w-[115%] relative z-10 shadow-lg object-cover"
+    />
+  </div>
 </section>
+
+
+      <section className="mt-20 pt-10 relative overflow-visible">
+  <div className="w-11/12 lg:w-10/12 grid grid-cols-1 lg:grid-cols-2 mx-auto items-center relative z-10">
+    
+    {/* Text Column */}
+    <div className="block col-span-1 relative  max-w-3xl z-0">
+    <div className="absolute bottom-4 right-4 w-11/12 h-full bg-red-600 rounded-[25px] z-0"></div>
+    <img
+      src="/img/Homeless.jpg"
+      alt="Training Image"
+      className="ms-auto rounded-[25px] w-11/12 relative z-10 shadow-lg object-cover"
+    />
+  </div>
+    <div className="text-black py-5">
+      <h3 className="text-4xl fjalla-one">Are you Prepared for a Tank Rollover?</h3>
+      <p className="pt-2 text-xl w-10/12">
+      Stay prepared for tank rollovers with expert training and safety solutions. Explore our full range of services today!
+      </p>
+      <Button 
+        text={"View Training"} 
+        color={"mt-4 border border-red-600 bg-red-600 hover:bg-white text-white hover:text-red-600"} 
+      />
+    </div>
+
+   
+  </div>
+
+  {/* Image Column for desktop (absolute) */}
+ 
+</section>
+
+
 
 <section className="">
 
