@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import GoButton from './Go-Button';
-import { services } from '@/data/ServicesData';
+import { services } from '../data/ServicesData';
 
 export default function ServiceList() {
   const [hoveredId, setHoveredId] = useState(null);

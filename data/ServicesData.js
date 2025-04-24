@@ -10,6 +10,7 @@ export const services = [
       callToAction: "Call our 24/7 Response Line: (XXX) XXX-XXXX",
       pageInfo: [
         {
+
           title: "24/7 Emergency Spill Response",
           description: "When time is critical, count on our emergency hazardous material services. Our team is on-call day and night for chemical spill cleanup, unknown substance identification, and high-risk hazmat incidents. We ensure rapid hazmat spill response, site safety, and contamination containment using proven hazmat site remediation methods.",
           img:""
@@ -42,7 +43,7 @@ export const services = [
       callToAction: "Call today for sample testing or contamination analysis.",
       pageInfo:[
         {
-          
+
             title: "Why Choose Us",
             description: "Here are the benefits of using our services:",
             listItems: [
