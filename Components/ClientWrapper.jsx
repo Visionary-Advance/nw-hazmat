@@ -1,25 +1,32 @@
-'use client';
-import { useState, useEffect } from 'react';
-import HazmatLoader from './HazmatLoader';
+"use client";
+
+import { useEffect, useState } from "react";
+import Header from "@/Components/Header";
+import Footer from "@/Components/Footer";
+import HazmatLoader from "./HazmatLoader";
 
 export default function ClientWrapper({ children }) {
   const [loading, setLoading] = useState(true);
-  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setFadeOut(true);
-      setTimeout(() => setLoading(false), 500); // Wait for fade-out to finish before hiding the loader
-    }, 3000); // Show loader for 3 seconds
-    return () => clearTimeout(timer); // Cleanup if unmounts early
+      setLoading(false);
+    }, 2000); // Show loader for 2 seconds
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
+      {/* Render both, but hide page content during loading */}
       {loading && (
-        <HazmatLoader className={`${fadeOut ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000 ease-in`} />
+        <HazmatLoader />
       )}
-      {loading && children}
+
+      <div className={loading ? "hidden" : "block"}>
+        <Header />
+        {children}
+        <Footer />
+      </div>
     </>
   );
 }

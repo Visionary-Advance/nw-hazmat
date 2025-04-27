@@ -48,11 +48,26 @@ export default async function TrainingPage({ params }) {
         </div>
 
         {/* Contact Box */}
-        <div className="bg-white rounded-[60px] p-4 shadow border text-center">
-          <div className="text-sm text-gray-600 mb-2">📞 555-555-5555</div>
-          <h3 className="font-bold text-lg mb-2">Get in Touch With Us</h3>
-          <button className="bg-black text-white px-4 py-2 rounded">Contact Us</button>
-        </div>
+        <div className="bg-white rounded-[60px] p-4 shadow border text-center relative flex items-center justify-center h-[400px]">
+  {/* Dark Overlay */}
+  <div className="absolute inset-0 bg-black opacity-80 rounded-[60px]"></div>
+
+  {/* Image */}
+  <img className='absolute inset-0 w-full h-full object-cover rounded-[60px]' src='/img/Call_Now_Side.png' alt='' />
+
+  {/* Content */}
+  <div className="relative z-10 flex flex-col items-center justify-center text-center space-y-10">
+    <Link href="tel:555-555-5555">
+      <button className="text-xl text-white border border-white rounded-full inline-block mb-2 px-4">
+        555-555-5555
+      </button>
+    </Link>
+    <h3 className="text-white font-bold text-4xl mb-2">Get in Touch With Us</h3>
+    <Link href="/contact">
+    <button className="bg-black text-white px-4 py-2 rounded">Contact Us</button>
+    </Link>
+  </div>
+</div>
       </aside>
 
       {/* Main Content */}
@@ -83,6 +98,24 @@ export default async function TrainingPage({ params }) {
     {section.description && <p className="mb-2">{section.description}</p>}
   </div>
 ))}
+<div className=' mt-10 '>
+  <h3 className='text-4xl font-bold mb-4'>Group Sizes</h3>
+  <div className='w-3/4 mx-auto grid grid-cols-1 lg:grid-cols-2'>
+  <div className='col-span-1 mx-auto text-center'>
+    <img className='mx-auto' alt='Group of 5-9' src='/img/2_Group.png'/>
+   
+      <p className='text-2xl font-bold'>Group (5-9)</p>
+      <p className='text-lg w-3/4 mx-auto'>Small group hazmat training for teams of 2 to 9. Improve workplace safety with hands-on learning and real-world scenarios.</p>
+   
+  </div>
+  <div className='col-span-1 mx-auto text-center'>
+    <img className='mx-auto' alt='Group of 10 or more' src='/img/3_Group.png'/>
+    <p className='text-2xl font-bold'>Large Group (10+)</p>
+    <p className='text-lg w-3/4 mx-auto'>Comprehensive hazmat training for large groups. Ensure your entire team stays compliant, prepared, and safe while handling hazardous materials.</p>
+  </div>
+
+  </div>
+</div>
       </main>
     </div>
     </>

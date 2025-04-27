@@ -123,7 +123,7 @@ export default function Home() {
         <div className="text-black w-10/12 mx-auto pt-5 pb-14 text-5xl fjalla-one">
           <h2 className=""> About Us </h2>
         </div>
-        <div className="grid lg:grid-cols-2 grid-cols-1 lg:w-8/12 w-11/12 mx-auto">
+        <div className="grid lg:grid-cols-2 relative grid-cols-1 lg:w-8/12 w-11/12 mx-auto">
           <div className="col-span-1 relative mx-auto w-fit">
             {/* Background Shadow */}
             <div className="bg-red-600 h-full w-full rounded-[25px] absolute -z-10 -translate-y-4 -translate-x-4"></div>
@@ -141,10 +141,10 @@ export default function Home() {
 
   {/* Stats Overlay — now inside the same relative parent */}
   <StatsCard
-    widths="w-[120%] max-w-[500px]"
+    widths="w-[105%] lg:w-[120%] max-w-[500px]"
     textSize="md:text-4xl text-3xl"
     textSizep="text-lg"
-    bottom="bottom-[-30px]"
+    bottom="bottom-[30px]"
   />
 </div>
 
@@ -229,7 +229,7 @@ export default function Home() {
       className="ms-auto rounded-[25px] w-11/12 relative z-10 shadow-lg object-cover"
     />
   </div>
-    <div className="text-black py-5">
+    <div className="text-black ps-10 py-5">
       <h3 className="text-4xl fjalla-one">Are you Prepared for a Tank Rollover?</h3>
       <p className="pt-2 text-xl w-10/12">
       Stay prepared for tank rollovers with expert training and safety solutions. Explore our full range of services today!
