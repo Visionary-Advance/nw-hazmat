@@ -10,7 +10,7 @@ export default function CallDropdown() {
     {
       name: 'Eric Ruby',
       title: 'Director Of Operations',
-      phone: '555-555-5555',
+      phone: '(541)-556-3000',
     },
     {
       name: 'Mike Haas',
@@ -20,7 +20,7 @@ export default function CallDropdown() {
     {
       name: 'Office Manager',
       title: 'Office',
-      phone: '555-555-5555',
+      phone: '(541)-988-9823',
     },
   ]
 
@@ -53,7 +53,7 @@ export default function CallDropdown() {
               className="grid grid-cols-3 p-2 gap-4 text-sm md:text-base"
             >
               <span className='font-bold lg:text-2xl'>{contact.name}</span>
-              <span className="text-center lg:text-2xl font-bold">{contact.title}</span>
+              <span className="text-center lg:text-2xl ">{contact.title}</span>
               <Link className='text-right' href={"tel: " + contact.phone}>
               <span className=" lg:text-2xl">{contact.phone}</span>
               </Link>

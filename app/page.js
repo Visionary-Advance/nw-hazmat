@@ -107,8 +107,8 @@ export default function Home() {
           <h3 className="pb-3">Areas We Serve</h3>
           <div className="border-white -mt-3 border w-[60px] mx-auto"></div>
         </div>
-        <div className="grid place-items-center text-white lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-3">
-          {["Eugene", "Salem", "Rainier"].map((item, index) => (
+        <div className="grid place-items-center text-white w-1/2 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-2">
+          {["Eugene",  "Rainier"].map((item, index) => (
             <div
               className="text-center text-3xl place-items-center"
               key={index}
@@ -140,6 +140,7 @@ export default function Home() {
             <div className="relative">
 
   {/* Stats Overlay — now inside the same relative parent */}
+</div>
   <StatsCard
     widths="w-[105%] lg:w-[120%] max-w-[500px]"
     textSize="md:text-4xl text-3xl"
@@ -149,7 +150,7 @@ export default function Home() {
 </div>
 
 
-          </div>
+          
           <div className="col-span-1 flex flex-col gap-5 ps-10 pt-5 mx-auto lg:items-start items-center">
             <h3 className="fjalla-one text-4xl lg:w-7/12 text-center lg:text-left">
               <span className="text-red-600">Who We Are:</span> Your Trusted

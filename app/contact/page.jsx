@@ -1,41 +1,43 @@
-"use client"
+"use client";
 
-import Breadcrumbs from "@/Components/BreadCrumbs"
-import CallDropdown from "@/Components/CallDropdown"
-import Form from "@/Components/Form"
-import { useState } from "react"
-import { FaChevronDown } from "react-icons/fa"
+import Breadcrumbs from "@/Components/BreadCrumbs";
+import CallDropdown from "@/Components/CallDropdown";
+import Form from "@/Components/Form";
+import { useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
 
 export default function Contact() {
-  const [openFAQIndex, setOpenFAQIndex] = useState(null)
+  const [openFAQIndex, setOpenFAQIndex] = useState(null);
 
   const faqData = [
     {
-      question: "What types of hazardous materials do you handle?",
-      answer: "",
+      question: "Do you offer hazmat training classes?",
+      answer: "Yes, we offer both initial hazmat training and refresher courses for individuals and businesses in Eugene, Oregon and the surrounding Lane County area. Our courses cover OSHA-compliant safety procedures, proper handling of hazardous materials, and real-world scenarios. Classes require a minimum group size of 5 people, and we host the training at one of our approved facilities.",
     },
     {
       question: "Do you provide emergency hazmat response services?",
-      answer: "",
+      answer: "Yes, we offer 24/7 emergency hazmat response services in Lane County and surrounding areas. Our certified team is trained to quickly and safely handle hazardous materials incidents, including chemical spills, biohazards, and contamination threats. If you’re facing a hazardous situation, call us immediately for a rapid response.",
     },
     {
-      question: "How do you ensure compliance with safety regulations?",
+      question: "When should I call a hazmat team?",
       answer:
-        "Our team follows OSHA, EPA, and DOT guidelines, using proper safety protocols, equipment, and training to meet all regulatory requirements.",
+        "You should call a hazmat team if you encounter chemical spills, biohazards (blood, bodily fluids), asbestos, meth labs, or other potentially dangerous materials.",
     },
     {
-      question: "Do you offer hazardous waste disposal services?",
-      answer: "",
+      question: "How can I tell if I have mold in my home or business?",
+      answer:
+        "Common signs include musty odors, visible spots, allergy symptoms, or recent water damage.",
     },
     {
-      question: "Can you assist with hazmat training and certification?",
-      answer: "",
+      question: "What areas do you service?",
+      answer:
+        "We proudly serve Eugene, Oregon, as well as Lane County and surrounding areas. Our hazmat and mold remediation team is ready to respond quickly and professionally. If you're unsure whether we service your location, just give us a call!",
     },
-  ]
+  ];
 
   const toggleFAQ = (index) => {
-    setOpenFAQIndex(openFAQIndex === index ? null : index)
-  }
+    setOpenFAQIndex(openFAQIndex === index ? null : index);
+  };
 
   return (
     <>
@@ -52,7 +54,9 @@ export default function Contact() {
 
       {/* FAQ Section */}
       <div className=" w-11/12 lg:max-w-7xl mx-auto mt-12 rounded-lg py-4  ">
-        <h2 className="text-3xl fjalla-one  mb-4">Frequently Asked Questions</h2>
+        <h2 className="text-3xl fjalla-one  mb-4">
+          Frequently Asked Questions
+        </h2>
         <div className="space-y-4">
           {faqData.map((faq, index) => (
             <div key={index} className="border-b border-gray-300 pb-2">
@@ -83,5 +87,5 @@ export default function Contact() {
         </div>
       </div>
     </>
-  )
+  );
 }
