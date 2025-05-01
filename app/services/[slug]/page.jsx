@@ -97,6 +97,7 @@ export default async function ServicePage({ params }) {
           <div key={index}>
             {section.title && <h2 className="text-2xl font-bold mt-6 mb-2">{section.title}</h2>}
             {section.description && <p className="mb-2">{section.description}</p>}
+            {section.img && <img className='w-full rounded-[60px] mb-10 h-96 object-cover'src={section.img} alt={section.title}/>} 
 
             {/* Render the list items dynamically with <span> */}
             {section.listItems && (

@@ -5,15 +5,12 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { IoMdClose } from 'react-icons/io';
 import Link from 'next/link';
 import { useState } from 'react';
+import { services } from '@/data/ServicesData';
 
 export default function MobileMenu({ menuOpen, setMenuOpen }) {
-  const [equipmentOpen, setEquipmentOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
-  const equipment = [
-    { id: 'item1', name: 'Equipment 1' },
-    { id: 'item2', name: 'Equipment 2' },
-    { id: 'item3', name: 'Equipment 3' },
-  ];
+  
 
   const backdropVariants = {
     hidden: { opacity: 0 },
@@ -61,12 +58,12 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
               className="text-white text-3xl flex flex-col items-center"
             >
               <button
-                onClick={() => setEquipmentOpen(!equipmentOpen)}
+                onClick={() => setServicesOpen(!servicesOpen)}
                 className="flex items-center gap-2 focus:outline-none"
               >
                 Services
                 <motion.span
-                  animate={{ rotate: equipmentOpen ? 90 : 0 }}
+                  animate={{ rotate: servicesOpen ? 90 : 0 }}
                   transition={{ duration: 0.2 }}
                 >
                   <IoIosArrowForward size={24} />
@@ -74,7 +71,7 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
               </button>
 
               <AnimatePresence>
-                {equipmentOpen && (
+                {servicesOpen && (
                   <motion.ul
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
@@ -82,14 +79,14 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className="mt-2 space-y-2 overflow-hidden"
                   >
-                    {equipment.map((item) => (
-                      <li key={item.id}>
+                    {services.map((item) => (
+                      <li key={item.slug}>
                         <Link
-                          href={`/services/${item.id}`}
+                          href={`/services/${item.slug}`}
                           onClick={() => setMenuOpen(false)}
                           className="text-white text-xl"
                         >
-                          {item.name}
+                          {item.title}
                         </Link>
                       </li>
                     ))}

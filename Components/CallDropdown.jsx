@@ -15,7 +15,7 @@ export default function CallDropdown() {
     {
       name: 'Mike Haas',
       title: 'Operations Manager',
-      phone: '555-555-5555',
+      phone: '503-756-7105',
     },
     {
       name: 'Office Manager',

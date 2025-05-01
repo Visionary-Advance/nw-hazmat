@@ -13,6 +13,8 @@ const MobileMenu = dynamic(() => import ("./MobileMenu"), {ssr:false})
 export default function Header() {
    const [menuOpen, setMenuOpen] = useState(false)
 
+   const [showFormsDropdown, setShowFormsDropdown] = useState(false)
+
   return (
     <>
     
@@ -32,6 +34,29 @@ export default function Header() {
           <Link href="/about">About</Link>
           <Link href="/training/hazwoper-40-hour">Training</Link>
           <Link href="/shop">Shop</Link>
+          <div
+        className="relative"
+        onMouseEnter={() => setShowFormsDropdown(true)}
+        onMouseLeave={() => setShowFormsDropdown(false)}
+      >
+        <button className="focus:outline-none">Forms</button>
+        {showFormsDropdown && (
+          <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 bg-white shadow-lg rounded-md py-2 z-50">
+            <Link
+              href="/employment-application"
+              className="block px-4 py-2 hover:bg-gray-100"
+            >
+              Job Application
+            </Link>
+            <Link
+              href="/chain-of-custody"
+              className="block px-4 py-2 hover:bg-gray-100"
+            >
+              Chain of Custody
+            </Link>
+          </div>
+        )}
+      </div>
           <Link href="/contact">Contact</Link>
         </nav>
 
