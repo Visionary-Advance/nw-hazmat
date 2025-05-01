@@ -8,6 +8,7 @@ COPY tailwind.config.mjs postcss.config.mjs next.config.mjs jsconfig.json ./
 COPY public/ public/
 COPY app/ app/
 COPY Components/ Components/
+COPY data/ data
 
 RUN npm install
 RUN npm run build
