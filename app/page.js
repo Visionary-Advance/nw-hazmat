@@ -142,7 +142,7 @@ export default function Home() {
   {/* Stats Overlay — now inside the same relative parent */}
 </div>
   <StatsCard
-    widths="w-[105%] lg:w-[120%] max-w-[500px]"
+    widths="  max-w-[500px]"
     textSize="md:text-4xl text-3xl"
     textSizep="text-lg"
     bottom="bottom-[30px]"
@@ -151,7 +151,7 @@ export default function Home() {
 
 
           
-          <div className="col-span-1 flex flex-col gap-5 ps-10 pt-5 mx-auto lg:items-start items-center">
+          <div className="col-span-1 flex flex-col gap-5 lg:ps-10 pt-5 mx-auto lg:items-start items-center">
             <h3 className="fjalla-one text-4xl lg:w-7/12 text-center lg:text-left">
               <span className="text-red-600">Who We Are:</span> Your Trusted
               Partner in Hazmat Services
@@ -218,12 +218,12 @@ export default function Home() {
 </section>
 
 
-      <section className="mt-20 pt-10 relative overflow-visible">
+      <section className="lg:mt-20  lg:pt-10 relative overflow-visible">
   <div className="w-11/12 lg:w-10/12 grid grid-cols-1 lg:grid-cols-2 mx-auto items-center relative z-10">
     
     {/* Text Column */}
     <div className="block col-span-1 relative  max-w-3xl z-0">
-    <div className="absolute bottom-4 right-4 w-11/12 h-full bg-red-600 rounded-[25px] z-0"></div>
+    <div className="absolute bottom-2 right-2 w-11/12 h-full bg-red-600 rounded-[25px] z-0"></div>
     <img
       src="/img/Homeless.jpg"
       alt="Training Image"

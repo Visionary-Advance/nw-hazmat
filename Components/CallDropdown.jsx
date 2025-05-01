@@ -10,7 +10,7 @@ export default function CallDropdown() {
     {
       name: 'Eric Ruby',
       title: 'Director Of Operations',
-      phone: '(541)-556-3000',
+      phone: '541-556-3000',
     },
     {
       name: 'Mike Haas',
@@ -20,7 +20,7 @@ export default function CallDropdown() {
     {
       name: 'Office Manager',
       title: 'Office',
-      phone: '(541)-988-9823',
+      phone: '541-988-9823',
     },
   ]
 
