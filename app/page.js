@@ -205,7 +205,7 @@ export default function Home() {
     <div className="block lg:hidden mt-10 relative z-0 w-full">
       <div className="absolute top-2 left-2 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
       <img
-        src="/img/Homeless.jpg"
+        src="/img/Need_Train.jpg"
         alt="Training Image"
         className="rounded-[25px] w-full relative z-10 shadow-lg object-cover"
       />
@@ -216,7 +216,7 @@ export default function Home() {
   <div className="hidden lg:block absolute top-[-40px] right-[5%] w-[105%] max-w-2xl z-0">
     <div className="absolute top-2 left-2 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
     <img
-      src="/img/Homeless.jpg"
+      src="/img/Need_Train.jpg"
       alt="Training Image"
       className="rounded-[25px] w-[115%] relative z-10 shadow-lg object-cover"
     />

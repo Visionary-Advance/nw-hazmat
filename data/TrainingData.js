@@ -193,7 +193,7 @@ export const training = [
   {
     title: "First Responder Awareness",
     slug: "first-responder-awareness",
-    img: "/img/training-first-responder.jpg",
+    img: "/img/First_Res_Aware.jpg",
     shortDescription: "Intro-level course for identifying hazardous materials in emergencies.",
     description: "Designed for individuals likely to witness a hazardous release. It teaches recognition, reporting procedures, and the importance of not attempting to stop the release.",
     keywords: ["hazmat awareness training", "emergency hazmat"],
@@ -222,7 +222,7 @@ export const training = [
   {
     title: "First Responder Operations",
     slug: "first-responder-operations",
-    img: "/img/training-custom.jpg",
+    img: "/img/First_Res_Op.jpg",
     shortDescription: "Tailored training solutions for your industry and compliance needs.",
     description: "First Responders at the operations level are personnel who are involved in an initial response for the purpose of protecting people, property and the environment from hazardous substances. The FRO are trained to respond defensively, instead of actually trying to stop the release at the source.",
     keywords: ["custom hazmat training", "industry-specific safety programs"],
