@@ -64,9 +64,9 @@ export default async function TrainingPage({ params }) {
 
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center text-center space-y-10">
-              <Link href="tel:555-555-5555">
+              <Link href="tel:541-988-9823">
                 <button className="text-xl text-white border border-white rounded-full inline-block mb-2 px-4">
-                  555-555-5555
+                  541-988-9823
                 </button>
               </Link>
               <h3 className="text-white font-bold text-4xl mb-2">

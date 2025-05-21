@@ -19,7 +19,7 @@ export default function Header() {
     <>
     
       {/* Top Bar */}
-      <div className="w-full flex bg-black justify-center p-2 lg:justify-end pe-5">
+      <div className="w-full flex bg-black justify-center p-2  pe-5">
         <Link href={"tel:541-988-9823"}>
           <Button text={<span className="flex font-bold items-center gap-2"><FaPhone /> 24 Hour Emergency</span>} color="hover:bg-white hover:text-black bg-red-600 text-white" />
         </Link>
@@ -48,12 +48,13 @@ export default function Header() {
             >
               Job Application
             </Link>
-            <Link
-              href="/chain-of-custody"
-              className="block px-4 py-2 hover:bg-gray-100"
-            >
-              Chain of Custody
-            </Link>
+           <a
+  href="/files/Chain_Of_Custody.pdf"
+  download
+  className="block px-4 py-2 hover:bg-gray-100"
+>
+  Chain of Custody
+</a>
           </div>
         )}
       </div>
