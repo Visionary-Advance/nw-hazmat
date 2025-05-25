@@ -20,8 +20,8 @@ export default function Header() {
     
       {/* Top Bar */}
       <div className="w-full flex bg-black justify-center p-2  pe-5">
-        <Link href={"tel:541-988-9823"}>
-          <Button text={<span className="flex font-bold items-center gap-2"><FaPhone /> 24 Hour Emergency</span>} color="hover:bg-white hover:text-black bg-red-600 text-white" />
+        <Link href={"tel:1-800-597-1323"}>
+          <Button text={<span className="flex text-base lg:text-lg font-bold items-center gap-2"><FaPhone /> 24 Hour Emergency: 1-800-597-1323</span>} color="hover:bg-white hover:text-black bg-red-600 text-white" />
         </Link>
       </div>
 

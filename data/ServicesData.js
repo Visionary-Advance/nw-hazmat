@@ -245,6 +245,11 @@ export const services = [
           description:"Mold abatement is a vital service for removing mold and preventing its return. We use advanced techniques to identify and eliminate mold from affected areas, including walls, ceilings, and air systems. Our team not only removes visible mold but also treats the underlying causes, such as excess moisture, to ensure the mold does not return. With our thorough mold abatement services, we help restore a healthy indoor environment for your home or business.",
           img:""
         },
+        {
+          title:"ORSO",
+          description:"The OSRO certification is crucial for Northwest Hazmat and when it comes to oil spill response due to its focus on public and environmental safety. It ensures that we are equipped with the necessary expertise, equipment, and resources to respond effectively to oil spills. The certification process involves rigorous evaluation by the USCG, assessing factors such as response equipment, personnel training, response planning, and financial capability. Northwest Hazmat meets the OSRO certification requirements our crews can mobilize and deploy resources quickly in the event of an oil spill, significantly reducing response times and limiting the spread of oil. This proactive approach helps minimize the long-term environmental, economic, and social impacts of oil spills, safeguarding both natural resources and human livelihoods.",
+          img:"/img/Orso_Img.png"
+        },
       ]
     }
   ];

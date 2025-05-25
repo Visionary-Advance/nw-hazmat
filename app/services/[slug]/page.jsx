@@ -60,7 +60,9 @@ export default async function ServicePage({ params }) {
       </button>
     </Link>
     <h3 className="text-white font-bold text-4xl mb-2">Get in Touch With Us</h3>
+    <Link href='/contact'>
     <button className="bg-black text-white px-4 py-2 rounded">Contact Us</button>
+    </Link>
   </div>
 </div>
 
