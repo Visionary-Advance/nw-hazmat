@@ -78,7 +78,7 @@ export default function About() {
         <div className="bg-red-600 w-[100%] h-[100%] absolute -top-[3%] -left-[3%] lg:-top-[2%] lg:-left-[1%] rounded-[45px] lg:rounded-[90px] -z-10"></div>
         <img
           className=" rounded-[40px] lg:rounded-[75px] object-cover w-full h-full"
-          src="/img/Homeless.jpg"
+          src="/img/About_Header.jpg"
           alt="Environmental services"
         />
         <StatsCard
@@ -117,7 +117,7 @@ export default function About() {
           <div className="bg-red-600 w-[100%] h-[100%] absolute lg:-top-[2%] lg:-left-[2%] -top-[3%] -left-[3%] rounded-[45px] lg:rounded-[90px] -z-10"></div>
           <img
             className=" rounded-[40px] lg:rounded-[75px] object-cover w-full h-full"
-            src="/img/Homeless.jpg"
+            src="/img/Company_Core.png"
             alt="Our values"
           />
         </motion.div>
@@ -177,7 +177,7 @@ export default function About() {
         <div className="bg-red-600 w-[100%] h-[100%] absolute -top-[3%] -left-[3%] lg:-top-[2%] lg:-left-[2%] lg:rounded-[90px] rounded-[45px] -z-10"></div>
           <img
             className="rounded-[40px] lg:rounded-[75px] object-cover w-full h-full"
-            src="/img/Homeless.jpg"
+            src="/img/Mission.jpg"
             alt="Our values"
           />
         </div>

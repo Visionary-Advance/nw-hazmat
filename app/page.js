@@ -41,12 +41,15 @@ export default function Home() {
           </p>
 
           <div className="flex justify-center lg:justify-normal space-x-2 mt-auto pt-6">
+            <Link href="/shop">
             <Button
               text={"Shop Now"}
               color={
                 "bg-red-600 hover:bg-white hover:text-red-600 text-white border border-red-600 arial-bold duration-200 "
               }
             />
+            </Link>
+            <Link href="tel:541-988-9823">
             <Button
               text={
                 <span className="flex items-center gap-2 arial-bold">
@@ -57,6 +60,7 @@ export default function Home() {
                 "bg-white hover:bg-red-600 hover:text-white text-red-600 border border-red-600 duration-200 "
               }
             />
+            </Link>
           </div>
         </div>
       </section>
@@ -71,7 +75,7 @@ export default function Home() {
         />
         <div className="text-center text-white fjalla-one pt-5 pb-5 text-3xl">
           <h3 className="pb-8">For an Immediate Emergency</h3>
-          <Link href={"tel:555-555-5555"}>
+          <Link href={"tel:1-800-597-1323"}>
             <Button
               text={
                 <span className="flex items-center gap-2 arial-bold">
@@ -107,8 +111,8 @@ export default function Home() {
           <h3 className="pb-3">Areas We Serve</h3>
           <div className="border-white -mt-3 border w-[60px] mx-auto"></div>
         </div>
-        <div className="grid place-items-center text-white lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-3">
-          {["Eugene", "Salem", "Rainier"].map((item, index) => (
+        <div className="grid place-items-center text-white w-1/2 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-2">
+          {["Eugene",  "Rainier"].map((item, index) => (
             <div
               className="text-center text-3xl place-items-center"
               key={index}
@@ -126,7 +130,7 @@ export default function Home() {
         <div className="grid lg:grid-cols-2 relative grid-cols-1 lg:w-8/12 w-11/12 mx-auto">
           <div className="col-span-1 relative mx-auto w-fit">
             {/* Background Shadow */}
-            <div className="bg-red-600 h-full w-full rounded-[25px] absolute -z-10 -translate-y-4 -translate-x-4"></div>
+            <div className="bg-red-600 h-full w-full rounded-[25px] absolute -z-10 -translate-y-2 -translate-x-2"></div>
 
             {/* Main Image */}
   {/* Main Image */}
@@ -140,8 +144,9 @@ export default function Home() {
             <div className="relative">
 
   {/* Stats Overlay — now inside the same relative parent */}
+</div>
   <StatsCard
-    widths="w-[105%] lg:w-[120%] max-w-[500px]"
+    widths="  max-w-[500px]"
     textSize="md:text-4xl text-3xl"
     textSizep="text-lg"
     bottom="bottom-[30px]"
@@ -149,8 +154,8 @@ export default function Home() {
 </div>
 
 
-          </div>
-          <div className="col-span-1 flex flex-col gap-5 ps-10 pt-5 mx-auto lg:items-start items-center">
+          
+          <div className="col-span-1 flex flex-col gap-5 lg:ps-10 pt-5 mx-auto lg:items-start items-center">
             <h3 className="fjalla-one text-4xl lg:w-7/12 text-center lg:text-left">
               <span className="text-red-600">Who We Are:</span> Your Trusted
               Partner in Hazmat Services
@@ -188,17 +193,19 @@ export default function Home() {
       <p className="pt-2 text-xl w-10/12">
         Take a look at what we offer to keep you and your company safe
       </p>
+      <Link href={"/training/hazwoper-40-hour"}>
       <Button 
         text={"View Training"} 
         color={"mt-4 border border-red-600 bg-red-600 hover:bg-white text-white hover:text-red-600"} 
       />
+      </Link>
     </div>
 
     {/* Image Column for mobile (relative position) */}
     <div className="block lg:hidden mt-10 relative z-0 w-full">
       <div className="absolute top-2 left-2 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
       <img
-        src="/img/Homeless.jpg"
+        src="/img/Need_Train.jpg"
         alt="Training Image"
         className="rounded-[25px] w-full relative z-10 shadow-lg object-cover"
       />
@@ -207,9 +214,9 @@ export default function Home() {
 
   {/* Image Column for desktop (absolute) */}
   <div className="hidden lg:block absolute top-[-40px] right-[5%] w-[105%] max-w-2xl z-0">
-    <div className="absolute top-4 left-4 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
+    <div className="absolute top-2 left-2 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
     <img
-      src="/img/Homeless.jpg"
+      src="/img/Need_Train.jpg"
       alt="Training Image"
       className="rounded-[25px] w-[115%] relative z-10 shadow-lg object-cover"
     />
@@ -217,14 +224,14 @@ export default function Home() {
 </section>
 
 
-      <section className="mt-20 pt-10 relative overflow-visible">
+      <section className="lg:mt-20  lg:pt-10 relative overflow-visible">
   <div className="w-11/12 lg:w-10/12 grid grid-cols-1 lg:grid-cols-2 mx-auto items-center relative z-10">
     
     {/* Text Column */}
     <div className="block col-span-1 relative  max-w-3xl z-0">
-    <div className="absolute bottom-4 right-4 w-11/12 h-full bg-red-600 rounded-[25px] z-0"></div>
+    <div className="absolute bottom-2 right-2 w-11/12 h-full bg-red-600 rounded-[25px] z-0"></div>
     <img
-      src="/img/Homeless.jpg"
+      src="/img/Tank_Roll.jpg"
       alt="Training Image"
       className="ms-auto rounded-[25px] w-11/12 relative z-10 shadow-lg object-cover"
     />
@@ -234,10 +241,12 @@ export default function Home() {
       <p className="pt-2 text-xl w-10/12">
       Stay prepared for tank rollovers with expert training and safety solutions. Explore our full range of services today!
       </p>
+      <Link href={"/training/hazwoper-40-hour"}>
       <Button 
         text={"View Training"} 
         color={"mt-4 border border-red-600 bg-red-600 hover:bg-white text-white hover:text-red-600"} 
       />
+      </Link>
     </div>
 
    

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import GoButton from './Go-Button';
-import { services } from '@/data/ServicesData';
+import { services } from '../data/ServicesData';
 
 export default function ServiceList() {
   const [hoveredId, setHoveredId] = useState(null);
@@ -15,7 +15,7 @@ export default function ServiceList() {
         {services.map((item) => (
           <Link
             key={item.slug}
-            href={`services/`+item.slug}
+            href={`/services/`+ item.slug}
             className="grid grid-cols-1 group lg:grid-cols-[auto_1fr_1fr_auto] py-3 border-b w-11/12 mx-auto border-black last:border-b-0 items-center relative"
           
           >

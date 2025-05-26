@@ -32,12 +32,12 @@ export default function Footer() {
             </div>
             <div className="flex items-center space-x-2">
               <span>Social Media:</span>
-              <Link href="#" className="text-black hover:text-blue-600">
+              <a href="https://www.facebook.com/NorthWestHazMat/" target='_blank' rel='nofollow noreferrer'  className="text-black hover:text-blue-600">
                 {/* Facebook Icon (SVG) */}
                 <svg className="w-5 h-5 inline" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M22 12a10 10 0 1 0-11.62 9.87v-6.99h-2.8V12h2.8V9.7c0-2.76 1.64-4.3 4.15-4.3 1.2 0 2.46.21 2.46.21v2.7h-1.39c-1.37 0-1.8.85-1.8 1.72V12h3.06l-.49 2.88h-2.57v6.99A10 10 0 0 0 22 12" />
                 </svg>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -47,16 +47,16 @@ export default function Footer() {
         <div className="border-t border-gray-300 my-6"></div>
         <div className="flex flex-col md:flex-row items-center justify-between text-gray-500 text-sm">
         <div className="flex flex-wrap justify-center gap-6 text-sm">
-          <Link href="#" className="hover:underline">About Us</Link>
-          <Link href="#" className="hover:underline">Shop</Link>
-          <Link href="#" className="hover:underline">Contact Us</Link>
-          <Link href="#" className="hover:underline">Privacy Policy</Link>
-          <Link href="#" className="hover:underline">Terms and Conditions</Link>
+          <Link href="/about" className="hover:underline">About Us</Link>
+          <Link href="/shop" className="hover:underline">Shop</Link>
+          <Link href="/contact" className="hover:underline">Contact Us</Link>
+          <Link href="privacy-policy" className="hover:underline">Privacy Policy</Link>
+          <Link href="terms-and-conditions" className="hover:underline">Terms and Conditions</Link>
           <Link href="#" className="hover:underline">Sitemap</Link>
         </div>
         <div className='text-center lg:pt-0 pt-5 lg:text-right'>
           <p>Copyright © 2025 NorthWest Hazmat, INC</p>
-          <p>Powered By <Link href="https://www.visionaryadvance.com" className="text-[#008070] hover:underline">Visionary Advance</Link></p>
+          <p>Powered By <Link href="https://www.visionaryadvance.com" target='_blank' rel='nofollow noreferrer' className="text-[#008070] hover:underline">Visionary Advance</Link></p>
         </div>
         </div>
       </div>

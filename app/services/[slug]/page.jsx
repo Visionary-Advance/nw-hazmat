@@ -54,13 +54,15 @@ export default async function ServicePage({ params }) {
 
   {/* Content */}
   <div className="relative z-10 flex flex-col items-center justify-center text-center space-y-10">
-    <Link href="tel:555-555-5555">
+    <Link href="tel:541-988-9823">
       <button className="text-xl text-white border border-white rounded-full inline-block mb-2 px-4">
-        555-555-5555
+        541-988-9823
       </button>
     </Link>
     <h3 className="text-white font-bold text-4xl mb-2">Get in Touch With Us</h3>
+    <Link href='/contact'>
     <button className="bg-black text-white px-4 py-2 rounded">Contact Us</button>
+    </Link>
   </div>
 </div>
 
@@ -97,6 +99,7 @@ export default async function ServicePage({ params }) {
           <div key={index}>
             {section.title && <h2 className="text-2xl font-bold mt-6 mb-2">{section.title}</h2>}
             {section.description && <p className="mb-2">{section.description}</p>}
+            {section.img && <img className='w-full rounded-[60px] mb-10 h-96 object-cover'src={section.img} alt={section.title}/>} 
 
             {/* Render the list items dynamically with <span> */}
             {section.listItems && (

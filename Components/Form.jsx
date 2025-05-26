@@ -1,14 +1,46 @@
 import { useState } from "react";
 
 export default function Form() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    businessName: "",
-    type: "",
-    message: "",
-  });
+
+    return (
+      <div className="mt-10 flex flex-col items-center justify-center">
+        <div className="w-11/12 lg:max-w-7xl border border-black/30 rounded-lg shadow-md p-6">
+          <form className="flex flex-col">
+            <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+              <input
+                placeholder="First Name"
+                className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
+                type="text"
+              />
+              <input
+                placeholder="Last Name"
+                className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
+                type="text"
+              />
+            </div>
+  
+            <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+              <input
+                placeholder="Email"
+                className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
+                type="email"
+              />
+
+              <input
+                placeholder="Phone Number"
+                className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
+                type="tel"
+              />
+
+            </div>
+<div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+            <input
+                placeholder="Business Name (If Applicable)"
+                className="bg-white border border-black/30 text-black rounded-md p-2 w-full  focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
+                type="text"
+              />
+              </div>
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
