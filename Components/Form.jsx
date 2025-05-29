@@ -1,46 +1,14 @@
 import { useState } from "react";
 
 export default function Form() {
-
-    return (
-      <div className="mt-10 flex flex-col items-center justify-center">
-        <div className="w-11/12 lg:max-w-7xl border border-black/30 rounded-lg shadow-md p-6">
-          <form className="flex flex-col">
-            <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
-              <input
-                placeholder="First Name"
-                className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
-                type="text"
-              />
-              <input
-                placeholder="Last Name"
-                className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
-                type="text"
-              />
-            </div>
-  
-            <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
-              <input
-                placeholder="Email"
-                className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
-                type="email"
-              />
-
-              <input
-                placeholder="Phone Number"
-                className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
-                type="tel"
-              />
-
-            </div>
-<div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
-            <input
-                placeholder="Business Name (If Applicable)"
-                className="bg-white border border-black/30 text-black rounded-md p-2 w-full  focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
-                type="text"
-              />
-              </div>
-
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    businessName: "",
+    type: "",
+    message: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,38 +19,54 @@ export default function Form() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const payload = {
-      recipient: "colten.hallett@visionaryadvance.com", // your inbox
-      sender: formData.email,
-      website_name: formData.businessName || "Visionary Advance",
-      body: formData.message,
-      html_body: `
-        <p><strong>From:</strong> ${formData.firstName} ${formData.lastName} (${formData.email})</p>
-        <p><strong>Service Type:</strong> ${formData.type}</p>
-        <p><strong>Message:</strong><br>${formData.message}</p>
-      `
-    };
+  const formData = new FormData(e.target);
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const phone = formData.get("phone");
+  const message = formData.get("message");
 
-    try {
-      const res = await fetch("https://mail.visionaryadvance.com/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (res.ok) {
-        alert("Message sent!");
-      } else {
-        console.error(await res.json());
-        alert("Error sending message.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Server error.");
-    }
+  const payload = {
+    recipient: "colten.hallett@visionaryadvance.com", // your client’s inbox
+    reply_to: email, // this makes replies go to the form user
+    website_name: "nwhazmat.com",
+    body: message,
+    html_body: `
+      <div style="font-family: Arial, sans-serif; padding: 20px;">
+        <h2 style="color: #B91C1C;">New Contact Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Message:</strong><br>${message}</p>
+      </div>
+    `
   };
+
+  try {
+    console.log("Sending to API...");
+    const res = await fetch("https://mail.visionaryadvance.com/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+
+    if (res.ok) {
+      alert("Your message has been sent!");
+      e.target.reset(); // Optional: clears the form
+    } else {
+      const error = await res.json();
+      console.error("Email error:", error);
+      alert("There was a problem sending your message.");
+    }
+  } catch (err) {
+    console.error("Fetch error:", err);
+    alert("Server error. Please try again.");
+  }
+};
 
   return (
     <div className="mt-10 flex flex-col items-center justify-center">
@@ -156,4 +140,3 @@ export default function Form() {
     </div>
   );
 }
-
