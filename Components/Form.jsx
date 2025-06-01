@@ -21,31 +21,41 @@ export default function Form() {
   const handleSubmit = async (e) => {
   e.preventDefault();
 
-  const formData = new FormData(e.target);
-  const name = formData.get("name");
-  const email = formData.get("email");
-  const phone = formData.get("phone");
-  const message = formData.get("message");
+  const name = formData.name;
+  const email = formData.email;
+  const phone = formData.phone;
+  const message = formData.message;
 
   const payload = {
-    recipient: "colten.hallett@visionaryadvance.com", // your client’s inbox
-    reply_to: email, // this makes replies go to the form user
-    website_name: "nwhazmat.com",
-    body: message,
-    html_body: `
-      <div style="font-family: Arial, sans-serif; padding: 20px;">
-        <h2 style="color: #B91C1C;">New Contact Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Message:</strong><br>${message}</p>
-      </div>
+  recipient: "colten.hallett@visionaryadvance.com",
+  reply_to: formData.email,
+  website_name: "nwhazmat.com",
+  body: formData.message,
+  html_body: `
+    <div style="font-family: Arial, sans-serif; padding: 20px;">
+      <h2 style="color: #B91C1C;">New Contact Submission</h2>
+      <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
+      <p><strong>Email:</strong> ${formData.email}</p>
+      <p><strong>Business Name:</strong> ${formData.businessName}</p>
+      <p><strong>Type:</strong> ${formData.type}</p>
+      <p><strong>Message:</strong><br>${formData.message}</p>
+    </div>
     `
-  };
+   };
+
+  const fetchWithTimeout = (url, options, timeout = 10000) =>
+  Promise.race([
+    fetch(url, options),
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Request timed out")), timeout)
+    ),
+  ]);
+
+  console.log("Sending to API...");
+  console.log("Payload:", payload);
 
   try {
-    console.log("Sending to API...");
-    const res = await fetch("https://mail.visionaryadvance.com/send-email", {
+    const res = await fetchWithTimeout("https://mail.visionaryadvance.com/send-email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,6 +63,10 @@ export default function Form() {
       body: JSON.stringify(payload),
     });
 
+    console.log("API response received");
+
+    const resJson = await res.json();
+    console.log("API JSON:", resJson);
 
     if (res.ok) {
       alert("Your message has been sent!");
