@@ -27,7 +27,7 @@ export default function Form() {
   const message = formData.message;
 
   const payload = {
-  recipient: "colten.hallett@visionaryadvance.com",
+  recipient: "Office@nwhazmat.com",
   reply_to: formData.email,
   website_name: "nwhazmat.com",
   body: formData.message,
