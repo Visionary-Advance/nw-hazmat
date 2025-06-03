@@ -36,7 +36,7 @@ export default function JobApplicationPage() {
       }
     });
 
-    const res = await fetch('/api/apply', {
+    const res = await fetch('https://mail.visionaryadvance.com/send-job-application', {
       method: 'POST',
       body: data,
     });
