@@ -9,7 +9,7 @@ import TestimonialSlider from "@/Components/ReviewSlide";
 export default function Home() {
   return (
     <>
-      <section className="grid grid-cols-1 pb-10 relative 2xl:grid-cols-[2fr_3fr] gap-x-4 lg:w-full overflow-x-hidden overflow-hidden ">
+      <section className="grid grid-cols-1 pb-10 relative 2xl:grid-cols-[2fr_3fr]  lg:w-full overflow-x-hidden overflow-hidden ">
         <img
           className="absolute bottom-[-130px] right-[-110px] -z-20"
           src="/img/Hazmat_Symbol.png"
@@ -17,7 +17,7 @@ export default function Home() {
           height={500}
           alt="Hazmat Symbol"
         />
-        <div className="relative w-11/12 lg:w-full  max-w-[800px] col-span-1 aspect-[8/7]">
+        <div className="relative w-11/12   max-w-[800px] col-span-1 aspect-[8/7]">
           <img
             src="/img/Confined_Space.jpg"
             alt="Confined Space Worksite"
@@ -89,6 +89,11 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      <section className="">
+
+                <TestimonialSlider />
+
+</section>
 
       {/* SERVICES LIST */}
       <section className="bg-black pb-10">
@@ -111,8 +116,8 @@ export default function Home() {
           <h3 className="pb-3">Areas We Serve</h3>
           <div className="border-white -mt-3 border w-[60px] mx-auto"></div>
         </div>
-        <div className="grid place-items-center text-white w-1/2 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-2">
-          {["Eugene",  "Rainier"].map((item, index) => (
+        <div className="grid place-items-center text-white w-7/12 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-2">
+          {["Lane County & Surrounding Areas",  "Pacific Northwest"].map((item, index) => (
             <div
               className="text-center text-3xl place-items-center"
               key={index}
@@ -129,13 +134,12 @@ export default function Home() {
         </div>
         <div className="grid lg:grid-cols-2 relative grid-cols-1 lg:w-8/12 w-11/12 mx-auto">
           <div className="col-span-1 relative mx-auto w-fit">
-            {/* Background Shadow */}
-            <div className="bg-red-600 h-full w-full rounded-[25px] absolute -z-10 -translate-y-2 -translate-x-2"></div>
+            
 
             {/* Main Image */}
   {/* Main Image */}
   <img
-    className="rounded-[20px]"
+    className="rounded-[20px] shadow-[-10px_-10px_0_#dc2626]"
     src="/img/Reading_Gauge.jpg"
     alt="Reading Gauge Image"
     width={400}
@@ -196,7 +200,7 @@ export default function Home() {
       <Link href={"/training/hazwoper-40-hour"}>
       <Button 
         text={"View Training"} 
-        color={"mt-4 border border-red-600 bg-red-600 hover:bg-white text-white hover:text-red-600"} 
+        color={"mt-4 arial font-semibold text-white bg-red-600 hover:bg-white border border-red-600 hover:text-red-600"} 
       />
       </Link>
     </div>
@@ -244,7 +248,7 @@ export default function Home() {
       <Link href={"/training/hazwoper-40-hour"}>
       <Button 
         text={"View Training"} 
-        color={"mt-4 border border-red-600 bg-red-600 hover:bg-white text-white hover:text-red-600"} 
+        color={"mt-4 arial font-semibold text-white bg-red-600 hover:bg-white border border-red-600 hover:text-red-600"} 
       />
       </Link>
     </div>
@@ -258,11 +262,7 @@ export default function Home() {
 
 
 
-<section className="">
 
-                <TestimonialSlider />
-
-</section>
 
 
     </>
