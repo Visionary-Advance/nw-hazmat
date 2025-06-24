@@ -1,6 +1,5 @@
 import ATCButton from "@/Components/ATCButton";
 import Breadcrumbs from "@/Components/BreadCrumbs";
-import FilterBar from "@/Components/FilterBar";
 
 
 
@@ -11,7 +10,7 @@ export default function Shop(){
     id: "tank-truck-rollover-simulator",
     name: "Tank Truck Rollover Simulator",
     description: "High-impact training simulator for hazmat teams.",
-    image: "/img/Tank-Truck.jpg",
+    image: "/img/Tank-Truck-Rollover.jpg",
     price: 8120.00,
     category: "simulator"
   },
@@ -19,7 +18,7 @@ export default function Shop(){
     id: "tank-truck-accessory-pack",
     name: "Tank Truck Accessory Pack",
     description: "Complete add-on kit for tank truck simulators.",
-    image: "/img/Tank-Truck-Rollover.jpg",
+    image: "/img/Tank-Truck.jpg",
     price: 975.00,
     category: "simulator"
   },
