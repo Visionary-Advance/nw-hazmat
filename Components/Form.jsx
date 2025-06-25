@@ -35,6 +35,7 @@ export default function Form() {
     <div style="font-family: Arial, sans-serif; padding: 20px;">
       <h2 style="color: #B91C1C;">New Contact Submission</h2>
       <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
+      <p><strong>Phone Number:</strong> ${formData.phone}</p>
       <p><strong>Email:</strong> ${formData.email}</p>
       <p><strong>Business Name:</strong> ${formData.businessName}</p>
       <p><strong>Type:</strong> ${formData.type}</p>
