@@ -52,7 +52,7 @@ export default function Footer() {
           <Link href="/contact" className="hover:underline">Contact Us</Link>
           <Link href="privacy-policy" className="hover:underline">Privacy Policy</Link>
           <Link href="terms-and-conditions" className="hover:underline">Terms and Conditions</Link>
-          <Link href="#" className="hover:underline">Sitemap</Link>
+          <Link href="/sitemap.xml" className="hover:underline">Sitemap</Link>
         </div>
         <div className='text-center lg:pt-0 pt-5 lg:text-right'>
           <p>Copyright © 2025 NorthWest Hazmat, INC</p>
