@@ -8,6 +8,7 @@ import CartSidebar from "@/Components/CartSidebar";
 import { CartProvider } from "@/Components/CartContext";
 import { ProductSkeletonGrid } from "@/Components/ProductSkeleton";
 import { useProducts } from "@/hooks/useProducts";
+import ProductLink, { createProductSlug } from "@/Components/ProductLink";
 
 export default function Shop() {
   const { products, loading, getProductsByCategory } = useProducts();
@@ -27,8 +28,6 @@ export default function Shop() {
     <CartProvider>
       <>
         <Breadcrumbs />
-        
-       
         
         {/* Category Filter */}
         {!loading && categories.length > 2 && (
@@ -84,13 +83,13 @@ export default function Shop() {
                 {filteredProducts.map((item) => (
                   <div
                     key={item.id}
-                    className="w-64 h-[460px] mx-auto relative shadow-md rounded-[20px] bg-white border border-black/20 flex flex-col justify-between p-3"
+                    className="w-64 h-[460px] mx-auto relative shadow-md rounded-[20px] bg-white border border-black/20 flex flex-col justify-between p-3 group hover:shadow-lg transition-shadow"
                   >
-                    {/* Image */}
-                    <div className="flex justify-center">
+                    {/* Image - Now clickable */}
+                    <ProductLink product={item} className="flex justify-center">
                       {item.image ? (
                         <img
-                          className="w-60 h-60 object-cover border border-black shadow rounded-[16px]"
+                          className="w-60 h-60 object-cover border border-black shadow rounded-[16px] group-hover:opacity-90 transition-opacity"
                           src={item.image}
                           alt={item.name}
                           onError={(e) => {
@@ -106,7 +105,7 @@ export default function Shop() {
                           {item.image ? 'Loading...' : 'No Image'}
                         </span>
                       </div>
-                    </div>
+                    </ProductLink>
 
                     {/* Stock Status */}
                     {!item.inStock && (
@@ -115,16 +114,16 @@ export default function Shop() {
                       </div>
                     )}
 
-                    {/* Name + Divider */}
-                    <div className="mt-2">
-                      <h3 className="fjalla-one text-xl">{item.name}</h3>
+                    {/* Name + Divider - Now clickable */}
+                    <ProductLink product={item} className="mt-2 block">
+                      <h3 className="fjalla-one text-xl group-hover:text-blue-600 transition-colors">{item.name}</h3>
                       <div className="bg-black h-[1px] w-12 mt-1" />
-                    </div>
+                    </ProductLink>
 
-                    {/* Description */}
-                    <div className="text-sm mt-2 flex-grow overflow-hidden">
-                      <p className="line-clamp-3">{item.description}</p>
-                    </div>
+                    {/* Description - Now clickable */}
+                    <ProductLink product={item} className="text-sm mt-2 flex-grow overflow-hidden block">
+                      <p className="line-clamp-3 group-hover:text-gray-600 transition-colors">{item.description}</p>
+                    </ProductLink>
 
                     {/* Price + Button */}
                     <div className="flex justify-between items-center mt-4">
@@ -142,9 +141,24 @@ export default function Shop() {
                       />
                     </div>
 
+                    {/* SEO-friendly link overlay for better accessibility */}
+                    <ProductLink 
+                      product={item} 
+                      className="absolute inset-0 z-0"
+                      aria-label={`View ${item.name} details`}
+                    />
+
+                    {/* Bring Add to Cart button to front */}
+                    <div className="absolute bottom-3 right-3 z-10">
+                      <UpdatedATCButton 
+                        product={item} 
+                        disabled={!item.inStock}
+                      />
+                    </div>
+
                     {/* Inventory Count (if available) */}
                     {item.inventory !== null && item.inventory < 10 && item.inStock && (
-                      <div className="text-xs text-orange-600 mt-1 text-center">
+                      <div className="text-xs text-orange-600 mt-1 text-center relative z-10">
                         Only {item.inventory} left in stock
                       </div>
                     )}
