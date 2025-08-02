@@ -114,7 +114,7 @@ export default function Home() {
         />
         <div className="text-center text-white fjalla-one pt-5 pb-5 text-3xl">
           <h3 className="pb-3">Areas We Serve</h3>
-          <div className="border-white -mt-3 border w-[60px] mx-auto"></div>
+          
         </div>
         <div className="grid place-items-center text-white w-7/12 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-2">
           {["Lane County & Surrounding Areas",  "Pacific Northwest"].map((item, index) => (
@@ -164,7 +164,7 @@ export default function Home() {
               <span className="text-red-600">Who We Are:</span> Your Trusted
               Partner in Hazmat Services
             </h3>
-            <div className="border-black border w-[60px] lg:me-auto"></div>
+            {/* <div className="border-black border w-[60px] lg:me-auto"></div> */}
             <p className="lg:w-9/12 w-11/12 text-2xl lg:text-xl">
               Founded in 2000, NorthWest HazMat, Inc. is a female-owned and
               operated environmental company. We began as a spill response

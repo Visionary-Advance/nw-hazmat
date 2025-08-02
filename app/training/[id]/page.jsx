@@ -13,7 +13,7 @@ export function generateStaticParams() {
 
 // Generate SEO metadata for each training page
 export async function generateMetadata({ params }) {
-  const id = params?.id;
+  const { id } = await params;
   
   if (!id) {
     return {
@@ -93,7 +93,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function TrainingPage({ params }) {
-  const id = params?.id;
+  const { id } = await params;
 
   if (!id) {
     return notFound();

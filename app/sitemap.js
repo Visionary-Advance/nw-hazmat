@@ -2,28 +2,28 @@
 import { services } from '@/data/ServicesData';
 import { training } from '@/data/TrainingData';
 
+// Helper function to create URL-friendly slug from product name
+const createSlug = (name) => {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric chars with hyphens
+    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+    .replace(/-+/g, '-'); // Replace multiple hyphens with single hyphen
+};
+
 export default function sitemap() {
-  const baseUrl = 'https://nwhazmat.com'; // Update to your actual domain
+  const baseUrl = 'https://nwhazmat.com';
   
-  // Main pages
+  // Combine all products
+  const allProducts = [...services, ...training];
+  
+  // Core pages
   const routes = [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'yearly',
       priority: 1,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/training`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
     },
     {
       url: `${baseUrl}/about`,
@@ -32,28 +32,47 @@ export default function sitemap() {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/shop`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/services`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/training`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
   ];
 
-  // Add service pages dynamically using id
-  const serviceRoutes = services.map((service) => ({
-    url: `${baseUrl}/services/${service.id}`,
+  // Add product pages with direct URLs (shop/product-name)
+  const productRoutes = allProducts.map((product) => ({
+    url: `${baseUrl}/shop/${createSlug(product.name)}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',
-    priority: 0.8,
+    priority: 0.6,
   }));
 
-  // Add training pages dynamically using id (with fallback to slug)
-  const trainingRoutes = training.map((trainingItem) => ({
-    url: `${baseUrl}/training/${trainingItem.id || trainingItem.slug}`,
+  // Add category pages if you have them
+  const categories = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
+  const categoryRoutes = categories.map((category) => ({
+    url: `${baseUrl}/shop/category/${createSlug(category)}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.8,
+    changeFrequency: 'weekly',
+    priority: 0.7,
   }));
 
-  return [...routes, ...serviceRoutes, ...trainingRoutes];
+  return [...routes, ...productRoutes, ...categoryRoutes];
 }
