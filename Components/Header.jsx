@@ -48,13 +48,12 @@ export default function Header() {
             >
               Job Application
             </Link>
-           <a
-  href="/files/Chain_Of_Custody.pdf"
-  download
+           <Link
+  href="/chain-of-custody"
   className="block px-4 py-2 hover:bg-gray-100"
 >
   Chain of Custody
-</a>
+</Link>
           </div>
         )}
       </div>

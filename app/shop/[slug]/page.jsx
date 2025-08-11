@@ -5,11 +5,11 @@ import { useParams } from 'next/navigation';
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/Components/BreadCrumbs';
 import { CartProvider } from '@/Components/CartContext';
-import UpdatedATCButton from '@/Components/UpdatedATCButton';
 import CartButton from '@/Components/CartButton';
 import CartSidebar from '@/Components/CartSidebar';
 import { useProducts } from '@/hooks/useProducts';
 import Button from '@/Components/Button';
+import ProductPageATCButton from '@/Components/ProductPageATCButton';
 
 export default function ProductPage() {
   const params = useParams();
@@ -251,10 +251,10 @@ export default function ProductPage() {
             </div>
           </div>
 
-          <div className='grid grid-cols-1 md:grid-cols-2 w-11/12'>
+          <div className='grid grid-cols-1 gap-x-5 mt-5 md:grid-cols-2 w-11/12'>
             <Button text={"Go Back"} color={" w-full bg-red-500 text-white fjalla-one"} />
              <div className="w-full col-span-1">
-                  <UpdatedATCButton 
+                  <ProductPageATCButton 
                     product={product} 
                     disabled={!product.inStock}
                     width={"w-full"}
