@@ -157,6 +157,13 @@ export const structuredData = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+         <head>
+        {/* Other head content */}
+        <script 
+          src="http://localhost:3000/analytics.js" 
+          data-site-id="moldexpert_main"
+        ></script>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ClientWrapper>{children}</ClientWrapper>
       </body>

@@ -10,7 +10,7 @@ export default function CartButton() {
   return (
     <button
       onClick={() => setIsCartOpen(true)}
-      className="absolute top-36 lg:top-40 right-4 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg flex items-center gap-2 z-40"
+      className="fixed top-36 lg:top-40 right-4 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg flex items-center gap-2 z-40"
     >
       <ShoppingCart className="w-7 h-7" />
       {itemCount > 0 && (

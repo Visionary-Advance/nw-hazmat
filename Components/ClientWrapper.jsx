@@ -7,22 +7,34 @@ import HazmatLoader from "./HazmatLoader";
 
 export default function ClientWrapper({ children }) {
   const [loading, setLoading] = useState(true);
+  const [loaderVisible, setLoaderVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    // Start hiding the loader after 2 seconds
+    const hideTimer = setTimeout(() => {
+      setLoaderVisible(false);
+    }, 2000);
+
+    // Completely remove loader after slide-up animation completes
+    const removeTimer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // Show loader for 2 seconds
-    return () => clearTimeout(timer);
+    }, 3000); // 2000ms wait + 1000ms animation duration
+
+    return () => {
+      clearTimeout(hideTimer);
+      clearTimeout(removeTimer);
+    };
   }, []);
 
   return (
     <>
-      {/* Render both, but hide page content during loading */}
+      {/* Render loader with animation control */}
       {loading && (
-        <HazmatLoader />
+        <HazmatLoader isVisible={loaderVisible} />
       )}
 
-      <div className={loading ? "hidden" : "block"}>
+      {/* Main content with fade-in effect */}
+      <div className={`transition-opacity duration-500 ${loading ? "opacity-0" : "opacity-100"}`}>
         <Header />
         {children}
         <Footer />

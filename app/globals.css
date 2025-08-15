@@ -58,3 +58,98 @@
   font-family: "Antonio" , sans-serif;
 }
 
+/* Enhanced logo spin with smoother animation */
+@keyframes logoSpin {
+  0% { 
+    transform: rotate(-45deg) scale(1);
+  }
+  25% {
+    transform: rotate(45deg) scale(1.05);
+  }
+  50% { 
+    transform: rotate(135deg) scale(1);
+  }
+  75% {
+    transform: rotate(225deg) scale(1.05);
+  }
+  100% { 
+    transform: rotate(315deg) scale(1);
+  }
+}
+
+/* Loading bar animation */
+@keyframes loadingBar {
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(0.7);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* Pulse color scale with smoother transitions */
+@keyframes pulseColorScale {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+}
+
+/* Slide up animation for the entire loader */
+@keyframes slideUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+/* Stagger animation for text elements */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced logo animation class */
+.animate-logoSpin {
+  animation: logoSpin 3s linear infinite;
+}
+
+.animate-loadingBar {
+  animation: loadingBar 2s ease-in-out forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 1s ease-in-out forwards;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Additional smooth transitions */
+.loader-element {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loader container improvements */
+.loader-container {
+  backdrop-filter: blur(2px);
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}

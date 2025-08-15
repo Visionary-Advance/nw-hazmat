@@ -1,16 +1,20 @@
-'use client';
+import React from 'react';
 
-export default function HazmatLoader() {
+export default function HazmatLoader({ isVisible }) {
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div 
+      className={`fixed inset-0 z-50 flex justify-center items-center h-screen bg-gray-100 transition-transform duration-1000 ease-in-out ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       <div className="relative flex items-center justify-center space-x-4 lg:space-x-8 animate-pulseColorScale">
         {/* Northwest Text */}
         <span className="text-4xl lg:text-7xl antonio">NorthWest</span>
 
-        {/* Spinning + Pulsing Hazmat Logo */}
+        {/* Spinning + Pulsing Hazmat Logo - Your Original Animation */}
         <div className="relative w-[40px] sm:w-[55px] lg:w-[110px] h-[40px] sm:h-[55px] lg:h-[110px] -rotate-45 animate-logoSpin">
           {/* White */}
-          <div className="absolute w-1/2 h-1/2 bottom-0 left-0 bg-white  border border-black"></div>
+          <div className="absolute w-1/2 h-1/2 bottom-0 left-0 bg-white border border-black"></div>
           {/* Blue */}
           <div className="absolute w-1/2 h-1/2 top-0 left-0 bg-[#0072ce] border border-black"></div>
           {/* Red */}
@@ -20,7 +24,7 @@ export default function HazmatLoader() {
         </div>
 
         {/* Hazmat Text */}
-        <span className=" text-4xl lg:text-7xl antonio">HazMat</span>
+        <span className="text-4xl lg:text-7xl antonio">HazMat</span>
       </div>
     </div>
   );
