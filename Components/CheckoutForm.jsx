@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';;
+import React, { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 import { useCart } from './CartContext';
 
@@ -11,6 +11,9 @@ export default function CheckoutForm({ onSuccess }) {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState('');
   const [paymentRequest, setPaymentRequest] = useState(null);
+  const [canMakePayment, setCanMakePayment] = useState(false);
+  const [shippingCost, setShippingCost] = useState(0);
+  const [isCalculatingShipping, setIsCalculatingShipping] = useState(false);
   const [customerInfo, setCustomerInfo] = useState({
     firstName: '',
     lastName: '',
@@ -23,93 +26,404 @@ export default function CheckoutForm({ onSuccess }) {
     zipCode: ''
   });
 
-  // Initialize Payment Request (Apple Pay, Google Pay)
-  React.useEffect(() => {
-    if (stripe) {
+  // Calculate shipping cost
+  const calculateShipping = async (address) => {
+    if (!address.city || !address.state || !address.zipCode) {
+      setShippingCost(15); // Default shipping
+      return 15;
+    }
+
+    setIsCalculatingShipping(true);
+    try {
+      const response = await fetch('/api/shipping/calculate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: cartItems,
+          shippingAddress: address
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const cost = data.shippingCost || 15;
+        setShippingCost(cost);
+        return cost;
+      } else {
+        setShippingCost(15);
+        return 15;
+      }
+    } catch (error) {
+      console.error('Shipping calculation error:', error);
+      setShippingCost(15);
+      return 15;
+    } finally {
+      setIsCalculatingShipping(false);
+    }
+  };
+
+  const getTotalWithShipping = () => {
+    return getCartTotal() + shippingCost;
+  };
+
+  function DetailedGooglePayTest() {
+  const testGooglePayDirect = async () => {
+    console.log('=== TESTING GOOGLE PAY DIRECTLY ===');
+    
+    // Test 1: Check if Google Pay API is loaded
+    if (window.google && window.google.payments) {
+      console.log('✅ Google Pay API is loaded');
+      
+      try {
+        const paymentsClient = new window.google.payments.api.PaymentsClient({
+          environment: 'TEST'
+        });
+        
+        const isReadyToPayRequest = {
+          apiVersion: 2,
+          apiVersionMinor: 0,
+          allowedPaymentMethods: [
+            {
+              type: 'CARD',
+              parameters: {
+                allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                allowedCardNetworks: ['AMEX', 'DISCOVER', 'JCB', 'MASTERCARD', 'VISA']
+              }
+            }
+          ]
+        };
+        
+        const response = await paymentsClient.isReadyToPay(isReadyToPayRequest);
+        console.log('Google Pay isReadyToPay response:', response);
+        
+        if (response.result) {
+          console.log('🎉 Google Pay is ready to pay!');
+        } else {
+          console.log('❌ Google Pay is not ready:', response);
+        }
+      } catch (error) {
+        console.log('❌ Google Pay API error:', error);
+      }
+    } else {
+      console.log('❌ Google Pay API not loaded');
+      
+      // Try to load Google Pay API manually
+      const script = document.createElement('script');
+      script.src = 'https://pay.google.com/gp/p/js/pay.js';
+      script.async = true;
+      script.onload = () => {
+        console.log('✅ Google Pay API loaded manually');
+        setTimeout(() => testGooglePayDirect(), 1000);
+      };
+      script.onerror = () => {
+        console.log('❌ Failed to load Google Pay API');
+      };
+      document.head.appendChild(script);
+    }
+  };
+
+  const testPaymentRequest = async () => {
+    console.log('=== TESTING PAYMENT REQUEST API ===');
+    
+    if (!window.PaymentRequest) {
+      console.log('❌ PaymentRequest not supported');
+      return;
+    }
+    
+    try {
+      const request = new PaymentRequest(
+        [
+          {
+            supportedMethods: 'https://google.com/pay',
+            data: {
+              environment: 'TEST',
+              apiVersion: 2,
+              apiVersionMinor: 0,
+              merchantInfo: {
+                merchantName: 'Test Store'
+              },
+              allowedPaymentMethods: [
+                {
+                  type: 'CARD',
+                  parameters: {
+                    allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                    allowedCardNetworks: ['VISA', 'MASTERCARD', 'AMEX']
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        {
+          total: {
+            label: 'Test',
+            amount: { currency: 'USD', value: '1.00' }
+          }
+        }
+      );
+      
+      const canPay = await request.canMakePayment();
+      console.log('PaymentRequest canMakePayment result:', canPay);
+      
+      if (canPay) {
+        console.log('🎉 PaymentRequest says Google Pay is available!');
+      } else {
+        console.log('❌ PaymentRequest says Google Pay is not available');
+      }
+    } catch (error) {
+      console.log('❌ PaymentRequest error:', error);
+    }
+  };
+
+  return (
+    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 my-4">
+      <h3 className="font-bold mb-2">Google Pay Debug Tests</h3>
+      <div className="space-x-2">
+        <button
+          onClick={testGooglePayDirect}
+          className="bg-blue-500 text-white px-3 py-2 rounded text-sm"
+        >
+          Test Google Pay API
+        </button>
+        <button
+          onClick={testPaymentRequest}
+          className="bg-green-500 text-white px-3 py-2 rounded text-sm"
+        >
+          Test PaymentRequest
+        </button>
+      </div>
+    </div>
+  );
+}
+  // Initialize Apple Pay and Google Pay
+  useEffect(() => {
+    if (stripe && cartItems.length > 0) {
+      const subtotal = getCartTotal();
+      
       const pr = stripe.paymentRequest({
         country: 'US',
         currency: 'usd',
+        disableLink: true,
         total: {
-          label: 'Total',
-          amount: Math.round(getCartTotal() * 100),
+          label: 'NorthWest HazMat',
+          amount: Math.round((subtotal + 15) * 100), // Start with default shipping
         },
+        displayItems: [
+          {
+            label: 'Subtotal',
+            amount: Math.round(subtotal * 100),
+          },
+          {
+            label: 'Shipping',
+            amount: 1500, // Default $15 shipping
+          },
+        ],
         requestPayerName: true,
         requestPayerEmail: true,
         requestShipping: true,
+        shippingOptions: [
+          {
+            id: 'standard',
+            label: 'Standard Shipping',
+            detail: '3-7 business days',
+            amount: 1500,
+          },
+        ],
       });
 
-      // Check if Payment Request is available
+      // Check if Apple Pay or Google Pay is available
       pr.canMakePayment().then(result => {
         if (result) {
+          setCanMakePayment(true);
           setPaymentRequest(pr);
         }
       });
 
+      // Handle shipping address change
+      pr.on('shippingaddresschange', async (event) => {
+        const address = {
+          city: event.shippingAddress.city,
+          state: event.shippingAddress.region,
+          zipCode: event.shippingAddress.postalCode,
+          country: event.shippingAddress.country,
+        };
+
+        // Calculate new shipping cost
+        const newShippingCost = await calculateShipping(address);
+        const newTotal = subtotal + newShippingCost;
+
+        // Update the payment request with new totals
+        event.updateWith({
+          status: 'success',
+          total: {
+            label: 'NorthWest HazMat',
+            amount: Math.round(newTotal * 100),
+          },
+          displayItems: [
+            {
+              label: 'Subtotal',
+              amount: Math.round(subtotal * 100),
+            },
+            {
+              label: 'Shipping',
+              amount: Math.round(newShippingCost * 100),
+            },
+          ],
+          shippingOptions: [
+            {
+              id: 'standard',
+              label: 'Standard Shipping',
+              detail: address.state === 'Oregon' ? '1-3 business days' : '3-7 business days',
+              amount: Math.round(newShippingCost * 100),
+              selected: true,
+            },
+          ],
+        });
+      });
+
+      // Handle shipping option change
+      pr.on('shippingoptionchange', (event) => {
+        // For now, we only have one shipping option, but you can add express shipping here
+        event.updateWith({
+          status: 'success',
+          total: {
+            label: 'NorthWest HazMat',
+            amount: Math.round(getTotalWithShipping() * 100),
+          },
+        });
+      });
+
+      // Handle payment method
       pr.on('paymentmethod', async (event) => {
-        // Handle Apple Pay/Google Pay payment
         try {
           setProcessing(true);
           
+          const shippingAddress = event.shippingAddress;
+          const finalShippingCost = await calculateShipping({
+            city: shippingAddress.city,
+            state: shippingAddress.region,
+            zipCode: shippingAddress.postalCode,
+          });
+
+          const finalTotal = subtotal + finalShippingCost;
+
+          // Create payment intent with final total
           const response = await fetch('/api/create-payment-intent', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              amount: getCartTotal(),
-              customerInfo: {
-                firstName: event.payerName?.split(' ')[0] || '',
-                lastName: event.payerName?.split(' ').slice(1).join(' ') || '',
-                email: event.payerEmail || '',
-                address: event.shippingAddress?.line1 || '',
-                city: event.shippingAddress?.city || '',
-                state: event.shippingAddress?.state || '',
-                zipCode: event.shippingAddress?.postal_code || '',
-              },
+              amount: finalTotal,
+              currency: 'usd',
               metadata: {
                 customerName: event.payerName,
                 customerEmail: event.payerEmail,
-                orderSource: 'express_checkout',
+                orderSource: 'apple_google_pay',
+                shippingCost: finalShippingCost,
+                subtotal: subtotal,
+                shippingAddress: JSON.stringify(shippingAddress),
                 items: JSON.stringify(cartItems.map(item => ({
                   id: item.id,
                   name: item.name,
                   price: item.price,
                   quantity: item.quantity
-                })))
+                }))),
               }
             }),
           });
 
-          const { clientSecret } = await response.json();
+          const { clientSecret, error: apiError } = await response.json();
 
-          const { error: confirmError } = await stripe.confirmCardPayment(
+          if (apiError) {
+            console.error('Payment intent creation failed:', apiError);
+            event.complete('fail');
+            setError(apiError);
+            return;
+          }
+
+          // Confirm the payment
+          const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(
             clientSecret,
-            { payment_method: event.paymentMethod.id },
-            { handleActions: false }
+            { 
+              payment_method: event.paymentMethod.id 
+            },
+            { 
+              handleActions: false 
+            }
           );
 
           if (confirmError) {
+            console.error('Payment confirmation failed:', confirmError);
             event.complete('fail');
             setError(confirmError.message);
           } else {
+            console.log('Payment succeeded:', paymentIntent);
+            
+            // Create order record
+            try {
+              const orderResponse = await fetch('/api/orders', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  customerInfo: {
+                    firstName: event.payerName?.split(' ')[0] || '',
+                    lastName: event.payerName?.split(' ').slice(1).join(' ') || '',
+                    email: event.payerEmail || '',
+                    address: shippingAddress.addressLine?.[0] || '',
+                    city: shippingAddress.city || '',
+                    state: shippingAddress.region || '',
+                    zipCode: shippingAddress.postalCode || '',
+                    country: shippingAddress.country || 'US',
+                  },
+                  items: cartItems,
+                  subtotal: subtotal,
+                  shippingCost: finalShippingCost,
+                  total: finalTotal,
+                  paymentIntentId: paymentIntent.id,
+                  paymentMethod: 'apple_google_pay',
+                  paymentStatus: paymentIntent.status,
+                }),
+              });
+
+              if (orderResponse.ok) {
+                console.log('Order created successfully');
+              }
+            } catch (orderError) {
+              console.error('Order creation failed:', orderError);
+              // Don't fail the payment for order creation issues
+            }
+
             event.complete('success');
             clearCart();
             onSuccess();
           }
         } catch (err) {
+          console.error('Payment processing error:', err);
           event.complete('fail');
           setError('Payment failed. Please try again.');
         } finally {
           setProcessing(false);
         }
       });
-    }
-  }, [stripe, getCartTotal, cartItems]);
 
-  const handlePayPal = () => {
-    // For now, show a message. You'd integrate PayPal SDK here
-    alert('PayPal integration coming soon! Please use card payment below.');
-  };
+    }
+  }, [stripe, cartItems, shippingCost]);
+
+  // Update shipping when address changes for regular checkout
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      calculateShipping(customerInfo);
+    }, 500);
+
+    return () => clearTimeout(debounceTimer);
+  }, [customerInfo.city, customerInfo.state, customerInfo.zipCode]);
+
+ 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -120,22 +434,24 @@ export default function CheckoutForm({ onSuccess }) {
     setError('');
 
     try {
+      const total = getTotalWithShipping();
+      
       const response = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          amount: getCartTotal(),
-          customerInfo,
+          amount: total,
+          currency: 'usd',
           metadata: {
             customerName: `${customerInfo.firstName} ${customerInfo.lastName}`,
             customerEmail: customerInfo.email,
             orderSource: 'card_payment',
+            shippingCost: shippingCost,
+            subtotal: getCartTotal(),
             items: JSON.stringify(cartItems.map(item => ({
               id: item.id,
-              stripeProductId: item.stripeProductId,
-              stripePriceId: item.stripePriceId,
               name: item.name,
               price: item.price,
               quantity: item.quantity
@@ -182,17 +498,17 @@ export default function CheckoutForm({ onSuccess }) {
           body: JSON.stringify({
             customerInfo,
             items: cartItems,
-            total: getCartTotal(),
+            subtotal: getCartTotal(),
+            shippingCost: shippingCost,
+            total: total,
             paymentIntentId: paymentIntent.id,
-            stripePaymentIntentId: paymentIntent.id,
-            currency: paymentIntent.currency,
+            paymentMethod: 'card',
             paymentStatus: paymentIntent.status,
           }),
         });
 
         if (orderResponse.ok) {
-          const orderData = await orderResponse.json();
-          console.log('Order created:', orderData);
+          console.log('Order created successfully');
         }
 
         clearCart();
@@ -204,6 +520,10 @@ export default function CheckoutForm({ onSuccess }) {
     } finally {
       setProcessing(false);
     }
+  };
+
+  const handleInputChange = (field, value) => {
+    setCustomerInfo(prev => ({ ...prev, [field]: value }));
   };
 
   const cardStyle = {
@@ -223,8 +543,7 @@ export default function CheckoutForm({ onSuccess }) {
   };
 
   const subtotal = getCartTotal();
-  const shipping = 100; // Fixed shipping for now
-  const total = subtotal + shipping;
+  const total = getTotalWithShipping();
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -236,25 +555,29 @@ export default function CheckoutForm({ onSuccess }) {
           
           <div className="space-y-3">
             {/* Apple Pay & Google Pay */}
-            {paymentRequest && (
-              <div className="grid grid-cols-2 gap-3">
+            {canMakePayment && paymentRequest ? (
+              <div className="h-12">
                 <PaymentRequestButtonElement 
-                  options={{ paymentRequest }}
-                  className="h-12"
+                  options={{ 
+                    paymentRequest,
+                    style: {
+                      paymentRequestButton: {
+                        type: 'default', // 'default', 'book', 'buy', 'checkout', 'donate'
+                        theme: 'dark', // 'dark', 'light', 'light-outline'
+                        height: '48px',
+                      },
+                    },
+                  }}
+                  className="w-full h-12"
                 />
-                <div className="bg-white border border-gray-300 rounded-md h-12 flex items-center justify-center">
-                  <span className="text-lg font-medium">🍎 Pay</span>
-                </div>
+              </div>
+            ) : (
+              <div className="h-12 animate-pulse bg-gray-100 rounded-md flex items-center justify-center text-gray-500">
+                
               </div>
             )}
             
-            {/* PayPal */}
-            <button
-              onClick={handlePayPal}
-              className="w-full bg-[#ffc439] hover:bg-[#ffb93d] text-black font-semibold py-3 rounded-md flex items-center justify-center transition-colors"
-            >
-              <span className="text-lg font-bold">PayPal</span>
-            </button>
+            
           </div>
           
           <div className="flex items-center my-4">
@@ -280,7 +603,7 @@ export default function CheckoutForm({ onSuccess }) {
               type="text"
               placeholder="First Name"
               value={customerInfo.firstName}
-              onChange={(e) => setCustomerInfo({...customerInfo, firstName: e.target.value})}
+              onChange={(e) => handleInputChange('firstName', e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -288,7 +611,7 @@ export default function CheckoutForm({ onSuccess }) {
               type="text"
               placeholder="Last Name"
               value={customerInfo.lastName}
-              onChange={(e) => setCustomerInfo({...customerInfo, lastName: e.target.value})}
+              onChange={(e) => handleInputChange('lastName', e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -298,7 +621,7 @@ export default function CheckoutForm({ onSuccess }) {
             type="text"
             placeholder="Company (Required for business addresses)"
             value={customerInfo.company}
-            onChange={(e) => setCustomerInfo({...customerInfo, company: e.target.value})}
+            onChange={(e) => handleInputChange('company', e.target.value)}
             className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
@@ -306,7 +629,7 @@ export default function CheckoutForm({ onSuccess }) {
             type="text"
             placeholder="Address"
             value={customerInfo.address}
-            onChange={(e) => setCustomerInfo({...customerInfo, address: e.target.value})}
+            onChange={(e) => handleInputChange('address', e.target.value)}
             className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
@@ -315,7 +638,7 @@ export default function CheckoutForm({ onSuccess }) {
             type="text"
             placeholder="Apartment, suite, etc. (optional)"
             value={customerInfo.apartment}
-            onChange={(e) => setCustomerInfo({...customerInfo, apartment: e.target.value})}
+            onChange={(e) => handleInputChange('apartment', e.target.value)}
             className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
@@ -324,13 +647,13 @@ export default function CheckoutForm({ onSuccess }) {
               type="text"
               placeholder="City"
               value={customerInfo.city}
-              onChange={(e) => setCustomerInfo({...customerInfo, city: e.target.value})}
+              onChange={(e) => handleInputChange('city', e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
             <select
               value={customerInfo.state}
-              onChange={(e) => setCustomerInfo({...customerInfo, state: e.target.value})}
+              onChange={(e) => handleInputChange('state', e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="Oregon">Oregon</option>
@@ -343,7 +666,7 @@ export default function CheckoutForm({ onSuccess }) {
               type="text"
               placeholder="Zip Code"
               value={customerInfo.zipCode}
-              onChange={(e) => setCustomerInfo({...customerInfo, zipCode: e.target.value})}
+              onChange={(e) => handleInputChange('zipCode', e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -353,7 +676,7 @@ export default function CheckoutForm({ onSuccess }) {
             type="email"
             placeholder="Email"
             value={customerInfo.email}
-            onChange={(e) => setCustomerInfo({...customerInfo, email: e.target.value})}
+            onChange={(e) => handleInputChange('email', e.target.value)}
             className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
@@ -384,7 +707,7 @@ export default function CheckoutForm({ onSuccess }) {
                 Processing...
               </>
             ) : (
-              'Pay Now'
+              `Pay $${total.toFixed(2)}`
             )}
           </button>
         </div>
@@ -414,7 +737,6 @@ export default function CheckoutForm({ onSuccess }) {
                   <p className="text-gray-600 text-sm">Quantity: {item.quantity}</p>
                 </div>
                 <div className="text-right">
-                 
                   <p className="font-semibold mt-1">${(item.price * item.quantity).toFixed(2)}</p>
                 </div>
               </div>
@@ -429,13 +751,22 @@ export default function CheckoutForm({ onSuccess }) {
             </div>
             <div className="flex justify-between">
               <span>Shipping:</span>
-              <span>${shipping.toFixed(2)}</span>
+              <span>
+                {isCalculatingShipping ? (
+                  <span className="text-gray-500">Calculating...</span>
+                ) : (
+                  `$${shippingCost.toFixed(2)}`
+                )}
+              </span>
             </div>
             <div className="flex justify-between text-lg font-bold border-t pt-3">
               <span>Total:</span>
               <span>${total.toFixed(2)}</span>
             </div>
           </div>
+
+          {/* Payment Method Availability */}
+          
         </div>
       </div>
     </div>
