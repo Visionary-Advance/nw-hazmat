@@ -1,71 +1,81 @@
-// File: app/api/webhooks/stripe/route.js
+// app/api/webhooks/stripe/route.js
 import { NextResponse } from 'next/server';
-import { headers } from 'next/headers';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+// Ensure pure runtime execution (no static optimization/pre-render)
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+// Lazy-init Stripe at request time (prevents build-time crashes)
+let _stripe;
+function getStripe() {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error('STRIPE_SECRET_KEY missing (runtime)');
+    _stripe = new Stripe(key, { apiVersion: '2024-06-20' });
+  }
+  return _stripe;
+}
+
+function getEndpointSecret() {
+  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!secret) throw new Error('STRIPE_WEBHOOK_SECRET missing (runtime)');
+  return secret;
+}
 
 export async function POST(request) {
-  const body = await request.text();
-  const headersList = headers();
-  const sig = headersList.get('stripe-signature');
+  // Stripe requires the **raw** request body
+  const rawBody = await request.text();
+  const signature = request.headers.get('stripe-signature');
 
   let event;
-
   try {
-    event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
+    const stripe = getStripe();
+    const endpointSecret = getEndpointSecret();
+    event = stripe.webhooks.constructEvent(rawBody, signature, endpointSecret);
   } catch (err) {
-    console.error('Webhook signature verification failed:', err.message);
+    console.error('Webhook signature verification failed:', err?.message || err);
     return NextResponse.json(
       { error: 'Webhook signature verification failed' },
       { status: 400 }
     );
   }
 
-  // Handle the event
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-      console.log('Payment succeeded:', paymentIntent.id);
-      
-      // Update order status in database
-      await handleSuccessfulPayment(paymentIntent);
-      break;
+  try {
+    // Handle supported events
+    switch (event.type) {
+      case 'payment_intent.succeeded': {
+        const paymentIntent = event.data.object;
+        console.log('Payment succeeded:', paymentIntent.id);
+        await handleSuccessfulPayment(paymentIntent);
+        break;
+      }
+      case 'payment_intent.payment_failed': {
+        const failedPayment = event.data.object;
+        console.log('Payment failed:', failedPayment.id);
+        await handleFailedPayment(failedPayment);
+        break;
+      }
+      default:
+        console.log(`Unhandled event type ${event.type}`);
+    }
 
-    case 'payment_intent.payment_failed':
-      const failedPayment = event.data.object;
-      console.log('Payment failed:', failedPayment.id);
-      
-      // Handle failed payment
-      await handleFailedPayment(failedPayment);
-      break;
-
-    default:
-      console.log(`Unhandled event type ${event.type}`);
+    // ✅ Return stays INSIDE the POST function
+    return NextResponse.json({ received: true });
+  } catch (err) {
+    console.error('Webhook handling error:', err?.message || err);
+    return NextResponse.json({ error: 'Webhook handler error' }, { status: 500 });
   }
-
-  return NextResponse.json({ received: true });
 }
 
+// ----- helpers (keep these pure; no top-level side effects) -----
 async function handleSuccessfulPayment(paymentIntent) {
   try {
-    // In production, you would:
-    // 1. Update order status to 'paid'
-    // 2. Send confirmation email to customer
-    // 3. Update inventory
-    // 4. Create shipping label
-    // 5. Notify fulfillment team
-    
     console.log('Processing successful payment:', paymentIntent.id);
-    
-    // Example: Update order status (you'd use a real database)
-    const orderId = paymentIntent.metadata.orderId;
+    const orderId = paymentIntent.metadata?.orderId;
     if (orderId) {
-      // Update order in database
       console.log(`Order ${orderId} marked as paid`);
-      
-      // Send confirmation email
       await sendOrderConfirmationEmail(orderId);
     }
   } catch (error) {
@@ -75,38 +85,14 @@ async function handleSuccessfulPayment(paymentIntent) {
 
 async function handleFailedPayment(paymentIntent) {
   try {
-    // Handle failed payment
     console.log('Processing failed payment:', paymentIntent.id);
-    
-    // In production, you might:
-    // 1. Update order status to 'payment_failed'
-    // 2. Send notification to customer
-    // 3. Log for review
+    // Update order, notify customer, etc.
   } catch (error) {
     console.error('Failed to handle failed payment:', error);
   }
 }
 
 async function sendOrderConfirmationEmail(orderId) {
-  // In production, integrate with email service like:
-  // - SendGrid
-  // - AWS SES
-  // - Mailgun
-  // - Your existing email service
-  
   console.log(`Sending confirmation email for order ${orderId}`);
-  
-  // Example email content structure:
-  const emailData = {
-    to: 'customer@example.com',
-    subject: 'Order Confirmation - NorthWest HazMat',
-    template: 'order-confirmation',
-    data: {
-      orderId,
-      customerName: 'John Doe',
-      items: [],
-      total: 0,
-      shippingAddress: {}
-    }
-  };
+  // integrate with your email provider here
 }
