@@ -2,7 +2,7 @@
 'use client';
 import { useState } from 'react';
 
-export default function ChainOfCustodyForm() {
+export default function ChainofCustodyForm() {
   const [formData, setFormData] = useState({
     // Client Information
     client: '',

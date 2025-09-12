@@ -1,6 +1,6 @@
 // app/chain-of-custody/page.jsx
 import Breadcrumbs from '@/Components/BreadCrumbs';
-import ChainOfCustodyForm from '@/Components/ChainOfCustodyForm';
+import ChainOfCustodyForm from '@/Components/ChainofCustodyForm';
 
 export const metadata = {
   title: 'Chain of Custody Form | NorthWest HazMat Oregon',
