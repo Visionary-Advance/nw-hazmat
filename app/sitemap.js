@@ -2,77 +2,73 @@
 import { services } from '@/data/ServicesData';
 import { training } from '@/data/TrainingData';
 
-// Helper function to create URL-friendly slug from product name
-const createSlug = (name) => {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric chars with hyphens
-    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
-    .replace(/-+/g, '-'); // Replace multiple hyphens with single hyphen
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+// Safe slug generator – guards undefined/null
+const createSlug = (value) => {
+  const s = (value ?? '').toString().trim().toLowerCase();
+  if (!s) return ''; // caller will skip empty slugs
+  return s
+    .replace(/[^a-z0-9]+/g, '-')  // non-alphanumerics -> hyphen
+    .replace(/^-+|-+$/g, '')      // trim leading/trailing hyphens
+    .replace(/-+/g, '-');         // collapse multiple hyphens
 };
 
 export default function sitemap() {
-  const baseUrl = 'https://nwhazmat.com';
-  
-  // Combine all products
-  const allProducts = [...services, ...training];
-  
-  // Core pages
+  // Prefer env so preview/prod URLs are correct
+  const baseUrl =
+    (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'http://localhost:3000')
+      .replace(/\/+$/, '');
+
+  const allProducts = [...(services ?? []), ...(training ?? [])];
+
   const routes = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/shop`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/training`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
+    { url: `${baseUrl}/`,              lastModified: new Date(), changeFrequency: 'yearly',  priority: 1.0 },
+    { url: `${baseUrl}/about`,         lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/shop`,          lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${baseUrl}/contact`,       lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/services`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/training`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
   ];
 
-  // Add product pages with direct URLs (shop/product-name)
-  const productRoutes = allProducts.map((product) => ({
-    url: `${baseUrl}/shop/${createSlug(product.name)}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }));
+  // Only include products that have a valid name
+  const productRoutes = allProducts
+    .filter(p => p && typeof p.name === 'string' && p.name.trim().length > 0)
+    .map(p => {
+      const slug = createSlug(p.name);
+      if (!slug) return null;
+      return {
+        url: `${baseUrl}/shop/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      };
+    })
+    .filter(Boolean);
 
-  // Add category pages if you have them
-  const categories = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
-  const categoryRoutes = categories.map((category) => ({
-    url: `${baseUrl}/shop/category/${createSlug(category)}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: 0.7,
-  }));
+  // Only include non-empty categories
+  const categories = Array.from(
+    new Set(
+      allProducts
+        .map(p => (p && typeof p.category === 'string' ? p.category.trim() : ''))
+        .filter(Boolean)
+    )
+  );
+
+  const categoryRoutes = categories
+    .map(cat => {
+      const slug = createSlug(cat);
+      if (!slug) return null;
+      return {
+        url: `${baseUrl}/shop/category/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      };
+    })
+    .filter(Boolean);
 
   return [...routes, ...productRoutes, ...categoryRoutes];
 }

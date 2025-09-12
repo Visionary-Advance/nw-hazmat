@@ -1,42 +1,44 @@
-// File: app/api/create-payment-intent/route.js
+// app/api/create-payment-intent/route.js
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-export async function POST(request) {
-  try {
-    const { amount, currency = 'usd', metadata = {} } = await request.json();
-
-    // Validate amount
-    if (!amount || amount < 50) { // Stripe minimum is $0.50
-      return NextResponse.json(
-        { error: 'Amount must be at least $0.50' },
-        { status: 400 }
-      );
-    }
-
-    // Create payment intent
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount * 100), // Convert to cents
-      currency,
-      metadata,
-      automatic_payment_methods: {
-        enabled: true,
-      },
-    });
-
-    return NextResponse.json({
-      clientSecret: paymentIntent.client_secret,
-      paymentIntentId: paymentIntent.id,
-    });
-  } catch (error) {
-    console.error('Payment intent creation failed:', error);
-    return NextResponse.json(
-      { error: 'Failed to create payment intent' },
-      { status: 500 }
-    );
+let _stripe;
+function getStripe() {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error('STRIPE_SECRET_KEY missing (runtime)');
+    _stripe = new Stripe(key, { apiVersion: '2024-06-20' });
   }
+  return _stripe;
 }
 
+export async function POST(req) {
+  try {
+    const stripe = getStripe();
+    const body = await req.json();
 
+    // Expecting { amount: number_in_cents, currency: 'usd', metadata?: {...} }
+    const amount = Number(body?.amount);
+    const currency = body?.currency || 'usd';
+    if (!Number.isFinite(amount) || amount <= 0) {
+      return NextResponse.json({ error: 'Invalid amount' }, { status: 400 });
+    }
+
+    const params = {
+      amount,
+      currency,
+      automatic_payment_methods: { enabled: true },
+      metadata: body?.metadata || {},
+    };
+
+    const pi = await stripe.paymentIntents.create(params);
+    return NextResponse.json({ clientSecret: pi.client_secret });
+  } catch (err) {
+    console.error('create-payment-intent error:', err?.message || err);
+    return NextResponse.json({ error: 'Stripe error' }, { status: 500 });
+  }
+}
