@@ -19,69 +19,72 @@ export default function Form() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const name = formData.name;
-  const email = formData.email;
-  const phone = formData.phone;
-  const message = formData.message;
+    const payload = {
+      from: "noreply@mail.visionaryadvance.com", // You'll need to verify this domain with Resend
+      to: ["colten.hallett@visionaryadvance.com"],
+      reply_to: formData.email,
+      subject: `New Contact Form Submission from ${formData.name}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #B91C1C;">New Contact Submission</h2>
+          <p><strong>Name:</strong> ${formData.name}</p>
+          <p><strong>Phone Number:</strong> ${formData.phone}</p>
+          <p><strong>Email:</strong> ${formData.email}</p>
+          <p><strong>Business Name:</strong> ${formData.businessName}</p>
+          <p><strong>Type:</strong> ${formData.type}</p>
+          <p><strong>Message:</strong><br>${formData.message}</p>
+        </div>
+      `,
+      text: `
+        New Contact Submission
+        
+        Name: ${formData.name}
+        Phone Number: ${formData.phone}
+        Email: ${formData.email}
+        Business Name: ${formData.businessName}
+        Type: ${formData.type}
+        Message: ${formData.message}
+      `
+    };
 
-  const payload = {
-  recipient: "Office@nwhazmat.com",
-  reply_to: formData.email,
-  website_name: "nwhazmat.com",
-  body: formData.message,
-  html_body: `
-    <div style="font-family: Arial, sans-serif; padding: 20px;">
-      <h2 style="color: #B91C1C;">New Contact Submission</h2>
-      <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
-      <p><strong>Phone Number:</strong> ${formData.phone}</p>
-      <p><strong>Email:</strong> ${formData.email}</p>
-      <p><strong>Business Name:</strong> ${formData.businessName}</p>
-      <p><strong>Type:</strong> ${formData.type}</p>
-      <p><strong>Message:</strong><br>${formData.message}</p>
-    </div>
-    `
-   };
+    console.log("Sending email via Resend...");
+    console.log("Payload:", payload);
 
-  const fetchWithTimeout = (url, options, timeout = 10000) =>
-  Promise.race([
-    fetch(url, options),
-    new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Request timed out")), timeout)
-    ),
-  ]);
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-  console.log("Sending to API...");
-  console.log("Payload:", payload);
+      console.log("API response received");
 
-  try {
-    const res = await fetchWithTimeout("https://mail.visionaryadvance.com/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+      const resJson = await res.json();
+      console.log("API JSON:", resJson);
 
-    console.log("API response received");
-
-    const resJson = await res.json();
-    console.log("API JSON:", resJson);
-
-    if (res.ok) {
-      alert("Your message has been sent!");
-      e.target.reset(); // Optional: clears the form
-    } else {
-      const error = await res.json();
-      console.error("Email error:", error);
-      alert("There was a problem sending your message.");
+      if (res.ok) {
+        alert("Your message has been sent!");
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          businessName: "",
+          type: "",
+          message: "",
+        });
+      } else {
+        console.error("Email error:", resJson);
+        alert("There was a problem sending your message.");
+      }
+    } catch (err) {
+      console.error("Fetch error:", err);
+      alert("Server error. Please try again.");
     }
-  } catch (err) {
-    console.error("Fetch error:", err);
-    alert("Server error. Please try again.");
-  }
-};
+  };
 
   return (
     <div className="mt-10 flex flex-col items-center justify-center">
@@ -89,20 +92,21 @@ export default function Form() {
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
             <input
-              name="firstName"
+              name="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="Name"
               className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
               type="text"
+              required
             />
             <input
-              name="phoneNumber"
+              name="phone"
               value={formData.phone}
               onChange={handleChange}
               placeholder="Phone Number"
               className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
-              type="num"
+              type="tel"
             />
           </div>
 
@@ -114,6 +118,7 @@ export default function Form() {
               placeholder="Email"
               className="bg-white border border-black/30 text-black rounded-md p-2 w-full md:w-1/2 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
               type="email"
+              required
             />
             <input
               name="businessName"
@@ -130,6 +135,7 @@ export default function Form() {
             value={formData.type}
             onChange={handleChange}
             className="bg-white border mb-4 border-black/30 text-black rounded-md p-2 w-full focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
+            required
           >
             <option value="" disabled>Select Type (Service or Training)</option>
             <option value="service">Service</option>
@@ -142,6 +148,7 @@ export default function Form() {
             onChange={handleChange}
             placeholder="Message"
             className="bg-white border h-52 border-black/30 text-black rounded-md p-2 mb-4 focus:outline-none focus:ring-1 focus:ring-black/30 transition ease-in-out duration-150"
+            required
           />
 
           <button

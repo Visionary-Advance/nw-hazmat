@@ -10,8 +10,8 @@ export default function CallDropdown() {
       phone: '541-556-3000',
     },
     {
-      name: 'Office Manager',
-      title: 'Office',
+      name: 'Sarah Crites',
+      title: 'Office Manager',
       phone: '541-988-9823',
     },
   ]
