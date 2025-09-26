@@ -71,7 +71,7 @@ export default function JobApplicationPage() {
 
     const payload = {
       from: "noreply@mail.visionaryadvance.com",
-      to: ["brandon@visionaryadvance.com"], // Update this to your jobs email
+      to: ["office@nwhazmat.com"], // Update this to your jobs email
       reply_to: formData.email,
       subject: `New Job Application from ${formData.name}`,
       html: `

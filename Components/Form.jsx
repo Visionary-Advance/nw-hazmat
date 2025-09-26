@@ -23,7 +23,7 @@ export default function Form() {
 
     const payload = {
       from: "noreply@mail.visionaryadvance.com", // You'll need to verify this domain with Resend
-      to: ["colten.hallett@visionaryadvance.com"],
+      to: ["office@nwhazmat.com"],
       reply_to: formData.email,
       subject: `New Contact Form Submission from ${formData.name}`,
       html: `
