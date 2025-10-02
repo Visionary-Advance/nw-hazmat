@@ -151,6 +151,8 @@ describe('Chain of Custody API', () => {
         { samples: 26, expectedPages: 3 },  // 5 on page 1, 20 on page 2, 1 on page 3
         { samples: 45, expectedPages: 3 },  // 5 + 20 + 20 = 45
         { samples: 46, expectedPages: 4 },  // 5 + 20 + 20 + 1 = 46
+        { samples: 100, expectedPages: 6 },  // 5 + 20 + 20 + 20 + 20 + 15  = 100
+
       ];
 
       for (const { samples: sampleCount, expectedPages } of testCases) {

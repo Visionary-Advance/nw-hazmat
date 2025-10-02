@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientWrapper from "@/Components/ClientWrapper";
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -159,13 +160,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
          <head>
         {/* Other head content */}
-        <script 
-          src="http://localhost:3000/analytics.js" 
-          data-site-id="moldexpert_main"
-        ></script>
+       
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ClientWrapper>{children}</ClientWrapper>
+        <ClientWrapper>{children}
+          <Analytics />
+        </ClientWrapper>
       </body>
     </html>
   );
