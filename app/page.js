@@ -5,6 +5,7 @@ import ServiceList from "@/Components/ServiceList";
 import { IoLocationSharp } from "react-icons/io5";
 import StatsCard from "@/Components/CountUp";
 import TestimonialSlider from "@/Components/ReviewSlide";
+import EmploymentSection from "@/Components/EmploymentSection";
 
 export default function Home() {
   return (
@@ -226,6 +227,8 @@ export default function Home() {
     />
   </div>
 </section>
+
+{/* <EmploymentSection /> */}
 
 
       <section className="lg:mt-20  lg:pt-10 relative overflow-visible">
