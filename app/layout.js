@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  // Metadata base URL for resolving relative URLs
+  metadataBase: new URL('https://nwhazmat.com'),
+
   // Primary SEO tags
   title: "NorthWest HazMat, Inc. | Professional Hazmat & Mold Remediation Services",
   description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services. Licensed experts serving the Pacific Northwest with 24/7 emergency response.",
@@ -25,26 +28,26 @@ export const metadata = {
   openGraph: {
     title: "NorthWest HazMat, Inc. | Professional Hazmat & Mold Remediation Services",
     description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services. Licensed experts serving the Pacific Northwest.",
-    url: "https://northwesthazmat.com", // Replace with your actual domain
+    url: "https://nwhazmat.com",
     siteName: "NorthWest HazMat, Inc.",
     type: "website",
     locale: "en_US",
     images: [
       {
-        url: "https://northwesthazmat.com/og-image.jpg", // Replace with your actual image
+        url: "/img/Hazmat-Services.jpg",
         width: 1200,
         height: 630,
         alt: "NorthWest HazMat professional hazmat and mold remediation services",
       },
     ],
   },
-  
+
   // Twitter Card tags
   twitter: {
     card: "summary_large_image",
     title: "NorthWest HazMat, Inc. | Professional Hazmat & Mold Remediation Services",
     description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services in the Pacific Northwest.",
-    images: ["https://northwesthazmat.com/twitter-image.jpg"], // Replace with your actual image
+    images: ["/img/Hazmat-Services.jpg"],
   },
   
   // Additional metadata
@@ -85,7 +88,7 @@ export const structuredData = {
   "@type": "LocalBusiness",
   "name": "NorthWest HazMat, Inc.",
   "description": "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services.",
-  "url": "https://northwesthazmat.com",
+  "url": "https://nwhazmat.com",
   "telephone": "+1-XXX-XXX-XXXX", // Replace with actual phone
   "email": "info@northwesthazmat.com", // Replace with actual email
   "address": {

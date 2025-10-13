@@ -2,6 +2,33 @@ import React from 'react';
 import Link from 'next/link';
 import Breadcrumbs from '@/Components/BreadCrumbs';
 
+export const metadata = {
+  title: "Emergency Black Mold Removal Eugene Oregon | 24/7 Response",
+  description: "24/7 emergency black mold removal in Eugene-Springfield, Oregon. Toxic Stachybotrys response team. Licensed, certified, 25+ years experience. Call 1-800-597-1323 NOW!",
+  keywords: "emergency mold removal eugene, black mold removal eugene oregon, toxic mold emergency springfield, 24/7 mold response lane county, stachybotrys removal oregon",
+  openGraph: {
+    title: "Emergency Black Mold Removal | 24/7 Eugene Oregon Response",
+    description: "Immediate response for toxic black mold contamination in Eugene-Springfield. Professional emergency remediation. Call 1-800-597-1323.",
+    url: "https://nwhazmat.com/emergency-mold-removal-eugene-oregon",
+    siteName: "NorthWest HazMat, Inc.",
+    type: "website",
+    images: [
+      {
+        url: "https://nwhazmat.com/img/Mold-Remi.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Emergency black mold removal Eugene Oregon",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Emergency Black Mold Removal | 24/7 Eugene Oregon",
+    description: "Immediate response for toxic black mold. Call 1-800-597-1323 NOW!",
+    images: ["https://nwhazmat.com/img/Mold-Remi.jpg"],
+  },
+};
+
 export default function BlackMoldSingleColumn() {
   const responseAreas = [
     { area: "University of Oregon", time: "8 minutes" },
