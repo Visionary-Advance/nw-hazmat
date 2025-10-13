@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { training } from "@/data/TrainingData";
 import Breadcrumbs from "@/Components/BreadCrumbs";
 import Link from "next/link";
@@ -193,11 +194,12 @@ export default async function TrainingPage({ params }) {
             <div className="absolute inset-0 bg-black opacity-80 rounded-[60px]"></div>
 
             {/* Image */}
-            <img
-              className="absolute inset-0 w-full h-full object-cover rounded-[60px]"
+            <Image
+              className="rounded-[60px]"
               src="/img/Call_Now_Side.png"
               alt="Contact NorthWest HazMat for training"
-              loading="lazy"
+              fill
+              style={{ objectFit: 'cover' }}
             />
 
             {/* Content */}
@@ -223,11 +225,13 @@ export default async function TrainingPage({ params }) {
         <main className="md:w-2/3 mx-auto">
           {/* Main Image */}
           {trainings.img && (
-            <img
+            <Image
               src={trainings.img}
               alt={`${trainings.title} training in Oregon`}
+              width={896}
+              height={384}
               className="rounded-[60px] shadow mb-10 h-96 object-cover w-full"
-              loading="eager"
+              priority
             />
           )}
 
@@ -299,11 +303,12 @@ export default async function TrainingPage({ params }) {
             <h3 className="text-4xl font-bold mb-4">Group Sizes</h3>
             <div className="w-3/4 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="col-span-1 mx-auto text-center">
-                <img
+                <Image
                   className="mx-auto"
                   alt="Small group hazmat training for 5-9 people"
                   src="/img/2_Group.png"
-                  loading="lazy"
+                  width={300}
+                  height={300}
                 />
                 <p className="text-2xl font-bold">Group (5-9)</p>
                 <p className="text-lg w-3/4 mx-auto text-gray-700">
@@ -313,11 +318,12 @@ export default async function TrainingPage({ params }) {
                 </p>
               </div>
               <div className="col-span-1 mx-auto text-center">
-                <img
+                <Image
                   className="mx-auto"
                   alt="Large group hazmat training for 10 or more people"
                   src="/img/3_Group.png"
-                  loading="lazy"
+                  width={300}
+                  height={300}
                 />
                 <p className="text-2xl font-bold">Large Group (10+)</p>
                 <p className="text-lg w-3/4 mx-auto text-gray-700">

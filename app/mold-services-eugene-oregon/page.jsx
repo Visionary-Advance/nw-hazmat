@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Breadcrumbs from '@/Components/BreadCrumbs';
+import Image from 'next/image';
 
 export const metadata = {
   title: "Mold Remediation Eugene Oregon | Professional Mold Removal Services",
@@ -150,10 +150,13 @@ export default function MoldRemediationLanding() {
               
               <div className="relative">
                 <div className="bg-blue-600 w-full h-full absolute -top-[3%] -left-[3%] lg:-top-[2%] lg:-left-[2%] rounded-[45px] lg:rounded-[90px] -z-10"></div>
-                <img
+                <Image
                   className="rounded-[40px] lg:rounded-[75px] object-cover w-full h-96 lg:h-[500px] shadow-2xl"
                   src="/img/Mold-Remi.jpg"
                   alt="Professional mold remediation in Eugene Oregon"
+                  width={600}
+                  height={500}
+                  priority
                 />
               </div>
             </div>
@@ -260,10 +263,12 @@ export default function MoldRemediationLanding() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="relative">
                 <div className="bg-green-600 w-full h-full absolute -top-[3%] -right-[3%] lg:-top-[2%] lg:-right-[2%] rounded-[45px] lg:rounded-[90px] -z-10"></div>
-                <img
+                <Image
                   className="rounded-[40px] lg:rounded-[75px] object-cover w-full h-96 lg:h-[400px] shadow-2xl"
                   src="/img/Oregon_Rain.jpg"
                   alt="Oregon rainy climate creates mold challenges"
+                  width={600}
+                  height={400}
                 />
               </div>
               

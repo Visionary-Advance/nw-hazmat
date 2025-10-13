@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import GoButton from './Go-Button';
 import { services } from '../data/ServicesData';
 
@@ -21,7 +22,7 @@ export default function ServiceList() {
           >
             {/* IMAGE */}
             <div className="col-span-1 rounded-xl mx-auto w-auto pb-2 lg:pb-0">
-              <img className='rounded-xl' src={item.img} alt={item.icon + " Icon"} width={150} height={70} />
+              <Image className='rounded-xl' src={item.img} alt={item.icon + " Icon"} width={150} height={70} />
             </div>
 
             {/* Title */}
@@ -43,7 +44,7 @@ export default function ServiceList() {
 
             {/* Hover Image - Inside Each Link */}
             {hoveredId === item.slug && (
-              <img
+              <Image
                 src={item.img}
                 alt={item.title + " Image"}
                 width={200}

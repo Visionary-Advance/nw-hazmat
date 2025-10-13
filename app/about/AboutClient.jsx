@@ -3,6 +3,7 @@
 import Breadcrumbs from "@/Components/BreadCrumbs";
 import StatsCard from "@/Components/CountUp";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const containerVariants = {
   hidden: {},
@@ -76,10 +77,12 @@ export default function AboutClient() {
         transition={{ duration: 0.7, delay: 0.2 }}
       >
         <div className="bg-red-600 w-[100%] h-[100%] absolute -top-[3%] -left-[3%] lg:-top-[2%] lg:-left-[1%] rounded-[45px] lg:rounded-[90px] -z-10"></div>
-        <img
-          className=" rounded-[40px] lg:rounded-[75px] object-cover w-full h-full"
+        <Image
+          className="rounded-[40px] lg:rounded-[75px] object-cover"
           src="/img/About_Header.jpg"
-          alt="Environmental services"
+          alt="Environmental services team"
+          fill
+          sizes="(max-width: 1024px) 90vw, 80vw"
         />
         <StatsCard
           widths={"lg:w-3/4 w-full"}
@@ -115,10 +118,12 @@ export default function AboutClient() {
           viewport={{ once: true }}
         >
           <div className="bg-red-600 w-[100%] h-[100%] absolute lg:-top-[2%] lg:-left-[2%] -top-[3%] -left-[3%] rounded-[45px] lg:rounded-[90px] -z-10"></div>
-          <img
-            className=" rounded-[40px] lg:rounded-[75px] object-cover w-full h-full"
+          <Image
+            className="rounded-[40px] lg:rounded-[75px] object-cover"
             src="/img/Company_Core.png"
-            alt="Our values"
+            alt="Our company values"
+            fill
+            sizes="(max-width: 768px) 90vw, 40vw"
           />
         </motion.div>
 
@@ -137,11 +142,13 @@ export default function AboutClient() {
                 className="grid items-center grid-cols-[auto_1fr]"
                 variants={itemVariants}
               >
-                <div className="col-span-1">
-                  <img
+                <div className="col-span-1 relative w-16 h-16">
+                  <Image
                     src={item.icon}
                     alt={`${item.title} icon`}
-                    className="w-16 h-16"
+                    fill
+                    className="object-contain"
+                    sizes="64px"
                   />
                 </div>
                 <div className="col-span-1 ms-5 text-left">
@@ -175,10 +182,12 @@ export default function AboutClient() {
         </div>
         <div className="w-10/12 h-72 lg:h-[30rem] relative mt-10 col-span-1 mx-auto">
         <div className="bg-red-600 w-[100%] h-[100%] absolute -top-[3%] -left-[3%] lg:-top-[2%] lg:-left-[2%] lg:rounded-[90px] rounded-[45px] -z-10"></div>
-          <img
-            className="rounded-[40px] lg:rounded-[75px] object-cover w-full h-full"
+          <Image
+            className="rounded-[40px] lg:rounded-[75px] object-cover"
             src="/img/Mission.jpg"
-            alt="Our values"
+            alt="Our mission statement"
+            fill
+            sizes="(max-width: 768px) 90vw, 40vw"
           />
         </div>
       </div>

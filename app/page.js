@@ -1,5 +1,6 @@
 import Button from "@/Components/Button";
 import Link from "next/link";
+import Image from "next/image";
 import { FaPhone } from "react-icons/fa6";
 import ServiceList from "@/Components/ServiceList";
 import { IoLocationSharp } from "react-icons/io5";
@@ -11,20 +12,22 @@ export default function Home() {
   return (
     <>
       <section className="grid grid-cols-1 pb-10 relative 2xl:grid-cols-[2fr_3fr]  lg:w-full overflow-x-hidden overflow-hidden ">
-        <img
+        <Image
           className="absolute bottom-[-130px] right-[-110px] -z-20"
           src="/img/Hazmat_Symbol.png"
           width={500}
           height={500}
           alt="Hazmat Symbol"
+          priority={false}
         />
-        <div className="relative w-11/12   max-w-[800px] col-span-1 aspect-[8/7]">
-          <img
+        <div className="relative w-11/12 max-w-[800px] col-span-1 aspect-[8/7]">
+          <Image
             src="/img/Confined_Space.jpg"
             alt="Confined Space Worksite"
-            fill = "true"
-            className="object-cover h-full rounded-br-[80px]"
-            // priority
+            fill
+            className="object-cover rounded-br-[80px]"
+            priority
+            sizes="(max-width: 768px) 100vw, 800px"
           />
           <div className="bg-red-600 w-[102%] h-[102%] absolute inset-0 rounded-br-[90px] -z-10"></div>
         </div>
@@ -67,12 +70,12 @@ export default function Home() {
       </section>
       <section className="relative">
         <div className="bg-red-600 h-full w-full absolute top-0 left-0 -z-10 opacity-65"></div>
-        <img
+        <Image
           src="/img/Trucks.jpg"
           alt="Truck Background"
-          width={1000}
-          height={250}
-          className="absolute top-0 left-0 w-full h-full -z-20 object-cover"
+          fill
+          className="-z-20 object-cover"
+          sizes="100vw"
         />
         <div className="text-center text-white fjalla-one pt-5 pb-5 text-3xl">
           <h3 className="pb-8">For an Immediate Emergency</h3>
@@ -106,12 +109,12 @@ export default function Home() {
 
       <section className="relative">
         <div className="bg-red-600 h-full w-full absolute top-0 left-0 -z-10 opacity-65"></div>
-        <img
+        <Image
           src="/img/Areas_bg.png"
-          alt="Truck Background"
-          width={1000}
-          height={250}
-          className="absolute top-0 left-0 w-full h-full -z-20 object-cover"
+          alt="Areas We Serve Background"
+          fill
+          className="-z-20 object-cover"
+          sizes="100vw"
         />
         <div className="text-center text-white fjalla-one pt-5 pb-5 text-3xl">
           <h3 className="pb-3">Areas We Serve</h3>
@@ -138,13 +141,13 @@ export default function Home() {
             
 
             {/* Main Image */}
-  {/* Main Image */}
-  <img
+  <Image
     className="rounded-[20px] shadow-[-10px_-10px_0_#dc2626]"
     src="/img/Reading_Gauge.jpg"
     alt="Reading Gauge Image"
     width={400}
     height={900}
+    sizes="(max-width: 768px) 100vw, 400px"
   />
             <div className="relative">
 
@@ -207,23 +210,27 @@ export default function Home() {
     </div>
 
     {/* Image Column for mobile (relative position) */}
-    <div className="block lg:hidden mt-10 relative z-0 w-full">
+    <div className="block lg:hidden mt-10 relative z-0 w-full h-64">
       <div className="absolute top-2 left-2 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
-      <img
+      <Image
         src="/img/Need_Train.jpg"
-        alt="Training Image"
-        className="rounded-[25px] w-full relative z-10 shadow-lg object-cover"
+        alt="Hazmat Training Services"
+        fill
+        className="rounded-[25px] relative z-10 shadow-lg object-cover"
+        sizes="(max-width: 1024px) 100vw, 0px"
       />
     </div>
   </div>
 
   {/* Image Column for desktop (absolute) */}
-  <div className="hidden lg:block absolute top-[-40px] right-[5%] w-[105%] max-w-2xl z-0">
+  <div className="hidden lg:block absolute top-[-40px] right-[5%] w-[105%] max-w-2xl h-96 z-0">
     <div className="absolute top-2 left-2 w-full h-full bg-red-600 rounded-[25px] z-0"></div>
-    <img
+    <Image
       src="/img/Need_Train.jpg"
-      alt="Training Image"
-      className="rounded-[25px] w-[115%] relative z-10 shadow-lg object-cover"
+      alt="Hazmat Training Services"
+      fill
+      className="rounded-[25px] relative z-10 shadow-lg object-cover"
+      sizes="(min-width: 1024px) 50vw, 0px"
     />
   </div>
 </section>
@@ -235,13 +242,17 @@ export default function Home() {
   <div className="w-11/12 lg:w-10/12 grid grid-cols-1 lg:grid-cols-2 mx-auto items-center relative z-10">
     
     {/* Text Column */}
-    <div className="block col-span-1 relative  max-w-3xl z-0">
+    <div className="block col-span-1 relative max-w-3xl z-0 h-96">
     <div className="absolute bottom-2 right-2 w-11/12 h-full bg-red-600 rounded-[25px] z-0"></div>
-    <img
-      src="/img/Tank_Roll.jpg"
-      alt="Training Image"
-      className="ms-auto rounded-[25px] w-11/12 relative z-10 shadow-lg object-cover"
-    />
+    <div className="ms-auto rounded-[25px] w-11/12 relative z-10 shadow-lg h-full">
+      <Image
+        src="/img/Tank_Roll.jpg"
+        alt="Tank Rollover Training"
+        fill
+        className="rounded-[25px] object-cover"
+        sizes="(max-width: 1024px) 100vw, 50vw"
+      />
+    </div>
   </div>
     <div className="text-black ps-10 py-5">
       <h3 className="text-4xl fjalla-one">Are you Prepared for a Tank Rollover?</h3>

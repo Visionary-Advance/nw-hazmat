@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 import { useCart } from './CartContext';
 
@@ -725,9 +726,9 @@ export default function CheckoutForm({ onSuccess }) {
           <div className="space-y-4 mb-6">
             {cartItems.map(item => (
               <div key={item.id} className="flex items-center gap-4 bg-white p-4 rounded-lg">
-                <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center">
+                <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center relative">
                   {item.image ? (
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover rounded-md" />
+                    <Image src={item.image} alt={item.name} fill className="object-cover rounded-md" />
                   ) : (
                     <span className="text-xs text-gray-400">No Image</span>
                   )}

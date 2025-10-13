@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Breadcrumbs from '@/Components/BreadCrumbs';
 import { CartProvider } from '@/Components/CartContext';
 import CartButton from '@/Components/CartButton';
@@ -70,11 +71,13 @@ export default function ProductPageClient({ product }) {
             {/* Product Image */}
             <div className="flex justify-center">
               {product.image ? (
-                <img
+                <Image
                   src={product.image}
                   alt={`${product.name} - Professional hazmat equipment`}
+                  width={448}
+                  height={384}
                   className="w-full max-w-md h-96 object-cover rounded-lg shadow-lg"
-                  loading="eager"
+                  priority
                 />
               ) : (
                 <div className="w-full max-w-md h-96 bg-gray-200 rounded-lg flex items-center justify-center">

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import { services } from '@/data/ServicesData';
 import Breadcrumbs from '@/Components/BreadCrumbs';
 import Link from 'next/link';
@@ -241,11 +242,12 @@ export default function ServicePage({ params }) {
           {/* Contact Box */}
           <div className="bg-white rounded-[60px] p-4 shadow border text-center relative flex items-center justify-center h-[400px]">
             <div className="absolute inset-0 bg-black opacity-50 rounded-[60px]"></div>
-            <img 
-              className='absolute inset-0 w-full h-full object-cover rounded-[60px]' 
-              src='/img/Call_Now_Side.png' 
+            <Image
+              className='rounded-[60px]'
+              src='/img/Call_Now_Side.png'
               alt='Professional hazmat team ready to help'
-              loading="lazy"
+              fill
+              style={{ objectFit: 'cover' }}
             />
             <div className="relative z-10 flex flex-col items-center justify-center text-center space-y-10">
               <Link href="tel:541-988-9823">
@@ -278,11 +280,13 @@ export default function ServicePage({ params }) {
 
           {/* Hero Image */}
           {service.img && (
-            <img
+            <Image
               src={service.img}
               alt={`${service.title} - Professional hazmat services in Oregon`}
+              width={896}
+              height={384}
               className="rounded-[60px] shadow mb-10 h-96 object-cover w-full"
-              loading="eager" // Load hero image immediately
+              priority
             />
           )}
 
@@ -305,11 +309,12 @@ export default function ServicePage({ params }) {
                   <p className="mb-4 text-gray-700 leading-relaxed">{section.description}</p>
                 )}
                 {section.img && (
-                  <img 
-                    className='w-full rounded-[60px] mb-10 h-96 object-cover shadow-lg' 
-                    src={section.img} 
+                  <Image
+                    className='w-full rounded-[60px] mb-10 h-96 object-cover shadow-lg'
+                    src={section.img}
                     alt={section.title ? `${section.title} - ${service.title}` : `${service.title} service image`}
-                    loading="lazy"
+                    width={896}
+                    height={384}
                   />
                 )} 
 

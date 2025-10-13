@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowDown, Lock, ShoppingCart, Minus, Plus } from 'lucide-react';
 
 export default function Checkout() {
@@ -61,19 +62,25 @@ export default function Checkout() {
                 Express Checkout
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                <img
+                <Image
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/89fc31dd35c073482d71f3eb9000e20a81ee46b0?width=524"
                   alt="Shop Pay"
+                  width={262}
+                  height={48}
                   className="h-12 w-auto flex-1"
                 />
-                <img
+                <Image
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/adc11a42e9b6c66851ed58acacaabe6bd8e44ba6?width=558"
                   alt="Apple Pay"
+                  width={279}
+                  height={48}
                   className="h-12 w-auto flex-1"
                 />
-                <img
+                <Image
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/2cb08ce8bf0eb1b53e04bd6f7db85386e7d8eaa2?width=413"
                   alt="PayPal"
+                  width={207}
+                  height={48}
                   className="h-12 w-auto flex-1"
                 />
               </div>

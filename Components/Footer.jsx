@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -10,7 +11,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
           <div className="flex items-center space-x-4">
             <Link href="/" aria-label='Home Button'>
-            <img
+            <Image
               src="/img/NorthWest-HazMat-Logo.png"
               alt="NorthWest HazMat Logo"
               width={120}
@@ -18,7 +19,7 @@ export default function Footer() {
               className="h-10 w-auto"
             />
             </Link>
-           
+
           </div>
 
           <div className="space-y-2 text-center lg:text-left">

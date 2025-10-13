@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Breadcrumbs from "@/Components/BreadCrumbs";
 import UpdatedATCButton from "@/Components/UpdatedATCButton";
 import CartButton from "@/Components/CartButton";
@@ -86,25 +87,22 @@ export default function ShopClient() {
                     className="w-64 h-[460px] mx-auto relative shadow-md rounded-[20px] bg-white border border-black/20 flex flex-col justify-between p-3 group hover:shadow-lg transition-shadow"
                   >
                     {/* Image - Now clickable */}
-                    <ProductLink product={item} className="flex justify-center">
+                    <ProductLink product={item} className="flex justify-center relative">
                       {item.image ? (
-                        <img
+                        <Image
                           className="w-60 h-60 object-cover border border-black shadow rounded-[16px] group-hover:opacity-90 transition-opacity"
                           src={item.image}
                           alt={item.name}
-                          onError={(e) => {
-                            e.target.style.display = 'none';
-                            e.target.nextSibling.style.display = 'flex';
-                          }}
+                          width={240}
+                          height={240}
                         />
-                      ) : null}
-                      <div
-                        className={`w-60 h-60 bg-gray-200 border border-black shadow rounded-[16px] flex items-center justify-center ${item.image ? 'hidden' : 'flex'}`}
-                      >
-                        <span className="text-gray-400 text-sm text-center px-4">
-                          {item.image ? 'Loading...' : 'No Image'}
-                        </span>
-                      </div>
+                      ) : (
+                        <div className="w-60 h-60 bg-gray-200 border border-black shadow rounded-[16px] flex items-center justify-center">
+                          <span className="text-gray-400 text-sm text-center px-4">
+                            No Image
+                          </span>
+                        </div>
+                      )}
                     </ProductLink>
 
                     {/* Stock Status */}
