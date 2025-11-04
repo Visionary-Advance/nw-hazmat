@@ -279,13 +279,13 @@ export const services = [
     title: "Waste Management & Consulting",
     slug: "waste-management-consulting",
     img: "/img/Managment-Services.jpg",
-    shortDescription: "Expert consulting and project management for safety and environmental solutions.",
+    shortDescription: "Expert hazardous waste consultants providing project management and safety solutions.",
     description: (
       <>
-        Hazardous waste disposal is highly regulated and logistically complex. Northwest Hazmat offers professional waste management solutions that help clients navigate compliance and reduce risk. We evaluate your waste streams, recommend best practices, and handle transportation and disposal with complete documentation. Our consulting services are designed to improve operational safety, reduce environmental liability, and ensure all protocols meet local, state, and federal requirements. Our team includes certified experts trained in <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER standards</Link> and emergency response.
+        Hazardous waste disposal is highly regulated and logistically complex. Northwest Hazmat offers professional waste management solutions that help clients navigate compliance and reduce risk. Our hazardous waste consultants evaluate your waste streams, recommend best practices, and handle transportation and disposal with complete documentation. As experienced hazardous waste consultants, our team is designed to improve operational safety, reduce environmental liability, and ensure all protocols meet local, state, and federal requirements. Our hazardous waste consultants include certified experts trained in <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER standards</Link> and emergency response.
       </>
     ),
-    keywords: ["hazardous waste disposal Oregon", "environmental consulting"],
+    keywords: ["hazardous waste disposal Oregon", "environmental consulting", "hazardous waste consultants Oregon"],
     callToAction: "Call today for a compliance consultation.",
     pageInfo: [
       {

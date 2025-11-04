@@ -7,13 +7,13 @@ export const training = [
     slug: "hazwoper-40-hour",
     title: "HAZWOPER 40-Hour Certification",
     img: "/img/40-Hour.jpg",
-    shortDescription: "Comprehensive hazardous waste operations and emergency response training.",
+    shortDescription: "Comprehensive hazmat emergency response training and hazardous waste operations.",
     description: (
       <>
-        This OSHA-mandated course prepares workers for hazardous waste operations and emergency response. Topics include toxicology, PPE, decontamination, spill response, and regulatory standards. Perfect for workers handling hazardous materials or working on contaminated sites. This certification is essential for anyone working in <Link href="/services/hazmat-services" className="text-blue-600 hover:underline">hazmat services</Link>, <Link href="/services/soil-remediation" className="text-blue-600 hover:underline">soil remediation</Link>, or <Link href="/services/biohazard-cleanup" className="text-blue-600 hover:underline">biohazard cleanup</Link> operations.
+        This OSHA-mandated hazmat emergency response training course prepares workers for hazardous waste operations and emergency response. Topics include toxicology, PPE, decontamination, spill response, and regulatory standards. Perfect for workers handling hazardous materials or working on contaminated sites. This hazmat emergency response training certification is essential for anyone working in <Link href="/services/hazmat-services" className="text-blue-600 hover:underline">hazmat services</Link>, <Link href="/services/soil-remediation" className="text-blue-600 hover:underline">soil remediation</Link>, or <Link href="/services/biohazard-cleanup" className="text-blue-600 hover:underline">biohazard cleanup</Link> operations.
       </>
     ),
-    keywords: ["HAZWOPER training Oregon", "40-hour hazwoper course", "hazmat certification"],
+    keywords: ["HAZWOPER training Oregon", "40-hour hazwoper course", "hazmat certification", "hazmat emergency response training"],
     eButton: true,
     callToAction: "Enroll in HAZWOPER training today to meet OSHA standards.",
     pageInfo: [
@@ -235,13 +235,13 @@ export const training = [
     slug: "first-responder-awareness",
     title: "First Responder Awareness",
     img: "/img/First_Res_Aware.jpg",
-    shortDescription: "Intro-level course for identifying hazardous materials in emergencies.",
+    shortDescription: "Intro-level hazmat first responder training for identifying hazardous materials in emergencies.",
     description: (
       <>
-        Designed for individuals likely to witness a hazardous release. This foundational course teaches recognition, reporting procedures, and the importance of not attempting to stop the release. It serves as the entry-level training that can lead to more advanced certifications like <Link href="/training/first-responder-operations" className="text-blue-600 hover:underline">First Responder Operations</Link> and eventually <Link href="/training/hazmat-technician" className="text-blue-600 hover:underline">Hazmat Technician</Link> certification. Essential for personnel who may encounter hazardous materials in their workplace or during <Link href="/services/waste-management-consulting" className="text-blue-600 hover:underline">waste management operations</Link>.
+        Designed for individuals likely to witness a hazardous release. This foundational hazmat first responder training course teaches recognition, reporting procedures, and the importance of not attempting to stop the release. It serves as the entry-level hazmat first responder training that can lead to more advanced certifications like <Link href="/training/first-responder-operations" className="text-blue-600 hover:underline">First Responder Operations</Link> and eventually <Link href="/training/hazmat-technician" className="text-blue-600 hover:underline">Hazmat Technician</Link> certification. Essential for personnel who may encounter hazardous materials in their workplace or during <Link href="/services/waste-management-consulting" className="text-blue-600 hover:underline">waste management operations</Link>.
       </>
     ),
-    keywords: ["hazmat awareness training", "emergency hazmat", "first responder basics"],
+    keywords: ["hazmat awareness training", "emergency hazmat", "first responder basics", "hazmat first responder training"],
     callToAction: "Train your frontline employees for fast and safe response.",
     pageInfo: [
       {
@@ -273,13 +273,13 @@ export const training = [
     slug: "first-responder-operations",
     title: "First Responder Operations",
     img: "/img/First_Res_Op.jpg",
-    shortDescription: "Defensive response training for hazmat incidents.",
+    shortDescription: "Defensive hazmat first responder training for hazmat incidents.",
     description: (
       <>
-        First Responders at the operations level are personnel who are involved in an initial response for the purpose of protecting people, property and the environment from hazardous substances. The FRO are trained to respond defensively, instead of actually trying to stop the release at the source. This training builds upon <Link href="/training/first-responder-awareness" className="text-blue-600 hover:underline">First Responder Awareness</Link> and prepares responders for more active roles in <Link href="/services/hazmat-services" className="text-blue-600 hover:underline">hazmat incidents</Link>. Operations-level responders work alongside our <Link href="/training/hazmat-technician" className="text-blue-600 hover:underline">certified hazmat technicians</Link> during emergency response operations.
+        First Responders at the operations level are personnel who are involved in an initial response for the purpose of protecting people, property and the environment from hazardous substances. This hazmat first responder training course teaches FRO to respond defensively, instead of actually trying to stop the release at the source. This hazmat first responder training builds upon <Link href="/training/first-responder-awareness" className="text-blue-600 hover:underline">First Responder Awareness</Link> and prepares responders for more active roles in <Link href="/services/hazmat-services" className="text-blue-600 hover:underline">hazmat incidents</Link>. Operations-level responders work alongside our <Link href="/training/hazmat-technician" className="text-blue-600 hover:underline">certified hazmat technicians</Link> during emergency response operations.
       </>
     ),
-    keywords: ["first responder operations", "defensive hazmat response", "incident command"],
+    keywords: ["first responder operations", "defensive hazmat response", "incident command", "hazmat first responder training"],
     callToAction: "Train for defensive hazmat response operations.",
     pageInfo: [
       {

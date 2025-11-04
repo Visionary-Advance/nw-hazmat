@@ -4,7 +4,7 @@ import ServiceList from "@/Components/ServiceList";
 export const metadata = {
   title: "Hazmat Services Oregon | Mold Remediation, Lab Testing & Emergency Response",
   description: "Professional hazmat services in Oregon: 24/7 emergency response, mold remediation, soil remediation, biohazard cleanup, lab testing, and waste management consulting. Licensed & certified.",
-  keywords: "hazmat services oregon, mold remediation eugene, soil remediation, biohazard cleanup, lab testing oregon, waste management consulting, emergency spill response",
+  keywords: "hazmat services oregon, mold remediation eugene, soil remediation, biohazard cleanup, lab testing oregon, waste management consulting, hazardous waste consultants, emergency spill response",
   openGraph: {
     title: "Professional Hazmat Services | NorthWest HazMat Oregon",
     description: "24/7 emergency hazmat response, mold remediation, lab testing, and environmental cleanup services throughout Oregon. Licensed experts serving Lane County.",
