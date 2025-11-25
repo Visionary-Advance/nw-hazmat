@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -24,11 +25,11 @@ export default function Footer() {
 
           <div className="space-y-2 text-center lg:text-left">
             <div className="flex items-center space-x-2">
-              <span>📞</span>
+              <Phone className="w-5 h-5 text-gray-700" />
               <a href="tel:541-988-9823" className="hover:underline">(541)-988-9823</a>
             </div>
             <div className="flex items-right space-x-2">
-              <span>📍</span>
+              <MapPin className="w-5 h-5 text-gray-700" />
               <span>36 West Q Street Springfield, OR 97477</span>
             </div>
             <div className="flex items-center space-x-2">

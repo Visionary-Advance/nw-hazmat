@@ -9,7 +9,7 @@ export const revalidate = 0;
 // Generate metadata for each product page
 export async function generateMetadata({ params }) {
   try {
-    const { slug } = params;
+    const { slug } = await params;
     const product = await getProductBySlug(slug);
 
     if (!product) {
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }) {
         description,
         url: `https://nwhazmat.com/shop/${slug}`,
         siteName: 'NorthWest HazMat, Inc.',
-        type: 'product',
+        type: 'website',
         images: product.image ? [
           {
             url: product.image,
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }) {
 
 export default async function ProductPage({ params }) {
   try {
-    const { slug } = params;
+    const { slug } = await params;
     const product = await getProductBySlug(slug);
 
     if (!product) {

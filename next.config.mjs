@@ -7,14 +7,17 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
   },
-  
-  // If you need image optimization
-//   images: {
-//     domains: [
-//       'files.stripe.com', // For Stripe product images
-//       'your-domain.com',  // Your domain for local images
-//     ],
-//   },
+
+  // Image optimization for Stripe product images
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'files.stripe.com',
+        pathname: '/links/**',
+      },
+    ],
+  },
   
 //   // Environment variables (optional)
 //   env: {

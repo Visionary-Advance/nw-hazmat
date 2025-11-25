@@ -20,14 +20,23 @@ function getStripe() {
   return _stripe;
 }
 
+// Helper function to create URL-friendly slug from product name
+function createSlug(name) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric chars with hyphens
+    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+    .replace(/-+/g, '-'); // Replace multiple hyphens with single hyphen
+}
+
 export async function GET() {
   try {
     console.log('Starting Stripe API call...');
-    
+
     // Check if Stripe key exists
     if (!process.env.STRIPE_SECRET_KEY) {
       console.error('STRIPE_SECRET_KEY environment variable is not set');
-      return NextResponse.json({ 
+      return NextResponse.json({
         error: 'Stripe configuration error',
         debug: 'STRIPE_SECRET_KEY not found'
       }, { status: 500 });
@@ -35,21 +44,21 @@ export async function GET() {
 
     const stripe = getStripe();
     console.log('Stripe instance created, fetching products...');
-    
+
     // Fetch products and prices from Stripe
-    const { data: products } = await stripe.products.list({ 
-      active: true, 
+    const { data: products } = await stripe.products.list({
+      active: true,
       limit: 50,
       expand: ['data.default_price']
     });
-    
+
     console.log(`Found ${products.length} products from Stripe`);
 
-    const { data: prices } = await stripe.prices.list({ 
-      active: true, 
-      limit: 100 
+    const { data: prices } = await stripe.prices.list({
+      active: true,
+      limit: 100
     });
-    
+
     console.log(`Found ${prices.length} prices from Stripe`);
 
     // Group prices by product
@@ -64,7 +73,7 @@ export async function GET() {
     const transformedProducts = products.map(p => {
       const productPrices = priceByProduct.get(p.id) || [];
       const defaultPrice = productPrices[0]; // Use first price as default
-      
+
       return {
         id: p.id,
         name: p.name,
@@ -79,6 +88,7 @@ export async function GET() {
         inventory: p.metadata?.inventory ? parseInt(p.metadata.inventory) : null,
         weight: p.metadata?.weight ? parseFloat(p.metadata.weight) : null,
         metadata: p.metadata || {},
+        slug: createSlug(p.name),
       };
     });
 

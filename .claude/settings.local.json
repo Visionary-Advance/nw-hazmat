@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(if [ -f .env.local ])",
+      "Bash(else echo \".env.local not found\")",
+      "Bash(fi)",
+      "Bash(npm run dev:*)",
+      "Bash(npm test:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

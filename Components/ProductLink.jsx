@@ -11,10 +11,11 @@ export const createProductSlug = (name) => {
 };
 
 export default function ProductLink({ product, children, className = '', ...props }) {
-  const productSlug = createProductSlug(product.name);
-  
+  // Use pre-computed slug if available, otherwise generate from name
+  const productSlug = product.slug || createProductSlug(product.name);
+
   return (
-    <Link 
+    <Link
       href={`/shop/${productSlug}`}
       className={className}
       {...props}
@@ -26,5 +27,5 @@ export default function ProductLink({ product, children, className = '', ...prop
 
 // Alternative: Direct function for generating product URLs
 export const getProductUrl = (product) => {
-  return `/shop/${createProductSlug(product.name)}`;
+  return `/shop/${product.slug || createProductSlug(product.name)}`;
 };
