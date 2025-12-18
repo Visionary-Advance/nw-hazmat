@@ -62,11 +62,9 @@ export default function AboutClient() {
         <h1 className="text-6xl lg:text-8xl text-left mt-16 fjalla-one mb-4">
           About Us
         </h1>
-        <p className="text-xl w-11/12 lg:w-1/2">
-          Founded in 2000, NorthWest HazMat, Inc. is a female owned and operated
-          environmental company. We began as a spill response company based in
-          the Eugene-Springfield, Oregon area. Since then we have grown into a
-          full service environmental response and management company.
+        <p className="text-xl w-11/12 lg:w-8/12">
+          NorthWest HazMat is a trusted full-service provider across Oregon and Washington. We offer expert services including hazardous materials handling and disposal, asbestos testing and analysis, soil restoration, biohazard cleanup, waste management consulting,
+ and more. Committed to safety, compliance, and sustainable results, we protect communities and businesses throughout the Pacific Northwest.
         </p>
       </motion.div>
 

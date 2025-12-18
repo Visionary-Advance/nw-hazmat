@@ -33,15 +33,12 @@ export default function Home() {
         </div>
         <div className="col-span-1 pt-4 ps-2 relative lg:pt-12 flex flex-col">
           <h1 className="fjalla-one leading-tight text-4xl lg:text-5xl">
-            Lane County's Longest Active <br className="lg:block hidden" />{" "}
-            Hazmat Service
+           Oregon's Leading Environmental Solutions Provider
+
           </h1>
-          <p className="w-11/12 lg:w-6/12 text-lg lg:text-xl pt-5 poppins">
-            Founded in 2000, NorthWest HazMat, Inc. is a female owned and
-            operated environmental company. We began as a spill response company
-            based in the Eugene-Springfield, Oregon area. Since then we have
-            grown into a full service environmental response and management
-            company.
+          <p className="w-11/12 lg:w-7/12 text-lg lg:text-xl pt-5 poppins">
+            NorthWest HazMat is a trusted full-service provider across Oregon and Washington. We offer expert services including hazardous materials handling and disposal, asbestos testing and analysis, soil restoration, biohazard cleanup, waste management consulting,
+ and more. Committed to safety, compliance, and sustainable results, we protect communities and businesses throughout the Pacific Northwest.
           </p>
 
           <div className="flex justify-center lg:justify-normal space-x-2 mt-auto pt-6">
@@ -169,12 +166,9 @@ export default function Home() {
               Partner in Hazmat Services
             </h3>
             {/* <div className="border-black border w-[60px] lg:me-auto"></div> */}
-            <p className="lg:w-9/12 w-11/12 text-2xl lg:text-xl">
-              Founded in 2000, NorthWest HazMat, Inc. is a female-owned and
-              operated environmental company. We began as a spill response
-              company based in the Eugene-Springfield, Oregon area. Since then,
-              we have grown into a full-service environmental response and
-              management company.
+            <p className=" w-11/12 text-2xl lg:text-xl">
+              NorthWest HazMat is a trusted full-service provider across Oregon and Washington. We offer expert services including hazardous materials handling and disposal, asbestos testing and analysis, soil restoration, biohazard cleanup, waste management consulting,
+ and more. Committed to safety, compliance, and sustainable results, we protect communities and businesses throughout the Pacific Northwest.
             </p>
 
             {/* Button pushed to the bottom */}
