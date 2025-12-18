@@ -1,12 +1,12 @@
 import ShopClient from "./ShopClient";
 
 export const metadata = {
-  title: "Hazmat Equipment & Safety Supplies Shop | NorthWest HazMat Oregon",
-  description: "Shop professional hazmat equipment, safety supplies, and environmental testing products. Quality gear for spill response, mold remediation, and hazardous materials handling in Oregon.",
-  keywords: "hazmat equipment shop, safety supplies oregon, spill response gear, hazmat products, environmental safety equipment, ppe supplies eugene",
+  title: "Professional Hazmat Equipment & Safety Supplies | Nationwide Shipping",
+  description: "Buy professional hazmat equipment, safety gear, and environmental testing supplies online. Fast nationwide shipping across the USA. Quality PPE, spill response kits, hazmat training simulators, and safety equipment for environmental professionals, first responders, and industrial teams.",
+  keywords: "hazmat equipment, safety supplies, ppe equipment, spill response kits, hazmat training equipment, environmental safety gear, hazmat simulators, hazmat suits, respirators, safety equipment online, hazmat gear USA, professional safety supplies",
   openGraph: {
-    title: "Hazmat Equipment Shop | NorthWest HazMat Oregon",
-    description: "Professional hazmat equipment and safety supplies. Quality gear for environmental professionals in Oregon.",
+    title: "Professional Hazmat Equipment & Safety Supplies | Nationwide Shipping",
+    description: "Shop premium hazmat equipment and safety gear with fast shipping across the USA. Professional-grade PPE, training simulators, and environmental safety supplies.",
     url: "https://nwhazmat.com/shop",
     siteName: "NorthWest HazMat, Inc.",
     type: "website",
@@ -15,15 +15,21 @@ export const metadata = {
         url: "https://nwhazmat.com/img/Hazmat-Services.jpg",
         width: 1200,
         height: 630,
-        alt: "NorthWest HazMat equipment and supplies",
+        alt: "Professional hazmat equipment and safety supplies",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hazmat Equipment Shop | NorthWest HazMat Oregon",
-    description: "Professional hazmat equipment and safety supplies for Oregon environmental professionals.",
+    title: "Professional Hazmat Equipment & Safety Supplies | Nationwide Shipping",
+    description: "Shop premium hazmat equipment and safety gear with fast shipping across the USA. Professional-grade PPE and environmental safety supplies.",
     images: ["https://nwhazmat.com/img/Hazmat-Services.jpg"],
+  },
+  // Override geo tags for shop - make it national instead of regional
+  other: {
+    "geo.region": "US", // National scope (all states)
+    "geo.placename": "United States", // Nationwide
+    // Remove specific coordinates for shop to avoid regional bias
   },
 };
 

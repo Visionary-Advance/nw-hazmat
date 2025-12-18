@@ -21,15 +21,18 @@ export async function POST(req) {
     const stripe = getStripe();
     const body = await req.json();
 
-    // Expecting { amount: number_in_cents, currency: 'usd', metadata?: {...} }
-    const amount = Number(body?.amount);
+    // Expecting { amount: number_in_dollars, currency: 'usd', metadata?: {...} }
+    const amountInDollars = Number(body?.amount);
     const currency = body?.currency || 'usd';
-    if (!Number.isFinite(amount) || amount <= 0) {
+    if (!Number.isFinite(amountInDollars) || amountInDollars <= 0) {
       return NextResponse.json({ error: 'Invalid amount' }, { status: 400 });
     }
 
+    // Convert dollars to cents for Stripe (Stripe requires amounts in cents)
+    const amountInCents = Math.round(amountInDollars * 100);
+
     const params = {
-      amount,
+      amount: amountInCents,
       currency,
       automatic_payment_methods: { enabled: true },
       metadata: body?.metadata || {},

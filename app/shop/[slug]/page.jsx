@@ -14,18 +14,18 @@ export async function generateMetadata({ params }) {
 
     if (!product) {
       return {
-        title: 'Product | NorthWest HazMat Shop Oregon',
-        description: 'Professional hazmat equipment and safety supplies from NorthWest HazMat in Oregon.',
+        title: 'Professional Hazmat Equipment | NorthWest HazMat USA',
+        description: 'Buy professional hazmat equipment and safety supplies online with nationwide shipping across the United States.',
       };
     }
 
     const description = product.description?.substring(0, 155) ||
-      `Buy ${product.name} from NorthWest HazMat. Professional hazmat equipment and safety supplies in Oregon.`;
+      `Buy ${product.name} online. Professional hazmat equipment with fast nationwide shipping. Trusted by environmental professionals, first responders, and industrial teams across the USA.`;
 
     return {
-      title: `${product.name} | NorthWest HazMat Shop Oregon`,
+      title: `${product.name} | Professional Hazmat Equipment - Nationwide Shipping`,
       description,
-      keywords: `${product.name}, hazmat equipment, safety supplies, ${product.category}, oregon hazmat`,
+      keywords: `${product.name}, hazmat equipment, safety supplies, ${product.category}, professional safety gear, hazmat equipment USA, buy online`,
       openGraph: {
         title: `${product.name} | NorthWest HazMat`,
         description,
@@ -46,6 +46,11 @@ export async function generateMetadata({ params }) {
         title: `${product.name} | NorthWest HazMat`,
         description,
         images: product.image ? [product.image] : [],
+      },
+      // Override geo tags for products - make it national
+      other: {
+        "geo.region": "US", // Available nationwide
+        "geo.placename": "United States",
       },
     };
   } catch (error) {

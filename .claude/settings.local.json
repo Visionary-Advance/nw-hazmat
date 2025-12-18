@@ -6,7 +6,8 @@
       "Bash(fi)",
       "Bash(npm run dev:*)",
       "Bash(npm test:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []

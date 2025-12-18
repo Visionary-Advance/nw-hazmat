@@ -15,6 +15,9 @@ export default function CheckoutForm({ onSuccess }) {
   const [canMakePayment, setCanMakePayment] = useState(false);
   const [shippingCost, setShippingCost] = useState(0);
   const [isCalculatingShipping, setIsCalculatingShipping] = useState(false);
+  const [stripeShippingRates, setStripeShippingRates] = useState([]);
+  const [selectedShippingRate, setSelectedShippingRate] = useState(null);
+  const [useStripeRates, setUseStripeRates] = useState(true); // Toggle between Stripe rates and calculated shipping
   const [customerInfo, setCustomerInfo] = useState({
     firstName: '',
     lastName: '',
@@ -27,7 +30,46 @@ export default function CheckoutForm({ onSuccess }) {
     zipCode: ''
   });
 
-  // Calculate shipping cost
+  // Fetch Stripe shipping rates
+  const fetchStripeShippingRates = async (address) => {
+    setIsCalculatingShipping(true);
+    try {
+      const response = await fetch('/api/shipping/rates', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: cartItems,
+          shippingAddress: address
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success && data.rates.length > 0) {
+          setStripeShippingRates(data.rates);
+          // Auto-select first (cheapest) rate
+          const firstRate = data.rates[0];
+          setSelectedShippingRate(firstRate);
+          setShippingCost(firstRate.amount);
+          return firstRate.amount;
+        } else {
+          // Fallback to calculated shipping if no Stripe rates available
+          return await calculateShipping(address);
+        }
+      } else {
+        return await calculateShipping(address);
+      }
+    } catch (error) {
+      console.error('Stripe shipping rates error:', error);
+      return await calculateShipping(address);
+    } finally {
+      setIsCalculatingShipping(false);
+    }
+  };
+
+  // Calculate shipping cost (fallback method)
   const calculateShipping = async (address) => {
     if (!address.city || !address.state || !address.zipCode) {
       setShippingCost(15); // Default shipping
@@ -418,11 +460,15 @@ export default function CheckoutForm({ onSuccess }) {
   // Update shipping when address changes for regular checkout
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
-      calculateShipping(customerInfo);
+      if (useStripeRates) {
+        fetchStripeShippingRates(customerInfo);
+      } else {
+        calculateShipping(customerInfo);
+      }
     }, 500);
 
     return () => clearTimeout(debounceTimer);
-  }, [customerInfo.city, customerInfo.state, customerInfo.zipCode]);
+  }, [customerInfo.city, customerInfo.state, customerInfo.zipCode, useStripeRates]);
 
  
 
@@ -682,6 +728,53 @@ export default function CheckoutForm({ onSuccess }) {
             required
           />
         </div>
+
+        {/* Shipping Options - Only show if Stripe rates are available */}
+        {useStripeRates && stripeShippingRates.length > 0 && (
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Shipping Method</h3>
+            <div className="space-y-2">
+              {stripeShippingRates.map(rate => (
+                <label
+                  key={rate.id}
+                  className={`flex items-center justify-between p-4 border rounded-md cursor-pointer transition-colors ${
+                    selectedShippingRate?.id === rate.id
+                      ? 'border-blue-500 bg-blue-50'
+                      : 'border-gray-300 hover:border-blue-300'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="radio"
+                      name="shipping"
+                      checked={selectedShippingRate?.id === rate.id}
+                      onChange={() => {
+                        setSelectedShippingRate(rate);
+                        setShippingCost(rate.amount);
+                      }}
+                      className="w-4 h-4 text-blue-600"
+                    />
+                    <div>
+                      <div className="font-semibold">{rate.displayName}</div>
+                      {rate.deliveryEstimate && (
+                        <div className="text-sm text-gray-600">
+                          {rate.deliveryEstimate.minimum}-{rate.deliveryEstimate.maximum}{' '}
+                          {rate.deliveryEstimate.unit === 'business_day' ? 'business days' : 'days'}
+                        </div>
+                      )}
+                      {rate.description && (
+                        <div className="text-sm text-gray-500">{rate.description}</div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="font-semibold text-lg">
+                    ${rate.amount.toFixed(2)}
+                  </div>
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Credit Card Payment */}
         <div className="space-y-4">

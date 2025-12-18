@@ -1,14 +1,45 @@
 'use client';
 
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
 
 // Create Cart Context
 const CartContext = createContext();
+
+const CART_STORAGE_KEY = 'nwhazmat_cart';
 
 // Cart Provider Component
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    try {
+      const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+      if (savedCart) {
+        const parsedCart = JSON.parse(savedCart);
+        setCartItems(parsedCart);
+        console.log('Cart loaded from localStorage:', parsedCart.length, 'items');
+      }
+    } catch (error) {
+      console.error('Error loading cart from localStorage:', error);
+    } finally {
+      setIsLoaded(true);
+    }
+  }, []);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    if (isLoaded) {
+      try {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
+        console.log('Cart saved to localStorage:', cartItems.length, 'items');
+      } catch (error) {
+        console.error('Error saving cart to localStorage:', error);
+      }
+    }
+  }, [cartItems, isLoaded]);
 
   const addToCart = (product) => {
     setCartItems(prevItems => {
@@ -52,6 +83,12 @@ export function CartProvider({ children }) {
 
   const clearCart = () => {
     setCartItems([]);
+    try {
+      localStorage.removeItem(CART_STORAGE_KEY);
+      console.log('Cart cleared from localStorage');
+    } catch (error) {
+      console.error('Error clearing cart from localStorage:', error);
+    }
   };
 
   return (
