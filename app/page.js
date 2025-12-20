@@ -240,7 +240,7 @@ export default function Home() {
     <div className="absolute bottom-2 right-2 w-11/12 h-full bg-red-600 rounded-[25px] z-0"></div>
     <div className="ms-auto rounded-[25px] w-11/12 relative z-10 shadow-lg h-full">
       <Image
-        src="/img/Tank_Roll.jpg"
+        src="/img/Tank_Roll.webp"
         alt="Tank Rollover Training"
         fill
         className="rounded-[25px] object-cover"
