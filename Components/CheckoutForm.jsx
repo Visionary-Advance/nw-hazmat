@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 import { useCart } from './CartContext';
@@ -240,222 +240,246 @@ export default function CheckoutForm({ onSuccess }) {
     </div>
   );
 }
-  // Initialize Apple Pay and Google Pay
+  // Ref to prevent recreating paymentRequest on every render
+  const paymentRequestRef = useRef(null);
+  // Ref to give event handlers access to latest values without re-registering
+  const latestRef = useRef({});
+  latestRef.current = { cartItems, getCartTotal, clearCart, onSuccess, shippingCost, stripe };
+
+  // Initialize Apple Pay and Google Pay (once)
+  const hasItems = cartItems.length > 0;
   useEffect(() => {
-    if (stripe && cartItems.length > 0) {
-      const subtotal = getCartTotal();
-      
-      const pr = stripe.paymentRequest({
-        country: 'US',
-        currency: 'usd',
-        disableLink: true,
+    if (!stripe || !hasItems || paymentRequestRef.current) return;
+
+    const subtotal = getCartTotal();
+
+    const pr = stripe.paymentRequest({
+      country: 'US',
+      currency: 'usd',
+      disableLink: true,
+      total: {
+        label: 'NorthWest HazMat',
+        amount: Math.round((subtotal + 15) * 100),
+      },
+      displayItems: [
+        {
+          label: 'Subtotal',
+          amount: Math.round(subtotal * 100),
+        },
+        {
+          label: 'Shipping',
+          amount: 1500,
+        },
+      ],
+      requestPayerName: true,
+      requestPayerEmail: true,
+      requestShipping: true,
+      shippingOptions: [
+        {
+          id: 'standard',
+          label: 'Standard Shipping',
+          detail: '3-7 business days',
+          amount: 1500,
+        },
+      ],
+    });
+
+    // Check if Apple Pay or Google Pay is available
+    pr.canMakePayment().then(result => {
+      if (result) {
+        setCanMakePayment(true);
+        setPaymentRequest(pr);
+      }
+    });
+
+    // Handle shipping address change
+    pr.on('shippingaddresschange', async (event) => {
+      const currentSubtotal = latestRef.current.getCartTotal();
+      const address = {
+        city: event.shippingAddress.city,
+        state: event.shippingAddress.region,
+        zipCode: event.shippingAddress.postalCode,
+        country: event.shippingAddress.country,
+      };
+
+      const newShippingCost = await calculateShipping(address);
+      const newTotal = currentSubtotal + newShippingCost;
+
+      event.updateWith({
+        status: 'success',
         total: {
           label: 'NorthWest HazMat',
-          amount: Math.round((subtotal + 15) * 100), // Start with default shipping
+          amount: Math.round(newTotal * 100),
         },
         displayItems: [
           {
             label: 'Subtotal',
-            amount: Math.round(subtotal * 100),
+            amount: Math.round(currentSubtotal * 100),
           },
           {
             label: 'Shipping',
-            amount: 1500, // Default $15 shipping
+            amount: Math.round(newShippingCost * 100),
           },
         ],
-        requestPayerName: true,
-        requestPayerEmail: true,
-        requestShipping: true,
         shippingOptions: [
           {
             id: 'standard',
             label: 'Standard Shipping',
-            detail: '3-7 business days',
-            amount: 1500,
+            detail: address.state === 'Oregon' ? '1-3 business days' : '3-7 business days',
+            amount: Math.round(newShippingCost * 100),
+            selected: true,
           },
         ],
       });
+    });
 
-      // Check if Apple Pay or Google Pay is available
-      pr.canMakePayment().then(result => {
-        if (result) {
-          setCanMakePayment(true);
-          setPaymentRequest(pr);
-        }
+    // Handle shipping option change
+    pr.on('shippingoptionchange', (event) => {
+      const { getCartTotal: getCurrentTotal, shippingCost: currentShipping } = latestRef.current;
+      event.updateWith({
+        status: 'success',
+        total: {
+          label: 'NorthWest HazMat',
+          amount: Math.round((getCurrentTotal() + currentShipping) * 100),
+        },
       });
+    });
 
-      // Handle shipping address change
-      pr.on('shippingaddresschange', async (event) => {
-        const address = {
-          city: event.shippingAddress.city,
-          state: event.shippingAddress.region,
-          zipCode: event.shippingAddress.postalCode,
-          country: event.shippingAddress.country,
-        };
+    // Handle payment method
+    pr.on('paymentmethod', async (event) => {
+      const {
+        cartItems: currentItems,
+        getCartTotal: getCurrentTotal,
+        clearCart: doClearCart,
+        onSuccess: doOnSuccess,
+        stripe: currentStripe,
+      } = latestRef.current;
+      const currentSubtotal = getCurrentTotal();
 
-        // Calculate new shipping cost
-        const newShippingCost = await calculateShipping(address);
-        const newTotal = subtotal + newShippingCost;
+      try {
+        setProcessing(true);
 
-        // Update the payment request with new totals
-        event.updateWith({
-          status: 'success',
-          total: {
-            label: 'NorthWest HazMat',
-            amount: Math.round(newTotal * 100),
-          },
-          displayItems: [
-            {
-              label: 'Subtotal',
-              amount: Math.round(subtotal * 100),
-            },
-            {
-              label: 'Shipping',
-              amount: Math.round(newShippingCost * 100),
-            },
-          ],
-          shippingOptions: [
-            {
-              id: 'standard',
-              label: 'Standard Shipping',
-              detail: address.state === 'Oregon' ? '1-3 business days' : '3-7 business days',
-              amount: Math.round(newShippingCost * 100),
-              selected: true,
-            },
-          ],
+        const shippingAddress = event.shippingAddress;
+        const finalShippingCost = await calculateShipping({
+          city: shippingAddress.city,
+          state: shippingAddress.region,
+          zipCode: shippingAddress.postalCode,
         });
-      });
 
-      // Handle shipping option change
-      pr.on('shippingoptionchange', (event) => {
-        // For now, we only have one shipping option, but you can add express shipping here
-        event.updateWith({
-          status: 'success',
-          total: {
-            label: 'NorthWest HazMat',
-            amount: Math.round(getTotalWithShipping() * 100),
+        const finalTotal = currentSubtotal + finalShippingCost;
+
+        // Create payment intent with final total
+        const response = await fetch('/api/create-payment-intent', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
+          body: JSON.stringify({
+            amount: finalTotal,
+            currency: 'usd',
+            metadata: {
+              customerName: event.payerName,
+              customerEmail: event.payerEmail,
+              orderSource: 'apple_google_pay',
+              shippingCost: finalShippingCost,
+              subtotal: currentSubtotal,
+              shippingAddress: JSON.stringify(shippingAddress),
+              items: JSON.stringify(currentItems.map(item => ({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity
+              }))),
+            }
+          }),
         });
-      });
 
-      // Handle payment method
-      pr.on('paymentmethod', async (event) => {
-        try {
-          setProcessing(true);
-          
-          const shippingAddress = event.shippingAddress;
-          const finalShippingCost = await calculateShipping({
-            city: shippingAddress.city,
-            state: shippingAddress.region,
-            zipCode: shippingAddress.postalCode,
-          });
+        const { clientSecret, error: apiError } = await response.json();
 
-          const finalTotal = subtotal + finalShippingCost;
-
-          // Create payment intent with final total
-          const response = await fetch('/api/create-payment-intent', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              amount: finalTotal,
-              currency: 'usd',
-              metadata: {
-                customerName: event.payerName,
-                customerEmail: event.payerEmail,
-                orderSource: 'apple_google_pay',
-                shippingCost: finalShippingCost,
-                subtotal: subtotal,
-                shippingAddress: JSON.stringify(shippingAddress),
-                items: JSON.stringify(cartItems.map(item => ({
-                  id: item.id,
-                  name: item.name,
-                  price: item.price,
-                  quantity: item.quantity
-                }))),
-              }
-            }),
-          });
-
-          const { clientSecret, error: apiError } = await response.json();
-
-          if (apiError) {
-            console.error('Payment intent creation failed:', apiError);
-            event.complete('fail');
-            setError(apiError);
-            return;
-          }
-
-          // Confirm the payment
-          const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(
-            clientSecret,
-            { 
-              payment_method: event.paymentMethod.id 
-            },
-            { 
-              handleActions: false 
-            }
-          );
-
-          if (confirmError) {
-            console.error('Payment confirmation failed:', confirmError);
-            event.complete('fail');
-            setError(confirmError.message);
-          } else {
-            console.log('Payment succeeded:', paymentIntent);
-            
-            // Create order record
-            try {
-              const orderResponse = await fetch('/api/orders', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  customerInfo: {
-                    firstName: event.payerName?.split(' ')[0] || '',
-                    lastName: event.payerName?.split(' ').slice(1).join(' ') || '',
-                    email: event.payerEmail || '',
-                    address: shippingAddress.addressLine?.[0] || '',
-                    city: shippingAddress.city || '',
-                    state: shippingAddress.region || '',
-                    zipCode: shippingAddress.postalCode || '',
-                    country: shippingAddress.country || 'US',
-                  },
-                  items: cartItems,
-                  subtotal: subtotal,
-                  shippingCost: finalShippingCost,
-                  total: finalTotal,
-                  paymentIntentId: paymentIntent.id,
-                  paymentMethod: 'apple_google_pay',
-                  paymentStatus: paymentIntent.status,
-                }),
-              });
-
-              if (orderResponse.ok) {
-                console.log('Order created successfully');
-              }
-            } catch (orderError) {
-              console.error('Order creation failed:', orderError);
-              // Don't fail the payment for order creation issues
-            }
-
-            event.complete('success');
-            clearCart();
-            onSuccess();
-          }
-        } catch (err) {
-          console.error('Payment processing error:', err);
+        if (apiError) {
+          console.error('Payment intent creation failed:', apiError);
           event.complete('fail');
-          setError('Payment failed. Please try again.');
-        } finally {
-          setProcessing(false);
+          setError(apiError);
+          return;
         }
-      });
 
-    }
-  }, [stripe, cartItems, shippingCost]);
+        // Confirm the payment
+        const { error: confirmError, paymentIntent } = await currentStripe.confirmCardPayment(
+          clientSecret,
+          { payment_method: event.paymentMethod.id },
+          { handleActions: false }
+        );
+
+        if (confirmError) {
+          console.error('Payment confirmation failed:', confirmError);
+          event.complete('fail');
+          setError(confirmError.message);
+        } else {
+          // Create order record
+          try {
+            await fetch('/api/orders', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                customerInfo: {
+                  firstName: event.payerName?.split(' ')[0] || '',
+                  lastName: event.payerName?.split(' ').slice(1).join(' ') || '',
+                  email: event.payerEmail || '',
+                  address: shippingAddress.addressLine?.[0] || '',
+                  city: shippingAddress.city || '',
+                  state: shippingAddress.region || '',
+                  zipCode: shippingAddress.postalCode || '',
+                  country: shippingAddress.country || 'US',
+                },
+                items: currentItems,
+                subtotal: currentSubtotal,
+                shippingCost: finalShippingCost,
+                total: finalTotal,
+                paymentIntentId: paymentIntent.id,
+                paymentMethod: 'apple_google_pay',
+                paymentStatus: paymentIntent.status,
+              }),
+            });
+          } catch (orderError) {
+            console.error('Order creation failed:', orderError);
+          }
+
+          event.complete('success');
+          doClearCart();
+          doOnSuccess();
+        }
+      } catch (err) {
+        console.error('Payment processing error:', err);
+        event.complete('fail');
+        setError('Payment failed. Please try again.');
+      } finally {
+        setProcessing(false);
+      }
+    });
+
+    paymentRequestRef.current = pr;
+  }, [stripe, hasItems]);
+
+  // Update payment request amounts when cart or shipping changes
+  useEffect(() => {
+    if (!paymentRequestRef.current || cartItems.length === 0) return;
+
+    const subtotal = getCartTotal();
+    const shipping = shippingCost || 15;
+
+    paymentRequestRef.current.update({
+      total: {
+        label: 'NorthWest HazMat',
+        amount: Math.round((subtotal + shipping) * 100),
+      },
+      displayItems: [
+        { label: 'Subtotal', amount: Math.round(subtotal * 100) },
+        { label: 'Shipping', amount: Math.round(shipping * 100) },
+      ],
+    });
+  }, [cartItems, shippingCost]);
 
   // Update shipping when address changes for regular checkout
   useEffect(() => {

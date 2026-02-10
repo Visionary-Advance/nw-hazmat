@@ -20,7 +20,6 @@ export function CartProvider({ children }) {
       if (savedCart) {
         const parsedCart = JSON.parse(savedCart);
         setCartItems(parsedCart);
-        console.log('Cart loaded from localStorage:', parsedCart.length, 'items');
       }
     } catch (error) {
       console.error('Error loading cart from localStorage:', error);
@@ -34,7 +33,6 @@ export function CartProvider({ children }) {
     if (isLoaded) {
       try {
         localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
-        console.log('Cart saved to localStorage:', cartItems.length, 'items');
       } catch (error) {
         console.error('Error saving cart to localStorage:', error);
       }
@@ -85,7 +83,6 @@ export function CartProvider({ children }) {
     setCartItems([]);
     try {
       localStorage.removeItem(CART_STORAGE_KEY);
-      console.log('Cart cleared from localStorage');
     } catch (error) {
       console.error('Error clearing cart from localStorage:', error);
     }
