@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function JobApplicationPage() {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,6 +28,13 @@ export default function JobApplicationPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!executeRecaptcha) {
+      alert("reCAPTCHA not loaded. Please try again.");
+      return;
+    }
+
+    const recaptchaToken = await executeRecaptcha("employment_application");
 
     // Convert file to base64 if present
     let attachment = null;
@@ -70,6 +79,7 @@ export default function JobApplicationPage() {
     }
 
     const payload = {
+      recaptchaToken,
       from: "noreply@mail.visionaryadvance.com",
       to: ["office@nwhazmat.com"], // Update this to your jobs email
       reply_to: formData.email,

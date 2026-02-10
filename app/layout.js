@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientWrapper from "@/Components/ClientWrapper";
+import ReCaptchaProvider from "@/Components/ReCaptchaProvider";
 import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
@@ -166,9 +167,11 @@ export default function RootLayout({ children }) {
        
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ClientWrapper>{children}
-          <Analytics />
-        </ClientWrapper>
+        <ReCaptchaProvider>
+          <ClientWrapper>{children}
+            <Analytics />
+          </ClientWrapper>
+        </ReCaptchaProvider>
       </body>
     </html>
   );

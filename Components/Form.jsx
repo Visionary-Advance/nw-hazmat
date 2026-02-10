@@ -1,6 +1,9 @@
+"use client";
 import { useState } from "react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function Form() {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -21,7 +24,15 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!executeRecaptcha) {
+      alert("reCAPTCHA not loaded. Please try again.");
+      return;
+    }
+
+    const recaptchaToken = await executeRecaptcha("contact_form");
+
     const payload = {
+      recaptchaToken,
       from: "noreply@mail.visionaryadvance.com", // You'll need to verify this domain with Resend
       to: ["office@nwhazmat.com"],
       reply_to: formData.email,
