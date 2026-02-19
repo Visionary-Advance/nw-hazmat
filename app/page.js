@@ -120,7 +120,7 @@ export default function Home() {
         <div className="grid place-items-center text-white w-7/12 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-2">
           {["Lane County & Surrounding Areas",  "Pacific Northwest"].map((item, index) => (
             <div
-              className="text-center text-3xl place-items-center"
+              className="flex flex-col items-center text-center text-3xl"
               key={index}
             >
               <IoLocationSharp />
