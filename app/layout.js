@@ -79,6 +79,12 @@ export const metadata = {
     yahoo: "your-yahoo-verification-code", // If applicable
   },
   
+  // Favicon / icons
+  icons: {
+    icon: '/img/NorthWest_HazMat_Logo.png',
+    apple: '/img/NorthWest_HazMat_Logo.png',
+  },
+
   // Additional schema markup can be added via JSON-LD script tag
   // This would go in a separate component or in the head
 }
