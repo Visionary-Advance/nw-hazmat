@@ -4,6 +4,7 @@ import { services } from '@/data/ServicesData';
 import Breadcrumbs from '@/Components/BreadCrumbs';
 import Link from 'next/link';
 import GoButton from '@/Components/Go-Button';
+import FAQ from '@/Components/FAQ';
 
 // Generate static params using id instead of slug
 export function generateStaticParams() {
@@ -32,13 +33,11 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  // Create SEO-optimized title (under 60 characters)
-  const title = `${service.title} | NorthWest HazMat Oregon`;
-  
-  // Create compelling meta description (under 160 characters)
-  const description = service.shortDescription.length > 150 
+  // Use custom meta fields when available, fallback to auto-generated
+  const title = service.metaTitle || `${service.title} | NorthWest HazMat Oregon`;
+  const description = service.metaDescription || (service.shortDescription.length > 150
     ? service.shortDescription.substring(0, 147) + '...'
-    : service.shortDescription;
+    : service.shortDescription);
 
   // Generate keywords from service data
   const keywords = [
@@ -349,6 +348,26 @@ export default function ServicePage({ params }) {
               </Link>
             </div>
           </div>
+
+          {/* Testimonial */}
+          {service.testimonial && (
+            <div className="mt-12 p-6 bg-gray-50 rounded-lg border border-gray-200">
+              <blockquote className="text-lg text-gray-700 italic leading-relaxed">
+                &ldquo;{service.testimonial.quote}&rdquo;
+              </blockquote>
+              <div className="mt-4 text-gray-900 font-semibold">
+                — {service.testimonial.author}, {service.testimonial.location}
+              </div>
+              {service.testimonial.project && (
+                <div className="text-sm text-gray-500 mt-1">{service.testimonial.project}</div>
+              )}
+            </div>
+          )}
+
+          {/* FAQ Section */}
+          {service.faqData && (
+            <FAQ faqData={service.faqData} title={`${service.title} FAQ`} />
+          )}
         </main>
       </div>
     </>

@@ -6,6 +6,8 @@ export const services = [
     title: "Hazmat Services",
     slug: "hazmat-services",
     img: "/img/Hazmat-Services.jpg",
+    metaTitle: "24/7 Hazmat Services Eugene OR | NorthWest HazMat",
+    metaDescription: "Licensed hazmat response in Eugene, Oregon. 24/7 emergency spills, containment & disposal. Serving Lane County since 2000. Call 541-988-9823 today.",
     shortDescription: "Expert hazmat handling, containment, and disposal to protect your environment and ensure safety.",
     description: (
       <>
@@ -64,13 +66,15 @@ export const services = [
     title: "Lab Services",
     slug: "lab-services",
     img: "/img/Lab-Testing.jpg",
+    metaTitle: "Asbestos & Environmental Lab Testing | Eugene OR",
+    metaDescription: "Fast, accurate asbestos testing & environmental lab analysis in Eugene, Oregon. Local results, no out-of-state delays. Free quotes — call 541-988-9823.",
     shortDescription: "Accurate asbestos testing and lab analysis to identify hazards and ensure safe removal.",
     description: (
       <>
-        Accurate data is the foundation of every effective cleanup or compliance plan. That's why Northwest Hazmat offers in-house environmental lab services to identify hazardous materials and assess contamination levels. Our lab technicians deliver detailed, fast results to support decision-making for <Link href="/services/mold-remediation" className="text-blue-600 hover:underline">remediation</Link>, development, and regulatory reporting. Every sample is handled with precision, documented carefully, and tested under strict industry standards to provide you with the clear, actionable insights you need.
+        Accurate data is the foundation of every effective cleanup or compliance plan. That's why Northwest Hazmat offers in-house environmental lab services to identify hazardous materials and assess contamination levels. Our lab technicians deliver detailed, fast results to support decision-making for <Link href="/services/mold-remediation" className="text-blue-600 hover:underline">remediation</Link>, development, and regulatory reporting. We also provide dedicated <Link href="/services/asbestos-testing" className="text-blue-600 hover:underline">asbestos testing services</Link> with fast turnaround. Every sample is handled with precision, documented carefully, and tested under strict industry standards to provide you with the clear, actionable insights you need.
       </>
     ),
-    keywords: ["environmental lab services Oregon", "hazardous material testing"],
+    keywords: ["environmental lab services Oregon", "hazardous material testing", "asbestos testing eugene oregon", "asbestos testing eugene", "asbestos"],
     callToAction: "Call today for sample testing or contamination analysis.",
     pageInfo: [
       {
@@ -119,6 +123,24 @@ export const services = [
         ),
         img: ''
       },
+    ],
+    faqData: [
+      {
+        question: "What types of environmental testing do you offer?",
+        answer: "We offer asbestos testing (PLM and TEM analysis), mold and microbial testing, soil and groundwater analysis, air quality monitoring, and hazardous materials identification. All testing is performed in our local Eugene, Oregon lab for faster turnaround."
+      },
+      {
+        question: "How fast can I get lab results?",
+        answer: "Standard turnaround is 3-5 business days. Rush services are available for time-sensitive projects like real estate transactions or renovation deadlines. Because our lab is local in Eugene, you avoid the delays of sending samples out of state."
+      },
+      {
+        question: "Do you provide chain-of-custody documentation?",
+        answer: "Yes, every sample we process includes full chain-of-custody documentation. This ensures your results are legally defensible and meet all regulatory requirements for compliance reporting."
+      },
+      {
+        question: "Can you test for asbestos in my home before renovation?",
+        answer: "Absolutely. Oregon law requires asbestos testing before renovating or demolishing buildings built before 2004. We collect samples on-site and analyze them in our lab. Visit our dedicated asbestos testing page for more details."
+      },
     ]
   },
   {
@@ -126,6 +148,8 @@ export const services = [
     title: "Mold Remediation",
     slug: "mold-remediation",
     img: "/img/Mold-Remi.jpg",
+    metaTitle: "Mold Remediation Eugene Oregon | Free Inspection",
+    metaDescription: "Professional mold removal in Eugene, Oregon. Free inspection, certified specialists, air quality testing. Protect your property — call 541-988-9823 now.",
     shortDescription: "Professional mold removal to prevent health risks, improve air quality, and protect property.",
     description: (
       <>
@@ -174,6 +198,8 @@ export const services = [
     title: "Soil Remediation",
     slug: "soil-remediation",
     img: "/img/Soil-Remidiation.jpg",
+    metaTitle: "Soil Remediation Services Oregon | NorthWest HazMat",
+    metaDescription: "Contaminated soil cleanup in Eugene & Lane County, Oregon. On-site treatment, disposal & post-remediation restoration. Licensed experts — get a free quote.",
     shortDescription: "Effective soil remediation services to restore contaminated ground for safe use.",
     description: (
       <>
@@ -220,6 +246,101 @@ export const services = [
         img: ""
       },
     ]
+  },
+  {
+    id: "asbestos-testing",
+    title: "Asbestos Testing",
+    slug: "asbestos-testing",
+    img: "/img/Lab-Testing.jpg",
+    metaTitle: "Asbestos Testing Eugene Oregon | Fast Lab Results",
+    metaDescription: "Certified asbestos testing in Eugene, Oregon. PLM & TEM analysis, fast turnaround, chain-of-custody forms. Serving Lane County since 2000. Call 541-988-9823.",
+    shortDescription: "Certified asbestos testing and inspection services in Eugene, Oregon with fast lab results and full chain-of-custody documentation.",
+    keywords: ["asbestos testing eugene oregon", "asbestos testing eugene", "asbestos testing", "asbestos inspection oregon", "asbestos analysis", "PLM asbestos testing", "TEM asbestos testing", "asbestos testing lane county"],
+    description: (
+      <>
+        Asbestos remains one of the most common hazardous materials found in Oregon buildings constructed before 2004. At Northwest Hazmat, we provide certified asbestos testing services in Eugene and throughout Lane County. Our in-house <Link href="/services/lab-services" className="text-blue-600 hover:underline">environmental lab</Link> performs both PLM and TEM analysis, delivering fast, accurate results without the delays of sending samples out of state. Whether you need testing for a renovation project, real estate transaction, or suspected asbestos exposure, our licensed inspectors and lab technicians ensure you get reliable data to make informed decisions. If asbestos is confirmed, our <Link href="/services/hazmat-services" className="text-blue-600 hover:underline">hazmat services team</Link> can handle safe abatement and disposal.
+      </>
+    ),
+    callToAction: "Schedule your asbestos test today — call 541-988-9823.",
+    pageInfo: [
+      {
+        title: "Asbestos Testing Process",
+        description: (
+          <>
+            Our asbestos testing process begins with a certified inspector visiting your property to collect bulk material samples from suspected asbestos-containing materials. Samples are carefully sealed, labeled, and transported to our Eugene lab under full chain-of-custody protocols. We perform Polarized Light Microscopy (PLM) analysis as the standard method, with Transmission Electron Microscopy (TEM) available for air samples and situations requiring higher sensitivity. Standard results are delivered within 3-5 business days, with rush turnaround available for urgent projects. You receive a detailed report identifying the type and percentage of asbestos fibers found, along with recommendations for next steps.
+          </>
+        ),
+        img: ''
+      },
+      {
+        title: "When to Test for Asbestos",
+        description: (
+          <>
+            Oregon law requires asbestos testing before renovating or demolishing buildings constructed before 2004. Beyond legal requirements, you should consider asbestos testing before any remodeling project that disturbs walls, flooring, ceiling tiles, insulation, or roofing materials. Real estate transactions often require asbestos inspections, especially for older properties. If you notice damaged or deteriorating building materials that appear fibrous, crumbly, or are releasing dust, testing is strongly recommended. Common materials that may contain asbestos include vinyl floor tiles, popcorn ceilings, pipe insulation, cement siding, and vermiculite attic insulation.
+          </>
+        ),
+        img: ''
+      },
+      {
+        title: "Types of Asbestos Analysis",
+        description: (
+          <>
+            We offer two primary methods of asbestos analysis. <strong>PLM (Polarized Light Microscopy)</strong> is the standard EPA-approved method for analyzing bulk building material samples. It identifies asbestos fiber type (chrysotile, amosite, crocidolite) and concentration. <strong>TEM (Transmission Electron Microscopy)</strong> is used for air monitoring samples and provides higher sensitivity, capable of detecting fibers too small for PLM. TEM is typically required for clearance air monitoring after abatement projects. Our <Link href="/services/lab-services" className="text-blue-600 hover:underline">lab services</Link> team can advise which method is appropriate for your situation.
+          </>
+        ),
+        img: ''
+      },
+      {
+        title: "Asbestos in Eugene, Oregon",
+        description: (
+          <>
+            Many homes and commercial buildings in Eugene were constructed during the peak years of asbestos use (1940s–1980s). Neighborhoods with older housing stock, including the Whiteaker, South Hills, and downtown areas, frequently contain asbestos in flooring, insulation, siding, and roofing materials. Oregon DEQ regulations require proper testing and notification before any renovation or demolition work on pre-2004 structures. As a local Eugene company serving Lane County since 2000, we understand the specific building materials and construction methods common to our area, helping us identify suspect materials quickly and accurately.
+          </>
+        ),
+        img: ''
+      },
+      {
+        title: "Chain of Custody & Documentation",
+        description: (
+          <>
+            Every asbestos sample we collect and analyze follows strict chain-of-custody procedures. From the moment a sample is taken, it is sealed, labeled with a unique identifier, and documented at every transfer point until analysis is complete. This ensures your results are legally defensible and accepted by Oregon DEQ, EPA, and other regulatory agencies. Our reports include sample locations, photographs, analytical results, laboratory accreditation information, and recommendations. We maintain all records for regulatory compliance and can provide documentation for real estate transactions, permit applications, and legal proceedings.
+          </>
+        ),
+        img: ''
+      },
+    ],
+    faqData: [
+      {
+        question: "How much does asbestos testing cost in Eugene, Oregon?",
+        answer: "Asbestos testing costs vary based on the number of samples and type of analysis required. A single bulk sample PLM analysis typically starts around $25-35. Most residential inspections involve 3-10 samples depending on the size and age of the building. Contact us at 541-988-9823 for a free quote based on your specific project."
+      },
+      {
+        question: "How long does asbestos testing take?",
+        answer: "Standard turnaround for PLM analysis is 3-5 business days from when samples arrive at our lab. Rush service is available for an additional fee, with results possible within 24 hours. Because our lab is local in Eugene, you avoid the shipping delays of out-of-state laboratories."
+      },
+      {
+        question: "Do I need asbestos testing before renovating my home in Oregon?",
+        answer: "Yes. Oregon DEQ requires an asbestos survey before renovating or demolishing any structure built before 2004. This applies to both residential and commercial properties. Failing to test can result in fines and potential health hazards for workers and occupants."
+      },
+      {
+        question: "What happens if asbestos is found in my building?",
+        answer: "If asbestos is confirmed, you have several options depending on the material's condition. Intact, undamaged asbestos materials can often be managed in place through encapsulation or an operations and maintenance plan. Damaged or friable materials, or those that will be disturbed during renovation, must be removed by a licensed abatement contractor. Our hazmat services team can handle the entire removal process safely and in compliance with Oregon regulations."
+      },
+      {
+        question: "Is asbestos common in Eugene, Oregon homes?",
+        answer: "Yes, asbestos is very common in Eugene homes built before the mid-1980s. It was widely used in floor tiles, pipe insulation, popcorn ceilings, cement siding, roof shingles, and vermiculite attic insulation. Even homes built up to 2004 may contain some asbestos-containing materials, as certain products were not fully banned until then."
+      },
+      {
+        question: "Can I collect asbestos samples myself?",
+        answer: "While homeowners can legally collect their own samples in Oregon, we strongly recommend hiring a certified inspector. Disturbing asbestos-containing materials without proper precautions can release dangerous fibers into the air. A certified inspector knows how to safely collect samples while minimizing fiber release and follows proper wet-sampling techniques to reduce risk."
+      },
+    ],
+    testimonial: {
+      quote: "We needed asbestos testing done on our 1960s Eugene home before a kitchen remodel. Northwest Hazmat came out the next day, collected samples, and had our results back within the week. They found asbestos in the floor tiles and handled the entire removal process. Professional, fast, and reasonably priced.",
+      author: "Sarah M.",
+      location: "Eugene, OR",
+      project: "Residential asbestos testing & abatement"
+    }
   },
   {
     id: "biohazard-cleanup",

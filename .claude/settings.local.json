@@ -12,7 +12,9 @@
       "Bash(npm run build:*)",
       "Bash(npx next build:*)",
       "Bash(npx:*)",
-      "Bash(npm ls:*)"
+      "Bash(npm ls:*)",
+      "Bash(find \"/home/brandon/Desktop/Visionary Advance/GitHub/nw-hazmat/app/services\" -type f -name \"*.js\" -o -name \"*.jsx\" 2>/dev/null | head -20)",
+      "Bash(grep -r \"FAQ\\\\|faq\\\\|testimonial\\\\|Testimonial\\\\|Case Study\\\\|case study\" \"/home/brandon/Desktop/Visionary Advance/GitHub/nw-hazmat/Components\" --include=\"*.jsx\" 2>/dev/null | head -20)"
     ],
     "deny": [],
     "ask": []
