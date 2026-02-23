@@ -335,12 +335,6 @@ export const services = [
         answer: "While homeowners can legally collect their own samples in Oregon, we strongly recommend hiring a certified inspector. Disturbing asbestos-containing materials without proper precautions can release dangerous fibers into the air. A certified inspector knows how to safely collect samples while minimizing fiber release and follows proper wet-sampling techniques to reduce risk."
       },
     ],
-    testimonial: {
-      quote: "We needed asbestos testing done on our 1960s Eugene home before a kitchen remodel. Northwest Hazmat came out the next day, collected samples, and had our results back within the week. They found asbestos in the floor tiles and handled the entire removal process. Professional, fast, and reasonably priced.",
-      author: "Sarah M.",
-      location: "Eugene, OR",
-      project: "Residential asbestos testing & abatement"
-    }
   },
   {
     id: "biohazard-cleanup",
