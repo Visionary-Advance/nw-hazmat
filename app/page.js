@@ -8,6 +8,29 @@ import StatsCard from "@/Components/CountUp";
 import TestimonialSlider from "@/Components/ReviewSlide";
 import EmploymentSection from "@/Components/EmploymentSection";
 
+export const metadata = {
+  title: "NorthWest HazMat | Hazmat Services Eugene Oregon",
+  description: "Oregon's trusted hazmat & environmental services since 2000. Emergency response, mold remediation, asbestos testing & more in Eugene. Call 541-988-9823.",
+  keywords: "northwest hazmat, hazmat services eugene, hazmat services oregon, mold remediation eugene, asbestos testing eugene, environmental services lane county",
+  openGraph: {
+    title: "NorthWest HazMat | Hazmat Services Eugene Oregon",
+    description: "Oregon's trusted hazmat & environmental services since 2000. Emergency response, mold remediation, asbestos testing & more in Eugene.",
+    url: "https://nwhazmat.com",
+    siteName: "NorthWest HazMat, Inc.",
+    type: "website",
+    images: [{ url: "/img/Hazmat-Services.jpg", width: 1200, height: 630, alt: "NorthWest HazMat - Professional hazmat services in Eugene, Oregon" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NorthWest HazMat | Hazmat Services Eugene Oregon",
+    description: "Oregon's trusted hazmat & environmental services since 2000. Emergency response, mold remediation, asbestos testing & more in Eugene.",
+    images: ["/img/Hazmat-Services.jpg"],
+  },
+  alternates: {
+    canonical: "https://nwhazmat.com",
+  },
+};
+
 export default function Home() {
   return (
     <>

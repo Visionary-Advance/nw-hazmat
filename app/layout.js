@@ -66,10 +66,10 @@ export const metadata = {
   
   // Local business structured data
   other: {
-    "geo.region": "US-OR", // Adjust based on your primary service area
-    "geo.placename": "Portland", // Adjust to your main city
-    "geo.position": "45.5152;-122.6784", // Replace with your actual coordinates
-    "ICBM": "45.5152, -122.6784", // Replace with your actual coordinates
+    "geo.region": "US-OR",
+    "geo.placename": "Eugene, Springfield",
+    "geo.position": "44.0521;-123.0868",
+    "ICBM": "44.0521, -123.0868",
   },
   
   // Verification tags (add these when you have them)
@@ -79,6 +79,12 @@ export const metadata = {
     yahoo: "your-yahoo-verification-code", // If applicable
   },
   
+  // Favicon / icons
+  icons: {
+    icon: '/img/NorthWest_HazMat_Logo.png',
+    apple: '/img/NorthWest_HazMat_Logo.png',
+  },
+
   // Additional schema markup can be added via JSON-LD script tag
   // This would go in a separate component or in the head
 }
