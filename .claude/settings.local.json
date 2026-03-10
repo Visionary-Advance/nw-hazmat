@@ -14,7 +14,11 @@
       "Bash(npx:*)",
       "Bash(npm ls:*)",
       "Bash(find \"/home/brandon/Desktop/Visionary Advance/GitHub/nw-hazmat/app/services\" -type f -name \"*.js\" -o -name \"*.jsx\" 2>/dev/null | head -20)",
-      "Bash(grep -r \"FAQ\\\\|faq\\\\|testimonial\\\\|Testimonial\\\\|Case Study\\\\|case study\" \"/home/brandon/Desktop/Visionary Advance/GitHub/nw-hazmat/Components\" --include=\"*.jsx\" 2>/dev/null | head -20)"
+      "Bash(grep -r \"FAQ\\\\|faq\\\\|testimonial\\\\|Testimonial\\\\|Case Study\\\\|case study\" \"/home/brandon/Desktop/Visionary Advance/GitHub/nw-hazmat/Components\" --include=\"*.jsx\" 2>/dev/null | head -20)",
+      "Read(//c/tmp/**)",
+      "Bash(unzip -o \"c:\\\\Users\\\\brand\\\\Downloads\\\\nwhazmat.com-Coverage-Drilldown-2026-03-09.zip\")",
+      "Bash(ls /tmp/*.csv 2>/dev/null || ls C:/tmp/*.csv 2>/dev/null || find /tmp -name \"*.csv\" 2>/dev/null)",
+      "Bash(cd /tmp && unzip -o \"c:\\\\Users\\\\brand\\\\Downloads\\\\nwhazmat.com-Coverage-Validation-2026-03-09.zip\" 2>&1)"
     ],
     "deny": [],
     "ask": []

@@ -18,6 +18,11 @@ export const metadata = {
   // Metadata base URL for resolving relative URLs
   metadataBase: new URL('https://nwhazmat.com'),
 
+  // Canonical URL - tells Google the preferred version of each page
+  alternates: {
+    canonical: './',
+  },
+
   // Primary SEO tags
   title: "NorthWest HazMat, Inc. | Professional Hazmat & Mold Remediation Services",
   description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services. Licensed experts serving the Pacific Northwest with 24/7 emergency response.",

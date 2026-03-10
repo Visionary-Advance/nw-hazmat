@@ -5,6 +5,9 @@ export const metadata = {
   title: "Hazmat & Safety Training Oregon | HAZWOPER, Confined Space, Emergency Response",
   description: "Professional hazmat training in Oregon: HAZWOPER 40-hour certification, confined space entry, spill response, first responder training, and hazmat technician courses. OSHA-compliant safety training.",
   keywords: "hazmat training oregon, HAZWOPER certification, confined space training, emergency response training, hazmat emergency response training, spill response course, first responder training, hazmat first responder training, hazmat technician, safety training eugene",
+  alternates: {
+    canonical: "https://nwhazmat.com/training",
+  },
   openGraph: {
     title: "Professional Hazmat & Safety Training | NorthWest HazMat Oregon",
     description: "OSHA-compliant hazmat training courses including HAZWOPER certification, confined space entry, emergency response, and spill response training in Oregon.",

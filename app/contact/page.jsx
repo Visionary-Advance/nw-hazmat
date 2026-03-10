@@ -4,6 +4,9 @@ export const metadata = {
   title: "Contact NorthWest HazMat | 24/7 Emergency Response Eugene Oregon",
   description: "Contact NorthWest HazMat for emergency hazmat response, mold remediation, and environmental services in Eugene, Oregon. Call 541-988-9823 or 24/7 emergency: 1-800-597-1323.",
   keywords: "contact hazmat eugene oregon, emergency spill response, mold remediation contact, hazmat services lane county, 24/7 emergency response",
+  alternates: {
+    canonical: "https://nwhazmat.com/contact",
+  },
   openGraph: {
     title: "Contact NorthWest HazMat | Emergency Response Eugene Oregon",
     description: "24/7 emergency hazmat response in Lane County. Contact us for mold remediation, spill response, and environmental services.",

@@ -6,6 +6,9 @@ export const metadata = {
   title: "Emergency Black Mold Removal Eugene Oregon | 24/7 Response",
   description: "24/7 emergency black mold removal in Eugene-Springfield, Oregon. Toxic Stachybotrys response team. Licensed, certified, 25+ years experience. Call 1-800-597-1323 NOW!",
   keywords: "emergency mold removal eugene, black mold removal eugene oregon, toxic mold emergency springfield, 24/7 mold response lane county, stachybotrys removal oregon",
+  alternates: {
+    canonical: "https://nwhazmat.com/emergency-mold-removal-eugene-oregon",
+  },
   openGraph: {
     title: "Emergency Black Mold Removal | 24/7 Eugene Oregon Response",
     description: "Immediate response for toxic black mold contamination in Eugene-Springfield. Professional emergency remediation. Call 1-800-597-1323.",

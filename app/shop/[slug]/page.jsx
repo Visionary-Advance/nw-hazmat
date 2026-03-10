@@ -59,6 +59,9 @@ export async function generateMetadata({ params }) {
         description,
         images: product.image ? [product.image] : [],
       },
+      alternates: {
+        canonical: `https://nwhazmat.com/shop/${slug}`,
+      },
       other: {
         "geo.region": "US",
         "geo.placename": "United States",

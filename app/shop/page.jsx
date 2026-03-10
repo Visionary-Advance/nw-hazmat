@@ -7,6 +7,9 @@ export const metadata = {
   title: "Professional Hazmat Equipment & Safety Supplies | Nationwide Shipping",
   description: "Buy professional hazmat equipment, safety gear, and environmental testing supplies online. Fast nationwide shipping across the USA. Quality PPE, spill response kits, hazmat training simulators, and safety equipment for environmental professionals, first responders, and industrial teams.",
   keywords: "hazmat equipment, safety supplies, ppe equipment, spill response kits, hazmat training equipment, environmental safety gear, hazmat simulators, hazmat suits, respirators, safety equipment online, hazmat gear USA, professional safety supplies",
+  alternates: {
+    canonical: "https://nwhazmat.com/shop",
+  },
   openGraph: {
     title: "Professional Hazmat Equipment & Safety Supplies | Nationwide Shipping",
     description: "Shop premium hazmat equipment and safety gear with fast shipping across the USA. Professional-grade PPE, training simulators, and environmental safety supplies.",

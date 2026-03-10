@@ -5,6 +5,9 @@ export const metadata = {
   title: "Hazmat & Environmental Services Eugene OR",
   description: "Full-service hazmat, mold remediation, asbestos testing & emergency response in Eugene, Oregon. Licensed since 2000. Call 541-988-9823 for a free quote.",
   keywords: "hazmat services oregon, mold remediation eugene, soil remediation, biohazard cleanup, lab testing oregon, waste management consulting, hazardous waste consultants, emergency spill response, asbestos testing eugene",
+  alternates: {
+    canonical: "https://nwhazmat.com/services",
+  },
   openGraph: {
     title: "Hazmat & Environmental Services Eugene OR",
     description: "Full-service hazmat, mold remediation, asbestos testing & emergency response in Eugene, Oregon. Licensed since 2000. Call 541-988-9823 for a free quote.",

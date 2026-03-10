@@ -1,14 +1,18 @@
 export default function robots() {
   const baseUrl = 'https://nwhazmat.com';
-  
+
   return {
     rules: {
       userAgent: '*',
-      allow: '/',
+      allow: [
+        '/',
+        '/_next/static/',  // Allow CSS, JS, fonts, images
+      ],
       disallow: [
-        '/api/', // Block API routes from indexing
-        '/_next/', // Block Next.js internals
-        '/admin/', // Block admin areas if any
+        '/api/',          // Block API routes
+        '/_next/data/',   // Block Next.js data fetches
+        '/admin/',        // Block admin areas
+        '/checkout',      // Block checkout page
       ],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
