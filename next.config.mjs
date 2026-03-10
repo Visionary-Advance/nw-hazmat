@@ -131,6 +131,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/wp-json/:path*',
+        destination: '/',
+        permanent: true,
+      },
+      {
         source: '/embed',
         destination: '/',
         permanent: true,
