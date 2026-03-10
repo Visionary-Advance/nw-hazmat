@@ -1,8 +1,9 @@
-// app/sitemap.js
-export default function sitemap() {
+import { getAllProducts } from '@/lib/getProducts';
+
+export default async function sitemap() {
   const baseUrl = 'https://nwhazmat.com';
-  
-  // Core pages only - guaranteed to work
+
+  // Core pages
   const routes = [
     { url: `${baseUrl}/`,              lastModified: new Date(), changeFrequency: 'yearly',  priority: 1.0 },
     { url: `${baseUrl}/about`,         lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
@@ -10,57 +11,66 @@ export default function sitemap() {
     { url: `${baseUrl}/contact`,       lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/services`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/training`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    // Standalone landing pages
+    { url: `${baseUrl}/mold-services-eugene-oregon`,          lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/emergency-mold-removal-eugene-oregon`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/employment-application`,               lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${baseUrl}/chain-of-custody`,                     lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
   ];
 
-  // Try to safely add dynamic content
+  // Add product pages from Stripe
+  try {
+    const products = await getAllProducts();
+    products.forEach(product => {
+      routes.push({
+        url: `${baseUrl}/shop/${product.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
+    });
+  } catch (error) {
+    console.log('Error fetching products for sitemap:', error);
+  }
+
+  // Add dynamic service pages
   try {
     const { services } = require('@/data/ServicesData');
-    const { training } = require('@/data/TrainingData');
-    
+
     if (services && Array.isArray(services)) {
       services.forEach(service => {
-        if (service && service.name && typeof service.name === 'string') {
-          const slug = service.name
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-+|-+$/g, '')
-            .replace(/-+/g, '-');
-          
-          if (slug) {
-            routes.push({
-              url: `${baseUrl}/shop/${slug}`,
-              lastModified: new Date(),
-              changeFrequency: 'monthly',
-              priority: 0.6,
-            });
-          }
-        }
-      });
-    }
-    
-    if (training && Array.isArray(training)) {
-      training.forEach(item => {
-        if (item && item.name && typeof item.name === 'string') {
-          const slug = item.name
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-+|-+$/g, '')
-            .replace(/-+/g, '-');
-          
-          if (slug) {
-            routes.push({
-              url: `${baseUrl}/shop/${slug}`,
-              lastModified: new Date(),
-              changeFrequency: 'monthly',
-              priority: 0.6,
-            });
-          }
+        if (service && service.id) {
+          routes.push({
+            url: `${baseUrl}/services/${service.id}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+          });
         }
       });
     }
   } catch (error) {
-    console.log('Error loading dynamic content for sitemap:', error);
-    // Just continue with static routes
+    console.log('Error loading services for sitemap:', error);
+  }
+
+  // Add dynamic training pages
+  try {
+    const { training } = require('@/data/TrainingData');
+
+    if (training && Array.isArray(training)) {
+      training.forEach(item => {
+        if (item && item.id) {
+          routes.push({
+            url: `${baseUrl}/training/${item.id}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+          });
+        }
+      });
+    }
+  } catch (error) {
+    console.log('Error loading training for sitemap:', error);
   }
 
   return routes;

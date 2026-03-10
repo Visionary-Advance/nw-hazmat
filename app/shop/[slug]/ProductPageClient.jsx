@@ -27,43 +27,9 @@ export default function ProductPageClient({ product }) {
     );
   }
 
-  // Structured data for rich snippets
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": product.name,
-    "description": product.description,
-    "image": product.image,
-    "sku": product.id,
-    "category": product.category,
-    "offers": {
-      "@type": "Offer",
-      "price": product.price,
-      "priceCurrency": product.currency?.toUpperCase() || "USD",
-      "availability": product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "NorthWest HazMat, Inc.",
-        "url": "https://nwhazmat.com"
-      }
-    },
-    "brand": {
-      "@type": "Brand",
-      "name": "NorthWest HazMat"
-    }
-  };
-
   return (
     <CartProvider>
       <>
-        {/* Structured Data JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData),
-          }}
-        />
-
         <Breadcrumbs />
 
         <div className="max-w-7xl mx-auto px-4 py-8">

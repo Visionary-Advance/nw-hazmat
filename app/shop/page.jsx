@@ -1,4 +1,7 @@
 import ShopClient from "./ShopClient";
+import { getAllProducts } from "@/lib/getProducts";
+
+export const revalidate = 3600; // Revalidate every hour
 
 export const metadata = {
   title: "Professional Hazmat Equipment & Safety Supplies | Nationwide Shipping",
@@ -29,10 +32,10 @@ export const metadata = {
   other: {
     "geo.region": "US", // National scope (all states)
     "geo.placename": "United States", // Nationwide
-    // Remove specific coordinates for shop to avoid regional bias
   },
 };
 
-export default function Shop() {
-  return <ShopClient />;
+export default async function Shop() {
+  const products = await getAllProducts();
+  return <ShopClient initialProducts={products} />;
 }

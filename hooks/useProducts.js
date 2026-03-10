@@ -2,18 +2,16 @@
 
 import { useState, useEffect } from 'react';
 
-export function useProducts() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+export function useProducts(initialProducts = []) {
+  const [products, setProducts] = useState(initialProducts);
+  const [loading, setLoading] = useState(initialProducts.length === 0);
   const [error, setError] = useState(null);
   const [debugInfo, setDebugInfo] = useState(null);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (showLoading = true) => {
     try {
-      setLoading(true);
+      if (showLoading) setLoading(true);
       setError(null);
-
-      console.log('Fetching products from API...');
 
       const response = await fetch('/api/products/stripe', {
         method: 'GET',
@@ -21,9 +19,6 @@ export function useProducts() {
           'Content-Type': 'application/json',
         },
       });
-
-      console.log('Response status:', response.status);
-      console.log('Response headers:', response.headers);
 
       // Check if the response is actually JSON
       const contentType = response.headers.get('content-type');
@@ -34,7 +29,6 @@ export function useProducts() {
       }
 
       const data = await response.json();
-      console.log('API Response:', data);
 
       if (!response.ok) {
         throw new Error(data.message || `HTTP error! status: ${response.status}`);
@@ -43,15 +37,13 @@ export function useProducts() {
       if (data.success) {
         setProducts(data.products || []);
         setDebugInfo(data.debug);
-        console.log('Products loaded successfully:', data.products?.length || 0);
       } else {
         throw new Error(data.error || 'Failed to load products');
       }
     } catch (err) {
       console.error('Error fetching products:', err);
       setError(err.message);
-      
-      // If it's a JSON parsing error, provide more specific guidance
+
       if (err.message.includes('Unexpected token')) {
         setError('API route is returning HTML instead of JSON. Check your Stripe configuration and API route.');
       }
@@ -61,11 +53,16 @@ export function useProducts() {
   };
 
   useEffect(() => {
-    fetchProducts();
+    if (initialProducts.length > 0) {
+      // Already have server data — fetch silently in background to refresh
+      fetchProducts(false);
+    } else {
+      fetchProducts(true);
+    }
   }, []);
 
   const getProductsByCategory = (category) => {
-    return products.filter(product => 
+    return products.filter(product =>
       product.category.toLowerCase() === category.toLowerCase()
     );
   };

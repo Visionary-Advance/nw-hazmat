@@ -2,9 +2,21 @@ import { notFound } from 'next/navigation';
 import ProductPageClient from './ProductPageClient';
 import { getProductBySlug, getAllProducts } from '@/lib/getProducts';
 
-// Force dynamic rendering for all product pages
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// ISR - revalidate every hour
+export const revalidate = 3600;
+
+// Pre-build all product pages at build time
+export async function generateStaticParams() {
+  try {
+    const products = await getAllProducts();
+    return products.map((product) => ({
+      slug: product.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for products:', error);
+    return [];
+  }
+}
 
 // Generate metadata for each product page
 export async function generateMetadata({ params }) {
@@ -47,24 +59,19 @@ export async function generateMetadata({ params }) {
         description,
         images: product.image ? [product.image] : [],
       },
-      // Override geo tags for products - make it national
       other: {
-        "geo.region": "US", // Available nationwide
+        "geo.region": "US",
         "geo.placename": "United States",
       },
     };
   } catch (error) {
     console.error('Error generating metadata for product:', error);
-    // Return default metadata on error to prevent build failure
     return {
       title: 'Product | NorthWest HazMat Shop Oregon',
       description: 'Professional hazmat equipment and safety supplies from NorthWest HazMat in Oregon.',
     };
   }
 }
-
-// Note: generateStaticParams is removed because we're using force-dynamic
-// Product pages will be generated on-demand when users visit them
 
 export default async function ProductPage({ params }) {
   try {
@@ -75,7 +82,41 @@ export default async function ProductPage({ params }) {
       notFound();
     }
 
-    return <ProductPageClient product={product} />;
+    // Server-side structured data for reliable SEO
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": product.name,
+      "description": product.description,
+      "image": product.image,
+      "sku": product.id,
+      "category": product.category,
+      "offers": {
+        "@type": "Offer",
+        "price": product.price,
+        "priceCurrency": product.currency?.toUpperCase() || "USD",
+        "availability": product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "NorthWest HazMat, Inc.",
+          "url": "https://nwhazmat.com"
+        }
+      },
+      "brand": {
+        "@type": "Brand",
+        "name": "NorthWest HazMat"
+      }
+    };
+
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <ProductPageClient product={product} />
+      </>
+    );
   } catch (error) {
     console.error('Error loading product page:', error);
     notFound();

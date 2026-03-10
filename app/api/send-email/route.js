@@ -1,7 +1,15 @@
 // For Next.js App Router (app/api/send-email/route.js)
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let _resend;
+function getResend() {
+  if (!_resend) {
+    const key = process.env.RESEND_API_KEY;
+    if (!key) throw new Error('RESEND_API_KEY is not configured');
+    _resend = new Resend(key);
+  }
+  return _resend;
+}
 
 export async function POST(request) {
   try {
@@ -53,7 +61,7 @@ export async function POST(request) {
       }));
     }
 
-    const { data, error } = await resend.emails.send(emailOptions);
+    const { data, error } = await getResend().emails.send(emailOptions);
 
     if (error) {
       console.error('Resend error:', error);

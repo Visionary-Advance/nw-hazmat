@@ -11,8 +11,8 @@ import { ProductSkeletonGrid } from "@/Components/ProductSkeleton";
 import { useProducts } from "@/hooks/useProducts";
 import ProductLink, { createProductSlug } from "@/Components/ProductLink";
 
-export default function ShopClient() {
-  const { products, loading, getProductsByCategory } = useProducts();
+export default function ShopClient({ initialProducts = [] }) {
+  const { products, loading, getProductsByCategory } = useProducts(initialProducts);
   const [selectedCategory, setSelectedCategory] = useState('all');
 
 
@@ -25,9 +25,28 @@ export default function ShopClient() {
     : getProductsByCategory(selectedCategory);
 
 
+  const itemListStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Professional Hazmat Equipment & Safety Supplies",
+    "numberOfItems": products.length,
+    "itemListElement": products.map((product, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": product.name,
+      "url": `https://nwhazmat.com/shop/${product.slug}`
+    }))
+  };
+
   return (
     <CartProvider>
       <>
+        {products.length > 0 && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListStructuredData) }}
+          />
+        )}
         <Breadcrumbs />
 
         {/* Category Filter */}
