@@ -34,6 +34,7 @@ export default function Header() {
           <Link href="/about">About</Link>
           <Link href="/training/hazwoper-40-hour">Training</Link>
           <Link href="/shop">Shop</Link>
+          <Link href="/blog">Blog</Link>
           <div
         className="relative"
         onMouseEnter={() => setShowFormsDropdown(true)}

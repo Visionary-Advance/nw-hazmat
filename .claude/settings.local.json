@@ -18,7 +18,18 @@
       "Read(//c/tmp/**)",
       "Bash(unzip -o \"c:\\\\Users\\\\brand\\\\Downloads\\\\nwhazmat.com-Coverage-Drilldown-2026-03-09.zip\")",
       "Bash(ls /tmp/*.csv 2>/dev/null || ls C:/tmp/*.csv 2>/dev/null || find /tmp -name \"*.csv\" 2>/dev/null)",
-      "Bash(cd /tmp && unzip -o \"c:\\\\Users\\\\brand\\\\Downloads\\\\nwhazmat.com-Coverage-Validation-2026-03-09.zip\" 2>&1)"
+      "Bash(cd /tmp && unzip -o \"c:\\\\Users\\\\brand\\\\Downloads\\\\nwhazmat.com-Coverage-Validation-2026-03-09.zip\" 2>&1)",
+      "mcp__Sanity__list_projects",
+      "mcp__Sanity__list_sanity_rules",
+      "mcp__Sanity__list_datasets",
+      "mcp__Sanity__get_schema",
+      "mcp__figma__get_design_context",
+      "mcp__Sanity__deploy_schema",
+      "mcp__Sanity__create_documents_from_json",
+      "mcp__Sanity__publish_documents",
+      "mcp__Sanity__patch_document_from_json",
+      "Bash(find:*)",
+      "mcp__Sanity__generate_image"
     ],
     "deny": [],
     "ask": []

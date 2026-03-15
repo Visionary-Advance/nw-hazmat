@@ -157,27 +157,27 @@ export default function Home() {
           <h2 className=""> About Us </h2>
         </div>
         <div className="grid lg:grid-cols-2 relative grid-cols-1 lg:w-8/12 w-11/12 mx-auto">
-          <div className="col-span-1 relative mx-auto w-fit">
+          <div className="col-span-1 relative mx-auto w-fit overflow-visible">
             
 
             {/* Main Image */}
   <Image
-    className="rounded-[20px] shadow-[-10px_-10px_0_#dc2626]"
+    className="rounded-[20px] shadow-[-10px_-10px_0_#dc2626] w-full"
     src="/img/Reading_Gauge.jpg"
     alt="Reading Gauge Image"
     width={400}
     height={900}
-    sizes="(max-width: 768px) 100vw, 400px"
+    sizes="(max-width: 768px) 80vw, 400px"
   />
             <div className="relative">
 
   {/* Stats Overlay — now inside the same relative parent */}
 </div>
   <StatsCard
-    widths="  max-w-[500px]"
-    textSize="md:text-4xl text-3xl"
-    textSizep="text-lg"
-    bottom="bottom-[30px]"
+    widths="w-[110%] -left-[5%] lg:w-[115%] lg:-left-[7.5%]"
+    textSize="md:text-4xl text-2xl"
+    textSizep="md:text-lg text-sm"
+    bottom="bottom-[20px] lg:bottom-[30px]"
   />
 </div>
 

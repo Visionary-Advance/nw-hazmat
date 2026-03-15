@@ -13,10 +13,10 @@ export default function Footer() {
           <div className="flex items-center space-x-4">
             <Link href="/" aria-label='Home Button'>
             <Image
-              src="/img/NorthWest-HazMat-Logo.png"
+              src="/img/NorthWest_HazMat_Logo_Small.png"
               alt="NorthWest HazMat Logo"
-              width={120}
-              height={40}
+              width={250}
+              height={70}
               className="h-10 w-auto"
             />
             </Link>
@@ -57,7 +57,7 @@ export default function Footer() {
           <Link href="/sitemap.xml" className="hover:underline">Sitemap</Link>
         </div>
         <div className='text-center lg:pt-0 pt-5 lg:text-right'>
-          <p>Copyright © 2025 NorthWest Hazmat, INC</p>
+          <p>Copyright © {new Date().getFullYear()} NorthWest Hazmat, INC</p>
           <p>Powered By <Link href="https://www.visionaryadvance.com" target='_blank' rel='nofollow noreferrer' className="text-[#008070] hover:underline">Visionary Advance</Link></p>
         </div>
         </div>

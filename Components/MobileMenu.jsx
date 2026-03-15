@@ -112,6 +112,11 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
               </Link>
             </motion.li>
             <motion.li variants={itemVariants} className="text-white text-3xl">
+              <Link href="/blog" onClick={() => setMenuOpen(false)}>
+                Blog
+              </Link>
+            </motion.li>
+            <motion.li variants={itemVariants} className="text-white text-3xl">
               <Link href="/contact" onClick={() => setMenuOpen(false)}>
                 Contact
               </Link>

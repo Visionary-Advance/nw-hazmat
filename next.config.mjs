@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: 'files.stripe.com',
         pathname: '/links/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        pathname: '/images/**',
+      },
     ],
   },
 
@@ -35,21 +40,7 @@ const nextConfig = {
         permanent: true,
       },
 
-      // ============================================
-      // Blog pages (no blog on new site)
-      // ============================================
-      {
-        source: '/blog/:path*',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/blog',
-        destination: '/',
-        permanent: true,
-      },
-
-      // ============================================
+// ============================================
       // Renamed pages
       // ============================================
       {

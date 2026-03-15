@@ -1,4 +1,5 @@
 import { getAllProducts } from '@/lib/getProducts';
+import { getAllPosts } from '@/lib/sanity';
 
 export default async function sitemap() {
   const baseUrl = 'https://nwhazmat.com';
@@ -9,6 +10,7 @@ export default async function sitemap() {
     { url: `${baseUrl}/about`,         lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/shop`,          lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${baseUrl}/contact`,       lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/blog`,           lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${baseUrl}/services`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/training`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     // Standalone landing pages
@@ -31,6 +33,23 @@ export default async function sitemap() {
     });
   } catch (error) {
     console.log('Error fetching products for sitemap:', error);
+  }
+
+  // Add blog posts from Sanity
+  try {
+    const posts = await getAllPosts();
+    posts.forEach(post => {
+      if (post?.slug?.current) {
+        routes.push({
+          url: `${baseUrl}/blog/${post.slug.current}`,
+          lastModified: post.publishedAt ? new Date(post.publishedAt) : new Date(),
+          changeFrequency: 'weekly',
+          priority: 0.6,
+        });
+      }
+    });
+  } catch (error) {
+    console.log('Error fetching blog posts for sitemap:', error);
   }
 
   // Add dynamic service pages
