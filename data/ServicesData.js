@@ -249,13 +249,13 @@ export const services = [
   },
   {
     id: "asbestos-testing",
-    title: "Asbestos Testing",
+    title: "Asbestos Testing & Removal",
     slug: "asbestos-testing",
     img: "/img/Lab-Testing.jpg",
-    metaTitle: "Asbestos Testing Eugene Oregon | Fast Lab Results",
-    metaDescription: "Certified asbestos testing in Eugene, Oregon. PLM & TEM analysis, fast turnaround, chain-of-custody forms. Serving Lane County since 2000. Call 541-988-9823.",
-    shortDescription: "Certified asbestos testing and inspection services in Eugene, Oregon with fast lab results and full chain-of-custody documentation.",
-    keywords: ["asbestos testing eugene oregon", "asbestos testing eugene", "asbestos testing", "asbestos inspection oregon", "asbestos analysis", "PLM asbestos testing", "TEM asbestos testing", "asbestos testing lane county"],
+    metaTitle: "Asbestos Testing & Removal Eugene Oregon | Lane County",
+    metaDescription: "Certified asbestos testing and removal in Eugene, Oregon. PLM & TEM lab analysis, safe abatement, chain-of-custody. Serving Lane County since 2000. Call 541-988-9823.",
+    shortDescription: "Certified asbestos testing and removal services in Eugene, Oregon with fast lab results, safe abatement, and full chain-of-custody documentation.",
+    keywords: ["asbestos removal eugene oregon", "asbestos testing eugene oregon", "asbestos abatement eugene", "asbestos testing eugene", "asbestos removal lane county", "asbestos inspection oregon", "asbestos analysis", "PLM asbestos testing", "TEM asbestos testing"],
     description: (
       <>
         Asbestos remains one of the most common hazardous materials found in Oregon buildings constructed before 2004. At Northwest Hazmat, we provide certified asbestos testing services in Eugene and throughout Lane County. Our in-house <Link href="/services/lab-services" className="text-blue-600 hover:underline">environmental lab</Link> performs both PLM and TEM analysis, delivering fast, accurate results without the delays of sending samples out of state. Whether you need testing for a renovation project, real estate transaction, or suspected asbestos exposure, our licensed inspectors and lab technicians ensure you get reliable data to make informed decisions. If asbestos is confirmed, our <Link href="/services/hazmat-services" className="text-blue-600 hover:underline">hazmat services team</Link> can handle safe abatement and disposal.
@@ -338,16 +338,18 @@ export const services = [
   },
   {
     id: "biohazard-cleanup",
-    title: "Biohazard Cleanup",
+    title: "Biohazard & Crime Scene Cleanup",
     slug: "biohazard-cleanup",
     img: "/img/Cleanup.jpg",
-    shortDescription: "Safe and thorough biohazard cleanup to remove health risks and contamination.",
+    metaTitle: "Biohazard & Crime Scene Cleanup Eugene | Lane County, Oregon",
+    metaDescription: "Discreet biohazard, crime scene, trauma, and unattended death cleanup in Eugene-Springfield and Lane County, Oregon. 24/7 response. Call 541-988-9823.",
+    shortDescription: "Safe and thorough biohazard and crime scene cleanup in Lane County to remove health risks and contamination.",
     description: (
       <>
         Biohazard incidents require a fast, discreet, and professional response. At Northwest Hazmat, we are trained to manage high-risk situations such as trauma scenes, unattended deaths, infectious waste, and hoarding conditions. We remove hazardous materials, decontaminate affected areas, and restore sites to a safe and livable condition. Our teams are compassionate, efficient, and fully equipped to handle even the most extreme cases with dignity and care. All technicians are trained in <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER protocols</Link> and emergency response procedures.
       </>
     ),
-    keywords: ["biohazard cleanup Oregon", "crime scene cleaning", "trauma cleanup"],
+    keywords: ["biohazard cleanup lane county", "crime scene cleanup eugene", "biohazard cleanup eugene oregon", "trauma cleanup oregon", "unattended death cleanup eugene", "crime scene cleaning oregon"],
     eButton: true,
     callToAction: "In a crisis? Contact Northwest Hazmat immediately.",
     pageInfo: [
@@ -391,10 +393,12 @@ export const services = [
   },
   {
     id: "waste-management-consulting",
-    title: "Waste Management & Consulting",
+    title: "Hazardous Waste Disposal & Consulting",
     slug: "waste-management-consulting",
     img: "/img/Managment-Services.jpg",
-    shortDescription: "Expert hazardous waste consultants providing project management and safety solutions.",
+    metaTitle: "Hazardous Waste Disposal Eugene Oregon | Lane County",
+    metaDescription: "Licensed hazardous waste disposal, transportation, and consulting in Eugene-Springfield and Lane County, Oregon. EPA/DOT compliant. Call 541-988-9823.",
+    shortDescription: "Expert hazardous waste disposal and consulting in Eugene, Oregon — project management, transport, and compliance solutions.",
     description: (
       <>
         Hazardous waste disposal is highly regulated and logistically complex. Northwest Hazmat offers professional waste management solutions that help clients navigate compliance and reduce risk. Our hazardous waste consultants evaluate your waste streams, recommend best practices, and handle transportation and disposal with complete documentation. As experienced hazardous waste consultants, our team is designed to improve operational safety, reduce environmental liability, and ensure all protocols meet local, state, and federal requirements. Our hazardous waste consultants include certified experts trained in <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER standards</Link> and emergency response.

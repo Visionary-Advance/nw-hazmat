@@ -11,7 +11,7 @@ import EmploymentSection from "@/Components/EmploymentSection";
 export const metadata = {
   title: "NorthWest HazMat | Hazmat Services Eugene Oregon",
   description: "Oregon's trusted hazmat & environmental services since 2000. Emergency response, mold remediation, asbestos testing & more in Eugene. Call 541-988-9823.",
-  keywords: "northwest hazmat, hazmat services eugene, hazmat services oregon, mold remediation eugene, asbestos testing eugene, environmental services lane county",
+  keywords: "northwest hazmat, nw hazmat eugene, nw hazmat, hazmat services eugene, hazmat services oregon, mold remediation eugene, asbestos testing eugene, environmental services lane county",
   openGraph: {
     title: "NorthWest HazMat | Hazmat Services Eugene Oregon",
     description: "Oregon's trusted hazmat & environmental services since 2000. Emergency response, mold remediation, asbestos testing & more in Eugene.",
@@ -60,8 +60,8 @@ export default function Home() {
 
           </h1>
           <p className="w-11/12 lg:w-7/12 text-lg lg:text-xl pt-5 poppins">
-            NorthWest HazMat is a trusted full-service provider across Oregon and Washington. We offer expert services including hazardous materials handling and disposal, asbestos testing and analysis, soil restoration, biohazard cleanup, waste management consulting,
- and more. Committed to safety, compliance, and sustainable results, we protect communities and businesses throughout the Pacific Northwest.
+            NorthWest HazMat (NW HazMat) is a trusted full-service provider based in Eugene, Oregon, serving Lane County and the Pacific Northwest. We offer expert services including hazardous materials handling and disposal, asbestos testing and analysis, soil restoration, biohazard cleanup, waste management consulting,
+ and more. Committed to safety, compliance, and sustainable results, we protect communities and businesses throughout Oregon and Washington.
           </p>
 
           <div className="flex justify-center lg:justify-normal space-x-2 mt-auto pt-6">

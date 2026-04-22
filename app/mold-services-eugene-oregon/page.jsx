@@ -1,6 +1,30 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import FAQ from '@/Components/FAQ';
+
+const moldCostFaqs = [
+  {
+    question: "How much does mold remediation cost in Eugene, Oregon?",
+    answer: "Mold remediation in Eugene typically ranges from $500 for small isolated patches to $6,000+ for whole-home contamination. Most Lane County homes fall between $1,500 and $3,500. The exact cost depends on the affected square footage, mold type (black mold/Stachybotrys is more involved), the moisture source, and whether containment, HVAC cleaning, or drywall replacement is required. We offer free inspections and itemized estimates — call 541-988-9823.",
+  },
+  {
+    question: "What factors affect mold remediation pricing in Oregon?",
+    answer: "The biggest cost drivers are the size of the contaminated area, the type of mold present, accessibility (basement/crawlspace work costs more), how much moisture-damaged material must be removed, and whether you need post-remediation testing. Insurance coverage and the source of the moisture (a one-time leak vs. ongoing humidity) also affect total cost.",
+  },
+  {
+    question: "Does homeowners insurance cover mold remediation in Oregon?",
+    answer: "Sometimes. Most Oregon homeowners policies cover mold only when it results from a covered peril — for example, a sudden burst pipe. Mold caused by long-term humidity, deferred maintenance, or flooding is typically excluded. We work directly with major insurers and can help document your claim.",
+  },
+  {
+    question: "Is a free mold inspection really free?",
+    answer: "Yes. Our initial visual mold inspection in Eugene-Springfield and Lane County is free. If lab testing (air quality or surface samples) is required to identify the species or confirm clearance, that is quoted separately before we proceed.",
+  },
+  {
+    question: "How long does mold remediation take?",
+    answer: "Most residential mold remediation projects in Lane County take 1 to 5 days. Small isolated jobs can finish in a single day; whole-home or black mold projects with extensive containment and material removal can run a week or longer.",
+  },
+];
 
 export const metadata = {
   title: "Mold Remediation Eugene Oregon | Professional Mold Removal Services",
@@ -346,6 +370,22 @@ export default function MoldRemediationLanding() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Cost & FAQ Section */}
+        <section className="py-20 bg-white">
+          <div className="w-11/12 lg:max-w-5xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl lg:text-6xl fjalla-one text-gray-900 mb-4">
+                Mold Remediation Cost in Oregon
+              </h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Pricing varies by project — here are honest answers to the
+                questions Eugene-Springfield homeowners ask most.
+              </p>
+            </div>
+            <FAQ faqData={moldCostFaqs} title="Mold Remediation Pricing FAQ" />
           </div>
         </section>
 

@@ -2,9 +2,9 @@ import Breadcrumbs from "@/Components/BreadCrumbs";
 import TrainingList from "@/Components/TrainingList";
 
 export const metadata = {
-  title: "Hazmat & Safety Training Oregon | HAZWOPER, Confined Space, Emergency Response",
-  description: "Professional hazmat training in Oregon: HAZWOPER 40-hour certification, confined space entry, spill response, first responder training, and hazmat technician courses. OSHA-compliant safety training.",
-  keywords: "hazmat training oregon, HAZWOPER certification, confined space training, emergency response training, hazmat emergency response training, spill response course, first responder training, hazmat first responder training, hazmat technician, safety training eugene",
+  title: "OSHA Hazmat Training Eugene & Lane County Oregon | HAZWOPER, Confined Space",
+  description: "OSHA-compliant hazmat training in Eugene, Springfield, and Lane County, Oregon: HAZWOPER 40-hour certification, confined space entry, spill response, first responder, and hazmat technician courses.",
+  keywords: "osha hazmat training lane county, hazwoper training eugene oregon, hazmat training oregon, HAZWOPER certification, confined space training, emergency response training, hazmat emergency response training, spill response course, first responder training, hazmat technician, safety training eugene",
   alternates: {
     canonical: "https://nwhazmat.com/training",
   },
@@ -39,9 +39,9 @@ export default function Training() {
         <div className="text-black w-10/12 mx-auto py-14 text-5xl fjalla-one">
           <h1 className="text-6xl lg:text-8xl mb-4">Our Training Courses</h1>
           <p className="text-xl lg:text-2xl font-normal text-black">
-            Comprehensive OSHA-compliant hazmat and safety training for Oregon
-            businesses and emergency responders. From foundational awareness to
-            advanced technician certification.
+            Comprehensive OSHA-compliant hazmat and safety training for Lane
+            County, Eugene-Springfield, and businesses across Oregon. From
+            foundational awareness to advanced technician certification.
           </p>
         </div>
         <TrainingList />

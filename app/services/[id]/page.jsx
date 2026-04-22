@@ -15,8 +15,8 @@ export function generateStaticParams() {
 
 // Generate SEO-optimized metadata for each service page
 export async function generateMetadata({ params }) {
-  const id = params?.id;
-  
+  const { id } = await params;
+
   if (!id) {
     return {
       title: 'Service Not Found | NorthWest HazMat',
@@ -121,8 +121,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function ServicePage({ params }) {
-  const id = params?.id;
+export default async function ServicePage({ params }) {
+  const { id } = await params;
 
   if (!id) {
     return notFound();
