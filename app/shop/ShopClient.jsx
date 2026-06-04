@@ -4,12 +4,19 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Breadcrumbs from "@/Components/BreadCrumbs";
 import UpdatedATCButton from "@/Components/UpdatedATCButton";
+import CallToInquireButton from "@/Components/CallToInquireButton";
 import CartButton from "@/Components/CartButton";
 import CartSidebar from "@/Components/CartSidebar";
 import { CartProvider } from "@/Components/CartContext";
 import { ProductSkeletonGrid } from "@/Components/ProductSkeleton";
 import { useProducts } from "@/hooks/useProducts";
 import ProductLink, { createProductSlug } from "@/Components/ProductLink";
+
+function isInquireOnly(product) {
+  const flag = product?.metadata?.inquireOnly;
+  if (typeof flag === 'string') return flag.toLowerCase() === 'true';
+  return flag === true;
+}
 
 export default function ShopClient({ initialProducts = [] }) {
   const { products, loading, getProductsByCategory } = useProducts(initialProducts);
@@ -138,25 +145,9 @@ export default function ShopClient({ initialProducts = [] }) {
                     </ProductLink>
 
                     {/* Description - Now clickable */}
-                    <ProductLink product={item} className="text-sm mt-2 flex-grow overflow-hidden block">
-                      <p className="line-clamp-3 group-hover:text-gray-600 transition-colors">{item.description}</p>
+                    <ProductLink product={item} className="text-sm mt-2 flex-grow min-h-0 block">
+                      <p className="line-clamp-2 group-hover:text-gray-600 transition-colors">{item.description}</p>
                     </ProductLink>
-
-                    {/* Price + Button */}
-                    <div className="flex justify-between items-center mt-4">
-                      <div>
-                        <p className="font-bold text-2xl">
-                          ${item.price.toFixed(2)}
-                        </p>
-                        {item.currency && item.currency !== 'usd' && (
-                          <p className="text-xs text-gray-500 uppercase">{item.currency}</p>
-                        )}
-                      </div>
-                      <UpdatedATCButton
-                        product={item}
-                        disabled={!item.inStock}
-                      />
-                    </div>
 
                     {/* SEO-friendly link overlay for better accessibility */}
                     <ProductLink
@@ -165,20 +156,31 @@ export default function ShopClient({ initialProducts = [] }) {
                       aria-label={`View ${item.name} details`}
                     />
 
-                    {/* Bring Add to Cart button to front */}
-                    <div className="absolute bottom-3 right-3 z-10">
-                      <UpdatedATCButton
-                        product={item}
-                        disabled={!item.inStock}
-                      />
-                    </div>
-
-                    {/* Inventory Count (if available) */}
-                    {item.inventory !== null && item.inventory < 10 && item.inStock && (
-                      <div className="text-xs text-orange-600 mt-1 text-center relative z-10">
-                        Only {item.inventory} left in stock
+                    {/* Price + Full-width Button */}
+                    <div className="relative z-10 mt-4 space-y-2">
+                      <div className="flex items-baseline gap-2">
+                        <p className="font-bold text-2xl">
+                          ${item.price.toFixed(2)}
+                        </p>
+                        {item.currency && item.currency !== 'usd' && (
+                          <p className="text-xs text-gray-500 uppercase">{item.currency}</p>
+                        )}
                       </div>
-                    )}
+                      {isInquireOnly(item) ? (
+                        <CallToInquireButton width="w-full" />
+                      ) : (
+                        <UpdatedATCButton
+                          product={item}
+                          disabled={!item.inStock}
+                          width="w-full"
+                        />
+                      )}
+                      {item.inventory !== null && item.inventory < 10 && item.inStock && (
+                        <div className="text-xs text-orange-600 text-center">
+                          Only {item.inventory} left in stock
+                        </div>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>

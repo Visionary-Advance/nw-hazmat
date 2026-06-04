@@ -1,3 +1,5 @@
+import { withSentryConfig } from '@sentry/nextjs';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
@@ -212,4 +214,17 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+// Wrap with Sentry so production builds upload source maps (readable stack traces)
+// and instrument server errors. Source-map upload only runs when SENTRY_AUTH_TOKEN
+// is present, so local/dev builds without it are unaffected.
+export default withSentryConfig(nextConfig, {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: !process.env.CI,
+  widenClientFileUpload: true,
+  // Route Sentry's browser requests through your domain to dodge ad-blockers.
+  tunnelRoute: '/monitoring',
+  // Tree-shake Sentry's debug logging out of the production bundle.
+  webpack: { treeshake: { removeDebugLogging: true } },
+});

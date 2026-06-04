@@ -79,11 +79,16 @@ export async function generateMetadata({ params }) {
 export default async function ProductPage({ params }) {
   try {
     const { slug } = await params;
-    const product = await getProductBySlug(slug);
+    const allProducts = await getAllProducts();
+    const product = allProducts.find((p) => p.slug === slug);
 
     if (!product) {
       notFound();
     }
+
+    const relatedProducts = allProducts
+      .filter((p) => p.id !== product.id && p.category === product.category && p.inStock)
+      .slice(0, 4);
 
     // Server-side structured data for reliable SEO
     const structuredData = {
@@ -91,7 +96,7 @@ export default async function ProductPage({ params }) {
       "@type": "Product",
       "name": product.name,
       "description": product.description,
-      "image": product.image,
+      "image": product.images?.length ? product.images : product.image,
       "sku": product.id,
       "category": product.category,
       "offers": {
@@ -111,13 +116,37 @@ export default async function ProductPage({ params }) {
       }
     };
 
+    if (product.reviewsRating != null && product.reviewsCount != null) {
+      structuredData.aggregateRating = {
+        "@type": "AggregateRating",
+        "ratingValue": Number(product.reviewsRating).toFixed(1),
+        "reviewCount": product.reviewsCount,
+        "bestRating": 5,
+        "worstRating": 1,
+      };
+    }
+
+    if (Array.isArray(product.reviews) && product.reviews.length > 0) {
+      structuredData.review = product.reviews.map((r) => ({
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": r.rating ?? product.reviewsRating ?? 5,
+          "bestRating": 5,
+        },
+        "author": { "@type": "Person", "name": r.author || "Verified Buyer" },
+        "datePublished": r.date,
+        "reviewBody": r.text,
+      }));
+    }
+
     return (
       <>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <ProductPageClient product={product} />
+        <ProductPageClient product={product} relatedProducts={relatedProducts} />
       </>
     );
   } catch (error) {

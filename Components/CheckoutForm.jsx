@@ -15,13 +15,16 @@ export default function CheckoutForm({ onSuccess }) {
   const [canMakePayment, setCanMakePayment] = useState(false);
   const [shippingCost, setShippingCost] = useState(0);
   const [isCalculatingShipping, setIsCalculatingShipping] = useState(false);
-  const [stripeShippingRates, setStripeShippingRates] = useState([]);
+  const [shippingRates, setShippingRates] = useState([]);
   const [selectedShippingRate, setSelectedShippingRate] = useState(null);
-  const [useStripeRates, setUseStripeRates] = useState(true); // Toggle between Stripe rates and calculated shipping
+  const [shippingSource, setShippingSource] = useState(null); // 'ups' | 'flat_tier_fallback' | 'flat_tier_freight'
+  const [addressValidation, setAddressValidation] = useState(null);
+  const [isValidatingAddress, setIsValidatingAddress] = useState(false);
   const [customerInfo, setCustomerInfo] = useState({
     firstName: '',
     lastName: '',
     email: '',
+    phone: '',
     company: '',
     address: '',
     apartment: '',
@@ -30,80 +33,71 @@ export default function CheckoutForm({ onSuccess }) {
     zipCode: ''
   });
 
-  // Fetch Stripe shipping rates
-  const fetchStripeShippingRates = async (address) => {
+  // Fetch live UPS rates (with server-side flat-tier fallback baked into the route)
+  const fetchUpsRates = async (address) => {
+    if (!address?.city || !address?.state || !address?.zipCode) return 0;
     setIsCalculatingShipping(true);
     try {
-      const response = await fetch('/api/shipping/rates', {
+      const response = await fetch('/api/shipping/ups', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          items: cartItems,
-          shippingAddress: address
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cartItems, shippingAddress: address }),
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.success && data.rates.length > 0) {
-          setStripeShippingRates(data.rates);
-          // Auto-select first (cheapest) rate
-          const firstRate = data.rates[0];
-          setSelectedShippingRate(firstRate);
-          setShippingCost(firstRate.amount);
-          return firstRate.amount;
-        } else {
-          // Fallback to calculated shipping if no Stripe rates available
-          return await calculateShipping(address);
-        }
-      } else {
-        return await calculateShipping(address);
+      const data = await response.json();
+      if (response.ok && data.success && data.rates?.length > 0) {
+        setShippingRates(data.rates);
+        setShippingSource(data.source || null);
+        const first = data.rates[0];
+        setSelectedShippingRate(first);
+        setShippingCost(first.amount);
+        return first.amount;
       }
+      setShippingRates([]);
+      setShippingSource(null);
+      return 0;
     } catch (error) {
-      console.error('Stripe shipping rates error:', error);
-      return await calculateShipping(address);
+      console.error('UPS rate fetch failed:', error);
+      return 0;
     } finally {
       setIsCalculatingShipping(false);
     }
   };
 
-  // Calculate shipping cost (fallback method)
+  // Kept for Apple/Google Pay shippingaddresschange callback — returns a number.
   const calculateShipping = async (address) => {
     if (!address.city || !address.state || !address.zipCode) {
-      setShippingCost(15); // Default shipping
-      return 15;
-    }
-
-    setIsCalculatingShipping(true);
-    try {
-      const response = await fetch('/api/shipping/calculate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          items: cartItems,
-          shippingAddress: address
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        const cost = data.shippingCost || 15;
-        setShippingCost(cost);
-        return cost;
-      } else {
-        setShippingCost(15);
-        return 15;
-      }
-    } catch (error) {
-      console.error('Shipping calculation error:', error);
       setShippingCost(15);
       return 15;
+    }
+    const rate = await fetchUpsRates(address);
+    return rate || 15;
+  };
+
+  // UPS street-level address validation
+  const validateShippingAddress = async (address) => {
+    if (!address.address || !address.city || !address.state || !address.zipCode) {
+      setAddressValidation(null);
+      return;
+    }
+    setIsValidatingAddress(true);
+    try {
+      const res = await fetch('/api/shipping/validate-address', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          street: address.address,
+          city: address.city,
+          state: address.state,
+          zipCode: address.zipCode,
+        }),
+      });
+      const data = await res.json();
+      setAddressValidation(data?.success ? data : null);
+    } catch (err) {
+      console.error('Address validation failed:', err);
+      setAddressValidation(null);
     } finally {
-      setIsCalculatingShipping(false);
+      setIsValidatingAddress(false);
     }
   };
 
@@ -481,32 +475,57 @@ export default function CheckoutForm({ onSuccess }) {
     });
   }, [cartItems, shippingCost]);
 
-  // Update shipping when address changes for regular checkout
+  // Update UPS rates + run address validation when address changes
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
-      if (useStripeRates) {
-        fetchStripeShippingRates(customerInfo);
-      } else {
-        calculateShipping(customerInfo);
-      }
+      fetchUpsRates(customerInfo);
+      validateShippingAddress(customerInfo);
     }, 500);
 
     return () => clearTimeout(debounceTimer);
-  }, [customerInfo.city, customerInfo.state, customerInfo.zipCode, useStripeRates]);
+  }, [customerInfo.address, customerInfo.city, customerInfo.state, customerInfo.zipCode]);
 
  
 
+  const validateCustomerInfo = () => {
+    const required = [
+      ['firstName', 'First name'],
+      ['lastName', 'Last name'],
+      ['email', 'Email'],
+      ['phone', 'Phone number'],
+      ['address', 'Address'],
+      ['city', 'City'],
+      ['state', 'State'],
+      ['zipCode', 'ZIP code'],
+    ];
+    for (const [key, label] of required) {
+      if (!customerInfo[key] || !String(customerInfo[key]).trim()) {
+        return `${label} is required`;
+      }
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerInfo.email)) {
+      return 'Please enter a valid email address';
+    }
+    return null;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     if (!stripe || !elements) return;
-    
+
+    const validationError = validateCustomerInfo();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setProcessing(true);
     setError('');
 
     try {
       const total = getTotalWithShipping();
-      
+
       const response = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: {
@@ -560,26 +579,37 @@ export default function CheckoutForm({ onSuccess }) {
       if (paymentError) {
         setError(paymentError.message);
       } else if (paymentIntent.status === 'succeeded') {
-        // Create order record
-        const orderResponse = await fetch('/api/orders', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            customerInfo,
-            items: cartItems,
-            subtotal: getCartTotal(),
-            shippingCost: shippingCost,
-            total: total,
-            paymentIntentId: paymentIntent.id,
-            paymentMethod: 'card',
-            paymentStatus: paymentIntent.status,
-          }),
-        });
+        // Payment is already captured at this point. Order persistence is best-effort
+        // — never block the success UX or block the user behind a 4xx from /api/orders.
+        try {
+          const orderResponse = await fetch('/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              customerInfo,
+              items: cartItems,
+              subtotal: getCartTotal(),
+              shippingCost: shippingCost,
+              total: total,
+              paymentIntentId: paymentIntent.id,
+              paymentMethod: 'card',
+              paymentStatus: paymentIntent.status,
+            }),
+          });
 
-        if (orderResponse.ok) {
-          console.log('Order created successfully');
+          if (!orderResponse.ok) {
+            const errBody = await orderResponse.json().catch(() => ({}));
+            // Loud log so we can reconcile from Stripe Dashboard using the paymentIntentId.
+            console.error(
+              `[ORDER PERSIST FAILED] paymentIntent=${paymentIntent.id} status=${orderResponse.status}`,
+              errBody
+            );
+          }
+        } catch (orderErr) {
+          console.error(
+            `[ORDER PERSIST FAILED] paymentIntent=${paymentIntent.id} (network)`,
+            orderErr
+          );
         }
 
         clearCart();
@@ -662,7 +692,9 @@ export default function CheckoutForm({ onSuccess }) {
         <div className="space-y-4">
           <h3 className="text-xl font-semibold">Delivery</h3>
           
-          <select 
+          <select
+            name="country"
+            autoComplete="country-name"
             className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             defaultValue="United States"
           >
@@ -672,6 +704,8 @@ export default function CheckoutForm({ onSuccess }) {
           <div className="grid grid-cols-2 gap-4">
             <input
               type="text"
+              name="given-name"
+              autoComplete="given-name"
               placeholder="First Name"
               value={customerInfo.firstName}
               onChange={(e) => handleInputChange('firstName', e.target.value)}
@@ -680,6 +714,8 @@ export default function CheckoutForm({ onSuccess }) {
             />
             <input
               type="text"
+              name="family-name"
+              autoComplete="family-name"
               placeholder="Last Name"
               value={customerInfo.lastName}
               onChange={(e) => handleInputChange('lastName', e.target.value)}
@@ -690,6 +726,8 @@ export default function CheckoutForm({ onSuccess }) {
 
           <input
             type="text"
+            name="organization"
+            autoComplete="organization"
             placeholder="Company (Required for business addresses)"
             value={customerInfo.company}
             onChange={(e) => handleInputChange('company', e.target.value)}
@@ -698,6 +736,8 @@ export default function CheckoutForm({ onSuccess }) {
 
           <input
             type="text"
+            name="address-line1"
+            autoComplete="address-line1"
             placeholder="Address"
             value={customerInfo.address}
             onChange={(e) => handleInputChange('address', e.target.value)}
@@ -707,6 +747,8 @@ export default function CheckoutForm({ onSuccess }) {
 
           <input
             type="text"
+            name="address-line2"
+            autoComplete="address-line2"
             placeholder="Apartment, suite, etc. (optional)"
             value={customerInfo.apartment}
             onChange={(e) => handleInputChange('apartment', e.target.value)}
@@ -716,6 +758,8 @@ export default function CheckoutForm({ onSuccess }) {
           <div className="grid grid-cols-3 gap-4">
             <input
               type="text"
+              name="address-level2"
+              autoComplete="address-level2"
               placeholder="City"
               value={customerInfo.city}
               onChange={(e) => handleInputChange('city', e.target.value)}
@@ -723,18 +767,69 @@ export default function CheckoutForm({ onSuccess }) {
               required
             />
             <select
+              name="address-level1"
+              autoComplete="address-level1"
               value={customerInfo.state}
               onChange={(e) => handleInputChange('state', e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="Oregon">Oregon</option>
-              <option value="Washington">Washington</option>
+              <option value="Alabama">Alabama</option>
+              <option value="Alaska">Alaska</option>
+              <option value="Arizona">Arizona</option>
+              <option value="Arkansas">Arkansas</option>
               <option value="California">California</option>
+              <option value="Colorado">Colorado</option>
+              <option value="Connecticut">Connecticut</option>
+              <option value="Delaware">Delaware</option>
+              <option value="District of Columbia">District of Columbia</option>
+              <option value="Florida">Florida</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Hawaii">Hawaii</option>
               <option value="Idaho">Idaho</option>
+              <option value="Illinois">Illinois</option>
+              <option value="Indiana">Indiana</option>
+              <option value="Iowa">Iowa</option>
+              <option value="Kansas">Kansas</option>
+              <option value="Kentucky">Kentucky</option>
+              <option value="Louisiana">Louisiana</option>
+              <option value="Maine">Maine</option>
+              <option value="Maryland">Maryland</option>
+              <option value="Massachusetts">Massachusetts</option>
+              <option value="Michigan">Michigan</option>
+              <option value="Minnesota">Minnesota</option>
+              <option value="Mississippi">Mississippi</option>
+              <option value="Missouri">Missouri</option>
+              <option value="Montana">Montana</option>
+              <option value="Nebraska">Nebraska</option>
               <option value="Nevada">Nevada</option>
+              <option value="New Hampshire">New Hampshire</option>
+              <option value="New Jersey">New Jersey</option>
+              <option value="New Mexico">New Mexico</option>
+              <option value="New York">New York</option>
+              <option value="North Carolina">North Carolina</option>
+              <option value="North Dakota">North Dakota</option>
+              <option value="Ohio">Ohio</option>
+              <option value="Oklahoma">Oklahoma</option>
+              <option value="Oregon">Oregon</option>
+              <option value="Pennsylvania">Pennsylvania</option>
+              <option value="Rhode Island">Rhode Island</option>
+              <option value="South Carolina">South Carolina</option>
+              <option value="South Dakota">South Dakota</option>
+              <option value="Tennessee">Tennessee</option>
+              <option value="Texas">Texas</option>
+              <option value="Utah">Utah</option>
+              <option value="Vermont">Vermont</option>
+              <option value="Virginia">Virginia</option>
+              <option value="Washington">Washington</option>
+              <option value="West Virginia">West Virginia</option>
+              <option value="Wisconsin">Wisconsin</option>
+              <option value="Wyoming">Wyoming</option>
             </select>
             <input
               type="text"
+              name="postal-code"
+              autoComplete="postal-code"
+              inputMode="numeric"
               placeholder="Zip Code"
               value={customerInfo.zipCode}
               onChange={(e) => handleInputChange('zipCode', e.target.value)}
@@ -745,20 +840,75 @@ export default function CheckoutForm({ onSuccess }) {
 
           <input
             type="email"
+            name="email"
+            autoComplete="email"
             placeholder="Email"
             value={customerInfo.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
             className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+
+          <input
+            type="tel"
+            name="phone"
+            autoComplete="tel"
+            inputMode="tel"
+            placeholder="Phone Number"
+            value={customerInfo.phone}
+            onChange={(e) => handleInputChange('phone', e.target.value)}
+            className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
         </div>
 
-        {/* Shipping Options - Only show if Stripe rates are available */}
-        {useStripeRates && stripeShippingRates.length > 0 && (
+        {/* Address validation feedback */}
+        {addressValidation && !isValidatingAddress && (
+          <div className="text-sm">
+            {addressValidation.valid ? (
+              <div className="text-green-700 bg-green-50 border border-green-200 rounded p-2">
+                Address verified by UPS{addressValidation.classification && addressValidation.classification !== 'unknown' ? ` (${addressValidation.classification})` : ''}.
+              </div>
+            ) : addressValidation.suggestions?.length > 0 ? (
+              <div className="text-amber-700 bg-amber-50 border border-amber-200 rounded p-2">
+                <div className="font-semibold mb-1">Did you mean:</div>
+                {addressValidation.suggestions.slice(0, 3).map((s, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    className="block text-left underline hover:text-amber-900"
+                    onClick={() => {
+                      setCustomerInfo(prev => ({
+                        ...prev,
+                        address: s.street || prev.address,
+                        city: s.city || prev.city,
+                        zipCode: s.zipCode || prev.zipCode,
+                      }));
+                    }}
+                  >
+                    {s.street}, {s.city}, {s.state} {s.zipCode}
+                  </button>
+                ))}
+              </div>
+            ) : addressValidation.reason === 'no_candidates' ? (
+              <div className="text-red-700 bg-red-50 border border-red-200 rounded p-2">
+                UPS could not verify this address. Please double-check.
+              </div>
+            ) : null}
+          </div>
+        )}
+
+        {/* Shipping Options */}
+        {shippingRates.length > 0 && (
           <div className="space-y-4">
             <h3 className="text-xl font-semibold">Shipping Method</h3>
+            {shippingSource === 'flat_tier_fallback' && (
+              <div className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded p-2">
+                Live carrier rates are temporarily unavailable — showing standard rate.
+              </div>
+            )}
             <div className="space-y-2">
-              {stripeShippingRates.map(rate => (
+              {shippingRates.map(rate => (
                 <label
                   key={rate.id}
                   className={`flex items-center justify-between p-4 border rounded-md cursor-pointer transition-colors ${
@@ -780,14 +930,10 @@ export default function CheckoutForm({ onSuccess }) {
                     />
                     <div>
                       <div className="font-semibold">{rate.displayName}</div>
-                      {rate.deliveryEstimate && (
+                      {rate.transitDays && (
                         <div className="text-sm text-gray-600">
-                          {rate.deliveryEstimate.minimum}-{rate.deliveryEstimate.maximum}{' '}
-                          {rate.deliveryEstimate.unit === 'business_day' ? 'business days' : 'days'}
+                          ~{rate.transitDays} business day{rate.transitDays === 1 ? '' : 's'} in transit
                         </div>
-                      )}
-                      {rate.description && (
-                        <div className="text-sm text-gray-500">{rate.description}</div>
                       )}
                     </div>
                   </div>
