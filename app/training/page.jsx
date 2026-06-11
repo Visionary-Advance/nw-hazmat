@@ -2,8 +2,8 @@ import Breadcrumbs from "@/Components/BreadCrumbs";
 import TrainingList from "@/Components/TrainingList";
 
 export const metadata = {
-  title: "OSHA Hazmat Training Eugene & Lane County Oregon | HAZWOPER, Confined Space",
-  description: "OSHA-compliant hazmat training in Eugene, Springfield, and Lane County, Oregon: HAZWOPER 40-hour certification, confined space entry, spill response, first responder, and hazmat technician courses.",
+  title: "OSHA Hazmat Training Eugene & Lane County, Oregon",
+  description: "OSHA-compliant hazmat training in Eugene & Lane County, Oregon: HAZWOPER 40-hour, confined space entry, spill response, and hazmat technician courses.",
   keywords: "osha hazmat training lane county, hazwoper training eugene oregon, hazmat training oregon, HAZWOPER certification, confined space training, emergency response training, hazmat emergency response training, spill response course, first responder training, hazmat technician, safety training eugene",
   alternates: {
     canonical: "https://nwhazmat.com/training",

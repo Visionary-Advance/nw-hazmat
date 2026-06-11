@@ -153,7 +153,7 @@ export const services = [
     shortDescription: "Professional mold removal to prevent health risks, improve air quality, and protect property.",
     description: (
       <>
-        Mold is a health hazard and a sign of deeper moisture issues that can damage structures and air quality. At Northwest Hazmat, we offer expert mold remediation for residential, commercial, and institutional properties throughout Oregon. Our certified specialists locate the source, contain the spread, and remove mold completely using industry-best practices. With advanced tools and attention to detail, we ensure your space is safe, clean, and protected from future growth. All our work begins with comprehensive <Link href="/services/lab-services" className="text-blue-600 hover:underline">lab testing and analysis</Link> to identify the extent of contamination.
+        Mold is a health hazard and a sign of deeper moisture issues that can damage structures and air quality. At Northwest Hazmat, we offer expert mold remediation for residential, commercial, and institutional properties throughout Oregon. Our certified specialists locate the source, contain the spread, and remove mold completely using industry-best practices. With advanced tools and attention to detail, we ensure your space is safe, clean, and protected from future growth. All our work begins with comprehensive <Link href="/services/lab-services" className="text-blue-600 hover:underline">lab testing and analysis</Link> to identify the extent of contamination. Learn more about our <Link href="/mold-services-eugene-oregon" className="text-blue-600 hover:underline">mold remediation services in Eugene-Springfield</Link>, or get help fast with <Link href="/emergency-mold-removal-eugene-oregon" className="text-blue-600 hover:underline">24/7 emergency black mold removal</Link>.
       </>
     ),
     keywords: ["mold remediation Oregon", "black mold removal"],
@@ -253,7 +253,7 @@ export const services = [
     slug: "asbestos-testing",
     img: "/img/Lab-Testing.jpg",
     metaTitle: "Asbestos Testing & Removal Eugene Oregon | Lane County",
-    metaDescription: "Certified asbestos testing and removal in Eugene, Oregon. PLM & TEM lab analysis, safe abatement, chain-of-custody. Serving Lane County since 2000. Call 541-988-9823.",
+    metaDescription: "Certified asbestos testing & removal in Eugene, Oregon. PLM & TEM lab analysis, safe abatement, and chain-of-custody. Serving Lane County since 2000.",
     shortDescription: "Certified asbestos testing and removal services in Eugene, Oregon with fast lab results, safe abatement, and full chain-of-custody documentation.",
     keywords: ["asbestos removal eugene oregon", "asbestos testing eugene oregon", "asbestos abatement eugene", "asbestos testing eugene", "asbestos removal lane county", "asbestos inspection oregon", "asbestos analysis", "PLM asbestos testing", "TEM asbestos testing"],
     description: (
@@ -450,6 +450,8 @@ export const services = [
     title: "Dedication Services",
     slug: "dedication-services",
     img: "/img/Dedication-Services.jpg",
+    metaTitle: "Dedication & Ceremonial Space Cleaning | Eugene, Oregon",
+    metaDescription: "Professional cleaning and restoration for dedication and ceremonial spaces in Eugene & Lane County, Oregon — memorials, worship sites, and more. Call 541-988-9823.",
     shortDescription: "Committed to delivering safe, high-quality solutions for every project.",
     description: (
       <>

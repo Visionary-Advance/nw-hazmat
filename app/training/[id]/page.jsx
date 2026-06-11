@@ -33,8 +33,13 @@ export async function generateMetadata({ params }) {
   }
 
   const title = `${trainings.title} | NorthWest HazMat Oregon`;
-  const description = trainings.description || 
-    `Professional ${trainings.title.toLowerCase()} in Oregon. Expert hazmat training services in Eugene, Springfield, and Lane County. Call 541-988-9823.`;
+  // Note: trainings.description is JSX, so we use the plain-text shortDescription for metadata.
+  const baseDescription = trainings.shortDescription
+    ? `${trainings.shortDescription} OSHA-compliant training in Eugene & Lane County, Oregon. Call 541-988-9823.`
+    : `Professional ${trainings.title.toLowerCase()} in Eugene, Springfield & Lane County, Oregon. OSHA-compliant hazmat training. Call 541-988-9823.`;
+  const description = baseDescription.length > 160
+    ? baseDescription.slice(0, 157).trimEnd() + '...'
+    : baseDescription;
 
   return {
     title,
@@ -112,19 +117,21 @@ export default async function TrainingPage({ params }) {
     "@context": "https://schema.org",
     "@type": "Course",
     "name": trainings.title,
-    "description": trainings.description || `Professional ${trainings.title.toLowerCase()} training in Oregon`,
+    "description": trainings.shortDescription || `Professional ${trainings.title.toLowerCase()} training in Oregon`,
     "provider": {
       "@type": "Organization",
       "name": "NorthWest HazMat",
-      "telephone": "541-988-9823",
+      "url": "https://nwhazmat.com",
+      "telephone": "+1-541-988-9823",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Eugene",
+        "streetAddress": "36 West Q Street",
+        "addressLocality": "Springfield",
         "addressRegion": "OR",
+        "postalCode": "97477",
         "addressCountry": "US"
       }
     },
-    "courseMode": "In-person",
     "educationalLevel": "Professional",
     "teaches": [
       "Hazardous materials handling",
@@ -133,10 +140,22 @@ export default async function TrainingPage({ params }) {
       "OSHA compliance",
       "EPA regulations"
     ],
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "priceCurrency": "USD"
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "Onsite",
+      "courseWorkload": "PT8H",
+      "location": {
+        "@type": "Place",
+        "name": "NorthWest HazMat, Inc.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "36 West Q Street",
+          "addressLocality": "Springfield",
+          "addressRegion": "OR",
+          "postalCode": "97477",
+          "addressCountry": "US"
+        }
+      }
     }
   };
 

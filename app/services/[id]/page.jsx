@@ -140,7 +140,7 @@ export default async function ServicePage({ params }) {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": service.title,
-    "description": service.description,
+    "description": service.metaDescription || service.shortDescription,
     "provider": {
       "@type": "LocalBusiness",
       "name": "NorthWest HazMat, Inc.",
@@ -180,19 +180,18 @@ export default async function ServicePage({ params }) {
     "availableChannel": {
       "@type": "ServiceChannel",
       "serviceUrl": `https://nwhazmat.com/services/${service.id}`,
-      "servicePhone": "+1-541-988-9823"
-    },
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "itemCondition": "https://schema.org/NewCondition"
+      "servicePhone": {
+        "@type": "ContactPoint",
+        "telephone": "+1-541-988-9823",
+        "contactType": "customer service"
+      }
     }
   };
 
   // Emergency services get additional schema
   if (service.eButton) {
     structuredData["@type"] = "EmergencyService";
-    structuredData.availableChannel.servicePhone = "+1-800-597-1323";
+    structuredData.availableChannel.servicePhone.telephone = "+1-800-597-1323";
   }
 
   return (

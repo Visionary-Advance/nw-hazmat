@@ -52,8 +52,10 @@ export default function Footer() {
           <Link href="/about" className="hover:underline">About Us</Link>
           <Link href="/shop" className="hover:underline">Shop</Link>
           <Link href="/contact" className="hover:underline">Contact Us</Link>
-          <Link href="privacy-policy" className="hover:underline">Privacy Policy</Link>
-          <Link href="terms-and-conditions" className="hover:underline">Terms and Conditions</Link>
+          <Link href="/employment-application" className="hover:underline">Careers</Link>
+          <Link href="/chain-of-custody" className="hover:underline">Chain of Custody</Link>
+          <Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link>
+          <Link href="/terms-and-conditions" className="hover:underline">Terms and Conditions</Link>
           <Link href="/sitemap.xml" className="hover:underline">Sitemap</Link>
         </div>
         <div className='text-center lg:pt-0 pt-5 lg:text-right'>

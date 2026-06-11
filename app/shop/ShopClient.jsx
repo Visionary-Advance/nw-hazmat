@@ -56,6 +56,17 @@ export default function ShopClient({ initialProducts = [] }) {
         )}
         <Breadcrumbs />
 
+        {/* Page Heading */}
+        <header className="text-center max-w-3xl mx-auto px-4 mt-4 mb-8">
+          <h1 className="text-4xl lg:text-5xl fjalla-one font-bold mb-3">
+            Professional Hazmat Equipment &amp; Safety Supplies
+          </h1>
+          <p className="text-gray-600 text-lg">
+            Shop spill response kits, PPE, training simulators, and environmental
+            safety gear with fast nationwide shipping across the USA.
+          </p>
+        </header>
+
         {/* Category Filter */}
         {!loading && categories.length > 2 && (
           <div className="flex justify-center mb-8">

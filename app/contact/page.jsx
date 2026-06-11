@@ -2,7 +2,7 @@ import ContactClient from "./ContactClient";
 
 export const metadata = {
   title: "Contact NorthWest HazMat | 24/7 Emergency Response Eugene Oregon",
-  description: "Contact NorthWest HazMat for emergency hazmat response, mold remediation, and environmental services in Eugene, Oregon. Call 541-988-9823 or 24/7 emergency: 1-800-597-1323.",
+  description: "Contact NorthWest HazMat for hazmat response, mold remediation, and environmental services in Eugene, Oregon. Call 541-988-9823 or 24/7: 1-800-597-1323.",
   keywords: "contact hazmat eugene oregon, emergency spill response, mold remediation contact, hazmat services lane county, 24/7 emergency response",
   alternates: {
     canonical: "https://nwhazmat.com/contact",

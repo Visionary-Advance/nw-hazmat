@@ -35,7 +35,7 @@ export async function generateMetadata({ params }) {
       `Buy ${product.name} online. Professional hazmat equipment with fast nationwide shipping. Trusted by environmental professionals, first responders, and industrial teams across the USA.`;
 
     return {
-      title: `${product.name} | Professional Hazmat Equipment - Nationwide Shipping`,
+      title: `${product.name} | NorthWest HazMat`,
       description,
       keywords: `${product.name}, hazmat equipment, safety supplies, ${product.category}, professional safety gear, hazmat equipment USA, buy online`,
       openGraph: {
@@ -44,20 +44,20 @@ export async function generateMetadata({ params }) {
         url: `https://nwhazmat.com/shop/${slug}`,
         siteName: 'NorthWest HazMat, Inc.',
         type: 'website',
-        images: product.image ? [
+        images: [
           {
-            url: product.image,
+            url: product.image || 'https://nwhazmat.com/img/Hazmat-Services.jpg',
             width: 800,
             height: 600,
             alt: product.name,
           },
-        ] : [],
+        ],
       },
       twitter: {
         card: 'summary_large_image',
         title: `${product.name} | NorthWest HazMat`,
         description,
-        images: product.image ? [product.image] : [],
+        images: [product.image || 'https://nwhazmat.com/img/Hazmat-Services.jpg'],
       },
       alternates: {
         canonical: `https://nwhazmat.com/shop/${slug}`,

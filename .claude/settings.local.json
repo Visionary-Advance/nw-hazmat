@@ -48,7 +48,12 @@
       "Bash(powershell -Command \"if \\([System.Environment]::GetEnvironmentVariable\\('PEXELS_API_KEY','User'\\)\\) { 'PEXELS_API_KEY found in User env' } else { 'no PEXELS_API_KEY in User env' }\")",
       "Bash(python *)",
       "PowerShell(py *)",
-      "Bash(Get-ChildItem *)"
+      "Bash(Get-ChildItem *)",
+      "mcp__Sanity__query_documents",
+      "mcp__Sanity__edit_document",
+      "Bash(mkdir -p .image-originals)",
+      "Bash(mv public/img/_originals/* .image-originals/)",
+      "Bash(rmdir public/img/_originals)"
     ],
     "deny": [],
     "ask": []

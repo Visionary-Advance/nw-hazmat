@@ -3,12 +3,26 @@ import Breadcrumbs from '@/Components/BreadCrumbs';
 
 export const metadata = {
   title: 'Chain of Custody Form | NorthWest HazMat Oregon',
-  description: 'Download and fill out our Chain of Custody form for hazmat samples. NorthWest HazMat provides comprehensive sample tracking documentation for asbestos, mold, and lead testing in Oregon.',
+  description: 'Download our Chain of Custody form for hazmat samples. Comprehensive sample tracking for asbestos, mold, and lead testing in Oregon. Call 541-988-9823.',
   keywords: 'chain of custody, sample tracking, hazmat testing, asbestos testing, mold testing, lead testing, Oregon environmental services',
+  alternates: {
+    canonical: 'https://nwhazmat.com/chain-of-custody',
+  },
   openGraph: {
     title: 'Chain of Custody Form | NorthWest HazMat',
     description: 'Download our Chain of Custody form for hazmat sample tracking and documentation.',
+    url: 'https://nwhazmat.com/chain-of-custody',
+    siteName: 'NorthWest HazMat, Inc.',
     type: 'website',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://nwhazmat.com/img/Hazmat-Services.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'NorthWest HazMat Chain of Custody form',
+      },
+    ],
   },
 };
 

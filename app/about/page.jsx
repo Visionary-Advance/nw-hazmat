@@ -2,7 +2,7 @@ import AboutClient from "./AboutClient";
 
 export const metadata = {
   title: "About NorthWest HazMat | 25+ Years Serving Oregon Since 2000",
-  description: "Female-owned environmental company serving Lane County since 2000. Full-service hazmat response, mold remediation, and environmental management in Eugene-Springfield, Oregon.",
+  description: "Female-owned environmental company serving Lane County since 2000. Hazmat response, mold remediation & environmental management in Eugene-Springfield, OR.",
   keywords: "about northwest hazmat, female owned hazmat company, eugene oregon environmental services, lane county hazmat, hazmat company history",
   alternates: {
     canonical: "https://nwhazmat.com/about",

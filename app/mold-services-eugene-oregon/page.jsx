@@ -2,7 +2,7 @@ import MoldServicesClient from './MoldServicesClient';
 
 export const metadata = {
   title: "Mold Remediation Eugene Oregon | Professional Mold Removal Services",
-  description: "Professional mold remediation in Eugene-Springfield, Oregon. Free inspection, EPA-certified removal, moisture control & prevention. Serving Lane County since 2000. Call 541-988-9823.",
+  description: "Professional mold remediation in Eugene-Springfield, Oregon. Free inspection, EPA-certified removal & moisture control. Serving Lane County since 2000.",
   keywords: "mold remediation eugene oregon, mold removal springfield, black mold removal eugene, mold inspection lane county, professional mold services oregon",
   alternates: {
     canonical: "https://nwhazmat.com/mold-services-eugene-oregon",

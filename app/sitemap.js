@@ -18,6 +18,8 @@ export default async function sitemap() {
     { url: `${baseUrl}/emergency-mold-removal-eugene-oregon`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/employment-application`,               lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${baseUrl}/chain-of-custody`,                     lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${baseUrl}/privacy-policy`,                       lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.3 },
+    { url: `${baseUrl}/terms-and-conditions`,                 lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.3 },
   ];
 
   // Add product pages from Stripe
