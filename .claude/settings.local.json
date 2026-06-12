@@ -53,7 +53,9 @@
       "mcp__Sanity__edit_document",
       "Bash(mkdir -p .image-originals)",
       "Bash(mv public/img/_originals/* .image-originals/)",
-      "Bash(rmdir public/img/_originals)"
+      "Bash(rmdir public/img/_originals)",
+      "Bash(ls next.config.* middleware.* vercel.json)",
+      "Bash(grep -rln \"redirect\\\\|rewrite\\\\|privacy\" next.config.* middleware.* vercel.json next-sitemap.config.js)"
     ],
     "deny": [],
     "ask": []

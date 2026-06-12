@@ -165,40 +165,32 @@ const nextConfig = {
 
       // ============================================
       // Scattered privacy-policy / terms pages
+      // /privacy-policy and /terms-and-conditions are now REAL pages, so they
+      // must NOT be redirected. Old/alternate variants funnel to the real pages.
       // ============================================
       {
-        source: '/privacy-policy',
-        destination: '/',
-        permanent: true,
-      },
-      {
         source: '/terms-conditions',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/terms-and-conditions',
-        destination: '/',
+        destination: '/terms-and-conditions',
         permanent: true,
       },
       {
         source: '/:section/privacy-policy',
-        destination: '/',
+        destination: '/privacy-policy',
         permanent: true,
       },
       {
         source: '/:section/terms-and-conditions',
-        destination: '/',
+        destination: '/terms-and-conditions',
         permanent: true,
       },
       {
         source: '/:section/:sub/privacy-policy',
-        destination: '/',
+        destination: '/privacy-policy',
         permanent: true,
       },
       {
         source: '/:section/:sub/terms-and-conditions',
-        destination: '/',
+        destination: '/terms-and-conditions',
         permanent: true,
       },
 
