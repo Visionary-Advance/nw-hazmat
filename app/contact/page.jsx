@@ -1,4 +1,5 @@
 import ContactClient from "./ContactClient";
+import ReCaptchaProvider from "@/Components/ReCaptchaProvider";
 
 export const metadata = {
   title: "Contact NorthWest HazMat | 24/7 Emergency Response Eugene Oregon",
@@ -57,7 +58,9 @@ export default function Contact() {
           __html: JSON.stringify(contactStructuredData),
         }}
       />
-      <ContactClient />
+      <ReCaptchaProvider>
+        <ContactClient />
+      </ReCaptchaProvider>
     </>
   );
 }

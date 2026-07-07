@@ -14,7 +14,6 @@ export default async function sitemap() {
     { url: `${baseUrl}/services`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/training`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     // Standalone landing pages
-    { url: `${baseUrl}/mold-services-eugene-oregon`,          lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/emergency-mold-removal-eugene-oregon`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/employment-application`,               lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${baseUrl}/chain-of-custody`,                     lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },

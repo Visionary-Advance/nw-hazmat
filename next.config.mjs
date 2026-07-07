@@ -55,6 +55,13 @@ const nextConfig = {
         destination: '/services/lab-services',
         permanent: true,
       },
+      // Consolidated the Eugene mold landing page into the canonical service page
+      // to resolve keyword cannibalization (both targeted "mold ... eugene").
+      {
+        source: '/mold-services-eugene-oregon',
+        destination: '/services/mold-remediation',
+        permanent: true,
+      },
       {
         source: '/training/hazmat-specialist',
         destination: '/training/hazmat-technician',

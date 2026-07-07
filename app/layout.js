@@ -1,8 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientWrapper from "@/Components/ClientWrapper";
-import ReCaptchaProvider from "@/Components/ReCaptchaProvider";
 import { Analytics } from "@vercel/analytics/next"
+import { GoogleAnalytics } from "@next/third-parties/google"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -94,50 +94,64 @@ export const metadata = {
   // This would go in a separate component or in the head
 }
 
-// Additional structured data (JSON-LD) - Add this to your page or a separate component
+// LocalBusiness structured data (JSON-LD) rendered in the root layout below.
 export const structuredData = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": "https://nwhazmat.com/#business",
   "name": "NorthWest HazMat, Inc.",
-  "description": "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services.",
+  "description":
+    "Female-owned environmental, hazmat, and mold remediation company serving Eugene-Springfield and Lane County, Oregon since 2000. 24/7 emergency spill response, asbestos testing, biohazard cleanup, and hazardous waste disposal.",
   "url": "https://nwhazmat.com",
-  "telephone": "+1-XXX-XXX-XXXX", // Replace with actual phone
-  "email": "info@northwesthazmat.com", // Replace with actual email
+  "telephone": "+1-541-988-9823",
+  "email": "office@nwhazmat.com",
+  "foundingDate": "2000",
+  "image": "https://nwhazmat.com/img/Hazmat-Services.jpg",
+  "logo": "https://nwhazmat.com/img/NorthWest_HazMat_Logo.png",
+  "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Your Street Address",
-    "addressLocality": "Your City",
-    "addressRegion": "OR", // Adjust to your state
-    "postalCode": "Your ZIP",
+    "streetAddress": "36 West Q Street",
+    "addressLocality": "Springfield",
+    "addressRegion": "OR",
+    "postalCode": "97477",
     "addressCountry": "US"
   },
   "geo": {
+    // NOTE: approximate coordinates for 36 W Q St, Springfield OR — verify against your Google Business Profile pin.
     "@type": "GeoCoordinates",
-    "latitude": "45.5152", // Replace with actual coordinates
-    "longitude": "-122.6784"
+    "latitude": "44.0489",
+    "longitude": "-123.0225"
   },
-  "openingHours": [
-    "Mo-Fr 08:00-17:00",
-    "Sa 08:00-12:00"
+  "areaServed": [
+    { "@type": "City", "name": "Eugene" },
+    { "@type": "City", "name": "Springfield" },
+    { "@type": "AdministrativeArea", "name": "Lane County" }
   ],
-  "serviceArea": {
-    "@type": "GeoCircle",
-    "geoMidpoint": {
-      "@type": "GeoCoordinates",
-      "latitude": "45.5152",
-      "longitude": "-122.6784"
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
+    }
+  ],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-541-988-9823",
+      "contactType": "customer service",
+      "areaServed": "US",
+      "availableLanguage": "English"
     },
-    "geoRadius": "50000" // 50km radius, adjust as needed
-  },
-  "services": [
-    "Hazmat Services",
-    "Mold Remediation",
-    "Asbestos Testing",
-    "Environmental Cleanup",
-    "Hazardous Material Disposal",
-    "Contamination Cleanup"
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-800-597-1323",
+      "contactType": "emergency",
+      "areaServed": "US",
+      "availableLanguage": "English"
+    }
   ],
-  "priceRange": "$$",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Hazmat and Remediation Services",
@@ -147,7 +161,7 @@ export const structuredData = {
         "itemOffered": {
           "@type": "Service",
           "name": "Mold Remediation",
-          "description": "Professional mold removal and remediation services"
+          "description": "Professional mold removal and remediation services in Eugene-Springfield, Oregon"
         }
       },
       {
@@ -155,7 +169,7 @@ export const structuredData = {
         "itemOffered": {
           "@type": "Service",
           "name": "Asbestos Testing",
-          "description": "Comprehensive asbestos testing and analysis"
+          "description": "Comprehensive asbestos testing and lab analysis"
         }
       },
       {
@@ -164,6 +178,14 @@ export const structuredData = {
           "@type": "Service",
           "name": "Hazmat Cleanup",
           "description": "Safe handling and disposal of hazardous materials"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "HAZWOPER Training",
+          "description": "OSHA-compliant HAZWOPER 40-hour, 24-hour, and 8-hour refresher training"
         }
       }
     ]
@@ -178,12 +200,17 @@ export default function RootLayout({ children }) {
        
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ReCaptchaProvider>
-          <ClientWrapper>{children}
-            <Analytics />
-          </ClientWrapper>
-        </ReCaptchaProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <ClientWrapper>{children}
+          <Analytics />
+        </ClientWrapper>
       </body>
+      {process.env.NEXT_PUBLIC_GA_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      )}
     </html>
   );
 }

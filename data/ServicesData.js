@@ -153,11 +153,11 @@ export const services = [
     shortDescription: "Professional mold removal to prevent health risks, improve air quality, and protect property.",
     description: (
       <>
-        Mold is a health hazard and a sign of deeper moisture issues that can damage structures and air quality. At Northwest Hazmat, we offer expert mold remediation for residential, commercial, and institutional properties throughout Oregon. Our certified specialists locate the source, contain the spread, and remove mold completely using industry-best practices. With advanced tools and attention to detail, we ensure your space is safe, clean, and protected from future growth. All our work begins with comprehensive <Link href="/services/lab-services" className="text-blue-600 hover:underline">lab testing and analysis</Link> to identify the extent of contamination. Learn more about our <Link href="/mold-services-eugene-oregon" className="text-blue-600 hover:underline">mold remediation services in Eugene-Springfield</Link>, or get help fast with <Link href="/emergency-mold-removal-eugene-oregon" className="text-blue-600 hover:underline">24/7 emergency black mold removal</Link>.
+        Mold is a health hazard and a sign of deeper moisture issues that can damage structures and air quality. At Northwest Hazmat, we offer expert mold remediation for residential, commercial, and institutional properties throughout Oregon. Our certified specialists locate the source, contain the spread, and remove mold completely using industry-best practices. With advanced tools and attention to detail, we ensure your space is safe, clean, and protected from future growth. We provide mold remediation services throughout Eugene-Springfield and Lane County. All our work begins with comprehensive <Link href="/services/lab-services" className="text-blue-600 hover:underline">lab testing and analysis</Link> to identify the extent of contamination, or get help fast with <Link href="/emergency-mold-removal-eugene-oregon" className="text-blue-600 hover:underline">24/7 emergency black mold removal</Link>.
       </>
     ),
     keywords: ["mold remediation Oregon", "black mold removal"],
-    callToAction: "Call (XXX) XXX-XXXX for mold remediation today.",
+    callToAction: "Call 541-988-9823 for mold remediation today.",
     pageInfo: [
       {
         title: "Mold Inspection",

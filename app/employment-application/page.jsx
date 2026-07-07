@@ -1,4 +1,5 @@
 import ApplicationClient from './ApplicationClient';
+import ReCaptchaProvider from '@/Components/ReCaptchaProvider';
 
 export const metadata = {
   title: 'Hazmat Careers & Employment Application | NorthWest HazMat',
@@ -19,5 +20,9 @@ export const metadata = {
 };
 
 export default function EmploymentApplicationPage() {
-  return <ApplicationClient />;
+  return (
+    <ReCaptchaProvider>
+      <ApplicationClient />
+    </ReCaptchaProvider>
+  );
 }

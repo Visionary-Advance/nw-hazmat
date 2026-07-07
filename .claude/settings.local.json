@@ -55,7 +55,20 @@
       "Bash(mv public/img/_originals/* .image-originals/)",
       "Bash(rmdir public/img/_originals)",
       "Bash(ls next.config.* middleware.* vercel.json)",
-      "Bash(grep -rln \"redirect\\\\|rewrite\\\\|privacy\" next.config.* middleware.* vercel.json next-sitemap.config.js)"
+      "Bash(grep -rln \"redirect\\\\|rewrite\\\\|privacy\" next.config.* middleware.* vercel.json next-sitemap.config.js)",
+      "mcp__google-analytics__get_account_summaries",
+      "mcp__gsc__list_sites",
+      "mcp__ahrefs__site-explorer-metrics",
+      "mcp__ahrefs__site-explorer-top-pages",
+      "mcp__ahrefs__site-explorer-organic-keywords",
+      "mcp__Sanity__patch_documents",
+      "Bash(gcloud config *)",
+      "Bash(gcloud auth *)",
+      "Bash(gcloud iam *)",
+      "Bash(gcloud services *)",
+      "mcp__gsc__search_analytics",
+      "mcp__google-analytics__run_report",
+      "Bash(gcloud projects *)"
     ],
     "deny": [],
     "ask": []

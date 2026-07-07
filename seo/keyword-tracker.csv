@@ -1,11 +1,11 @@
 Priority,Keyword,Intent,Target URL,Title Tag Status,H1 Status,First-Para Status,Position,Impressions,Clicks,CTR,Last Checked,Notes
-P1,mold remediation eugene oregon,Local service,https://nwhazmat.com/mold-services-eugene-oregon,Strong,Strong,Strong,,,,,,
-P1,mold removal eugene,Local service,https://nwhazmat.com/mold-services-eugene-oregon,Partial,Partial,Strong,,,,,,Add to H2
+P1,mold remediation eugene oregon,Local service,https://nwhazmat.com/services/mold-remediation,Strong,Strong,Strong,,,,,,
+P1,mold removal eugene,Local service,https://nwhazmat.com/services/mold-remediation,Partial,Partial,Strong,,,,,,Add to H2
 P2,hazmat cleanup eugene oregon,Local service,https://nwhazmat.com/services/hazmat-services,Partial,Partial,Strong,,,,,,Says 'services' not 'cleanup'
 P2,emergency spill response eugene,Local service,https://nwhazmat.com/services/hazmat-services,Partial,Partial,Strong,,,,,,Subsection only - consider dedicated page
 P1,asbestos removal eugene oregon,Local service,https://nwhazmat.com/services/asbestos-testing,Strong,Strong,Strong,,,,,,Updated title to include Removal
 P1,biohazard cleanup lane county,Local service,https://nwhazmat.com/services/biohazard-cleanup,Strong,Strong,Strong,,,,,,Updated metadata with Lane County
-P1,mold inspection eugene oregon,Local service,https://nwhazmat.com/mold-services-eugene-oregon,Strong,Strong,Strong,,,,,,
+P1,mold inspection eugene oregon,Local service,https://nwhazmat.com/services/mold-remediation,Strong,Strong,Strong,,,,,,
 P1,hazardous waste disposal eugene,Local service,https://nwhazmat.com/services/waste-management-consulting,Strong,Strong,Strong,,,,,,Updated title to Disposal & Consulting
 P2,meth lab cleanup oregon,Local service,https://nwhazmat.com/services/biohazard-cleanup,Partial,Partial,Strong,,,,,,Subsection only - consider dedicated page
 P1,crime scene cleanup eugene,Local service,https://nwhazmat.com/services/biohazard-cleanup,Strong,Strong,Strong,,,,,,Now in title and metadata
@@ -18,4 +18,4 @@ P2,24 hour spill response oregon,Long-tail service,https://nwhazmat.com/services
 P2,hazwoper training eugene oregon,Training/commercial,https://nwhazmat.com/training/hazwoper-40-hour,Partial,Partial,Strong,,,,,,Verify Eugene appears in dynamic title
 P3,mold remediation training oregon,Training/commercial,https://nwhazmat.com/training,Missing,Missing,Missing,,,,,,No mold-specific course exists - consider adding or replacing
 P1,osha hazmat training lane county,Training/commercial,https://nwhazmat.com/training,Strong,Strong,Strong,,,,,,Lane County added to title and intro
-P1,mold remediation cost oregon,Awareness,https://nwhazmat.com/mold-services-eugene-oregon,Strong,Strong,Strong,,,,,,Cost FAQ section added with FAQPage schema
+P1,mold remediation cost oregon,Awareness,https://nwhazmat.com/services/mold-remediation,Strong,Strong,Strong,,,,,,Cost FAQ section added with FAQPage schema

@@ -13,6 +13,17 @@ Sentry.init({
   integrations: [
     Sentry.replayIntegration({ maskAllText: true, blockAllMedia: true }),
   ],
+  // Google's reCAPTCHA script throws internal errors on some browsers (notably
+  // iOS/Mobile Safari) that surface through Sentry's setTimeout instrumentation.
+  // These originate entirely inside Google's code and aren't actionable, so drop them.
+  ignoreErrors: [
+    "Cannot read properties of undefined (reading 'SO')",
+  ],
+  denyUrls: [
+    /\/recaptcha\//,
+    /gstatic\.com/,
+    /google\.com\/recaptcha/,
+  ],
   debug: false,
 });
 
