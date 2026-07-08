@@ -34,6 +34,20 @@ const nextConfig = {
       },
 
       // ============================================
+      // Legacy WooCommerce "add to cart" links: strip the ?add-to-cart=<id>
+      // query so crawlers land on the clean product URL instead of a duplicate
+      // that only resolves via the canonical tag (GSC: "Alternate page with
+      // proper canonical tag"). The category variant is normalized by the rule
+      // above first, so matching /shop/:product here covers both shapes.
+      // ============================================
+      {
+        source: '/shop/:product',
+        has: [{ type: 'query', key: 'add-to-cart' }],
+        destination: '/shop/:product',
+        permanent: true,
+      },
+
+      // ============================================
       // Product category pages → /shop
       // ============================================
       {
