@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { track } from "@/lib/amplitude";
 
 export default function Form() {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -78,6 +79,11 @@ export default function Form() {
       console.log("API JSON:", resJson);
 
       if (res.ok) {
+        // Track a lead conversion (no PII in event properties).
+        track("Contact Form Submitted", {
+          inquiryType: formData.type,
+          hasBusinessName: Boolean(formData.businessName),
+        });
         alert("Your message has been sent!");
         setFormData({
           name: "",

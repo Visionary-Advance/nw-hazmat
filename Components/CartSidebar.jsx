@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ShoppingCart, Plus, Minus, CreditCard } from 'lucide-react';
 import { useCart } from './CartContext';
 import CheckoutModal from './CheckoutModal';
+import { track } from '@/lib/amplitude';
 
 export default function CartSidebar() {
   const { cartItems, isCartOpen, setIsCartOpen, updateQuantity, removeFromCart, getCartTotal } = useCart();
@@ -89,7 +90,13 @@ export default function CartSidebar() {
             </div>
             
             <button
-              onClick={() => setShowCheckout(true)}
+              onClick={() => {
+                track('Begin Checkout', {
+                  itemCount: cartItems.reduce((n, i) => n + (i.quantity || 1), 0),
+                  total: getCartTotal(),
+                });
+                setShowCheckout(true);
+              }}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
             >
               <CreditCard className="w-4 h-4" />

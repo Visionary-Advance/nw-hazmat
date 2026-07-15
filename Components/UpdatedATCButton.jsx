@@ -3,6 +3,7 @@
 import React from 'react';
 import { Plus, ShoppingCart } from 'lucide-react';
 import { useCart } from './CartContext';
+import { track } from '@/lib/amplitude';
 
 const UpdatedATCButton = ({ width, product, disabled = false }) => {
   const { addToCart } = useCart();
@@ -10,6 +11,12 @@ const UpdatedATCButton = ({ width, product, disabled = false }) => {
   const handleAddToCart = () => {
     if (!disabled && product.inStock) {
       addToCart(product);
+      track('Add to Cart', {
+        productId: product.id,
+        productName: product.name,
+        category: product.category,
+        price: product.price,
+      });
     }
   };
 

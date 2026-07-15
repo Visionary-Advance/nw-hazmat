@@ -55,7 +55,8 @@ export default function Checkout() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col xl:flex-row gap-8">
           {/* Checkout Form */}
-          <div className="flex-1 bg-white rounded-lg shadow-lg p-6 md:p-8">
+          {/* amp-mask: masks all PII + card input text in Session Replay */}
+          <div className="flex-1 bg-white rounded-lg shadow-lg p-6 md:p-8 amp-mask">
             {/* Express Checkout */}
             <div className="mb-8">
               <h2 className="font-bold text-3xl md:text-4xl text-black mb-6">

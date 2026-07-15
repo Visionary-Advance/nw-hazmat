@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 import { useCart } from './CartContext';
+import { track, trackRevenue, identifyUser } from '@/lib/amplitude';
 
 export default function CheckoutForm({ onSuccess }) {
   const stripe = useStripe();
@@ -440,6 +441,17 @@ export default function CheckoutForm({ onSuccess }) {
             console.error('Order creation failed:', orderError);
           }
 
+          track('Purchase', {
+            paymentIntentId: paymentIntent.id,
+            paymentMethod: 'apple_google_pay',
+            itemCount: currentItems.reduce((n, i) => n + (i.quantity || 1), 0),
+            subtotal: currentSubtotal,
+            shippingCost: finalShippingCost,
+            total: finalTotal,
+          });
+          trackRevenue({ price: finalTotal, revenueType: 'purchase', productId: paymentIntent.id });
+          if (event.payerEmail) identifyUser(event.payerEmail);
+
           event.complete('success');
           doClearCart();
           doOnSuccess();
@@ -612,6 +624,17 @@ export default function CheckoutForm({ onSuccess }) {
           );
         }
 
+        track('Purchase', {
+          paymentIntentId: paymentIntent.id,
+          paymentMethod: 'card',
+          itemCount: cartItems.reduce((n, i) => n + (i.quantity || 1), 0),
+          subtotal: getCartTotal(),
+          shippingCost: shippingCost,
+          total: total,
+        });
+        trackRevenue({ price: total, revenueType: 'purchase', productId: paymentIntent.id });
+        if (customerInfo.email) identifyUser(customerInfo.email);
+
         clearCart();
         onSuccess();
       }
@@ -689,7 +712,8 @@ export default function CheckoutForm({ onSuccess }) {
         </div>
 
         {/* Delivery Information */}
-        <div className="space-y-4">
+        {/* amp-mask: masks PII input text in Amplitude Session Replay */}
+        <div className="space-y-4 amp-mask">
           <h3 className="text-xl font-semibold">Delivery</h3>
           
           <select
@@ -947,7 +971,8 @@ export default function CheckoutForm({ onSuccess }) {
         )}
 
         {/* Credit Card Payment */}
-        <div className="space-y-4">
+        {/* amp-block: fully omit the card region from Session Replay */}
+        <div className="space-y-4 amp-block">
           <h3 className="text-xl font-semibold">Credit Card Payment</h3>
           
           <div className="border border-gray-300 rounded-md px-3 py-3 focus-within:ring-2 focus-within:ring-blue-500">

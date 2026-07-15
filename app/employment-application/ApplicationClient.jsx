@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { track } from "@/lib/amplitude";
 
 export default function ApplicationClient() {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -138,6 +139,7 @@ export default function ApplicationClient() {
       console.log("API JSON:", resJson);
 
       if (res.ok) {
+        track("Employment Application Submitted");
         alert("Application submitted successfully!");
         setFormData({
           name: '',
