@@ -42,10 +42,38 @@ const contactStructuredData = {
     "email": "info@nwhazmat.com",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Eugene",
+      "streetAddress": "36 West Q Street",
+      "addressLocality": "Springfield",
       "addressRegion": "OR",
+      "postalCode": "97477",
       "addressCountry": "US"
-    }
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "44.0489",
+      "longitude": "-123.0225"
+    },
+    "areaServed": { "@type": "State", "name": "Oregon" },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+1-800-597-1323",
+        "contactType": "emergency",
+        "areaServed": "US-OR",
+        "availableLanguage": "English",
+        "hoursAvailable": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday", "Tuesday", "Wednesday", "Thursday",
+              "Friday", "Saturday", "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        ]
+      }
+    ]
   }
 };
 

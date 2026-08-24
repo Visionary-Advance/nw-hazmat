@@ -92,8 +92,9 @@ export async function generateMetadata({ params }) {
     // Local SEO
     other: {
       'geo.region': 'US-OR',
-      'geo.placename': 'Eugene, Oregon',
-      'geo.position': '44.0521;-123.0868',
+      'geo.placename': 'Springfield',
+      'geo.position': '44.0489;-123.0225',
+      'ICBM': '44.0489, -123.0225',
     },
   };
 }

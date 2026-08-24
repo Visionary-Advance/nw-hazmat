@@ -69,21 +69,23 @@ export const metadata = {
     },
   },
   
-  // Local business structured data
+  // Local business structured data — single pin: Springfield yard, 36 West Q Street.
   other: {
     "geo.region": "US-OR",
-    "geo.placename": "Eugene, Springfield",
-    "geo.position": "44.0521;-123.0868",
-    "ICBM": "44.0521, -123.0868",
+    "geo.placename": "Springfield",
+    "geo.position": "44.0489;-123.0225",
+    "ICBM": "44.0489, -123.0225",
   },
-  
-  // Verification tags (add these when you have them)
-  verification: {
-    google: "your-google-verification-code", // Replace with actual code
-    yandex: "your-yandex-verification-code", // If applicable
-    yahoo: "your-yahoo-verification-code", // If applicable
-  },
-  
+
+  // Verification tags. Google code comes from Search Console once the property is
+  // verified (punch list #11); leaving a placeholder in the head is worse than
+  // omitting the tag, so this stays out until we have the real value.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    },
+  }),
+
   // Favicon / icons
   icons: {
     icon: '/img/NorthWest_HazMat_Logo.png',
@@ -124,16 +126,21 @@ export const structuredData = {
     "longitude": "-123.0225"
   },
   "areaServed": [
-    { "@type": "City", "name": "Eugene" },
+    { "@type": "State", "name": "Oregon" },
     { "@type": "City", "name": "Springfield" },
+    { "@type": "City", "name": "Eugene" },
     { "@type": "AdministrativeArea", "name": "Lane County" }
   ],
+  // Office / walk-in / lab hours only. The 24-hour spill line is modeled on the
+  // emergency contactPoint below so "open now" emergency search does not see us
+  // as closed nights and weekends.
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       "opens": "08:00",
-      "closes": "17:00"
+      "closes": "17:00",
+      "name": "Office and lab"
     }
   ],
   "contactPoint": [
@@ -142,14 +149,33 @@ export const structuredData = {
       "telephone": "+1-541-988-9823",
       "contactType": "customer service",
       "areaServed": "US",
-      "availableLanguage": "English"
+      "availableLanguage": "English",
+      "hoursAvailable": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ]
     },
     {
       "@type": "ContactPoint",
       "telephone": "+1-800-597-1323",
       "contactType": "emergency",
       "areaServed": "US",
-      "availableLanguage": "English"
+      "availableLanguage": "English",
+      "hoursAvailable": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday", "Tuesday", "Wednesday", "Thursday",
+            "Friday", "Saturday", "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ]
     }
   ],
   "hasOfferCatalog": {

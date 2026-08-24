@@ -105,14 +105,14 @@ export async function generateMetadata({ params }) {
 
     // Additional metadata
     other: {
-      // Local business markup
+      // Local business markup — single pin: Springfield yard, 36 West Q Street.
       'geo.region': 'US-OR',
-      'geo.placename': 'Eugene, Springfield',
-      'geo.position': '44.0521;-123.0868',
-      'ICBM': '44.0521, -123.0868',
-      
+      'geo.placename': 'Springfield',
+      'geo.position': '44.0489;-123.0225',
+      'ICBM': '44.0489, -123.0225',
+
       // Service-specific
-      'service-area': 'Lane County, Oregon, Eugene, Springfield, Pacific Northwest',
+      'service-area': 'Oregon statewide, I-5 corridor, Springfield, Eugene, Portland, Salem, Bend, Medford',
       'business-type': 'Hazmat Services, Environmental Cleanup',
       'emergency-contact': '1-800-597-1323',
     },
@@ -157,25 +157,43 @@ export default async function ServicePage({ params }) {
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "44.0521",
-        "longitude": "-123.0868"
+        "latitude": "44.0489",
+        "longitude": "-123.0225"
       },
       "url": "https://nwhazmat.com",
       "sameAs": [
         "https://www.facebook.com/NorthWestHazMat/"
       ],
+      // Office / walk-in / lab hours. Emergency response is 24/7 and is modeled
+      // on the emergency contactPoint below.
       "openingHours": "Mo-Fr 08:00-17:00",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+1-800-597-1323",
+          "contactType": "emergency",
+          "areaServed": "US-OR",
+          "availableLanguage": "English",
+          "hoursAvailable": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday", "Saturday", "Sunday"
+              ],
+              "opens": "00:00",
+              "closes": "23:59"
+            }
+          ]
+        }
+      ],
       "priceRange": "$$"
     },
     "serviceType": service.title,
+    // We respond statewide, not within a radius of one metro.
     "areaServed": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "latitude": "44.0521",
-        "longitude": "-123.0868"
-      },
-      "geoRadius": "50000"
+      "@type": "State",
+      "name": "Oregon"
     },
     "availableChannel": {
       "@type": "ServiceChannel",
@@ -188,10 +206,22 @@ export default async function ServicePage({ params }) {
     }
   };
 
-  // Emergency services get additional schema
+  // Emergency services get additional schema. These are 24/7 — the provider's
+  // weekday office hours must not be read as the response window.
   if (service.eButton) {
     structuredData["@type"] = "EmergencyService";
     structuredData.availableChannel.servicePhone.telephone = "+1-800-597-1323";
+    structuredData.hoursAvailable = [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday",
+          "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ];
   }
 
   return (
