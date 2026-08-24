@@ -74,24 +74,33 @@ export default function Home() {
             consulting. Female-owned and serving Oregon since 2000.
           </p>
 
-          <div className="flex justify-center lg:justify-normal space-x-2 mt-auto pt-6">
-            <Link href="/shop">
+          <div className="flex flex-wrap justify-center lg:justify-normal gap-2 mt-auto pt-6">
+            {/* Spill response is the primary path off the hero (punch list #2). */}
+            <Link href="/24-hour-spill-response-oregon">
             <Button
-              text={"Shop Now"}
+              text={"24-Hour Spill Response"}
               color={
                 "bg-red-600 hover:bg-white hover:text-red-600 text-white border border-red-600 arial-bold duration-200 "
               }
             />
             </Link>
-            <Link href="tel:541-988-9823">
+            <Link href="tel:1-800-597-1323">
             <Button
               text={
                 <span className="flex items-center gap-2 arial-bold">
-                  <FaPhone /> Call Us
+                  <FaPhone /> 1-800-597-1323
                 </span>
               }
               color={
                 "bg-white hover:bg-red-600 hover:text-white text-red-600 border border-red-600 duration-200 "
+              }
+            />
+            </Link>
+            <Link href="/shop">
+            <Button
+              text={"Shop Now"}
+              color={
+                "bg-white hover:bg-black hover:text-white text-black border border-black arial-bold duration-200 "
               }
             />
             </Link>

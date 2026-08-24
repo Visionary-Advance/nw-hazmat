@@ -92,9 +92,20 @@ Copy-only. No new routes. Reviewable as a single diff.
 
 ---
 
-## Phase 3 — New spill pages + navigation (the growth work)
+## Phase 3 — New spill pages + navigation ✅ COMPLETE
 
 Punch items: **#2, #3, #7, #10 (partial)**
+
+**Status:** done and verified against a running production build. Both new URLs
+return 200; all four dead slugs return a true 301 (not 308) to the spill page;
+header exposes `/services`, `/training`, and the spill URL; footer links the service
+area; 5 product URLs link from the spill page (list asked for ≥3); spill page carries
+EmergencyService + 24/7 hours + areaServed Oregon; service-area schema lists Oregon
+plus 31 cities.
+**Still open:** the city list is Jon's verbatim — coast / central / eastern Oregon
+groups need his trim if we don't roll that far. Editing the `regions` array in
+`app/oregon-spill-response-service-area/page.jsx` updates both the page and its
+JSON-LD, since both read from it.
 
 This is the #1 revenue item in the list — the spill URL simply does not exist today.
 

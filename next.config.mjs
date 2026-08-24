@@ -25,6 +25,36 @@ const nextConfig = {
   async redirects() {
     return [
       // ============================================
+      // Spill URLs that were 404ing. These slugs were the ones people and
+      // search engines were already asking for, with no page behind them
+      // (punch list #2). They now land on the 24-hour spill page.
+      //
+      // statusCode: 301 rather than permanent: true, which emits 308. The
+      // client asked for 301 specifically. Google treats the two the same, but
+      // 301 is the better-understood signal across other crawlers and tools.
+      // ============================================
+      {
+        source: '/spill-response-springfield',
+        destination: '/24-hour-spill-response-oregon',
+        statusCode: 301,
+      },
+      {
+        source: '/emergency-spill-response',
+        destination: '/24-hour-spill-response-oregon',
+        statusCode: 301,
+      },
+      {
+        source: '/diesel-spill',
+        destination: '/24-hour-spill-response-oregon',
+        statusCode: 301,
+      },
+      {
+        source: '/services/spill-response',
+        destination: '/24-hour-spill-response-oregon',
+        statusCode: 301,
+      },
+
+      // ============================================
       // Old WooCommerce product URLs: /shop/:category/:product → /shop/:product
       // ============================================
       {

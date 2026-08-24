@@ -29,10 +29,19 @@ export default function Header() {
       <header className="w-full flex lg:flex-row items-center justify-between bg-white shadow-lg px-6 py-4">
       <HeaderLogo />
         {/* Desktop Navigation */}
-        <nav className="text-black hidden ms-auto lg:flex fjalla-one text-xl space-x-6">
-          <Link href="/services/hazmat-services">Services</Link>
+        <nav className="text-black hidden ms-auto lg:flex fjalla-one text-xl space-x-6 items-center">
+          {/* Spill is the primary growth path, so it gets a visible button
+              rather than sitting inside a services dropdown (punch list #7). */}
+          <Link
+            href="/24-hour-spill-response-oregon"
+            className="bg-red-600 hover:bg-black text-white rounded-lg px-4 py-2 duration-200"
+          >
+            24-Hour Spill Response
+          </Link>
+          {/* Hubs, not one deep page each. */}
+          <Link href="/services">Services</Link>
           <Link href="/about">About</Link>
-          <Link href="/training/hazwoper-40-hour">Training</Link>
+          <Link href="/training">Training</Link>
           <Link href="/shop">Shop</Link>
           <Link href="/blog">Blog</Link>
           <div

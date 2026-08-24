@@ -52,6 +52,17 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
             exit="hidden"
             className="space-y-6 text-center"
           >
+            {/* Spill response leads the mobile menu too (punch list #7). */}
+            <motion.li variants={itemVariants}>
+              <Link
+                href="/24-hour-spill-response-oregon"
+                onClick={() => setMenuOpen(false)}
+                className="inline-block bg-red-600 text-white text-2xl rounded-lg px-6 py-3"
+              >
+                24-Hour Spill Response
+              </Link>
+            </motion.li>
+
             {/* Equipment Dropdown */}
             <motion.li
               variants={itemVariants}
@@ -79,6 +90,15 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className="mt-2 space-y-2 overflow-hidden"
                   >
+                    <li>
+                      <Link
+                        href="/services"
+                        onClick={() => setMenuOpen(false)}
+                        className="text-white text-xl underline"
+                      >
+                        All services
+                      </Link>
+                    </li>
                     {services.map((item) => (
                       <li key={item.slug}>
                         <Link
@@ -102,7 +122,7 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
               </Link>
             </motion.li>
             <motion.li variants={itemVariants} className="text-white text-3xl">
-              <Link href="/training/hazwoper-40-hour" onClick={() => setMenuOpen(false)}>
+              <Link href="/training" onClick={() => setMenuOpen(false)}>
                 Training
               </Link>
             </motion.li>

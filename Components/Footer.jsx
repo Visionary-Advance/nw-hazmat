@@ -88,6 +88,8 @@ export default function Footer() {
         <div className="border-t border-gray-300 my-6"></div>
         <div className="flex flex-col md:flex-row items-center justify-between text-gray-500 text-sm">
         <div className="flex flex-wrap justify-center gap-6 text-sm">
+          <Link href="/24-hour-spill-response-oregon" className="hover:underline">24-Hour Spill Response</Link>
+          <Link href="/oregon-spill-response-service-area" className="hover:underline">Oregon service area</Link>
           <Link href="/about" className="hover:underline">About Us</Link>
           <Link href="/shop" className="hover:underline">Shop</Link>
           <Link href="/contact" className="hover:underline">Contact Us</Link>

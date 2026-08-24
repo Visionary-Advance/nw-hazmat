@@ -6,7 +6,11 @@ export default async function sitemap() {
 
   // Core pages
   const routes = [
-    { url: `${baseUrl}/`,              lastModified: new Date(), changeFrequency: 'yearly',  priority: 1.0 },
+    // changeFrequency weekly until the new titles settle (punch list #16).
+    { url: `${baseUrl}/`,              lastModified: new Date(), changeFrequency: 'weekly',  priority: 1.0 },
+    // Priority 1 growth pages (punch list #2, #3).
+    { url: `${baseUrl}/24-hour-spill-response-oregon`,        lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${baseUrl}/oregon-spill-response-service-area`,   lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/about`,         lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/shop`,          lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${baseUrl}/contact`,       lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
