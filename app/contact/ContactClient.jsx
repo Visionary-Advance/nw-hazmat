@@ -44,8 +44,20 @@ export default function ContactClient() {
       <Breadcrumbs />
 
       <div className="text-center mb-8">
-        <h1 className="fjalla-one font text-5xl">Get In Touch</h1>
-        <p className="text-lg">Let us know how we can help you</p>
+        <h1 className="fjalla-one font text-5xl">
+          Get in Touch &mdash; 24-Hour Spill Line
+        </h1>
+        <p className="text-lg">
+          Spill or hazmat emergency anywhere in Oregon? Call{" "}
+          <a href="tel:1-800-597-1323" className="font-semibold hover:underline">
+            1-800-597-1323
+          </a>{" "}
+          any hour, any day. For everything else, reach the Springfield office at{" "}
+          <a href="tel:541-988-9823" className="font-semibold hover:underline">
+            541-988-9823
+          </a>
+          .
+        </p>
       </div>
 
       <CallDropdown />

@@ -33,13 +33,17 @@ export const metadata = {
 };
 
 export default function BlackMoldSingleColumn() {
+  // Areas we cover from the Springfield yard. Deliberately no per-area minute
+  // estimates and no dispatch-time promise: actual response depends on crew
+  // availability, road conditions, and the nature of the job, and inventing
+  // precise ETAs is a claim we cannot stand behind.
   const responseAreas = [
-    { area: "University of Oregon", time: "8 minutes" },
-    { area: "Downtown Eugene", time: "12 minutes" },
-    { area: "Springfield", time: "5 minutes" },
-    { area: "West Eugene", time: "15 minutes" },
-    { area: "South Eugene", time: "14 minutes" },
-    { area: "Coburg/River Road", time: "10 minutes" }
+    "Springfield",
+    "Downtown Eugene",
+    "University of Oregon",
+    "West Eugene",
+    "South Eugene",
+    "Coburg / River Road"
   ];
 
   const emergencySymptoms = [
@@ -188,22 +192,22 @@ export default function BlackMoldSingleColumn() {
           </div>
         </section>
 
-        {/* Response Times Section */}
+        {/* Areas we cover. No per-area ETAs and no dispatch-time promise. */}
         <section className="w-full bg-green-600 text-white py-20">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <h2 className="text-4xl lg:text-6xl fjalla-one mb-16">
-              ⚡ RESPONSE TIMES
+              AREAS WE COVER
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {responseAreas.map((area, index) => (
-                <div key={index} className="bg-green-700 rounded-[20px] p-8 text-center">
-                  <h3 className="text-xl font-bold mb-4">{area.area}</h3>
-                  <p className="text-4xl font-bold">{area.time}</p>
+              {responseAreas.map((area) => (
+                <div key={area} className="bg-green-700 rounded-[20px] p-8 text-center">
+                  <h3 className="text-xl font-bold">{area}</h3>
                 </div>
               ))}
             </div>
             <p className="text-2xl font-bold">
-              🚨 TEAM DISPATCHED WITHIN 2 MINUTES
+              Crews roll from our Springfield yard, and our line is staffed 24
+              hours a day.
             </p>
           </div>
         </section>

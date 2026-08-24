@@ -1,16 +1,21 @@
 import ContactClient from "./ContactClient";
 import ReCaptchaProvider from "@/Components/ReCaptchaProvider";
 
+const CONTACT_TITLE =
+  "Contact Northwest Hazmat | 24/7 Spill Response Oregon | 1-800-597-1323";
+const CONTACT_DESCRIPTION =
+  "Reach Northwest Hazmat for 24-hour spill and hazmat response anywhere in Oregon. Emergency line 1-800-597-1323, office 541-988-9823, yard at 36 West Q Street, Springfield.";
+
 export const metadata = {
-  title: "Contact NorthWest HazMat | 24/7 Emergency Response Eugene Oregon",
-  description: "Contact NorthWest HazMat for hazmat response, mold remediation, and environmental services in Eugene, Oregon. Call 541-988-9823 or 24/7: 1-800-597-1323.",
-  keywords: "contact hazmat eugene oregon, emergency spill response, mold remediation contact, hazmat services lane county, 24/7 emergency response",
+  title: CONTACT_TITLE,
+  description: CONTACT_DESCRIPTION,
+  keywords: "contact northwest hazmat, 24 hour spill response oregon, emergency spill response oregon, hazmat cleanup oregon, springfield oregon hazmat, 24/7 emergency response",
   alternates: {
     canonical: "https://nwhazmat.com/contact",
   },
   openGraph: {
-    title: "Contact NorthWest HazMat | Emergency Response Eugene Oregon",
-    description: "24/7 emergency hazmat response in Lane County. Contact us for mold remediation, spill response, and environmental services.",
+    title: CONTACT_TITLE,
+    description: CONTACT_DESCRIPTION,
     url: "https://nwhazmat.com/contact",
     siteName: "NorthWest HazMat, Inc.",
     type: "website",
@@ -19,14 +24,14 @@ export const metadata = {
         url: "https://nwhazmat.com/img/Hazmat-Services.jpg",
         width: 1200,
         height: 630,
-        alt: "Contact NorthWest HazMat for emergency services",
+        alt: "Contact Northwest Hazmat for 24-hour spill response in Oregon",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact NorthWest HazMat | Emergency Response Eugene Oregon",
-    description: "24/7 emergency hazmat response in Lane County, Oregon.",
+    title: CONTACT_TITLE,
+    description: CONTACT_DESCRIPTION,
     images: ["https://nwhazmat.com/img/Hazmat-Services.jpg"],
   },
 };

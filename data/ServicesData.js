@@ -4,19 +4,20 @@ export const services = [
   {
     id: "hazmat-services",
     title: "Hazmat Services",
+    h1: "24/7 Emergency Hazmat and Spill Response in Oregon",
     slug: "hazmat-services",
     img: "/img/Hazmat-Services.jpg",
-    metaTitle: "24/7 Hazmat Services Eugene OR | NorthWest HazMat",
-    metaDescription: "Licensed hazmat response in Eugene, Oregon. 24/7 emergency spills, containment & disposal. Serving Lane County since 2000. Call 541-988-9823 today.",
+    metaTitle: "24/7 Hazmat & Spill Response Oregon | Portland to Medford | Northwest Hazmat",
+    metaDescription: "Licensed 24-hour hazmat and spill response anywhere in Oregon, from Portland and Salem to Eugene-Springfield, Bend, and Medford. Based in Springfield since 2000. Call 1-800-597-1323.",
     shortDescription: "Expert hazmat handling, containment, and disposal to protect your environment and ensure safety.",
     description: (
       <>
         Our hazardous materials services provide complete solutions for the safe handling, transport, disposal, and remediation of dangerous substances. We specialize in emergency hazmat response, hazardous waste disposal, chemical spill cleanup, <Link href="/training/hazmat-technician" className="text-blue-600 hover:underline">hazmat training</Link>, and compliance consulting. Backed by certifications and strict adherence to OSHA, EPA, and DOT regulations, our certified hazmat contractors are equipped to protect people, property, and the environment from harmful exposures.
       </>
     ),
-    keywords: ["hazmat services Oregon", "hazardous materials", "emergency hazmat"],
+    keywords: ["24-hour spill response Oregon", "emergency hazmat cleanup Oregon", "hazmat services Oregon", "chemical spill cleanup Oregon"],
     eButton: true,
-    callToAction: "Call our 24/7 Response Line: (XXX) XXX-XXXX",
+    callToAction: "Call our 24/7 Response Line: 1-800-597-1323",
     pageInfo: [
       {
         title: "24/7 Emergency Spill Response",
@@ -66,8 +67,8 @@ export const services = [
     title: "Lab Services",
     slug: "lab-services",
     img: "/img/Lab-Testing.jpg",
-    metaTitle: "Asbestos & Environmental Lab Testing | Eugene OR",
-    metaDescription: "Fast, accurate asbestos testing & environmental lab analysis in Eugene, Oregon. Local results, no out-of-state delays. Free quotes — call 541-988-9823.",
+    metaTitle: "Asbestos & Environmental Lab Testing Oregon | Springfield Lab",
+    metaDescription: "Fast, accurate asbestos testing and environmental lab analysis at our Springfield, Oregon lab. In-state results, no out-of-state delays. Free quotes — call 541-988-9823.",
     shortDescription: "Accurate asbestos testing and lab analysis to identify hazards and ensure safe removal.",
     description: (
       <>
@@ -127,11 +128,11 @@ export const services = [
     faqData: [
       {
         question: "What types of environmental testing do you offer?",
-        answer: "We offer asbestos testing (PLM and TEM analysis), mold and microbial testing, soil and groundwater analysis, air quality monitoring, and hazardous materials identification. All testing is performed in our local Eugene, Oregon lab for faster turnaround."
+        answer: "We offer asbestos testing (PLM and TEM analysis), mold and microbial testing, soil and groundwater analysis, air quality monitoring, and hazardous materials identification. All testing is performed in our own lab at 36 West Q Street in Springfield, Oregon, for faster turnaround."
       },
       {
         question: "How fast can I get lab results?",
-        answer: "Standard turnaround is 3-5 business days. Rush services are available for time-sensitive projects like real estate transactions or renovation deadlines. Because our lab is local in Eugene, you avoid the delays of sending samples out of state."
+        answer: "Standard turnaround is 3-5 business days. Rush services are available for time-sensitive projects like real estate transactions or renovation deadlines. Because our lab is here in Springfield, you avoid the delays of sending samples out of state."
       },
       {
         question: "Do you provide chain-of-custody documentation?",
@@ -396,9 +397,9 @@ export const services = [
     title: "Hazardous Waste Disposal & Consulting",
     slug: "waste-management-consulting",
     img: "/img/Managment-Services.jpg",
-    metaTitle: "Hazardous Waste Disposal Eugene Oregon | Lane County",
-    metaDescription: "Licensed hazardous waste disposal, transportation, and consulting in Eugene-Springfield and Lane County, Oregon. EPA/DOT compliant. Call 541-988-9823.",
-    shortDescription: "Expert hazardous waste disposal and consulting in Eugene, Oregon — project management, transport, and compliance solutions.",
+    metaTitle: "Hazardous Waste Disposal & Consulting Oregon | Northwest Hazmat",
+    metaDescription: "Licensed hazardous waste disposal, transportation, and consulting across Oregon. EPA/DOT compliant, based in Springfield. Call 541-988-9823.",
+    shortDescription: "Expert hazardous waste disposal and consulting across Oregon — project management, transport, and compliance solutions.",
     description: (
       <>
         Hazardous waste disposal is highly regulated and logistically complex. Northwest Hazmat offers professional waste management solutions that help clients navigate compliance and reduce risk. Our hazardous waste consultants evaluate your waste streams, recommend best practices, and handle transportation and disposal with complete documentation. As experienced hazardous waste consultants, our team is designed to improve operational safety, reduce environmental liability, and ensure all protocols meet local, state, and federal requirements. Our hazardous waste consultants include certified experts trained in <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER standards</Link> and emergency response.

@@ -59,9 +59,16 @@ Highest ratio of SEO impact to regression risk. Almost entirely `app/layout.js` 
 
 ---
 
-## Phase 2 — Titles, H1s, and the Oregon pivot (copy layer)
+## Phase 2 — Titles, H1s, and the Oregon pivot ✅ COMPLETE
 
 Punch items: **#1, #14 (partial), #15**
+
+**Status:** done and build-verified. All six title/H1 pairs match the table below in
+built HTML. "based in Eugene" appears 0 times in build output; the Eugene-lab claims
+and the "2-minute dispatch" / per-area ETA block are gone. Homepage meta description
+contains 24-hour, spill, Oregon, and the 800 number.
+**Still open:** lab accreditation question (#15) — no accreditation language shipped,
+which is the safe default until Jon confirms.
 
 Copy-only. No new routes. Reviewable as a single diff.
 

@@ -60,11 +60,16 @@ export default function AboutClient() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-6xl lg:text-8xl text-left mt-16 fjalla-one mb-4">
-          About Us
+          About Northwest Hazmat
         </h1>
         <p className="text-xl w-11/12 lg:w-8/12">
-          NorthWest HazMat is a trusted full-service provider across Oregon and Washington. We offer expert services including hazardous materials handling and disposal, asbestos testing and analysis, soil restoration, biohazard cleanup, waste management consulting,
- and more. Committed to safety, compliance, and sustainable results, we protect communities and businesses throughout the Pacific Northwest.
+          Northwest HazMat is a female-owned environmental and hazmat company
+          working out of our yard at 36 West Q Street in Springfield, Oregon,
+          where we have operated since 2000. We run 24-hour spill and hazmat
+          response anywhere in Oregon and keep an on-site lab for asbestos and
+          mold analysis. Our crews handle hazardous materials disposal, soil
+          restoration, biohazard cleanup, and waste management consulting, and we
+          are licensed under CCB #141189.
         </p>
       </motion.div>
 

@@ -320,7 +320,10 @@ export default async function ServicePage({ params }) {
 
           {/* Page Header */}
           <header className="mb-8">
-            <h1 className="text-5xl font-bold mb-4 text-gray-900">{service.title}</h1>
+            {/* Optional h1 override lets a page carry a long, keyword-led
+                headline without changing service.title, which also feeds nav
+                cards, breadcrumbs, and serviceType schema. */}
+            <h1 className="text-5xl font-bold mb-4 text-gray-900">{service.h1 || service.title}</h1>
             {service.description && (
               <p className="text-gray-800 mb-4 text-lg leading-relaxed">{service.description}</p>
             )}
