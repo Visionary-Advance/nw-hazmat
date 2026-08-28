@@ -6,9 +6,11 @@ import { IoMdClose } from 'react-icons/io';
 import Link from 'next/link';
 import { useState } from 'react';
 import { services } from '@/data/ServicesData';
+import { training } from '@/data/TrainingData';
 
 export default function MobileMenu({ menuOpen, setMenuOpen }) {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [trainingOpen, setTrainingOpen] = useState(false);
 
   
 
@@ -121,10 +123,56 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
                 About
               </Link>
             </motion.li>
-            <motion.li variants={itemVariants} className="text-white text-3xl">
-              <Link href="/training" onClick={() => setMenuOpen(false)}>
+            {/* Training hub plus all eight courses (punch list #13). */}
+            <motion.li
+              variants={itemVariants}
+              className="text-white text-3xl flex flex-col items-center"
+            >
+              <button
+                onClick={() => setTrainingOpen(!trainingOpen)}
+                className="flex items-center gap-2 focus:outline-none"
+              >
                 Training
-              </Link>
+                <motion.span
+                  animate={{ rotate: trainingOpen ? 90 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <IoIosArrowForward size={24} />
+                </motion.span>
+              </button>
+
+              <AnimatePresence>
+                {trainingOpen && (
+                  <motion.ul
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="mt-2 space-y-2 overflow-hidden"
+                  >
+                    <li>
+                      <Link
+                        href="/training"
+                        onClick={() => setMenuOpen(false)}
+                        className="text-white text-xl underline"
+                      >
+                        All training courses
+                      </Link>
+                    </li>
+                    {training.map((course) => (
+                      <li key={course.slug}>
+                        <Link
+                          href={`/training/${course.slug}`}
+                          onClick={() => setMenuOpen(false)}
+                          className="text-white text-xl"
+                        >
+                          {course.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
             </motion.li>
             <motion.li variants={itemVariants} className="text-white text-3xl">
               <Link href="/shop" onClick={() => setMenuOpen(false)}>

@@ -8,12 +8,15 @@ import { FaPhone } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import HeaderLogo from "./HeaderLogo";
 import { useState } from "react";
+import { training } from "@/data/TrainingData";
 const MobileMenu = dynamic(() => import ("./MobileMenu"), {ssr:false})
 
 export default function Header() {
    const [menuOpen, setMenuOpen] = useState(false)
 
    const [showFormsDropdown, setShowFormsDropdown] = useState(false)
+
+   const [showTrainingDropdown, setShowTrainingDropdown] = useState(false)
 
   return (
     <>
@@ -41,7 +44,42 @@ export default function Header() {
           {/* Hubs, not one deep page each. */}
           <Link href="/services">Services</Link>
           <Link href="/about">About</Link>
-          <Link href="/training">Training</Link>
+          {/* Training hub plus all eight courses. Previously the nav exposed
+              only HAZWOPER 40-Hour (punch list #13). */}
+          <div
+            className="relative"
+            onMouseEnter={() => setShowTrainingDropdown(true)}
+            onMouseLeave={() => setShowTrainingDropdown(false)}
+          >
+            <Link href="/training">Training</Link>
+            {/* Always in the DOM, hidden with CSS rather than unmounted, so the
+                eight course links are present in the served HTML for crawlers.
+                A hover-only conditional render would keep them out of the page
+                source entirely, which is what item #13 is trying to fix. */}
+            <div
+              className={`absolute top-full left-1/2 -translate-x-1/2 w-72 bg-white shadow-lg rounded-md py-2 z-50 text-base ${
+                showTrainingDropdown
+                  ? "visible opacity-100"
+                  : "invisible opacity-0 pointer-events-none"
+              }`}
+            >
+              <Link
+                href="/training"
+                className="block px-4 py-2 hover:bg-gray-100 font-semibold border-b"
+              >
+                All Training Courses
+              </Link>
+              {training.map((course) => (
+                <Link
+                  key={course.slug}
+                  href={`/training/${course.slug}`}
+                  className="block px-4 py-2 hover:bg-gray-100"
+                >
+                  {course.title}
+                </Link>
+              ))}
+            </div>
+          </div>
           <Link href="/shop">Shop</Link>
           <Link href="/blog">Blog</Link>
           <div

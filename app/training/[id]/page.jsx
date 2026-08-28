@@ -144,7 +144,14 @@ export default async function TrainingPage({ params }) {
     "hasCourseInstance": {
       "@type": "CourseInstance",
       "courseMode": "Onsite",
-      "courseWorkload": "PT8H",
+      // courseWorkload was hardcoded to PT8H, so every course claimed 8 hours
+      // regardless of its real length - the 40-hour HAZWOPER course included
+      // (punch list #13). It now comes from the course's own durationHours and
+      // is omitted entirely when we do not have a verified length, since an
+      // absent value is better than a wrong one.
+      ...(trainings.durationHours && {
+        courseWorkload: `PT${trainings.durationHours}H`,
+      }),
       "location": {
         "@type": "Place",
         "name": "NorthWest HazMat, Inc.",
@@ -258,6 +265,16 @@ export default async function TrainingPage({ params }) {
           {/* Main Title - SEO Optimized */}
           <header className="mb-8">
             <h1 className="text-5xl font-bold mb-4 text-gray-900">{trainings.title} in Oregon</h1>
+            {/* Scheduling line the client asked for on the hub and every course
+                (punch list #13). Replace with real dates when they send them. */}
+            <p className="mb-6 text-lg text-gray-900 bg-yellow-50 border-l-4 border-yellow-400 px-4 py-3">
+              Scheduled for groups of 5 or more at 36 West Q Street,
+              Springfield. Call{" "}
+              <a href="tel:541-988-9823" className="font-semibold underline">
+                541-988-9823
+              </a>{" "}
+              for the next open date.
+            </p>
             {trainings.description && (
               <p className="text-gray-800 mb-4 text-lg leading-relaxed">{trainings.description}</p>
             )}

@@ -17,8 +17,9 @@ export default async function sitemap() {
     { url: `${baseUrl}/blog`,           lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${baseUrl}/services`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/training`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    // Standalone landing pages
-    { url: `${baseUrl}/emergency-mold-removal-eugene-oregon`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    // Standalone landing pages.
+    // /emergency-mold-removal-eugene-oregon was removed and 301s to
+    // /services/mold-remediation, the canonical mold URL (punch list #14).
     { url: `${baseUrl}/employment-application`,               lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${baseUrl}/chain-of-custody`,                     lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${baseUrl}/privacy-policy`,                       lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.3 },

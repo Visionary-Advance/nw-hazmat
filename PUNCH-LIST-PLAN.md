@@ -154,9 +154,19 @@ Priority 2 in the doc, but it's the direct revenue leak. Needs photo assets from
 
 ---
 
-## Phase 5 — Cleanup and consolidation
+## Phase 5 — Cleanup and consolidation ✅ COMPLETE
 
 Punch items: **#8, #13, #14, #16**
+
+**Status:** done and verified against a running production build. `/services/dedication-services`
+and `/emergency-mold-removal-eugene-oregon` both 301; the renamed service returns 200;
+`sitemap.xml` returns 200. On the renamed page: ORSO appears 0 times, OSRO twice,
+ceremonial/memorial 0 times, USCG 0 times. `PT40H` on the 40-hour course, `courseWorkload`
+omitted on the other seven. All 8 course links present in served HTML.
+**Two claims removed pending Jon:** the USCG OSRO certification assertion (#8) and the
+`PT8H` durations for seven courses (#13). Both need his written confirmation to restore.
+**Left as-is deliberately:** `/employment-application` stays indexed — the list marks
+noindex "optional" and de-indexing a careers page can hurt hiring. Jon's call.
 
 1. **Dedication Services rename (#8)** — `data/ServicesData.js` → `dedication-services`. Real name: *Industrial demolition, site cleanup & oil-spill response*. New slug, 301 from `/services/dedication-services`. Fix the **ORSO → OSRO** misspelling (Oil Spill Removal Organization, spelled out once) including the `/img/Orso_Img.png` heading. Drop ceremonial/memorial copy unless we still sell it. **No USCG class number.**
 2. **Training (#13)** — `Components/Header.jsx` Training menu must list the hub + all 8 courses (`data/TrainingData.js` already has all 8). Add to `/training` and each course: *"Scheduled for groups of 5+ at 36 West Q Street, Springfield; call 541-988-9823 for the next open date."* Fix `courseWorkload` `PT8H` → **`PT40H`** on the 40-hour course. Training titles may keep Eugene & Lane County.

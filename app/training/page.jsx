@@ -43,6 +43,14 @@ export default function Training() {
             County, Eugene-Springfield, and businesses across Oregon. From
             foundational awareness to advanced technician certification.
           </p>
+          <p className="text-lg lg:text-xl font-normal text-black bg-yellow-50 border-l-4 border-yellow-400 px-4 py-3 mt-6">
+            Scheduled for groups of 5 or more at 36 West Q Street, Springfield.
+            Call{" "}
+            <a href="tel:541-988-9823" className="font-semibold underline">
+              541-988-9823
+            </a>{" "}
+            for the next open date.
+          </p>
         </div>
         <TrainingList />
       </section>

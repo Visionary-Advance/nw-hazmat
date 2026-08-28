@@ -6,6 +6,10 @@ export const training = [
     id: "hazwoper-40-hour",
     slug: "hazwoper-40-hour",
     title: "HAZWOPER 40-Hour Certification",
+    // Drives courseWorkload in the Course schema. Only set where the length is
+    // verifiable - here it is stated in the course name. The other seven
+    // courses omit it pending real hours from the client (punch list #13).
+    durationHours: 40,
     img: "/img/40-Hour.jpg",
     shortDescription: "Comprehensive hazmat emergency response training and hazardous waste operations.",
     description: (

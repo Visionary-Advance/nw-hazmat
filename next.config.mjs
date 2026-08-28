@@ -55,6 +55,27 @@ const nextConfig = {
       },
 
       // ============================================
+      // Dedication Services renamed to what we actually sell (punch list #8).
+      // ============================================
+      {
+        source: '/services/dedication-services',
+        destination: '/services/industrial-demolition-site-cleanup',
+        statusCode: 301,
+      },
+
+      // ============================================
+      // Mold consolidation (punch list #14). Two indexable mold URLs were
+      // competing, and the panic page trained Google that "emergency" means
+      // black mold in Eugene, which fights the spill growth we want.
+      // /services/mold-remediation is the canonical mold page.
+      // ============================================
+      {
+        source: '/emergency-mold-removal-eugene-oregon',
+        destination: '/services/mold-remediation',
+        statusCode: 301,
+      },
+
+      // ============================================
       // Old WooCommerce product URLs: /shop/:category/:product → /shop/:product
       // ============================================
       {
