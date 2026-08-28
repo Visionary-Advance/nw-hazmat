@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ShoppingCart, Plus, Minus, CreditCard } from 'lucide-react';
 import { useCart } from './CartContext';
 import CheckoutModal from './CheckoutModal';
+import { trackBeginCheckout } from '@/lib/analytics';
 
 export default function CartSidebar() {
   const { cartItems, isCartOpen, setIsCartOpen, updateQuantity, removeFromCart, getCartTotal } = useCart();
@@ -89,7 +90,12 @@ export default function CartSidebar() {
             </div>
             
             <button
-              onClick={() => setShowCheckout(true)}
+              onClick={() => {
+                // Opening the modal is the only "entered checkout" signal —
+                // there is no /checkout pageview to count (punch list #11).
+                trackBeginCheckout(cartItems);
+                setShowCheckout(true);
+              }}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
             >
               <CreditCard className="w-4 h-4" />

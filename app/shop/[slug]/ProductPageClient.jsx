@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Breadcrumbs from '@/Components/BreadCrumbs';
 import { CartProvider } from '@/Components/CartContext';
 import CartButton from '@/Components/CartButton';
@@ -11,8 +12,15 @@ import ProductAccordion from '@/Components/ProductAccordion';
 import ProductReviews from '@/Components/ProductReviews';
 import RelatedProducts from '@/Components/RelatedProducts';
 import MobileBuyBar from '@/Components/MobileBuyBar';
+import { trackViewItem } from '@/lib/analytics';
 
 export default function ProductPageClient({ product, relatedProducts = [] }) {
+  // Declared before the not-found return so the hook order stays stable.
+  // Keyed on id so a client-side nav between PDPs re-fires (punch list #11).
+  useEffect(() => {
+    trackViewItem(product);
+  }, [product?.id]);
+
   if (!product) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">

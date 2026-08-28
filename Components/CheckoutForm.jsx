@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 import { useCart } from './CartContext';
+import { trackPurchase } from '@/lib/analytics';
 
 export default function CheckoutForm({ onSuccess }) {
   const stripe = useStripe();
@@ -440,6 +441,14 @@ export default function CheckoutForm({ onSuccess }) {
             console.error('Order creation failed:', orderError);
           }
 
+          // Fire before clearCart() — the items array is the receipt.
+          trackPurchase({
+            transactionId: paymentIntent.id,
+            items: currentItems,
+            subtotal: currentSubtotal,
+            shipping: finalShippingCost,
+          });
+
           event.complete('success');
           doClearCart();
           doOnSuccess();
@@ -611,6 +620,14 @@ export default function CheckoutForm({ onSuccess }) {
             orderErr
           );
         }
+
+        // Fire before clearCart() — the items array is the receipt.
+        trackPurchase({
+          transactionId: paymentIntent.id,
+          items: cartItems,
+          subtotal: getCartTotal(),
+          shipping: shippingCost,
+        });
 
         clearCart();
         onSuccess();
