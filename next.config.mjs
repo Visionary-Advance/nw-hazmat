@@ -274,6 +274,21 @@ const nextConfig = {
         destination: '/shop',
         permanent: true,
       },
+
+      // ============================================
+      // Dead checkout mockup (punch list #11)
+      // ============================================
+      // /checkout was an unfinished Builder.io scaffold — hardcoded "Name of
+      // Product", a Pay Now button with no handler, and raw card inputs that
+      // were never Stripe Elements. Nothing linked to it, but it served 200 and
+      // Google indexed it. The real checkout is CheckoutModal, which opens over
+      // the cart and never changes the URL. 301 rather than 404 because the URL
+      // is already in the index and /shop is where those visitors meant to go.
+      {
+        source: '/checkout',
+        destination: '/shop',
+        statusCode: 301,
+      },
     ];
   },
 };

@@ -12,11 +12,11 @@ export default function robots() {
         '/api/',          // Block API routes
         '/_next/data/',   // Block Next.js data fetches
         '/admin/',        // Block admin areas
-        // NOTE: /checkout is deliberately NOT disallowed. It carries
-        // robots: noindex via app/checkout/layout.jsx, and a disallowed URL
-        // cannot be crawled to read that tag — which is how /checkout ended up
-        // indexed in the first place (punch list #11). Allow the crawl, let the
-        // noindex remove it.
+        // NOTE: /checkout is deliberately NOT disallowed. The route is gone
+        // (it was a dead mockup) and the URL now 301s to /shop — but a
+        // disallowed URL cannot be crawled, so Google would never see the
+        // redirect and the stale entry would linger. Allow the crawl, let the
+        // 301 resolve it (punch list #11).
       ],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
