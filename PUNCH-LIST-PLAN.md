@@ -126,9 +126,21 @@ This is the #1 revenue item in the list — the spill URL simply does not exist 
 
 ---
 
-## Phase 4 — Shop recovery
+## Phase 4 — Shop recovery ⚠️ COMPLETE EXCEPT PHOTOS
 
-Punch items: **#9, #10, #12**
+Punch items: **#9 (schema done, photo pending), #10 ✅, #12 ✅**
+
+**Status:** everything except the product photography is done and build-verified.
+Jon's four named files are now 201/205/304/213 KB; **no file in `public/img` is over
+1 MB**. `alt="undefined Icon"` appears 0 times. OG image is a real 1200x630 file.
+Shop FAQ renders with FAQPage schema. Product schema emits 0 `"image":null` and
+carries US `shippingDetails`.
+
+**Photo blocker is smaller than the list implies:** a build-time audit found only
+**one** SKU actually missing an image — `5-gallon-spill-kit-bucket`. The other four
+kits Jon listed (Plug N' Dike, storm drain filter, pop-up pool, spill bags) already
+have photos. One photo unblocks #9 completely. The build logs a `[shop] No image`
+warning naming any SKU in this state.
 
 Priority 2 in the doc, but it's the direct revenue leak. Needs photo assets from Jon — start the asset request during Phase 1.
 

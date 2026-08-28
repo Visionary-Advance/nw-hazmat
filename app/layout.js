@@ -40,7 +40,7 @@ export const metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/img/Hazmat-Services.jpg",
+        url: "/img/og-default.jpg",
         width: 1200,
         height: 630,
         alt: "NorthWest HazMat professional hazmat and mold remediation services",
@@ -53,7 +53,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "NorthWest HazMat, Inc. | Professional Hazmat & Mold Remediation Services",
     description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services in the Pacific Northwest.",
-    images: ["/img/Hazmat-Services.jpg"],
+    images: ["/img/og-default.jpg"],
   },
   
   // Additional metadata
@@ -108,7 +108,7 @@ export const structuredData = {
   "telephone": "+1-541-988-9823",
   "email": "office@nwhazmat.com",
   "foundingDate": "2000",
-  "image": "https://nwhazmat.com/img/Hazmat-Services.jpg",
+  "image": "https://nwhazmat.com/img/og-default.jpg",
   "logo": "https://nwhazmat.com/img/NorthWest_HazMat_Logo.png",
   "priceRange": "$$",
   "address": {

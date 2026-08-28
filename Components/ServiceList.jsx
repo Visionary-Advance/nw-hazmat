@@ -22,7 +22,9 @@ export default function ServiceList() {
           >
             {/* IMAGE */}
             <div className="col-span-1 rounded-xl mx-auto w-auto pb-2 lg:pb-0">
-              <Image className='rounded-xl' src={item.img} alt={item.icon + " Icon"} width={150} height={70} />
+              {/* services have no `icon` field, so the old alt rendered the
+                  literal string "undefined Icon" on all eight rows. */}
+              <Image className='rounded-xl' src={item.img} alt={item.title} width={150} height={70} />
             </div>
 
             {/* Title */}
@@ -46,7 +48,8 @@ export default function ServiceList() {
             {hoveredId === item.slug && (
               <Image
                 src={item.img}
-                alt={item.title + " Image"}
+                alt=""
+                aria-hidden="true"
                 width={200}
                 height={150}
                 className="pointer-events-none absolute w-52 h-auto object-cover rounded-lg shadow-lg transition duration-300 hidden md:block"

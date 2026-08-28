@@ -23,13 +23,13 @@ export const metadata = {
     url: "https://nwhazmat.com",
     siteName: "NorthWest HazMat, Inc.",
     type: "website",
-    images: [{ url: "/img/Hazmat-Services.jpg", width: 1200, height: 630, alt: "Northwest Hazmat 24-hour spill response and hazmat cleanup across Oregon" }],
+    images: [{ url: "/img/og-default.jpg", width: 1200, height: 630, alt: "Northwest Hazmat 24-hour spill response and hazmat cleanup across Oregon" }],
   },
   twitter: {
     card: "summary_large_image",
     title: HOME_TITLE,
     description: HOME_DESCRIPTION,
-    images: ["/img/Hazmat-Services.jpg"],
+    images: ["/img/og-default.jpg"],
   },
   alternates: {
     canonical: "https://nwhazmat.com",
@@ -157,10 +157,9 @@ export default function Home() {
         />
         <div className="text-center text-white fjalla-one pt-5 pb-5 text-3xl">
           <h3 className="pb-3">Areas We Serve</h3>
-          
         </div>
-        <div className="grid place-items-center text-white w-7/12 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-2">
-          {["Lane County & Surrounding Areas",  "Pacific Northwest"].map((item, index) => (
+        <div className="grid place-items-center text-white w-7/12 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-6 lg:grid-cols-2">
+          {["24-Hour Spill Response Statewide in Oregon", "Springfield Yard & On-Site Lab"].map((item, index) => (
             <div
               className="flex flex-col items-center text-center text-3xl"
               key={index}
@@ -169,6 +168,14 @@ export default function Home() {
               <span className="font-bold">{item}</span>
             </div>
           ))}
+        </div>
+        <div className="text-center text-white pb-10 fjalla-one text-xl">
+          <Link
+            href="/oregon-spill-response-service-area"
+            className="underline hover:text-black duration-200"
+          >
+            See the Oregon cities and regions we cover
+          </Link>
         </div>
       </section>
       <section className="">

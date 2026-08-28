@@ -21,7 +21,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "https://nwhazmat.com/img/Hazmat-Services.jpg",
+        url: "https://nwhazmat.com/img/og-default.jpg",
         width: 1200,
         height: 630,
         alt: "Contact Northwest Hazmat for 24-hour spill response in Oregon",
@@ -32,7 +32,7 @@ export const metadata = {
     card: "summary_large_image",
     title: CONTACT_TITLE,
     description: CONTACT_DESCRIPTION,
-    images: ["https://nwhazmat.com/img/Hazmat-Services.jpg"],
+    images: ["https://nwhazmat.com/img/og-default.jpg"],
   },
 };
 

@@ -524,7 +524,7 @@ export const services = [
             The OSRO certification is crucial for Northwest Hazmat and when it comes to oil spill response due to its focus on public and environmental safety. It ensures that we are equipped with the necessary expertise, equipment, and resources to respond effectively to oil spills. The certification process involves rigorous evaluation by the USCG, assessing factors such as response equipment, personnel training, response planning, and financial capability. Northwest Hazmat meets the OSRO certification requirements our crews can mobilize and deploy resources quickly in the event of an oil spill, significantly reducing response times and limiting the spread of oil. This proactive approach helps minimize the long-term environmental, economic, and social impacts of oil spills, safeguarding both natural resources and human livelihoods. Our response teams are trained in <Link href="/training/spill-response-training" className="text-blue-600 hover:underline">specialized spill response techniques</Link> and maintain current <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER certifications</Link>.
           </>
         ),
-        img: "/img/Orso_Img.png"
+        img: "/img/Orso_Img.jpg"
       },
     ]
   }

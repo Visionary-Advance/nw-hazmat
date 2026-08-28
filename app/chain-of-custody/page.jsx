@@ -17,7 +17,7 @@ export const metadata = {
     locale: 'en_US',
     images: [
       {
-        url: 'https://nwhazmat.com/img/Hazmat-Services.jpg',
+        url: 'https://nwhazmat.com/img/og-default.jpg',
         width: 1200,
         height: 630,
         alt: 'NorthWest HazMat Chain of Custody form',

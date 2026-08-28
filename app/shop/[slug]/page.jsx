@@ -46,7 +46,7 @@ export async function generateMetadata({ params }) {
         type: 'website',
         images: [
           {
-            url: product.image || 'https://nwhazmat.com/img/Hazmat-Services.jpg',
+            url: product.image || 'https://nwhazmat.com/img/og-default.jpg',
             width: 800,
             height: 600,
             alt: product.name,
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }) {
         card: 'summary_large_image',
         title: `${product.name} | NorthWest HazMat`,
         description,
-        images: [product.image || 'https://nwhazmat.com/img/Hazmat-Services.jpg'],
+        images: [product.image || 'https://nwhazmat.com/img/og-default.jpg'],
       },
       alternates: {
         canonical: `https://nwhazmat.com/shop/${slug}`,
@@ -90,20 +90,47 @@ export default async function ProductPage({ params }) {
       .filter((p) => p.id !== product.id && p.category === product.category && p.inStock)
       .slice(0, 4);
 
+    // Real product photos only. Previously this emitted "image": null when a
+    // product had no photo in Stripe, which fails Product rich-results
+    // validation outright (punch list #9). Omitting the property is still not
+    // eligible for rich results, but it is at least valid, and it stops being
+    // a problem the moment a real photo is uploaded to Stripe.
+    const productImages = (
+      product.images?.length ? product.images : [product.image]
+    ).filter(Boolean);
+
+    if (productImages.length === 0) {
+      // Surfaces in the build log so it is obvious which SKUs still need a
+      // photo before they can win a Product rich result.
+      console.warn(
+        `[shop] No image for "${product.name}" (${slug}) — Product schema will omit image and cannot earn a rich result until a photo is added in Stripe.`
+      );
+    }
+
     // Server-side structured data for reliable SEO
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Product",
       "name": product.name,
       "description": product.description,
-      "image": product.images?.length ? product.images : product.image,
+      ...(productImages.length > 0 && { image: productImages }),
       "sku": product.id,
       "category": product.category,
       "offers": {
         "@type": "Offer",
+        "url": `https://nwhazmat.com/shop/${slug}`,
         "price": product.price,
         "priceCurrency": product.currency?.toUpperCase() || "USD",
         "availability": product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        // The shop ships nationwide via UPS; spelling that out in the offer
+        // is what makes the listing eligible outside Oregon (punch list #10).
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "US"
+          }
+        },
         "seller": {
           "@type": "Organization",
           "name": "NorthWest HazMat, Inc.",

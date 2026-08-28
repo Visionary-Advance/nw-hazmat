@@ -22,7 +22,7 @@ export const metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/img/Hazmat-Services.jpg",
+        url: "/img/og-default.jpg",
         width: 1200,
         height: 630,
         alt: "NorthWest HazMat Blog",
@@ -34,7 +34,7 @@ export const metadata = {
     title: "Blog | NorthWest HazMat, Inc.",
     description:
       "Latest news and insights on hazmat services, mold remediation, and environmental safety.",
-    images: ["/img/Hazmat-Services.jpg"],
+    images: ["/img/og-default.jpg"],
   },
 };
 
