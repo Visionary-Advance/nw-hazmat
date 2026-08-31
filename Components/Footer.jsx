@@ -27,6 +27,14 @@ export default function Footer() {
             <div className="flex items-center space-x-2">
               <Phone className="w-5 h-5 text-gray-700" />
               <a href="tel:541-988-9823" className="hover:underline">(541)-988-9823</a>
+              <span className="text-gray-400">office</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Phone className="w-5 h-5 text-[#008070]" />
+              <a href="tel:1-800-597-1323" className="font-semibold hover:underline">
+                1-800-597-1323
+              </a>
+              <span className="text-gray-500">24-hour spill line</span>
             </div>
             <div className="flex items-right space-x-2">
               <MapPin className="w-5 h-5 text-gray-700" />
@@ -44,11 +52,44 @@ export default function Footer() {
           </div>
         </div>
 
-        
+
+        {/* Licensing / credential line. Oregon expects the CCB number on
+            advertising, and the GSA contract number is what wins bids — both
+            must be readable without opening the JSON-LD. Do not add 8(a),
+            WOSB, or WBENC here without a current certificate on file. */}
+        <div className="border-t border-gray-300 my-6"></div>
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-gray-600 text-center">
+          <a
+            href="https://search.ccb.state.or.us/search/business_details.aspx?id=141189"
+            target="_blank"
+            rel="nofollow noreferrer"
+            className="hover:underline"
+          >
+            CCB #141189
+          </a>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://www.gsaelibrary.gsa.gov/ElibMain/contractorInfo.do?contractNumber=47QRAA26D002R"
+            target="_blank"
+            rel="nofollow noreferrer"
+            className="hover:underline"
+          >
+            GSA MAS 47QRAA26D002R
+          </a>
+          <span aria-hidden="true">·</span>
+          <span>Small Business</span>
+          <span aria-hidden="true">·</span>
+          <span>Female-owned</span>
+          <span aria-hidden="true">·</span>
+          <span>36 West Q Street, Springfield, OR 97477</span>
+        </div>
+
         {/* Copyright */}
         <div className="border-t border-gray-300 my-6"></div>
         <div className="flex flex-col md:flex-row items-center justify-between text-gray-500 text-sm">
         <div className="flex flex-wrap justify-center gap-6 text-sm">
+          <Link href="/24-hour-spill-response-oregon" className="hover:underline">24-Hour Spill Response</Link>
+          <Link href="/oregon-spill-response-service-area" className="hover:underline">Oregon service area</Link>
           <Link href="/about" className="hover:underline">About Us</Link>
           <Link href="/shop" className="hover:underline">Shop</Link>
           <Link href="/contact" className="hover:underline">Contact Us</Link>

@@ -8,23 +8,28 @@ import StatsCard from "@/Components/CountUp";
 import TestimonialSlider from "@/Components/ReviewSlide";
 import EmploymentSection from "@/Components/EmploymentSection";
 
+const HOME_TITLE =
+  "24-Hour Spill Response Oregon | Hazmat Cleanup Statewide | Northwest Hazmat";
+const HOME_DESCRIPTION =
+  "24-hour spill response and hazmat cleanup anywhere in Oregon. Diesel, chemical, and transport spills handled statewide from our Springfield yard. Call 1-800-597-1323.";
+
 export const metadata = {
-  title: "NorthWest HazMat | Hazmat Services Eugene Oregon",
-  description: "Oregon's trusted hazmat & environmental services since 2000. Emergency response, mold remediation, asbestos testing & more in Eugene. Call 541-988-9823.",
-  keywords: "northwest hazmat, nw hazmat eugene, nw hazmat, hazmat services eugene, hazmat services oregon, mold remediation eugene, asbestos testing eugene, environmental services lane county",
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  keywords: "spill response oregon, 24 hour hazmat oregon, emergency spill response oregon, hazmat cleanup oregon, diesel spill oregon, chemical spill cleanup oregon, transport spill response, emergency spill portland salem eugene medford, hazmat services oregon",
   openGraph: {
-    title: "NorthWest HazMat | Hazmat Services Eugene Oregon",
-    description: "Oregon's trusted hazmat & environmental services since 2000. Emergency response, mold remediation, asbestos testing & more in Eugene.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     url: "https://nwhazmat.com",
     siteName: "NorthWest HazMat, Inc.",
     type: "website",
-    images: [{ url: "/img/Hazmat-Services.jpg", width: 1200, height: 630, alt: "NorthWest HazMat - Professional hazmat services in Eugene, Oregon" }],
+    images: [{ url: "/img/og-default.jpg", width: 1200, height: 630, alt: "Northwest Hazmat 24-hour spill response and hazmat cleanup across Oregon" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NorthWest HazMat | Hazmat Services Eugene Oregon",
-    description: "Oregon's trusted hazmat & environmental services since 2000. Emergency response, mold remediation, asbestos testing & more in Eugene.",
-    images: ["/img/Hazmat-Services.jpg"],
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: ["/img/og-default.jpg"],
   },
   alternates: {
     canonical: "https://nwhazmat.com",
@@ -56,32 +61,46 @@ export default function Home() {
         </div>
         <div className="col-span-1 pt-4 ps-2 relative lg:pt-12 flex flex-col">
           <h1 className="fjalla-one leading-tight text-4xl lg:text-5xl">
-           Oregon's Leading Environmental Solutions Provider
-
+            24-Hour Spill Response and Hazmat Services Across Oregon
           </h1>
           <p className="w-11/12 lg:w-7/12 text-lg lg:text-xl pt-5 poppins">
-            NorthWest HazMat (NW HazMat) is a trusted full-service provider based in Eugene, Oregon, serving Lane County and the Pacific Northwest. We offer expert services including hazardous materials handling and disposal, asbestos testing and analysis, soil restoration, biohazard cleanup, waste management consulting,
- and more. Committed to safety, compliance, and sustainable results, we protect communities and businesses throughout Oregon and Washington.
+            NorthWest HazMat (NW HazMat) runs 24-hour spill and hazmat response
+            anywhere in Oregon &mdash; diesel, hydraulic, chemical, transport and
+            tanker, unknown substance, storm-drain, and facility spills. We work
+            from our yard at 36 West Q Street in Springfield and roll statewide,
+            from Portland and Salem to Eugene&ndash;Springfield, Bend, and Medford.
+            We also handle hazardous materials disposal, asbestos testing and lab
+            analysis, soil restoration, biohazard cleanup, and waste management
+            consulting. Female-owned and serving Oregon since 2000.
           </p>
 
-          <div className="flex justify-center lg:justify-normal space-x-2 mt-auto pt-6">
-            <Link href="/shop">
+          <div className="flex flex-wrap justify-center lg:justify-normal gap-2 mt-auto pt-6">
+            {/* Spill response is the primary path off the hero (punch list #2). */}
+            <Link href="/24-hour-spill-response-oregon">
             <Button
-              text={"Shop Now"}
+              text={"24-Hour Spill Response"}
               color={
                 "bg-red-600 hover:bg-white hover:text-red-600 text-white border border-red-600 arial-bold duration-200 "
               }
             />
             </Link>
-            <Link href="tel:541-988-9823">
+            <Link href="tel:1-800-597-1323">
             <Button
               text={
                 <span className="flex items-center gap-2 arial-bold">
-                  <FaPhone /> Call Us
+                  <FaPhone /> 1-800-597-1323
                 </span>
               }
               color={
                 "bg-white hover:bg-red-600 hover:text-white text-red-600 border border-red-600 duration-200 "
+              }
+            />
+            </Link>
+            <Link href="/shop">
+            <Button
+              text={"Shop Now"}
+              color={
+                "bg-white hover:bg-black hover:text-white text-black border border-black arial-bold duration-200 "
               }
             />
             </Link>
@@ -138,10 +157,9 @@ export default function Home() {
         />
         <div className="text-center text-white fjalla-one pt-5 pb-5 text-3xl">
           <h3 className="pb-3">Areas We Serve</h3>
-          
         </div>
-        <div className="grid place-items-center text-white w-7/12 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-10 lg:grid-cols-2">
-          {["Lane County & Surrounding Areas",  "Pacific Northwest"].map((item, index) => (
+        <div className="grid place-items-center text-white w-7/12 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-6 lg:grid-cols-2">
+          {["24-Hour Spill Response Statewide in Oregon", "Springfield Yard & On-Site Lab"].map((item, index) => (
             <div
               className="flex flex-col items-center text-center text-3xl"
               key={index}
@@ -150,6 +168,14 @@ export default function Home() {
               <span className="font-bold">{item}</span>
             </div>
           ))}
+        </div>
+        <div className="text-center text-white pb-10 fjalla-one text-xl">
+          <Link
+            href="/oregon-spill-response-service-area"
+            className="underline hover:text-black duration-200"
+          >
+            See the Oregon cities and regions we cover
+          </Link>
         </div>
       </section>
       <section className="">

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, createContext, useContext, useEffect } from 'react';
+import { trackAddToCart } from '@/lib/analytics';
 
 // Create Cart Context
 const CartContext = createContext();
@@ -41,6 +42,9 @@ export function CartProvider({ children }) {
 
   const addToCart = (product, quantity = 1) => {
     const qty = Math.max(1, parseInt(quantity, 10) || 1);
+    // Every add-to-cart button in the app funnels through here, so this is the
+    // one place the GA4 event has to live (punch list #11).
+    trackAddToCart(product, qty);
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === product.id);
       if (existingItem) {

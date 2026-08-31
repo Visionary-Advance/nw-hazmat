@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
 
   const ogImage = post.mainImage
     ? urlFor(post.mainImage).width(1200).height(630).auto("format").url()
-    : "/img/Hazmat-Services.jpg";
+    : "/img/og-default.jpg";
 
   return {
     title: `${post.title} | NorthWest HazMat Blog`,

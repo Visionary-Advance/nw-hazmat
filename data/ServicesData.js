@@ -4,19 +4,20 @@ export const services = [
   {
     id: "hazmat-services",
     title: "Hazmat Services",
+    h1: "24/7 Emergency Hazmat and Spill Response in Oregon",
     slug: "hazmat-services",
     img: "/img/Hazmat-Services.jpg",
-    metaTitle: "24/7 Hazmat Services Eugene OR | NorthWest HazMat",
-    metaDescription: "Licensed hazmat response in Eugene, Oregon. 24/7 emergency spills, containment & disposal. Serving Lane County since 2000. Call 541-988-9823 today.",
+    metaTitle: "24/7 Hazmat & Spill Response Oregon | Portland to Medford | Northwest Hazmat",
+    metaDescription: "Licensed 24-hour hazmat and spill response anywhere in Oregon, from Portland and Salem to Eugene-Springfield, Bend, and Medford. Based in Springfield since 2000. Call 1-800-597-1323.",
     shortDescription: "Expert hazmat handling, containment, and disposal to protect your environment and ensure safety.",
     description: (
       <>
         Our hazardous materials services provide complete solutions for the safe handling, transport, disposal, and remediation of dangerous substances. We specialize in emergency hazmat response, hazardous waste disposal, chemical spill cleanup, <Link href="/training/hazmat-technician" className="text-blue-600 hover:underline">hazmat training</Link>, and compliance consulting. Backed by certifications and strict adherence to OSHA, EPA, and DOT regulations, our certified hazmat contractors are equipped to protect people, property, and the environment from harmful exposures.
       </>
     ),
-    keywords: ["hazmat services Oregon", "hazardous materials", "emergency hazmat"],
+    keywords: ["24-hour spill response Oregon", "emergency hazmat cleanup Oregon", "hazmat services Oregon", "chemical spill cleanup Oregon"],
     eButton: true,
-    callToAction: "Call our 24/7 Response Line: (XXX) XXX-XXXX",
+    callToAction: "Call our 24/7 Response Line: 1-800-597-1323",
     pageInfo: [
       {
         title: "24/7 Emergency Spill Response",
@@ -66,8 +67,8 @@ export const services = [
     title: "Lab Services",
     slug: "lab-services",
     img: "/img/Lab-Testing.jpg",
-    metaTitle: "Asbestos & Environmental Lab Testing | Eugene OR",
-    metaDescription: "Fast, accurate asbestos testing & environmental lab analysis in Eugene, Oregon. Local results, no out-of-state delays. Free quotes — call 541-988-9823.",
+    metaTitle: "Asbestos & Environmental Lab Testing Oregon | Springfield Lab",
+    metaDescription: "Fast, accurate asbestos testing and environmental lab analysis at our Springfield, Oregon lab. In-state results, no out-of-state delays. Free quotes — call 541-988-9823.",
     shortDescription: "Accurate asbestos testing and lab analysis to identify hazards and ensure safe removal.",
     description: (
       <>
@@ -127,11 +128,11 @@ export const services = [
     faqData: [
       {
         question: "What types of environmental testing do you offer?",
-        answer: "We offer asbestos testing (PLM and TEM analysis), mold and microbial testing, soil and groundwater analysis, air quality monitoring, and hazardous materials identification. All testing is performed in our local Eugene, Oregon lab for faster turnaround."
+        answer: "We offer asbestos testing (PLM and TEM analysis), mold and microbial testing, soil and groundwater analysis, air quality monitoring, and hazardous materials identification. All testing is performed in our own lab at 36 West Q Street in Springfield, Oregon, for faster turnaround."
       },
       {
         question: "How fast can I get lab results?",
-        answer: "Standard turnaround is 3-5 business days. Rush services are available for time-sensitive projects like real estate transactions or renovation deadlines. Because our lab is local in Eugene, you avoid the delays of sending samples out of state."
+        answer: "Standard turnaround is 3-5 business days. Rush services are available for time-sensitive projects like real estate transactions or renovation deadlines. Because our lab is here in Springfield, you avoid the delays of sending samples out of state."
       },
       {
         question: "Do you provide chain-of-custody documentation?",
@@ -153,7 +154,7 @@ export const services = [
     shortDescription: "Professional mold removal to prevent health risks, improve air quality, and protect property.",
     description: (
       <>
-        Mold is a health hazard and a sign of deeper moisture issues that can damage structures and air quality. At Northwest Hazmat, we offer expert mold remediation for residential, commercial, and institutional properties throughout Oregon. Our certified specialists locate the source, contain the spread, and remove mold completely using industry-best practices. With advanced tools and attention to detail, we ensure your space is safe, clean, and protected from future growth. We provide mold remediation services throughout Eugene-Springfield and Lane County. All our work begins with comprehensive <Link href="/services/lab-services" className="text-blue-600 hover:underline">lab testing and analysis</Link> to identify the extent of contamination, or get help fast with <Link href="/emergency-mold-removal-eugene-oregon" className="text-blue-600 hover:underline">24/7 emergency black mold removal</Link>.
+        Mold is a health hazard and a sign of deeper moisture issues that can damage structures and air quality. At Northwest Hazmat, we offer expert mold remediation for residential, commercial, and institutional properties throughout Oregon. Our certified specialists locate the source, contain the spread, and remove mold completely using industry-best practices. With advanced tools and attention to detail, we ensure your space is safe, clean, and protected from future growth. We provide mold remediation services throughout Eugene-Springfield and Lane County. All our work begins with comprehensive <Link href="/services/lab-services" className="text-blue-600 hover:underline">lab testing and analysis</Link> to identify the extent of contamination. For an urgent hazmat or spill emergency, our <Link href="/24-hour-spill-response-oregon" className="text-blue-600 hover:underline">24-hour response line</Link> is staffed around the clock.
       </>
     ),
     keywords: ["mold remediation Oregon", "black mold removal"],
@@ -396,9 +397,9 @@ export const services = [
     title: "Hazardous Waste Disposal & Consulting",
     slug: "waste-management-consulting",
     img: "/img/Managment-Services.jpg",
-    metaTitle: "Hazardous Waste Disposal Eugene Oregon | Lane County",
-    metaDescription: "Licensed hazardous waste disposal, transportation, and consulting in Eugene-Springfield and Lane County, Oregon. EPA/DOT compliant. Call 541-988-9823.",
-    shortDescription: "Expert hazardous waste disposal and consulting in Eugene, Oregon — project management, transport, and compliance solutions.",
+    metaTitle: "Hazardous Waste Disposal & Consulting Oregon | Northwest Hazmat",
+    metaDescription: "Licensed hazardous waste disposal, transportation, and consulting across Oregon. EPA/DOT compliant, based in Springfield. Call 541-988-9823.",
+    shortDescription: "Expert hazardous waste disposal and consulting across Oregon — project management, transport, and compliance solutions.",
     description: (
       <>
         Hazardous waste disposal is highly regulated and logistically complex. Northwest Hazmat offers professional waste management solutions that help clients navigate compliance and reduce risk. Our hazardous waste consultants evaluate your waste streams, recommend best practices, and handle transportation and disposal with complete documentation. As experienced hazardous waste consultants, our team is designed to improve operational safety, reduce environmental liability, and ensure all protocols meet local, state, and federal requirements. Our hazardous waste consultants include certified experts trained in <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER standards</Link> and emergency response.
@@ -446,20 +447,21 @@ export const services = [
     ]
   },
   {
-    id: "dedication-services",
-    title: "Dedication Services",
-    slug: "dedication-services",
+    id: "industrial-demolition-site-cleanup",
+    title: "Industrial Demolition & Site Cleanup",
+    h1: "Industrial Demolition, Site Cleanup & Oil-Spill Response",
+    slug: "industrial-demolition-site-cleanup",
     img: "/img/Dedication-Services.jpg",
-    metaTitle: "Dedication & Ceremonial Space Cleaning | Eugene, Oregon",
-    metaDescription: "Professional cleaning and restoration for dedication and ceremonial spaces in Eugene & Lane County, Oregon — memorials, worship sites, and more. Call 541-988-9823.",
-    shortDescription: "Committed to delivering safe, high-quality solutions for every project.",
+    metaTitle: "Industrial Demolition & Site Cleanup Oregon | Northwest Hazmat",
+    metaDescription: "Industrial and commercial demolition, excavation, debris and site cleanup, property clear-out, and oil-spill response across Oregon. Based in Springfield. Call 541-988-9823.",
+    shortDescription: "Demolition, excavation, debris removal, and site cleanup, including oil-spill response.",
     description: (
       <>
-        Respect and cleanliness go hand-in-hand when preparing for a dedication or ceremonial event. Northwest Hazmat offers professional cleaning and restoration services tailored to sacred, historical, or emotionally significant spaces. Whether you're hosting a memorial, reclaiming a site for community use, or preparing a space of worship, we bring precision, care, and professionalism to every detail. Our comprehensive services range from basic cleanup to full restoration, and we work closely with our <Link href="/services/mold-remediation" className="text-blue-600 hover:underline">mold remediation</Link> and <Link href="/services/biohazard-cleanup" className="text-blue-600 hover:underline">biohazard cleanup</Link> teams when specialized decontamination is needed.
+        Northwest Hazmat handles demolition and site cleanup work from start to finish: tearing down residential, commercial, and industrial structures, excavation and dirt work, debris removal and disposal, and clearing properties that have been left in poor condition. We also respond to oil spills. Where a site needs specialized decontamination we bring in our <Link href="/services/mold-remediation" className="text-blue-600 hover:underline">mold remediation</Link> and <Link href="/services/biohazard-cleanup" className="text-blue-600 hover:underline">biohazard cleanup</Link> teams, and all debris is routed through proper <Link href="/services/waste-management-consulting" className="text-blue-600 hover:underline">waste management</Link> and disposal.
       </>
     ),
-    keywords: ["dedication cleaning Oregon", "ceremonial site preparation"],
-    callToAction: "Contact us for respectful and professional dedication services.",
+    keywords: ["industrial demolition Oregon", "site cleanup Oregon", "excavation and debris removal", "oil spill response Oregon"],
+    callToAction: "Contact us about demolition, site cleanup, and oil-spill response.",
     pageInfo: [
       {
         title: "Demolition",
@@ -517,13 +519,20 @@ export const services = [
         img: ""
       },
       {
-        title: "ORSO",
+        // PENDING CLIENT CONFIRMATION (punch list #8): the previous copy here
+        // asserted that Northwest Hazmat "meets the OSRO certification
+        // requirements" and had been through "rigorous evaluation by the USCG".
+        // Section E of the punch list forbids claiming OSRO classifications not
+        // supplied in writing, so that assertion has been removed rather than
+        // just respelled. If Jon provides the USCG OSRO classification, the
+        // claim can go back in with the specific class named.
+        title: "Oil-Spill Response",
         description: (
           <>
-            The OSRO certification is crucial for Northwest Hazmat and when it comes to oil spill response due to its focus on public and environmental safety. It ensures that we are equipped with the necessary expertise, equipment, and resources to respond effectively to oil spills. The certification process involves rigorous evaluation by the USCG, assessing factors such as response equipment, personnel training, response planning, and financial capability. Northwest Hazmat meets the OSRO certification requirements our crews can mobilize and deploy resources quickly in the event of an oil spill, significantly reducing response times and limiting the spread of oil. This proactive approach helps minimize the long-term environmental, economic, and social impacts of oil spills, safeguarding both natural resources and human livelihoods. Our response teams are trained in <Link href="/training/spill-response-training" className="text-blue-600 hover:underline">specialized spill response techniques</Link> and maintain current <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER certifications</Link>.
+            An Oil Spill Removal Organization, or OSRO, is a responder resourced to contain and recover oil spills, judged on response equipment, personnel training, response planning, and financial capability. That is the standard we work to when we respond to an oil spill: containing the release, protecting waterways and storm drains, recovering product, and handling the contaminated material afterward. Our response teams are trained in <Link href="/training/spill-response-training" className="text-blue-600 hover:underline">specialized spill response techniques</Link> and maintain current <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER certifications</Link>. For a spill in progress anywhere in Oregon, call our <Link href="/24-hour-spill-response-oregon" className="text-blue-600 hover:underline">24-hour spill line</Link>.
           </>
         ),
-        img: "/img/Orso_Img.png"
+        img: "/img/Orso_Img.jpg"
       },
     ]
   }

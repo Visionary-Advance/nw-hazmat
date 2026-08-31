@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 import { useCart } from './CartContext';
 import { track, trackRevenue, identifyUser } from '@/lib/amplitude';
+import { trackPurchase } from '@/lib/analytics';
 
 export default function CheckoutForm({ onSuccess }) {
   const stripe = useStripe();
@@ -441,6 +442,9 @@ export default function CheckoutForm({ onSuccess }) {
             console.error('Order creation failed:', orderError);
           }
 
+          // Fire before clearCart() — the items array is the receipt.
+          // Amplitude (product analytics) and GA4 (the revenue report Jon
+          // reads) both fire here on purpose; they are different consumers.
           track('Purchase', {
             paymentIntentId: paymentIntent.id,
             paymentMethod: 'apple_google_pay',
@@ -451,6 +455,12 @@ export default function CheckoutForm({ onSuccess }) {
           });
           trackRevenue({ price: finalTotal, revenueType: 'purchase', productId: paymentIntent.id });
           if (event.payerEmail) identifyUser(event.payerEmail);
+          trackPurchase({
+            transactionId: paymentIntent.id,
+            items: currentItems,
+            subtotal: currentSubtotal,
+            shipping: finalShippingCost,
+          });
 
           event.complete('success');
           doClearCart();
@@ -624,6 +634,9 @@ export default function CheckoutForm({ onSuccess }) {
           );
         }
 
+        // Fire before clearCart() — the items array is the receipt.
+        // Amplitude (product analytics) and GA4 (the revenue report Jon
+        // reads) both fire here on purpose; they are different consumers.
         track('Purchase', {
           paymentIntentId: paymentIntent.id,
           paymentMethod: 'card',
@@ -634,6 +647,12 @@ export default function CheckoutForm({ onSuccess }) {
         });
         trackRevenue({ price: total, revenueType: 'purchase', productId: paymentIntent.id });
         if (customerInfo.email) identifyUser(customerInfo.email);
+        trackPurchase({
+          transactionId: paymentIntent.id,
+          items: cartItems,
+          subtotal: getCartTotal(),
+          shipping: shippingCost,
+        });
 
         clearCart();
         onSuccess();

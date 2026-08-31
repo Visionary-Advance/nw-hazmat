@@ -6,15 +6,20 @@ export default async function sitemap() {
 
   // Core pages
   const routes = [
-    { url: `${baseUrl}/`,              lastModified: new Date(), changeFrequency: 'yearly',  priority: 1.0 },
+    // changeFrequency weekly until the new titles settle (punch list #16).
+    { url: `${baseUrl}/`,              lastModified: new Date(), changeFrequency: 'weekly',  priority: 1.0 },
+    // Priority 1 growth pages (punch list #2, #3).
+    { url: `${baseUrl}/24-hour-spill-response-oregon`,        lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${baseUrl}/oregon-spill-response-service-area`,   lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/about`,         lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/shop`,          lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${baseUrl}/contact`,       lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/blog`,           lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${baseUrl}/services`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/training`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    // Standalone landing pages
-    { url: `${baseUrl}/emergency-mold-removal-eugene-oregon`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    // Standalone landing pages.
+    // /emergency-mold-removal-eugene-oregon was removed and 301s to
+    // /services/mold-remediation, the canonical mold URL (punch list #14).
     { url: `${baseUrl}/employment-application`,               lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${baseUrl}/chain-of-custody`,                     lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${baseUrl}/privacy-policy`,                       lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.3 },

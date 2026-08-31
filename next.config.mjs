@@ -25,6 +25,57 @@ const nextConfig = {
   async redirects() {
     return [
       // ============================================
+      // Spill URLs that were 404ing. These slugs were the ones people and
+      // search engines were already asking for, with no page behind them
+      // (punch list #2). They now land on the 24-hour spill page.
+      //
+      // statusCode: 301 rather than permanent: true, which emits 308. The
+      // client asked for 301 specifically. Google treats the two the same, but
+      // 301 is the better-understood signal across other crawlers and tools.
+      // ============================================
+      {
+        source: '/spill-response-springfield',
+        destination: '/24-hour-spill-response-oregon',
+        statusCode: 301,
+      },
+      {
+        source: '/emergency-spill-response',
+        destination: '/24-hour-spill-response-oregon',
+        statusCode: 301,
+      },
+      {
+        source: '/diesel-spill',
+        destination: '/24-hour-spill-response-oregon',
+        statusCode: 301,
+      },
+      {
+        source: '/services/spill-response',
+        destination: '/24-hour-spill-response-oregon',
+        statusCode: 301,
+      },
+
+      // ============================================
+      // Dedication Services renamed to what we actually sell (punch list #8).
+      // ============================================
+      {
+        source: '/services/dedication-services',
+        destination: '/services/industrial-demolition-site-cleanup',
+        statusCode: 301,
+      },
+
+      // ============================================
+      // Mold consolidation (punch list #14). Two indexable mold URLs were
+      // competing, and the panic page trained Google that "emergency" means
+      // black mold in Eugene, which fights the spill growth we want.
+      // /services/mold-remediation is the canonical mold page.
+      // ============================================
+      {
+        source: '/emergency-mold-removal-eugene-oregon',
+        destination: '/services/mold-remediation',
+        statusCode: 301,
+      },
+
+      // ============================================
       // Old WooCommerce product URLs: /shop/:category/:product → /shop/:product
       // ============================================
       {
@@ -222,6 +273,21 @@ const nextConfig = {
         source: '/shop/page/:num',
         destination: '/shop',
         permanent: true,
+      },
+
+      // ============================================
+      // Dead checkout mockup (punch list #11)
+      // ============================================
+      // /checkout was an unfinished Builder.io scaffold — hardcoded "Name of
+      // Product", a Pay Now button with no handler, and raw card inputs that
+      // were never Stripe Elements. Nothing linked to it, but it served 200 and
+      // Google indexed it. The real checkout is CheckoutModal, which opens over
+      // the cart and never changes the URL. 301 rather than 404 because the URL
+      // is already in the index and /shop is where those visitors meant to go.
+      {
+        source: '/checkout',
+        destination: '/shop',
+        statusCode: 301,
       },
     ];
   },

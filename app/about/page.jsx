@@ -1,15 +1,20 @@
 import AboutClient from "./AboutClient";
 
+const ABOUT_TITLE =
+  "About Northwest Hazmat | Springfield, Oregon | Statewide Spill Response Since 2000";
+const ABOUT_DESCRIPTION =
+  "Female-owned environmental and hazmat company based at 36 West Q Street, Springfield, Oregon since 2000. 24-hour spill response statewide, on-site lab, CCB #141189.";
+
 export const metadata = {
-  title: "About NorthWest HazMat | 25+ Years Serving Oregon Since 2000",
-  description: "Female-owned environmental company serving Lane County since 2000. Hazmat response, mold remediation & environmental management in Eugene-Springfield, OR.",
-  keywords: "about northwest hazmat, female owned hazmat company, eugene oregon environmental services, lane county hazmat, hazmat company history",
+  title: ABOUT_TITLE,
+  description: ABOUT_DESCRIPTION,
+  keywords: "about northwest hazmat, female owned hazmat company, springfield oregon environmental services, oregon spill response company, hazmat company history",
   alternates: {
     canonical: "https://nwhazmat.com/about",
   },
   openGraph: {
-    title: "About NorthWest HazMat, Inc.",
-    description: "Female-owned environmental company serving Lane County since 2000. Professional hazmat response and environmental management services.",
+    title: ABOUT_TITLE,
+    description: ABOUT_DESCRIPTION,
     url: "https://nwhazmat.com/about",
     siteName: "NorthWest HazMat, Inc.",
     type: "website",
@@ -18,14 +23,14 @@ export const metadata = {
         url: "https://nwhazmat.com/img/About_Header.jpg",
         width: 1200,
         height: 630,
-        alt: "NorthWest HazMat team providing environmental services",
+        alt: "Northwest Hazmat team providing environmental services in Oregon",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "About NorthWest HazMat | 25+ Years Experience",
-    description: "Female-owned environmental company serving Lane County since 2000.",
+    title: ABOUT_TITLE,
+    description: ABOUT_DESCRIPTION,
     images: ["https://nwhazmat.com/img/About_Header.jpg"],
   },
 };

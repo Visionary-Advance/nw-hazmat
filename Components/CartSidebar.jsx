@@ -5,6 +5,7 @@ import { ShoppingCart, Plus, Minus, CreditCard } from 'lucide-react';
 import { useCart } from './CartContext';
 import CheckoutModal from './CheckoutModal';
 import { track } from '@/lib/amplitude';
+import { trackBeginCheckout } from '@/lib/analytics';
 
 export default function CartSidebar() {
   const { cartItems, isCartOpen, setIsCartOpen, updateQuantity, removeFromCart, getCartTotal } = useCart();
@@ -91,10 +92,15 @@ export default function CartSidebar() {
             
             <button
               onClick={() => {
+                // Opening the modal is the only "entered checkout" signal —
+                // there is no /checkout pageview to count (punch list #11).
+                // Amplitude for product analytics, GA4 for the revenue report
+                // Jon reads; both are intentional, not a duplicate.
                 track('Begin Checkout', {
                   itemCount: cartItems.reduce((n, i) => n + (i.quantity || 1), 0),
                   total: getCartTotal(),
                 });
+                trackBeginCheckout(cartItems);
                 setShowCheckout(true);
               }}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"

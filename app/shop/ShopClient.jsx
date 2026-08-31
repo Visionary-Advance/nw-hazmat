@@ -11,6 +11,38 @@ import { CartProvider } from "@/Components/CartContext";
 import { ProductSkeletonGrid } from "@/Components/ProductSkeleton";
 import { useProducts } from "@/hooks/useProducts";
 import ProductLink, { createProductSlug } from "@/Components/ProductLink";
+import Link from "next/link";
+import FAQ from "@/Components/FAQ";
+
+// Kept plain-text so the FAQ component can lift these straight into FAQPage
+// JSON-LD (punch list #10).
+const shopFaqData = [
+  {
+    question: "How long does shipping take?",
+    answer:
+      "Orders are picked and packed at our Springfield, Oregon yard and ship via UPS anywhere in the United States. Most in-stock items leave within one to two business days, and UPS transit time depends on your destination and the service level you choose at checkout. If you need something urgently, call 541-988-9823 before ordering and we will tell you what is realistic.",
+  },
+  {
+    question: "Can I pick up my order in Springfield instead of shipping?",
+    answer:
+      "Yes. We are at 36 West Q Street, Springfield, Oregon 97477, and you are welcome to collect an order at the yard during office hours, Monday through Friday, 8:00 a.m. to 5:00 p.m. Call 541-988-9823 first so we can have it staged and confirm the item is on the shelf.",
+  },
+  {
+    question: "What is in the 5-gallon spill kit bucket?",
+    answer:
+      "It is a general-purpose absorbent kit sized for vehicles, shop floors, and small releases, packed in a sealed 5-gallon bucket so it can live in a truck or next to equipment. Exact contents can vary as we restock, so check the product page for the current pack list, or call 541-988-9823 and we will read you exactly what is in the one on the shelf.",
+  },
+  {
+    question: "Do you ship outside Oregon?",
+    answer:
+      "Yes. The shop ships nationwide across the United States. You do not need to be an Oregon customer to order spill kits or responder gear from us. Our 24-hour spill response crews, by contrast, work within Oregon.",
+  },
+  {
+    question: "Do you supply spill kits for a job you are responding to?",
+    answer:
+      "Yes. If we are on site for a spill, restocking your response supplies can be handled as part of the job. Call the 24-hour line at 1-800-597-1323.",
+  },
+];
 
 function isInquireOnly(product) {
   const flag = product?.metadata?.inquireOnly;
@@ -64,6 +96,17 @@ export default function ShopClient({ initialProducts = [] }) {
           <p className="text-gray-600 text-lg">
             Shop spill response kits, PPE, training simulators, and environmental
             safety gear with fast nationwide shipping across the USA.
+          </p>
+          <p className="text-gray-600 text-base pt-4">
+            We ship spill kits and responder gear anywhere in the United States
+            from our yard in Springfield, Oregon. Oregon customers who need{" "}
+            <Link
+              href="/24-hour-spill-response-oregon"
+              className="underline hover:text-red-600"
+            >
+              24-hour spill response
+            </Link>{" "}
+            can also pick up at 36 West Q Street during office hours.
           </p>
         </header>
 
@@ -198,6 +241,11 @@ export default function ShopClient({ initialProducts = [] }) {
             )}
           </>
         )}
+
+        {/* Shipping / pickup / kit-contents FAQ (punch list #10). */}
+        <section className="max-w-3xl mx-auto px-4 mt-16 mb-12">
+          <FAQ faqData={shopFaqData} title="Shipping, Pickup & Kit Questions" />
+        </section>
 
         {/* Cart Components */}
         <CartButton />
