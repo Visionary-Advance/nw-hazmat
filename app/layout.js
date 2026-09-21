@@ -126,8 +126,13 @@ export const structuredData = {
     "latitude": "44.0489",
     "longitude": "-123.0225"
   },
+  // Punch list #3: Jon confirmed the real service area is "All Oregon,
+  // Washington, California." Oregon stays first - it is the home state and the
+  // only one with a published city list on /oregon-spill-response-service-area.
   "areaServed": [
     { "@type": "State", "name": "Oregon" },
+    { "@type": "State", "name": "Washington" },
+    { "@type": "State", "name": "California" },
     { "@type": "City", "name": "Springfield" },
     { "@type": "City", "name": "Eugene" },
     { "@type": "AdministrativeArea", "name": "Lane County" }

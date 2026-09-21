@@ -72,7 +72,7 @@ export const services = [
     shortDescription: "Accurate asbestos testing and lab analysis to identify hazards and ensure safe removal.",
     description: (
       <>
-        Accurate data is the foundation of every effective cleanup or compliance plan. That's why Northwest Hazmat offers in-house environmental lab services to identify hazardous materials and assess contamination levels. Our lab technicians deliver detailed, fast results to support decision-making for <Link href="/services/mold-remediation" className="text-blue-600 hover:underline">remediation</Link>, development, and regulatory reporting. We also provide dedicated <Link href="/services/asbestos-testing" className="text-blue-600 hover:underline">asbestos testing services</Link> with fast turnaround. Every sample is handled with precision, documented carefully, and tested under strict industry standards to provide you with the clear, actionable insights you need.
+        Accurate data is the foundation of every effective cleanup or compliance plan. That's why Northwest Hazmat offers in-house environmental lab services to identify hazardous materials and assess contamination levels. Our Springfield lab is AIHA accredited and takes part in AIHA proficiency testing. We do not publish our accreditation number online at the client's request; it appears on the reports we issue and is available on request. Our lab technicians deliver detailed, fast results to support decision-making for <Link href="/services/mold-remediation" className="text-blue-600 hover:underline">remediation</Link>, development, and regulatory reporting. We also provide dedicated <Link href="/services/asbestos-testing" className="text-blue-600 hover:underline">asbestos testing services</Link> with fast turnaround. Every sample is handled with precision, documented carefully, and tested under strict industry standards to provide you with the clear, actionable insights you need.
       </>
     ),
     keywords: ["environmental lab services Oregon", "hazardous material testing", "asbestos testing eugene oregon", "asbestos testing eugene", "asbestos"],
@@ -82,6 +82,10 @@ export const services = [
         title: "Why Choose Us",
         description: "Here are the benefits of using our services:",
         listItems: [
+          // Punch list #15: Jon confirmed AIHA accreditation and proficiency
+          // testing, and asked that the accreditation number stay off the
+          // public site. Accreditation is named; the number is not.
+          { text: "AIHA-accredited lab, proficiency tested", spanText: "Accredited" },
           { text: "Faster turnaround times for results", spanText: "Speed" },
           { text: "Greater accuracy and quality control", spanText: "Accuracy" },
           { text: "No need to send samples out of state", spanText: "Local" },
@@ -519,17 +523,16 @@ export const services = [
         img: ""
       },
       {
-        // PENDING CLIENT CONFIRMATION (punch list #8): the previous copy here
-        // asserted that Northwest Hazmat "meets the OSRO certification
-        // requirements" and had been through "rigorous evaluation by the USCG".
-        // Section E of the punch list forbids claiming OSRO classifications not
-        // supplied in writing, so that assertion has been removed rather than
-        // just respelled. If Jon provides the USCG OSRO classification, the
-        // claim can go back in with the specific class named.
+        // Punch list #8 resolved: asked for the USCG OSRO classification, Jon
+        // answered that what the company actually holds is a Basic Ordering
+        // Agreement with the U.S. Coast Guard. A BOA is a contracting vehicle,
+        // not an OSRO classification, so the copy names the BOA and still makes
+        // no OSRO class claim. If an OSRO classification is ever issued, it can
+        // be added here with the specific class named.
         title: "Oil-Spill Response",
         description: (
           <>
-            An Oil Spill Removal Organization, or OSRO, is a responder resourced to contain and recover oil spills, judged on response equipment, personnel training, response planning, and financial capability. That is the standard we work to when we respond to an oil spill: containing the release, protecting waterways and storm drains, recovering product, and handling the contaminated material afterward. Our response teams are trained in <Link href="/training/spill-response-training" className="text-blue-600 hover:underline">specialized spill response techniques</Link> and maintain current <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER certifications</Link>. For a spill in progress anywhere in Oregon, call our <Link href="/24-hour-spill-response-oregon" className="text-blue-600 hover:underline">24-hour spill line</Link>.
+            Northwest Hazmat holds a Basic Ordering Agreement (BOA) with the U.S. Coast Guard, the contracting vehicle that lets the Coast Guard call us directly to a response. An Oil Spill Removal Organization, or OSRO, is a responder resourced to contain and recover oil spills, judged on response equipment, personnel training, response planning, and financial capability. That is the standard we work to when we respond to an oil spill: containing the release, protecting waterways and storm drains, recovering product, and handling the contaminated material afterward. Our response teams are trained in <Link href="/training/spill-response-training" className="text-blue-600 hover:underline">specialized spill response techniques</Link> and maintain current <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER certifications</Link>. For a spill in progress anywhere in Oregon, call our <Link href="/24-hour-spill-response-oregon" className="text-blue-600 hover:underline">24-hour spill line</Link>.
           </>
         ),
         img: "/img/Orso_Img.jpg"

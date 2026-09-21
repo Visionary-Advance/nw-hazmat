@@ -289,6 +289,20 @@ const nextConfig = {
         destination: '/shop',
         statusCode: 301,
       },
+
+      // ============================================
+      // Online employment application removed (punch list #16)
+      // ============================================
+      // Jon confirmed: "No employment application online available at this
+      // time." The route and its form are gone; the URL is already indexed and
+      // still gets traffic from job seekers, so it 301s to /contact rather than
+      // 404ing. Restoring the form means reverting this redirect and the
+      // deleted app/employment-application route.
+      {
+        source: '/employment-application',
+        destination: '/contact',
+        statusCode: 301,
+      },
     ];
   },
 };

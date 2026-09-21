@@ -3,15 +3,15 @@ import { FaPhone } from "react-icons/fa6";
 import Breadcrumbs from "@/Components/BreadCrumbs";
 
 const TITLE =
-  "Oregon Spill Response Service Area | Statewide Hazmat Coverage | Northwest Hazmat";
+  "Spill Response Service Area | Oregon, Washington & California | Northwest Hazmat";
 const DESCRIPTION =
-  "Where Northwest Hazmat responds across Oregon: the I-5 corridor, Willamette Valley, coast, central, and eastern Oregon. Based in Springfield, 24-hour spill line 1-800-597-1323.";
+  "Where Northwest Hazmat responds: all of Oregon - I-5 corridor, Willamette Valley, coast, central and eastern Oregon - plus Washington and California. Based in Springfield, 24-hour spill line 1-800-597-1323.";
 
 export const metadata = {
   title: TITLE,
   description: DESCRIPTION,
   keywords:
-    "oregon spill response service area, hazmat cleanup oregon cities, spill response portland salem eugene, spill response bend medford, i-5 corridor spill response",
+    "oregon spill response service area, hazmat cleanup oregon cities, spill response portland salem eugene, spill response bend medford, i-5 corridor spill response, washington spill response, california spill response",
   alternates: {
     canonical: "https://nwhazmat.com/oregon-spill-response-service-area",
   },
@@ -26,7 +26,7 @@ export const metadata = {
         url: "https://nwhazmat.com/img/Spill_Response.jpg",
         width: 1200,
         height: 630,
-        alt: "Northwest Hazmat spill response coverage across Oregon",
+        alt: "Northwest Hazmat spill response coverage across Oregon, Washington and California",
       },
     ],
   },
@@ -38,11 +38,15 @@ export const metadata = {
   },
 };
 
-// PENDING CLIENT CONFIRMATION (punch list #3): this is the city list exactly as
-// Jon supplied it in the punch list, which carried the note "edit if we do not
-// actually roll that far". The coast, central, and eastern Oregon groups are the
-// ones most likely to need trimming. Removing a city here also removes it from
-// the areaServed JSON-LD below, since both read from this same list.
+// Punch list #3 resolved: asked whether we really roll to the coast, central,
+// and eastern Oregon, Jon answered "All Oregon, Washington, California." So
+// nothing is trimmed, and Washington and California are served at the state
+// level below. Removing a city here also removes it from the areaServed JSON-LD,
+// since both read from this same list.
+//
+// No city list ships for Washington or California - Jon named the states, not
+// cities, and inventing city names would be the same unverified-claim problem
+// section E of the punch list is about.
 const regions = [
   {
     name: "Portland metro and north Willamette Valley",
@@ -89,11 +93,13 @@ const regions = [
 
 const allCities = regions.flatMap((region) => region.cities);
 
+const statesServed = ["Oregon", "Washington", "California"];
+
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": "https://nwhazmat.com/oregon-spill-response-service-area#service",
-  name: "Spill and Hazmat Response Service Area, Oregon",
+  name: "Spill and Hazmat Response Service Area: Oregon, Washington & California",
   description: DESCRIPTION,
   url: "https://nwhazmat.com/oregon-spill-response-service-area",
   serviceType: "24-hour spill and hazmat response",
@@ -118,7 +124,7 @@ const structuredData = {
     },
   },
   areaServed: [
-    { "@type": "State", name: "Oregon" },
+    ...statesServed.map((state) => ({ "@type": "State", name: state })),
     ...allCities.map((city) => ({
       "@type": "City",
       name: city,
@@ -150,14 +156,14 @@ export default function OregonServiceArea() {
       <section className="w-full bg-black text-white">
         <div className="max-w-5xl mx-auto px-4 py-16">
           <h1 className="fjalla-one text-4xl lg:text-6xl leading-tight mb-6">
-            Oregon Spill Response Service Area
+            Spill Response Service Area: Oregon, Washington &amp; California
           </h1>
           <p className="text-lg lg:text-xl poppins max-w-3xl text-gray-200">
             We are based at 36 West Q Street in Springfield, Oregon, and we run
-            24-hour spill and hazmat response anywhere in the state. Crews and
-            equipment stage from the Springfield yard and travel to the
-            incident, along the I-5 corridor and out to the coast, central, and
-            eastern Oregon.
+            24-hour spill and hazmat response anywhere in Oregon, Washington,
+            and California. Crews and equipment stage from the Springfield yard
+            and travel to the incident, up and down the I-5 corridor and out to
+            the coast, central, and eastern Oregon.
           </p>
           <a
             href="tel:1-800-597-1323"
@@ -172,7 +178,18 @@ export default function OregonServiceArea() {
       <section className="w-full bg-white">
         <div className="max-w-5xl mx-auto px-4 py-16">
           <h2 className="fjalla-one text-3xl lg:text-5xl mb-4 text-gray-900">
-            Regions and cities we cover
+            States we cover
+          </h2>
+          <p className="text-lg text-gray-700 poppins mb-10 max-w-3xl">
+            We respond throughout{" "}
+            <strong>Oregon, Washington, and California</strong>. Oregon is our
+            home state and the regions and cities below are where we run most
+            often; Washington and California responses are dispatched from the
+            same Springfield yard.
+          </p>
+
+          <h2 className="fjalla-one text-3xl lg:text-5xl mb-4 text-gray-900">
+            Oregon regions and cities
           </h2>
           <p className="text-lg text-gray-700 poppins mb-10 max-w-3xl">
             If your site is not on this list, it does not mean we cannot get

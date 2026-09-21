@@ -31,6 +31,11 @@ export async function generateMetadata({ params }) {
       };
     }
 
+    // product.image may be a site-relative fallback path; OG/Twitter need absolute.
+    const ogImage = product.image
+      ? (product.image.startsWith('/') ? `https://nwhazmat.com${product.image}` : product.image)
+      : 'https://nwhazmat.com/img/og-default.jpg';
+
     const description = product.description?.substring(0, 155) ||
       `Buy ${product.name} online. Professional hazmat equipment with fast nationwide shipping. Trusted by environmental professionals, first responders, and industrial teams across the USA.`;
 
@@ -46,7 +51,7 @@ export async function generateMetadata({ params }) {
         type: 'website',
         images: [
           {
-            url: product.image || 'https://nwhazmat.com/img/og-default.jpg',
+            url: ogImage,
             width: 800,
             height: 600,
             alt: product.name,
@@ -57,7 +62,7 @@ export async function generateMetadata({ params }) {
         card: 'summary_large_image',
         title: `${product.name} | NorthWest HazMat`,
         description,
-        images: [product.image || 'https://nwhazmat.com/img/og-default.jpg'],
+        images: [ogImage],
       },
       alternates: {
         canonical: `https://nwhazmat.com/shop/${slug}`,
@@ -95,9 +100,13 @@ export default async function ProductPage({ params }) {
     // validation outright (punch list #9). Omitting the property is still not
     // eligible for rich results, but it is at least valid, and it stops being
     // a problem the moment a real photo is uploaded to Stripe.
+    // Fallback photos (lib/productImageFallbacks) are site-relative paths, and
+    // both Product schema and Open Graph need absolute URLs.
     const productImages = (
       product.images?.length ? product.images : [product.image]
-    ).filter(Boolean);
+    )
+      .filter(Boolean)
+      .map((src) => (src.startsWith('/') ? `https://nwhazmat.com${src}` : src));
 
     if (productImages.length === 0) {
       // Surfaces in the build log so it is obvious which SKUs still need a

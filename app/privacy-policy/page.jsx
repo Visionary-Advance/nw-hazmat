@@ -39,8 +39,7 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-2xl font-bold mt-8 mb-3">Information We Collect</h2>
           <p>
             We collect information you voluntarily provide through our contact
-            forms, quote requests, employment application, and online store
-            checkout. This may include your name, email address, phone number,
+            forms, quote requests, and online store checkout. This may include your name, email address, phone number,
             mailing or shipping address, and any details you include in a
             message. When you make a purchase, payment information is processed
             securely by our payment provider (Stripe); we do not store full
@@ -56,7 +55,6 @@ export default function PrivacyPolicyPage() {
           <ul className="list-disc pl-6 space-y-2">
             <li>To respond to inquiries, quote requests, and service calls.</li>
             <li>To process and fulfill orders placed through our online store.</li>
-            <li>To review employment applications you submit.</li>
             <li>To improve our website, products, and services.</li>
             <li>To comply with legal and regulatory obligations.</li>
           </ul>

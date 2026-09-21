@@ -58,13 +58,17 @@ const contactStructuredData = {
       "latitude": "44.0489",
       "longitude": "-123.0225"
     },
-    "areaServed": { "@type": "State", "name": "Oregon" },
+    "areaServed": [
+      { "@type": "State", "name": "Oregon" },
+      { "@type": "State", "name": "Washington" },
+      { "@type": "State", "name": "California" }
+    ],
     "contactPoint": [
       {
         "@type": "ContactPoint",
         "telephone": "+1-800-597-1323",
         "contactType": "emergency",
-        "areaServed": "US-OR",
+        "areaServed": ["US-OR", "US-WA", "US-CA"],
         "availableLanguage": "English",
         "hoursAvailable": [
           {

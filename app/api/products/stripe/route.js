@@ -1,6 +1,7 @@
 // app/api/products/stripe/route.js
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { withFallbackImage } from '@/lib/productImageFallbacks';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -90,7 +91,7 @@ export async function GET() {
         metadata: p.metadata || {},
         slug: createSlug(p.name),
       };
-    });
+    }).map(withFallbackImage);
 
     console.log(`Transformed ${transformedProducts.length} products`);
     console.log('Sample product:', transformedProducts[0]);

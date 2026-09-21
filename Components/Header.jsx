@@ -90,12 +90,6 @@ export default function Header() {
         <button className="focus:outline-none">Forms</button>
         {showFormsDropdown && (
           <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 bg-white shadow-lg rounded-md py-2 z-50">
-            <Link
-              href="/employment-application"
-              className="block px-4 py-2 hover:bg-gray-100"
-            >
-              Job Application
-            </Link>
            <Link
   href="/chain-of-custody"
   className="block px-4 py-2 hover:bg-gray-100"

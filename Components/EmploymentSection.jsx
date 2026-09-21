@@ -28,9 +28,12 @@ export default function EmploymentSection() {
 
             {/* Benefits Grid */}
           
-            <Link href="/employment-application">
+            {/* Punch list #16: Jon confirmed there is no online employment
+                application at this time, so hiring enquiries go through the
+                contact page and the office line instead of a web form. */}
+            <Link href="/contact">
               <button className="bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-full text-xl font-bold fjalla-one active:scale-95 duration-200 shadow-xl">
-                Apply Now →
+                Get in Touch →
               </button>
             </Link>
           </div>

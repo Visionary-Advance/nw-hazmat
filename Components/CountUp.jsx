@@ -4,9 +4,8 @@ import CountUp from 'react-countup';
 import { useEffect, useRef } from 'react';
 import { useInView } from 'framer-motion';
 
-// PENDING CLIENT CONFIRMATION (punch list #12): Jon asked for "numbers we
-// approve or remove the counters." These are the figures already live on the
-// site — "51k Clients Served" in particular needs sign-off before it stays.
+// Punch list #12 resolved: Jon signed off on these figures — "51k clients
+// served is fine, just keep it." The counters stay as-is.
 const stats = [
   { end: 25, duration: 2, suffix: '+', label: 'Years in Business' },
   { end: 500, duration: 2, suffix: '+', label: 'Tons of Waste Handled' },

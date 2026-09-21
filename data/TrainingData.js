@@ -7,8 +7,12 @@ export const training = [
     slug: "hazwoper-40-hour",
     title: "HAZWOPER 40-Hour Certification",
     // Drives courseWorkload in the Course schema. Only set where the length is
-    // verifiable - here it is stated in the course name. The other seven
-    // courses omit it pending real hours from the client (punch list #13).
+    // verifiable in our own course copy - here it is stated in the course name.
+    // Punch list #13, settled 2026-09-21: leave every course as it stands. Only
+    // this one and General Site Worker state their hours, so only those two emit
+    // courseWorkload. Do not infer hours for the other six from the "8-hour haz
+    // / 4-hour refresher" note - it does not map onto their names. Add a
+    // durationHours only when Jon names that specific course's length.
     durationHours: 40,
     img: "/img/40-Hour.jpg",
     shortDescription: "Comprehensive hazmat emergency response training and hazardous waste operations.",
@@ -49,6 +53,9 @@ export const training = [
     id: "general-site-worker",
     slug: "general-site-worker",
     title: "General Site Worker",
+    // 40 hours is stated twice in this course's own description below, so the
+    // Course schema can claim it (punch list #13).
+    durationHours: 40,
     img: "/img/General.jpg",
     shortDescription: "Essential training for workers at hazardous waste sites.",
     description: (
@@ -204,7 +211,7 @@ export const training = [
     shortDescription: "Hands-on training for managing hazardous material spills.",
     description: (
       <>
-        Spill response training can ensure that your staff knows just what to do in any given situation, from the first responder all the way up to incident commander. These training courses have been designed and developed to fulfill the training requirements of personnel working within the different areas of hazardous materials handling. This training complements our <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER certification</Link> and prepares teams for real-world <Link href="/services/hazmat-services" className="text-blue-600 hover:underline">emergency response scenarios</Link>. Students learn techniques used in our <Link href="/services/dedication-services" className="text-blue-600 hover:underline">ORSO-certified spill response operations</Link>.
+        Spill response training can ensure that your staff knows just what to do in any given situation, from the first responder all the way up to incident commander. These training courses have been designed and developed to fulfill the training requirements of personnel working within the different areas of hazardous materials handling. This training complements our <Link href="/training/hazwoper-40-hour" className="text-blue-600 hover:underline">HAZWOPER certification</Link> and prepares teams for real-world <Link href="/services/hazmat-services" className="text-blue-600 hover:underline">emergency response scenarios</Link>. Students learn techniques used in our <Link href="/services/industrial-demolition-site-cleanup" className="text-blue-600 hover:underline">oil-spill response operations</Link>.
       </>
     ),
     keywords: ["spill cleanup training", "emergency response", "hazmat spill response"],

@@ -172,7 +172,7 @@ export default async function ServicePage({ params }) {
           "@type": "ContactPoint",
           "telephone": "+1-800-597-1323",
           "contactType": "emergency",
-          "areaServed": "US-OR",
+          "areaServed": ["US-OR", "US-WA", "US-CA"],
           "availableLanguage": "English",
           "hoursAvailable": [
             {
@@ -191,10 +191,11 @@ export default async function ServicePage({ params }) {
     },
     "serviceType": service.title,
     // We respond statewide, not within a radius of one metro.
-    "areaServed": {
-      "@type": "State",
-      "name": "Oregon"
-    },
+    "areaServed": [
+      { "@type": "State", "name": "Oregon" },
+      { "@type": "State", "name": "Washington" },
+      { "@type": "State", "name": "California" }
+    ],
     "availableChannel": {
       "@type": "ServiceChannel",
       "serviceUrl": `https://nwhazmat.com/services/${service.id}`,

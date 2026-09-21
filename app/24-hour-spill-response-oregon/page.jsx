@@ -139,7 +139,12 @@ const structuredData = {
       longitude: "-123.0225",
     },
   },
-  areaServed: { "@type": "State", name: "Oregon" },
+  // Punch list #3: Oregon, Washington, and California, per Jon.
+  areaServed: [
+    { "@type": "State", name: "Oregon" },
+    { "@type": "State", name: "Washington" },
+    { "@type": "State", name: "California" },
+  ],
   // The spill line is staffed around the clock; office hours are separate and
   // live on the LocalBusiness record in the root layout.
   hoursAvailable: [

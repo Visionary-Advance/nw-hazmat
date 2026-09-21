@@ -20,7 +20,6 @@ export default async function sitemap() {
     // Standalone landing pages.
     // /emergency-mold-removal-eugene-oregon was removed and 301s to
     // /services/mold-remediation, the canonical mold URL (punch list #14).
-    { url: `${baseUrl}/employment-application`,               lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${baseUrl}/chain-of-custody`,                     lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${baseUrl}/privacy-policy`,                       lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.3 },
     { url: `${baseUrl}/terms-and-conditions`,                 lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.3 },
