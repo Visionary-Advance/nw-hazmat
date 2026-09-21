@@ -159,7 +159,7 @@ export default function Home() {
           <h3 className="pb-3">Areas We Serve</h3>
         </div>
         <div className="grid place-items-center text-white w-7/12 mx-auto lg:space-y-0 space-y-10 grid-cols-1 pb-6 lg:grid-cols-2">
-          {["24-Hour Spill Response Statewide in Oregon", "Springfield Yard & On-Site Lab"].map((item, index) => (
+          {["24-Hour Spill Response Across Oregon, Washington & California", "Springfield Yard & On-Site Lab"].map((item, index) => (
             <div
               className="flex flex-col items-center text-center text-3xl"
               key={index}
@@ -174,7 +174,7 @@ export default function Home() {
             href="/oregon-spill-response-service-area"
             className="underline hover:text-black duration-200"
           >
-            See the Oregon cities and regions we cover
+            See the regions and cities we cover
           </Link>
         </div>
       </section>
