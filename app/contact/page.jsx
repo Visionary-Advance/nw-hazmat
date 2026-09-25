@@ -2,14 +2,14 @@ import ContactClient from "./ContactClient";
 import ReCaptchaProvider from "@/Components/ReCaptchaProvider";
 
 const CONTACT_TITLE =
-  "Contact Northwest Hazmat | 24/7 Spill Response Oregon | 1-800-597-1323";
+  "Contact Northwest Hazmat | 24/7 Spill Response OR, WA & CA | 1-800-597-1323";
 const CONTACT_DESCRIPTION =
-  "Reach Northwest Hazmat for 24-hour spill and hazmat response anywhere in Oregon. Emergency line 1-800-597-1323, office 541-988-9823, yard at 36 West Q Street, Springfield.";
+  "Reach Northwest Hazmat for 24-hour spill and hazmat response anywhere in Oregon, Washington, and California. Emergency line 1-800-597-1323, office 541-988-9823, yard at 36 West Q Street, Springfield.";
 
 export const metadata = {
   title: CONTACT_TITLE,
   description: CONTACT_DESCRIPTION,
-  keywords: "contact northwest hazmat, 24 hour spill response oregon, emergency spill response oregon, hazmat cleanup oregon, springfield oregon hazmat, 24/7 emergency response",
+  keywords: "contact northwest hazmat, 24 hour spill response oregon, emergency spill response oregon, hazmat cleanup oregon, springfield oregon hazmat, 24 hour spill response washington, 24 hour spill response california, 24/7 emergency response",
   alternates: {
     canonical: "https://nwhazmat.com/contact",
   },
@@ -24,7 +24,7 @@ export const metadata = {
         url: "https://nwhazmat.com/img/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Contact Northwest Hazmat for 24-hour spill response in Oregon",
+        alt: "Contact Northwest Hazmat for 24-hour spill response in Oregon, Washington and California",
       },
     ],
   },

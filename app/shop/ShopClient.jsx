@@ -35,7 +35,7 @@ const shopFaqData = [
   {
     question: "Do you ship outside Oregon?",
     answer:
-      "Yes. The shop ships nationwide across the United States. You do not need to be an Oregon customer to order spill kits or responder gear from us. Our 24-hour spill response crews, by contrast, work within Oregon.",
+      "Yes. The shop ships nationwide across the United States. You do not need to be an Oregon customer to order spill kits or responder gear from us. Our 24-hour spill response crews, by contrast, work across Oregon, Washington, and California.",
   },
   {
     question: "Do you supply spill kits for a job you are responding to?",

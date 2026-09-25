@@ -2,15 +2,15 @@ import Breadcrumbs from "@/Components/BreadCrumbs";
 import TrainingList from "@/Components/TrainingList";
 
 export const metadata = {
-  title: "OSHA Hazmat Training Eugene & Lane County, Oregon",
-  description: "OSHA-compliant hazmat training in Eugene & Lane County, Oregon: HAZWOPER 40-hour, confined space entry, spill response, and hazmat technician courses.",
-  keywords: "osha hazmat training lane county, hazwoper training eugene oregon, hazmat training oregon, HAZWOPER certification, confined space training, emergency response training, hazmat emergency response training, spill response course, first responder training, hazmat technician, safety training eugene",
+  title: "OSHA Hazmat Training | Springfield, Oregon | Serving OR, WA & CA",
+  description: "OSHA-compliant hazmat training in Springfield, Oregon for crews across Oregon, Washington & California: HAZWOPER 40-hour, confined space entry, spill response, and hazmat technician courses.",
+  keywords: "osha hazmat training oregon, hazwoper training eugene oregon, hazmat training oregon, hazmat training washington, hazmat training california, HAZWOPER certification, confined space training, emergency response training, hazmat emergency response training, spill response course, first responder training, hazmat technician, safety training eugene",
   alternates: {
     canonical: "https://nwhazmat.com/training",
   },
   openGraph: {
     title: "Professional Hazmat & Safety Training | NorthWest HazMat Oregon",
-    description: "OSHA-compliant hazmat training courses including HAZWOPER certification, confined space entry, emergency response, and spill response training in Oregon.",
+    description: "OSHA-compliant hazmat training courses including HAZWOPER certification, confined space entry, emergency response, and spill response training for Oregon, Washington, and California.",
     url: "https://nwhazmat.com/training",
     siteName: "NorthWest HazMat, Inc.",
     type: "website",
@@ -39,8 +39,8 @@ export default function Training() {
         <div className="text-black w-10/12 mx-auto py-14 text-5xl fjalla-one">
           <h1 className="text-6xl lg:text-8xl mb-4">Our Training Courses</h1>
           <p className="text-xl lg:text-2xl font-normal text-black">
-            Comprehensive OSHA-compliant hazmat and safety training for Lane
-            County, Eugene-Springfield, and businesses across Oregon. From
+            Comprehensive OSHA-compliant hazmat and safety training for
+            businesses across Oregon, Washington, and California. From
             foundational awareness to advanced technician certification.
           </p>
           <p className="text-lg lg:text-xl font-normal text-black bg-yellow-50 border-l-4 border-yellow-400 px-4 py-3 mt-6">

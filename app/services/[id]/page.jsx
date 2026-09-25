@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
   }
 
   // Use custom meta fields when available, fallback to auto-generated
-  const title = service.metaTitle || `${service.title} | NorthWest HazMat Oregon`;
+  const title = service.metaTitle || `${service.title} | NorthWest HazMat`;
   const description = service.metaDescription || (service.shortDescription.length > 150
     ? service.shortDescription.substring(0, 147) + '...'
     : service.shortDescription);
@@ -43,7 +43,8 @@ export async function generateMetadata({ params }) {
   const keywords = [
     ...service.keywords || [],
     'Oregon hazmat services',
-    'Lane County environmental',
+    'Washington hazmat services',
+    'California hazmat services',
     'Eugene Springfield hazmat',
     'professional hazmat cleanup',
     'certified hazmat contractors'
@@ -70,7 +71,7 @@ export async function generateMetadata({ params }) {
           url: service.img ? `https://nwhazmat.com${service.img}` : 'https://nwhazmat.com/img/og-default.jpg',
           width: 1200,
           height: 630,
-          alt: `${service.title} - Professional hazmat services in Oregon`,
+          alt: `${service.title} - Professional hazmat services in Oregon, Washington and California`,
           type: 'image/jpeg',
         },
       ],
@@ -112,7 +113,7 @@ export async function generateMetadata({ params }) {
       'ICBM': '44.0489, -123.0225',
 
       // Service-specific
-      'service-area': 'Oregon statewide, I-5 corridor, Springfield, Eugene, Portland, Salem, Bend, Medford',
+      'service-area': 'Oregon, Washington, California; I-5 corridor, Springfield, Eugene, Portland, Salem, Bend, Medford',
       'business-type': 'Hazmat Services, Environmental Cleanup',
       'emergency-contact': '1-800-597-1323',
     },
@@ -190,7 +191,7 @@ export default async function ServicePage({ params }) {
       "priceRange": "$$"
     },
     "serviceType": service.title,
-    // We respond statewide, not within a radius of one metro.
+    // We respond across Oregon, Washington, and California, not within a radius of one metro.
     "areaServed": [
       { "@type": "State", "name": "Oregon" },
       { "@type": "State", "name": "Washington" },
@@ -311,7 +312,7 @@ export default async function ServicePage({ params }) {
           {service.img && (
             <Image
               src={service.img}
-              alt={`${service.title} - Professional hazmat services in Oregon`}
+              alt={`${service.title} - Professional hazmat services in Oregon, Washington and California`}
               width={896}
               height={384}
               className="rounded-[60px] shadow mb-10 h-96 object-cover w-full"
@@ -370,7 +371,7 @@ export default async function ServicePage({ params }) {
               Need {service.title}?
             </h3>
             <p className="text-blue-800 mb-4">
-              Our certified professionals are ready to help with your {service.title.toLowerCase()} needs in Lane County and throughout Oregon.
+              Our certified professionals are ready to help with your {service.title.toLowerCase()} needs anywhere in Oregon, Washington, or California.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link href="tel:541-988-9823" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold text-center transition-colors">

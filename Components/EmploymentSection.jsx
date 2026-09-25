@@ -66,7 +66,7 @@ export default function EmploymentSection() {
                   </div>
                   <div>
                     <h4 className="text-xl font-bold text-gray-900">Community Focused</h4>
-                    <p className="text-gray-700">Serving Lane County and the Pacific Northwest</p>
+                    <p className="text-gray-700">Serving Oregon, Washington &amp; California</p>
                   </div>
                 </div>
 

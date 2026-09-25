@@ -35,8 +35,8 @@ export async function generateMetadata({ params }) {
   const title = `${trainings.title} | NorthWest HazMat Oregon`;
   // Note: trainings.description is JSX, so we use the plain-text shortDescription for metadata.
   const baseDescription = trainings.shortDescription
-    ? `${trainings.shortDescription} OSHA-compliant training in Eugene & Lane County, Oregon. Call 541-988-9823.`
-    : `Professional ${trainings.title.toLowerCase()} in Eugene, Springfield & Lane County, Oregon. OSHA-compliant hazmat training. Call 541-988-9823.`;
+    ? `${trainings.shortDescription} OSHA-compliant training in Springfield, Oregon for crews across OR, WA & CA. Call 541-988-9823.`
+    : `Professional ${trainings.title.toLowerCase()} in Springfield, Oregon for crews across Oregon, Washington & California. OSHA-compliant hazmat training. Call 541-988-9823.`;
   const description = baseDescription.length > 160
     ? baseDescription.slice(0, 157).trimEnd() + '...'
     : baseDescription;
@@ -50,7 +50,8 @@ export async function generateMetadata({ params }) {
       'Oregon hazmat training',
       'Eugene hazmat training',
       'Springfield hazmat training',
-      'Lane County hazmat',
+      'Washington hazmat training',
+      'California hazmat training',
       'OSHA training',
       'EPA training',
       'hazardous materials training',
@@ -376,8 +377,9 @@ export default async function TrainingPage({ params }) {
           <div className="mt-16 bg-gray-100 p-8 rounded-[60px] text-center">
             <h3 className="text-3xl font-bold mb-4">Ready to Get Started?</h3>
             <p className="text-lg text-gray-700 mb-6">
-              Contact us today to schedule your hazmat training in Oregon. 
-              We serve Eugene, Springfield, and all of Lane County.
+              Contact us today to schedule your hazmat training. Classes are
+              held in Springfield, Oregon, and we train crews from across
+              Oregon, Washington, and California.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="tel:541-988-9823">

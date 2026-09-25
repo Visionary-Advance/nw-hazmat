@@ -4,15 +4,15 @@ import { FaPhone } from "react-icons/fa6";
 import Breadcrumbs from "@/Components/BreadCrumbs";
 
 const TITLE =
-  "24-Hour Spill Response Oregon | Diesel, Chemical & Transport Spills | Northwest Hazmat";
+  "24-Hour Spill Response OR, WA & CA | Diesel, Chemical & Transport Spills | Northwest Hazmat";
 const DESCRIPTION =
-  "24-hour spill response anywhere in Oregon. Diesel, hydraulic, chemical, transport and tanker, unknown substance, storm-drain, and facility spills. Crews roll from our Springfield yard. Call 1-800-597-1323.";
+  "24-hour spill response anywhere in Oregon, Washington, and California. Diesel, hydraulic, chemical, transport and tanker, unknown substance, storm-drain, and facility spills. Crews roll from our Springfield yard. Call 1-800-597-1323.";
 
 export const metadata = {
   title: TITLE,
   description: DESCRIPTION,
   keywords:
-    "24 hour spill response oregon, emergency spill response oregon, diesel spill cleanup oregon, chemical spill cleanup oregon, transport spill response, tanker rollover cleanup oregon, storm drain spill, hazmat cleanup oregon",
+    "24 hour spill response oregon, emergency spill response oregon, diesel spill cleanup oregon, chemical spill cleanup oregon, transport spill response, tanker rollover cleanup oregon, storm drain spill, hazmat cleanup oregon, 24 hour spill response washington, 24 hour spill response california, emergency spill response washington, emergency spill response california",
   alternates: {
     canonical: "https://nwhazmat.com/24-hour-spill-response-oregon",
   },
@@ -27,7 +27,7 @@ export const metadata = {
         url: "https://nwhazmat.com/img/Spill_Response.jpg",
         width: 1200,
         height: 630,
-        alt: "Northwest Hazmat crew responding to a spill in Oregon",
+        alt: "Northwest Hazmat crew responding to a spill in Oregon, Washington or California",
       },
     ],
   },
@@ -199,7 +199,7 @@ export default function SpillResponseOregon() {
         </div>
         <div className="relative max-w-5xl mx-auto px-4 py-16 lg:py-24">
           <h1 className="fjalla-one text-4xl lg:text-6xl leading-tight mb-6">
-            24-Hour Spill Response Anywhere in Oregon
+            24-Hour Spill Response Anywhere in Oregon, Washington &amp; California
           </h1>
 
           <a
@@ -216,13 +216,14 @@ export default function SpillResponseOregon() {
           </p>
           <p className="text-base lg:text-lg pt-4 max-w-2xl poppins text-gray-300">
             We work from our yard at 36 West Q Street in Springfield and respond
-            statewide &mdash; Portland, Salem, Eugene&ndash;Springfield, Bend,
-            Medford, and the I-5 corridor between them.{" "}
+            across Oregon, Washington, and California &mdash; Portland, Salem,
+            Eugene&ndash;Springfield, Bend, Medford, and up and down the I-5
+            corridor.{" "}
             <Link
               href="/oregon-spill-response-service-area"
               className="underline hover:text-white"
             >
-              See our Oregon service area
+              See our service area
             </Link>
             .
           </p>
@@ -248,6 +249,15 @@ export default function SpillResponseOregon() {
             </a>{" "}
             for the cleanup. If you are not sure whether a release is
             reportable, call OERS and ask.
+          </p>
+          <p className="text-lg text-gray-800 poppins pt-3">
+            In Washington or California, report to that state&rsquo;s spill
+            line and, where federal rules apply, the National Response Center
+            at{" "}
+            <a href="tel:1-800-424-8802" className="font-semibold underline">
+              1-800-424-8802
+            </a>
+            . Then call us for the cleanup.
           </p>
           <p className="text-base text-gray-700 poppins pt-3">
             If there is fire, injury, or an immediate threat to life, call 911
@@ -287,7 +297,7 @@ export default function SpillResponseOregon() {
       <section className="w-full bg-gray-100">
         <div className="max-w-5xl mx-auto px-4 py-16">
           <h2 className="fjalla-one text-3xl lg:text-5xl mb-6 text-gray-900">
-            Based in Springfield, responding statewide
+            Based in Springfield, responding across three states
           </h2>
           <p className="text-lg text-gray-800 poppins max-w-3xl">
             Northwest HazMat has operated out of 36 West Q Street in Springfield,
@@ -307,7 +317,7 @@ export default function SpillResponseOregon() {
               href="/oregon-spill-response-service-area"
               className="border border-gray-800 hover:bg-gray-800 hover:text-white text-gray-900 fjalla-one text-lg rounded-lg px-6 py-3 duration-200"
             >
-              Oregon service area
+              Service area
             </Link>
             <Link
               href="/contact"
@@ -369,7 +379,7 @@ export default function SpillResponseOregon() {
             1-800-597-1323
           </a>
           <p className="text-lg pt-5 poppins">
-            Staffed 24 hours a day, every day, anywhere in Oregon.
+            Staffed 24 hours a day, every day, anywhere in Oregon, Washington, and California.
           </p>
         </div>
       </section>

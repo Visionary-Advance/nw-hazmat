@@ -26,7 +26,7 @@ export const metadata = {
 
   // Primary SEO tags
   title: "NorthWest HazMat, Inc. | Professional Hazmat & Mold Remediation Services",
-  description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services. Licensed experts serving the Pacific Northwest with 24/7 emergency response.",
+  description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services. Licensed experts serving Oregon, Washington, and California with 24/7 emergency response.",
   
   // Additional SEO metadata
   keywords: "hazmat services, mold remediation, asbestos testing, environmental cleanup, hazardous material disposal, mold removal, asbestos abatement, contamination cleanup, emergency hazmat response",
@@ -34,7 +34,7 @@ export const metadata = {
   // Open Graph tags for social media
   openGraph: {
     title: "NorthWest HazMat, Inc. | Professional Hazmat & Mold Remediation Services",
-    description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services. Licensed experts serving the Pacific Northwest.",
+    description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services. Licensed experts serving Oregon, Washington, and California.",
     url: "https://nwhazmat.com",
     siteName: "NorthWest HazMat, Inc.",
     type: "website",
@@ -53,7 +53,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "NorthWest HazMat, Inc. | Professional Hazmat & Mold Remediation Services",
-    description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services in the Pacific Northwest.",
+    description: "Professional hazmat handling, asbestos testing, mold remediation, and environmental cleanup services in Oregon, Washington, and California.",
     images: ["/img/og-default.jpg"],
   },
   
@@ -104,7 +104,7 @@ export const structuredData = {
   "@id": "https://nwhazmat.com/#business",
   "name": "NorthWest HazMat, Inc.",
   "description":
-    "Female-owned environmental, hazmat, and mold remediation company serving Eugene-Springfield and Lane County, Oregon since 2000. 24/7 emergency spill response, asbestos testing, biohazard cleanup, and hazardous waste disposal.",
+    "Female-owned environmental, hazmat, and mold remediation company based in Springfield, Oregon since 2000, serving Oregon, Washington, and California. 24/7 emergency spill response, asbestos testing, biohazard cleanup, and hazardous waste disposal.",
   "url": "https://nwhazmat.com",
   "telephone": "+1-541-988-9823",
   "email": "office@nwhazmat.com",
@@ -193,7 +193,7 @@ export const structuredData = {
         "itemOffered": {
           "@type": "Service",
           "name": "Mold Remediation",
-          "description": "Professional mold removal and remediation services in Eugene-Springfield, Oregon"
+          "description": "Professional mold removal and remediation services across Oregon, Washington, and California"
         }
       },
       {

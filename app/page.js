@@ -9,21 +9,21 @@ import TestimonialSlider from "@/Components/ReviewSlide";
 import EmploymentSection from "@/Components/EmploymentSection";
 
 const HOME_TITLE =
-  "24-Hour Spill Response Oregon | Hazmat Cleanup Statewide | Northwest Hazmat";
+  "24-Hour Spill Response & Hazmat Cleanup | Oregon, Washington & California | Northwest Hazmat";
 const HOME_DESCRIPTION =
-  "24-hour spill response and hazmat cleanup anywhere in Oregon. Diesel, chemical, and transport spills handled statewide from our Springfield yard. Call 1-800-597-1323.";
+  "24-hour spill response and hazmat cleanup anywhere in Oregon, Washington, and California. Diesel, chemical, and transport spills handled from our Springfield, Oregon yard. Call 1-800-597-1323.";
 
 export const metadata = {
   title: HOME_TITLE,
   description: HOME_DESCRIPTION,
-  keywords: "spill response oregon, 24 hour hazmat oregon, emergency spill response oregon, hazmat cleanup oregon, diesel spill oregon, chemical spill cleanup oregon, transport spill response, emergency spill portland salem eugene medford, hazmat services oregon",
+  keywords: "spill response oregon, 24 hour hazmat oregon, emergency spill response oregon, hazmat cleanup oregon, diesel spill oregon, chemical spill cleanup oregon, transport spill response, emergency spill portland salem eugene medford, hazmat services oregon, spill response washington, spill response california, hazmat cleanup washington, hazmat cleanup california",
   openGraph: {
     title: HOME_TITLE,
     description: HOME_DESCRIPTION,
     url: "https://nwhazmat.com",
     siteName: "NorthWest HazMat, Inc.",
     type: "website",
-    images: [{ url: "/img/og-default.jpg", width: 1200, height: 630, alt: "Northwest Hazmat 24-hour spill response and hazmat cleanup across Oregon" }],
+    images: [{ url: "/img/og-default.jpg", width: 1200, height: 630, alt: "Northwest Hazmat 24-hour spill response and hazmat cleanup across Oregon, Washington and California" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -61,17 +61,19 @@ export default function Home() {
         </div>
         <div className="col-span-1 pt-4 ps-2 relative lg:pt-12 flex flex-col">
           <h1 className="fjalla-one leading-tight text-4xl lg:text-5xl">
-            24-Hour Spill Response and Hazmat Services Across Oregon
+            24-Hour Spill Response and Hazmat Services Across Oregon, Washington &amp; California
           </h1>
           <p className="w-11/12 lg:w-7/12 text-lg lg:text-xl pt-5 poppins">
             NorthWest HazMat (NW HazMat) runs 24-hour spill and hazmat response
-            anywhere in Oregon &mdash; diesel, hydraulic, chemical, transport and
-            tanker, unknown substance, storm-drain, and facility spills. We work
-            from our yard at 36 West Q Street in Springfield and roll statewide,
-            from Portland and Salem to Eugene&ndash;Springfield, Bend, and Medford.
+            anywhere in Oregon, Washington, and California &mdash; diesel,
+            hydraulic, chemical, transport and tanker, unknown substance,
+            storm-drain, and facility spills. We work from our yard at 36 West Q
+            Street in Springfield and roll up and down the I-5 corridor, from
+            Portland, Salem, Eugene&ndash;Springfield, Bend, and Medford on into
+            Washington and California.
             We also handle hazardous materials disposal, asbestos testing and lab
             analysis, soil restoration, biohazard cleanup, and waste management
-            consulting. Female-owned and serving Oregon since 2000.
+            consulting. Female-owned and in business since 2000.
           </p>
 
           <div className="flex flex-wrap justify-center lg:justify-normal gap-2 mt-auto pt-6">
@@ -216,8 +218,8 @@ export default function Home() {
             </h3>
             {/* <div className="border-black border w-[60px] lg:me-auto"></div> */}
             <p className=" w-11/12 text-2xl lg:text-xl">
-              NorthWest HazMat is a trusted full-service provider across Oregon and Washington. We offer expert services including hazardous materials handling and disposal, asbestos testing and analysis, soil restoration, biohazard cleanup, waste management consulting,
- and more. Committed to safety, compliance, and sustainable results, we protect communities and businesses throughout the Pacific Northwest.
+              NorthWest HazMat is a trusted full-service provider across Oregon, Washington, and California. We offer expert services including hazardous materials handling and disposal, asbestos testing and analysis, soil restoration, biohazard cleanup, waste management consulting,
+ and more. Committed to safety, compliance, and sustainable results, we protect communities and businesses across all three states.
             </p>
 
             {/* Button pushed to the bottom */}

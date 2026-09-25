@@ -4,7 +4,7 @@ import Breadcrumbs from '@/Components/BreadCrumbs';
 export const metadata = {
   title: 'Privacy Policy | NorthWest HazMat Oregon',
   description:
-    'Read the NorthWest HazMat, Inc. privacy policy. Learn how we collect, use, and protect the personal information you share with our Oregon hazmat and mold remediation team.',
+    'Read the NorthWest HazMat, Inc. privacy policy. Learn how we collect, use, and protect the personal information you share with our hazmat and mold remediation team.',
   alternates: {
     canonical: 'https://nwhazmat.com/privacy-policy',
   },

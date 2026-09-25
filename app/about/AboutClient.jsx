@@ -66,7 +66,8 @@ export default function AboutClient() {
           Northwest HazMat is a female-owned environmental and hazmat company
           working out of our yard at 36 West Q Street in Springfield, Oregon,
           where we have operated since 2000. We run 24-hour spill and hazmat
-          response anywhere in Oregon and keep an on-site lab for asbestos and
+          response anywhere in Oregon, Washington, and California and keep an
+          on-site lab for asbestos and
           mold analysis. Our crews handle hazardous materials disposal, soil
           restoration, biohazard cleanup, and waste management consulting, and we
           are licensed under CCB #141189.
