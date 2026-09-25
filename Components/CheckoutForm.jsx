@@ -5,6 +5,7 @@ import { CardElement, useStripe, useElements, PaymentRequestButtonElement } from
 import { useCart } from './CartContext';
 import { track, trackRevenue, identifyUser } from '@/lib/amplitude';
 import { trackPurchase } from '@/lib/analytics';
+import { saveCompletedOrder } from '@/lib/completedOrder';
 
 export default function CheckoutForm({ onSuccess }) {
   const stripe = useStripe();
@@ -427,9 +428,14 @@ export default function CheckoutForm({ onSuccess }) {
           event.complete('fail');
           setError(confirmError.message);
         } else {
+          // Charged — remember it before anything else can throw, so the
+          // customer sees "order received" rather than an error page.
+          saveCompletedOrder({ paymentIntentId: paymentIntent.id, email: walletCustomerInfo.email, total: finalTotal });
+          let orderNumber = null;
+
           // Create order record
           try {
-            await fetch('/api/orders', {
+            const orderResponse = await fetch('/api/orders', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -445,6 +451,9 @@ export default function CheckoutForm({ onSuccess }) {
                 paymentStatus: paymentIntent.status,
               }),
             });
+            if (orderResponse.ok) {
+              orderNumber = (await orderResponse.json().catch(() => ({}))).orderNumber ?? null;
+            }
           } catch (orderError) {
             console.error('Order creation failed:', orderError);
           }
@@ -471,7 +480,7 @@ export default function CheckoutForm({ onSuccess }) {
 
           event.complete('success');
           doClearCart();
-          doOnSuccess();
+          doOnSuccess({ orderNumber, email: walletCustomerInfo.email });
         }
       } catch (err) {
         console.error('Payment processing error:', err);
@@ -611,6 +620,11 @@ export default function CheckoutForm({ onSuccess }) {
       if (paymentError) {
         setError(paymentError.message);
       } else if (paymentIntent.status === 'succeeded') {
+        // Charged — remember it before anything else can throw, so the customer
+        // sees "order received" rather than an error page.
+        saveCompletedOrder({ paymentIntentId: paymentIntent.id, email: customerInfo.email, total });
+        let orderNumber = null;
+
         // Payment is already captured at this point. Order persistence is best-effort
         // — never block the success UX or block the user behind a 4xx from /api/orders.
         try {
@@ -629,7 +643,9 @@ export default function CheckoutForm({ onSuccess }) {
             }),
           });
 
-          if (!orderResponse.ok) {
+          if (orderResponse.ok) {
+            orderNumber = (await orderResponse.json().catch(() => ({}))).orderNumber ?? null;
+          } else {
             const errBody = await orderResponse.json().catch(() => ({}));
             // Loud log so we can reconcile from Stripe Dashboard using the paymentIntentId.
             console.error(
@@ -665,7 +681,7 @@ export default function CheckoutForm({ onSuccess }) {
         });
 
         clearCart();
-        onSuccess();
+        onSuccess({ orderNumber, email: customerInfo.email });
       } else {
         // No error but not captured yet (e.g. still processing). The webhook will
         // send the confirmation once Stripe settles it — don't leave the button
