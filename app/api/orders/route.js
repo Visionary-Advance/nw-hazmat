@@ -28,8 +28,9 @@ export async function POST(request) {
       }
     }
 
-    // Phone is optional: Apple/Google Pay doesn't collect it, and rejecting
-    // here used to drop those orders (and their emails) entirely.
+    // Phone is collected on every checkout path but stays optional here: the
+    // payment has already been charged, and rejecting used to drop those orders
+    // (and their emails) entirely.
     const { customerInfo } = orderData;
     const requiredCustomerFields = ['firstName', 'email', 'address', 'city', 'state', 'zipCode'];
     for (const field of requiredCustomerFields) {

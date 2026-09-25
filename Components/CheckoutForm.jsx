@@ -270,6 +270,7 @@ export default function CheckoutForm({ onSuccess }) {
       ],
       requestPayerName: true,
       requestPayerEmail: true,
+      requestPayerPhone: true,
       requestShipping: true,
       shippingOptions: [
         {
@@ -605,6 +606,7 @@ export default function CheckoutForm({ onSuccess }) {
           billing_details: {
             name: `${customerInfo.firstName} ${customerInfo.lastName}`,
             email: customerInfo.email,
+            phone: customerInfo.phone,
             address: {
               line1: customerInfo.address,
               line2: customerInfo.apartment,
