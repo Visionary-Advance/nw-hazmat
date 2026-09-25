@@ -364,6 +364,19 @@ export default function CheckoutForm({ onSuccess }) {
 
         const finalTotal = currentSubtotal + finalShippingCost;
 
+        const walletCustomerInfo = {
+          firstName: event.payerName?.split(' ')[0] || '',
+          lastName: event.payerName?.split(' ').slice(1).join(' ') || '',
+          email: event.payerEmail || '',
+          phone: event.payerPhone || shippingAddress.phone || '',
+          address: shippingAddress.addressLine?.[0] || '',
+          apartment: shippingAddress.addressLine?.[1] || '',
+          city: shippingAddress.city || '',
+          state: shippingAddress.region || '',
+          zipCode: shippingAddress.postalCode || '',
+          country: shippingAddress.country || 'US',
+        };
+
         // Create payment intent with final total
         const response = await fetch('/api/create-payment-intent', {
           method: 'POST',
@@ -380,6 +393,9 @@ export default function CheckoutForm({ onSuccess }) {
               shippingCost: finalShippingCost,
               subtotal: currentSubtotal,
               shippingAddress: JSON.stringify(shippingAddress),
+              // Lets the Stripe webhook send the order emails if this tab never
+              // reaches /api/orders.
+              customerInfo: JSON.stringify(walletCustomerInfo),
               items: JSON.stringify(currentItems.map(item => ({
                 id: item.id,
                 name: item.name,
@@ -419,16 +435,7 @@ export default function CheckoutForm({ onSuccess }) {
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify({
-                customerInfo: {
-                  firstName: event.payerName?.split(' ')[0] || '',
-                  lastName: event.payerName?.split(' ').slice(1).join(' ') || '',
-                  email: event.payerEmail || '',
-                  address: shippingAddress.addressLine?.[0] || '',
-                  city: shippingAddress.city || '',
-                  state: shippingAddress.region || '',
-                  zipCode: shippingAddress.postalCode || '',
-                  country: shippingAddress.country || 'US',
-                },
+                customerInfo: walletCustomerInfo,
                 items: currentItems,
                 subtotal: currentSubtotal,
                 shippingCost: finalShippingCost,
@@ -562,6 +569,9 @@ export default function CheckoutForm({ onSuccess }) {
             orderSource: 'card_payment',
             shippingCost: shippingCost,
             subtotal: getCartTotal(),
+            // Lets the Stripe webhook send the order emails if this tab never
+            // reaches /api/orders (e.g. paying with Link).
+            customerInfo: JSON.stringify(customerInfo),
             items: JSON.stringify(cartItems.map(item => ({
               id: item.id,
               name: item.name,
@@ -656,6 +666,14 @@ export default function CheckoutForm({ onSuccess }) {
 
         clearCart();
         onSuccess();
+      } else {
+        // No error but not captured yet (e.g. still processing). The webhook will
+        // send the confirmation once Stripe settles it — don't leave the button
+        // spinning silently.
+        console.warn(`Payment ${paymentIntent?.id} ended in status ${paymentIntent?.status}`);
+        setError(
+          "Your payment is still processing. You'll get a confirmation email once it completes — please don't pay again."
+        );
       }
     } catch (err) {
       setError('An error occurred. Please try again.');

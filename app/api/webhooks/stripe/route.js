@@ -1,6 +1,8 @@
 // app/api/webhooks/stripe/route.js
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { fulfillOrder, orderDataFromPaymentIntent } from '@/lib/orders/fulfillOrder';
+import { sendAlert } from '@/lib/email/alertEmail';
 
 // Ensure pure runtime execution (no static optimization/pre-render)
 export const runtime = 'nodejs';
@@ -70,17 +72,32 @@ export async function POST(request) {
 }
 
 // ----- helpers (keep these pure; no top-level side effects) -----
+// Safety net for when the browser never calls /api/orders (Stripe Link, closed
+// tab, redirect-based auth). fulfillOrder dedupes on the PaymentIntent id, so
+// this is a no-op when the browser already handled it.
 async function handleSuccessfulPayment(paymentIntent) {
-  try {
-    console.log('Processing successful payment:', paymentIntent.id);
-    const orderId = paymentIntent.metadata?.orderId;
-    if (orderId) {
-      console.log(`Order ${orderId} marked as paid`);
-      await sendOrderConfirmationEmail(orderId);
-    }
-  } catch (error) {
-    console.error('Failed to handle successful payment:', error);
+  console.log('Processing successful payment:', paymentIntent.id);
+  const orderData = orderDataFromPaymentIntent(paymentIntent);
+
+  if (!orderData.customerInfo.email || orderData.items.length === 0) {
+    // Not a shop checkout PI (or metadata is missing) — nothing we can email.
+    console.warn(`[WEBHOOK] pi=${paymentIntent.id} has no customer email/items; skipping fulfilment`);
+    sendAlert({
+      subject: 'Paid PaymentIntent could not be fulfilled from webhook',
+      severity: 'error',
+      error: new Error('PaymentIntent metadata missing customer email or items'),
+      context: { paymentIntentId: paymentIntent.id, amount: paymentIntent.amount / 100 },
+    });
+    return;
   }
+
+  // Let errors propagate: a 500 makes Stripe retry the webhook later.
+  const result = await fulfillOrder(orderData, { source: 'webhook' });
+  console.log(
+    result.duplicate
+      ? `Order for ${paymentIntent.id} already fulfilled by client`
+      : `Order ${result.orderNumber} fulfilled from webhook for ${paymentIntent.id}`
+  );
 }
 
 async function handleFailedPayment(paymentIntent) {
@@ -90,9 +107,4 @@ async function handleFailedPayment(paymentIntent) {
   } catch (error) {
     console.error('Failed to handle failed payment:', error);
   }
-}
-
-async function sendOrderConfirmationEmail(orderId) {
-  console.log(`Sending confirmation email for order ${orderId}`);
-  // integrate with your email provider here
 }
