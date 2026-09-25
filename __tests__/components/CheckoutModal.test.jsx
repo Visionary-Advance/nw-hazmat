@@ -21,7 +21,7 @@ jest.mock('@/Components/CheckoutForm', () => {
   return function MockCheckoutForm({ onSuccess }) {
     return (
       <div data-testid="checkout-form">
-        <button data-testid="trigger-success" onClick={onSuccess}>
+        <button data-testid="trigger-success" onClick={() => onSuccess({ orderNumber: 1042, email: 'jane@example.com' })}>
           Simulate Success
         </button>
       </div>
@@ -79,8 +79,10 @@ describe('CheckoutModal', () => {
     // Trigger successful payment
     await user.click(screen.getByTestId('trigger-success'));
 
-    expect(screen.getByText('Order Complete!')).toBeInTheDocument();
+    expect(screen.getByText('Order Confirmed!')).toBeInTheDocument();
     expect(screen.getByText(/Thank you for your purchase/)).toBeInTheDocument();
+    expect(screen.getByText('#1042')).toBeInTheDocument();
+    expect(screen.getByText('jane@example.com')).toBeInTheDocument();
     expect(screen.getByText('Continue Shopping')).toBeInTheDocument();
   });
 

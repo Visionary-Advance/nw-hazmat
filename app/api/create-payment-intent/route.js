@@ -17,6 +17,20 @@ function getStripe() {
   return _stripe;
 }
 
+// Stripe rejects the whole PaymentIntent if any metadata value is over 500
+// chars, which would block checkout. Drop oversized values instead; the webhook
+// falls back to what it can recover.
+function stripeSafeMetadata(md) {
+  const out = {};
+  for (const [k, v] of Object.entries(md)) {
+    if (v === undefined || v === null) continue;
+    const len = String(v).length;
+    if (len <= 500) out[k] = v;
+    else console.warn(`create-payment-intent: dropping metadata.${k} (${len} chars > 500)`);
+  }
+  return out;
+}
+
 export async function POST(req) {
   try {
     const stripe = getStripe();
@@ -62,7 +76,7 @@ export async function POST(req) {
       amount: amountInCents,
       currency,
       automatic_payment_methods: { enabled: true },
-      metadata: { ...(body?.metadata || {}), ...itemMetadata },
+      metadata: stripeSafeMetadata({ ...(body?.metadata || {}), ...itemMetadata }),
       ...(description ? { description } : {}),
     };
 
