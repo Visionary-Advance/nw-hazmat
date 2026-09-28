@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { track } from "@/lib/amplitude";
+import { trackLead } from "@/lib/analytics";
 
 export default function Form() {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -84,6 +85,7 @@ export default function Form() {
           inquiryType: formData.type,
           hasBusinessName: Boolean(formData.businessName),
         });
+        trackLead({ form: "contact", leadType: formData.type });
         alert("Your message has been sent!");
         setFormData({
           name: "",

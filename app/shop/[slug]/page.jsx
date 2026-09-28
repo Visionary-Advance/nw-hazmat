@@ -1,6 +1,20 @@
 import { notFound } from 'next/navigation';
 import ProductPageClient from './ProductPageClient';
 import { getProductBySlug, getAllProducts } from '@/lib/getProducts';
+import { productSeo } from '@/data/ProductSeoData';
+
+// Trim a product description to a meta description without cutting a word or
+// sentence in half. Prefers ending on a full sentence; otherwise the last whole
+// word plus an ellipsis.
+function toMetaDescription(text, max = 155) {
+  if (!text) return '';
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max);
+  const sentenceEnd = cut.lastIndexOf('. ');
+  if (sentenceEnd > max * 0.5) return cut.slice(0, sentenceEnd + 1);
+  return `${cut.slice(0, cut.lastIndexOf(' '))}…`;
+}
 
 // ISR - revalidate every hour
 export const revalidate = 3600;
@@ -36,15 +50,21 @@ export async function generateMetadata({ params }) {
       ? (product.image.startsWith('/') ? `https://nwhazmat.com${product.image}` : product.image)
       : 'https://nwhazmat.com/img/og-default.jpg';
 
-    const description = product.description?.substring(0, 155) ||
+    const seo = productSeo[slug] || {};
+    const seoTitle = product.metadata?.seoTitle || seo.title || product.name;
+    const title = `${seoTitle} | NorthWest HazMat`;
+    const description =
+      product.metadata?.seoDescription ||
+      seo.description ||
+      toMetaDescription(product.description) ||
       `Buy ${product.name} online. Professional hazmat equipment with fast nationwide shipping. Trusted by environmental professionals, first responders, and industrial teams across the USA.`;
 
     return {
-      title: `${product.name} | NorthWest HazMat`,
+      title,
       description,
       keywords: `${product.name}, hazmat equipment, safety supplies, ${product.category}, professional safety gear, hazmat equipment USA, buy online`,
       openGraph: {
-        title: `${product.name} | NorthWest HazMat`,
+        title,
         description,
         url: `https://nwhazmat.com/shop/${slug}`,
         siteName: 'NorthWest HazMat, Inc.',
@@ -60,7 +80,7 @@ export async function generateMetadata({ params }) {
       },
       twitter: {
         card: 'summary_large_image',
-        title: `${product.name} | NorthWest HazMat`,
+        title,
         description,
         images: [ogImage],
       },

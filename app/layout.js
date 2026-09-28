@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientWrapper from "@/Components/ClientWrapper";
 import AmplitudeProvider from "@/Components/AmplitudeProvider";
+import ContactLinkTracker from "@/Components/ContactLinkTracker";
 import { Analytics } from "@vercel/analytics/next"
 import { GoogleAnalytics } from "@next/third-parties/google"
 
@@ -237,6 +238,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <AmplitudeProvider />
+        <ContactLinkTracker />
         <ClientWrapper>{children}
           <Analytics />
         </ClientWrapper>

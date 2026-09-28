@@ -67,7 +67,7 @@ export default function ShopClient({ initialProducts = [] }) {
   const itemListStructuredData = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "Professional Hazmat Equipment & Safety Supplies",
+    "name": "Hazmat Training Props, Spill Kits & Response Supplies",
     "numberOfItems": products.length,
     "itemListElement": products.map((product, index) => ({
       "@type": "ListItem",
@@ -91,11 +91,13 @@ export default function ShopClient({ initialProducts = [] }) {
         {/* Page Heading */}
         <header className="text-center max-w-3xl mx-auto px-4 mt-4 mb-8">
           <h1 className="text-4xl lg:text-5xl fjalla-one font-bold mb-3">
-            Professional Hazmat Equipment &amp; Safety Supplies
+            Hazmat Training Props, Spill Kits &amp; Response Supplies
           </h1>
           <p className="text-gray-600 text-lg">
-            Shop spill response kits, PPE, training simulators, and environmental
-            safety gear with fast nationwide shipping across the USA.
+            Hazmat training equipment from a working response company: tanker
+            rollover simulators, hot tap kits, and leak control tools for fire
+            departments and hazmat teams, plus spill kits and containment supplies
+            for fleets and facilities.
           </p>
           <p className="text-gray-600 text-base pt-4">
             We ship spill kits and responder gear anywhere in the United States

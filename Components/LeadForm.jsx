@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
+import { trackLead } from '@/lib/analytics';
 
 const SITUATIONS = [
   { value: 'suspected', label: 'I suspect mold but haven\'t confirmed it' },
@@ -42,6 +43,7 @@ export default function LeadForm({ source = 'mold-services-eugene-oregon', compa
         setErrorMsg(data.error || 'Something went wrong. Please call us instead.');
         return;
       }
+      trackLead({ form: 'lead', leadType: form.situation, source });
       setStatus('success');
     } catch (err) {
       setStatus('error');
