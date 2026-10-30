@@ -31,53 +31,21 @@ export default function Form() {
       return;
     }
 
-    const recaptchaToken = await executeRecaptcha("contact_form");
-
-    const payload = {
-      recaptchaToken,
-      from: "noreply@mail.visionaryadvance.com", // You'll need to verify this domain with Resend
-      to: ["office@nwhazmat.com"],
-      reply_to: formData.email,
-      subject: `New Contact Form Submission from ${formData.name}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h2 style="color: #B91C1C;">New Contact Submission</h2>
-          <p><strong>Name:</strong> ${formData.name}</p>
-          <p><strong>Phone Number:</strong> ${formData.phone}</p>
-          <p><strong>Email:</strong> ${formData.email}</p>
-          <p><strong>Business Name:</strong> ${formData.businessName}</p>
-          <p><strong>Type:</strong> ${formData.type}</p>
-          <p><strong>Message:</strong><br>${formData.message}</p>
-        </div>
-      `,
-      text: `
-        New Contact Submission
-        
-        Name: ${formData.name}
-        Phone Number: ${formData.phone}
-        Email: ${formData.email}
-        Business Name: ${formData.businessName}
-        Type: ${formData.type}
-        Message: ${formData.message}
-      `
-    };
-
-    console.log("Sending email via Resend...");
-    console.log("Payload:", payload);
-
     try {
+      // Inside the try: reCAPTCHA can reject (blocked script, timeout), often with a
+      // non-Error value. Uncaught, the submit silently does nothing.
+      const recaptchaToken = await executeRecaptcha("contact_form");
+
+      // The server builds the email; only send the field values.
       const res = await fetch("/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ recaptchaToken, ...formData }),
       });
 
-      console.log("API response received");
-
-      const resJson = await res.json();
-      console.log("API JSON:", resJson);
+      const resJson = await res.json().catch(() => ({}));
 
       if (res.ok) {
         // Track a lead conversion (no PII in event properties).
