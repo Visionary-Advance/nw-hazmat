@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 import { useCart } from './CartContext';
 import { track, trackRevenue, identifyUser } from '@/lib/amplitude';
-import { trackPurchase } from '@/lib/analytics';
+import { trackPurchase, getGaIds } from '@/lib/analytics';
 import { saveCompletedOrder } from '@/lib/completedOrder';
 
 export default function CheckoutForm({ onSuccess }) {
@@ -392,6 +392,8 @@ export default function CheckoutForm({ onSuccess }) {
               customerName: event.payerName,
               customerEmail: event.payerEmail,
               orderSource: 'apple_google_pay',
+              // Lets the webhook's GA4 purchase join this visitor's session.
+              ...getGaIds(),
               shippingCost: finalShippingCost,
               subtotal: currentSubtotal,
               shippingAddress: JSON.stringify(shippingAddress),
@@ -577,6 +579,8 @@ export default function CheckoutForm({ onSuccess }) {
             customerName: `${customerInfo.firstName} ${customerInfo.lastName}`,
             customerEmail: customerInfo.email,
             orderSource: 'card_payment',
+            // Lets the webhook's GA4 purchase join this visitor's session.
+            ...getGaIds(),
             shippingCost: shippingCost,
             subtotal: getCartTotal(),
             // Lets the Stripe webhook send the order emails if this tab never

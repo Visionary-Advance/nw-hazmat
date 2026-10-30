@@ -144,12 +144,16 @@ export default async function ProductPage({ params }) {
       "description": product.description,
       ...(productImages.length > 0 && { image: productImages }),
       "sku": product.id,
+      // Identifiers must match the Merchant Center feed (app/merchant-feed.xml)
+      ...(product.metadata?.gtin && { gtin: product.metadata.gtin }),
+      ...(product.metadata?.mpn && { mpn: product.metadata.mpn }),
       "category": product.category,
       "offers": {
         "@type": "Offer",
         "url": `https://nwhazmat.com/shop/${slug}`,
         "price": product.price,
         "priceCurrency": product.currency?.toUpperCase() || "USD",
+        "itemCondition": "https://schema.org/NewCondition",
         "availability": product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
         // The shop ships nationwide via UPS; spelling that out in the offer
         // is what makes the listing eligible outside Oregon (punch list #10).
@@ -168,7 +172,7 @@ export default async function ProductPage({ params }) {
       },
       "brand": {
         "@type": "Brand",
-        "name": "NorthWest HazMat"
+        "name": product.metadata?.brand || "NorthWest HazMat"
       }
     };
 

@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { fulfillOrder, orderDataFromPaymentIntent } from '@/lib/orders/fulfillOrder';
 import { sendAlert } from '@/lib/email/alertEmail';
+import { sendServerPurchase } from '@/lib/ga4Server';
 
 // Ensure pure runtime execution (no static optimization/pre-render)
 export const runtime = 'nodejs';
@@ -90,6 +91,11 @@ async function handleSuccessfulPayment(paymentIntent) {
     });
     return;
   }
+
+  // Report revenue to GA4 even when the buyer's browser blocked GA. Sent before
+  // fulfilment so a fulfilment failure can't lose it; Stripe retries reuse the
+  // same transaction_id, which GA4 dedupes. Never throws.
+  await sendServerPurchase(paymentIntent);
 
   // Let errors propagate: a 500 makes Stripe retry the webhook later.
   const result = await fulfillOrder(orderData, { source: 'webhook' });
